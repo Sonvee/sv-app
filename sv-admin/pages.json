@@ -1,0 +1,165 @@
+{
+  "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
+    }, {
+      "path": "uni_modules/sv-id-pages/pages/login/login-admin",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "topWindow": false,
+        "leftWindow": false
+      }
+    },
+    {
+      "path": "pages/media/media",
+      "style": {
+        "navigationBarTitleText": "媒体库",
+        "enablePullDownRefresh": false
+      }
+    }
+  ],
+  "subPackages": [{
+      "root": "pages/system",
+      "pages": [{
+          "path": "user/user",
+          "style": {
+            "navigationBarTitleText": "用户管理"
+          }
+        },
+        {
+          "path": "role/role",
+          "style": {
+            "navigationBarTitleText": "角色管理",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "permission/permission",
+          "style": {
+            "navigationBarTitleText": "权限管理",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "menu/menu",
+          "style": {
+            "navigationBarTitleText": "菜单管理"
+          }
+        },
+        {
+          "path": "app/app",
+          "style": {
+            "navigationBarTitleText": "应用管理",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "dict/dict",
+          "style": {
+            "navigationBarTitleText": "字典管理",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "logs/logs",
+          "style": {
+            "navigationBarTitleText": "日志管理",
+            "enablePullDownRefresh": false
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/tool",
+      "pages": [{
+          "path": "mine/mine",
+          "style": {
+            "navigationBarTitleText": "个人中心",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "apidoc/apidoc",
+          "style": {
+            "navigationBarTitleText": "接口文档",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "cache/cache",
+          "style": {
+            "navigationBarTitleText": "缓存管理",
+            "enablePullDownRefresh": false
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/static-page",
+      "pages": [{
+          "path": "table-template/table-template",
+          "style": {
+            "navigationBarTitleText": "table模板"
+          }
+        },
+        {
+          "path": "icons/icons",
+          "style": {
+            "navigationBarTitleText": "内置图标",
+            "enablePullDownRefresh": false
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/error",
+      "pages": [{
+          "path": "404",
+          "style": {
+            "navigationBarTitleText": "404"
+          }
+        },
+        {
+          "path": "403",
+          "style": {
+            "navigationBarTitleText": "403"
+          }
+        }
+      ]
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "sv-admin",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "h5": {
+      "titleNView": false
+    }
+  },
+  "topWindow": {
+    "path": "layout/navbar",
+    "style": {
+      "height": "50px"
+    },
+    "matchMedia": {
+      "minWidth": 0
+    }
+  },
+  "leftWindow": {
+    "path": "layout/sidebar",
+    "style": {
+      "width": "200px"
+    }
+  },
+  "uniIdRouter": {
+    "loginPage": "uni_modules/sv-id-pages/pages/login/login-admin",
+    "needLogin": [
+      "^((?!sv-id-pages\/pages\/login).)*$"
+    ],
+    "resToLogin": true
+  }
+}

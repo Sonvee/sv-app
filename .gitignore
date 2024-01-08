@@ -1,0 +1,26 @@
+# Editor directories
+.idea/
+.vscode/
+.vite/
+.hbuilderx/
+
+# system ignore
+node_modules/
+dist/
+unpackage/
+
+# package file
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# others
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.log
+*.yaml
+*.lock

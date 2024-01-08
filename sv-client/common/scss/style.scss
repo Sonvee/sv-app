@@ -1,0 +1,69 @@
+/* #ifdef MP-WEIXIN */
+page {
+  height: 100%;
+  // 微信小程序根节点为page标签，没有:root根节点
+  // 主体盒子高度：视窗 - (navbar + statusbar) - tabbar(100rpx) - env(safe-area-inset-bottom)
+  // 其中statusbar官方提供var(--status-bar-height)，但是不准，
+  // 需使用图鸟navbar自带的计算返回值height，去动态计算减去
+  --main-height: calc(100vh - 100rpx - env(safe-area-inset-bottom));
+}
+/* #endif */
+
+/* #ifndef MP-WEIXIN */
+:root {
+  // 主体盒子高度：视窗 - (navbar + statusbar) - tabbar(100rpx) - env(safe-area-inset-bottom)
+  // 其中statusbar官方提供var(--status-bar-height)，但是不准，
+  // 需使用图鸟navbar自带的计算返回值height，去动态计算减去
+  --main-height: calc(100vh - 100rpx - env(safe-area-inset-bottom));
+}
+
+uni-page-body {
+  height: 100%;
+}
+/* #endif */
+
+.card {
+  border-radius: 20rpx;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  border-top: 1rpx solid rgba(255, 255, 255, 0.4);
+  border-left: 1rpx solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px) brightness(110%);
+}
+
+/* 
+ * css正则匹配类目规则
+ * [class^="test"]：头部匹配；
+ * [class$="test"]：尾部匹配；
+ * [class*="test"]：任意位置匹配。 
+ * 例如：p[class^="test"] 匹配所有以test开头类名的p标签
+ */
+
+// 间隔，首个无左边距，后面盒子依次给10px的左边距作为间隔
+[class*='sv-ml-gap-'] {
+  margin-left: 10px;
+}
+
+.sv-ml-gap-0 {
+  margin-left: 0;
+}
+
+/* 全局滚动条样式 */
+/* 宽度 */
+::-webkit-scrollbar {
+  width: 12rpx;
+  height: 12rpx;
+}
+/* 轨道 */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* 滑块 */
+::-webkit-scrollbar-thumb {
+  @include useTheme {
+    background-color: getTheme('sv-grey-color');
+    &:hover {
+      background-color: getTheme('sv-grey-highlight-color');
+    }
+  }
+  border-radius: 6rpx; /* 圆角 */
+}

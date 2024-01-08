@@ -1,0 +1,7 @@
+{
+  "name": "sv-api-test",
+  "dependencies": {
+    "sv-handle-res": "file:../../../uni_modules/sv-id-pages/uniCloud/cloudfunctions/common/sv-handle-res"
+  },
+  "extensions": {}
+}

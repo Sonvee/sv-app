@@ -1,0 +1,93 @@
+{
+	"id": "sv-id-pages",
+	"displayName": "sv-id-pages",
+	"version": "1.2.1",
+	"description": "基于uni-id-pages改，适合微信小程序开发，新的易读易修改的界面样式。使用前请看详情介绍。",
+	"keywords": [
+        "sv-id-pages",
+        "uni-id-pages",
+        "用户体系",
+        "微信登录"
+    ],
+	"repository": "",
+	"engines": {
+		"HBuilderX": "^3.5.2"
+	},
+	"dcloudext": {
+		"type": "unicloud-template-page",
+		"sale": {
+			"regular": {
+				"price": "0.00"
+			},
+			"sourcecode": {
+				"price": "0.00"
+			}
+		},
+		"contact": {
+			"qq": "1051399604"
+		},
+		"declaration": {
+			"ads": "无",
+			"data": "插件不采集任何数据",
+			"permissions": "无"
+		},
+		"npmurl": ""
+	},
+	"uni_modules": {
+		"dependencies": [
+			"uni-forms",
+			"uni-captcha",
+			"uni-open-bridge-common",
+			"uni-cloud-s2s",
+			"uni-easyinput",
+			"uni-list",
+			"uni-tag",
+			"uni-popup"
+		],
+		"encrypt": [],
+		"platforms": {
+			"cloud": {
+				"tcb": "y",
+				"aliyun": "y"
+			},
+			"client": {
+				"Vue": {
+					"vue2": "y",
+					"vue3": "y"
+				},
+				"App": {
+					"app-vue": "u",
+					"app-nvue": "u"
+				},
+				"H5-mobile": {
+					"Safari": "u",
+					"Android Browser": "u",
+					"微信浏览器(Android)": "u",
+					"QQ浏览器(Android)": "u"
+				},
+				"H5-pc": {
+					"Chrome": "y",
+					"IE": "u",
+					"Edge": "u",
+					"Firefox": "u",
+					"Safari": "u"
+				},
+				"小程序": {
+					"微信": "y",
+					"阿里": "u",
+					"百度": "u",
+					"字节跳动": "u",
+					"QQ": "u",
+					"钉钉": "u",
+					"快手": "u",
+					"飞书": "u",
+					"京东": "u"
+				},
+				"快应用": {
+					"华为": "u",
+					"联盟": "u"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,100 @@
+$themes: (
+  light: (
+    sv-theme-key: light,
+    // 页面主配色
+    sv-navbar-bg-color: transparent,
+    sv-tabbar-bg-color: transparent,
+    sv-background-color: #f8f8f8,
+    sv-background-highlight-color: #ffffff,
+    sv-text-color: #212121,
+    sv-text-highlight-color: #000000,
+    sv-text-sub-color: #616161,
+    sv-border-color: #dcdfe6,
+    sv-border-highlight-color: #dadce2,
+    sv-grey-color: #cccccc,
+    sv-grey-highlight-color: #b2b2b2,
+    sv-mask-color: #f6f6f6,
+    sv-mask-highlight-color: #f2f2f2,
+    sv-card-color: #fafafa,
+    sv-hover-color: #ecf5ff,
+    sv-hover-highlight-color: #e6eef4,
+    sv-popper-bg-color: #fbfbfb,
+    sv-dialog-bg-color: #fafafa,
+    // 行为主配色
+    sv-primary-color: #01beff,
+    sv-success-color: #00d886,
+    sv-warning-color: #fbbd12,
+    sv-danger-color: #ff444f,
+    sv-error-color: #ff0808,
+    sv-info-color: #9c9c9c
+  ),
+  dark: (
+    sv-theme-key: dark,
+    // 页面主配色
+    sv-navbar-bg-color: rgba(56, 56, 56, 0.1),
+    sv-tabbar-bg-color: rgba(56, 56, 56, 0.1),
+    sv-background-color: #212121,
+    sv-background-highlight-color: #282828,
+    sv-text-color: #e1e1e1,
+    sv-text-highlight-color: #ffffff,
+    sv-text-sub-color: #ababab,
+    sv-border-color: #4c4d4f,
+    sv-border-highlight-color: #4e4f51,
+    sv-grey-color: #434343,
+    sv-grey-highlight-color: #727272,
+    sv-mask-color: #262626,
+    sv-mask-highlight-color: #242424,
+    sv-card-color: #141414,
+    sv-hover-color: #18222c,
+    sv-hover-highlight-color: #1b2836,
+    sv-popper-bg-color: #2d2d2d,
+    sv-dialog-bg-color: #141414,
+    // 行为主配色
+    sv-primary-color: #4dd2ff,
+    sv-success-color: #4de4aa,
+    sv-warning-color: #fcd159,
+    sv-danger-color: #ff7c84,
+    sv-error-color: #ff3434,
+    sv-info-color: #bababa
+  )
+);
+
+// 默认light主题
+$curTheme: light;
+
+:root {
+  // 跟随系统配色normal，考虑到后续可能不止light和dark两种主题，故不做light和dark之间切换
+  color-scheme: normal; // https://developer.mozilla.org/zh-CN/docs/Web/CSS/color-scheme
+}
+
+// 动态切换所有主题
+@mixin useTheme() {
+  @each $key, $value in $themes {
+    $curTheme: $key !global;
+    .sv-page[data-theme='#{$key}'] & {
+      @content;
+    }
+  }
+}
+
+// 只在light主题下的样式
+@mixin useLightTheme() {
+  $curTheme: light !global;
+  .sv-page[data-theme='light'] & {
+    @content;
+  }
+}
+
+// 只在dark主题下的样式
+@mixin useDarkTheme() {
+  $curTheme: dark !global;
+  .sv-page[data-theme='dark'] & {
+    @content;
+  }
+}
+
+// 获取主题样式变量
+@function getTheme($key) {
+  $themeMap: map-get($themes, $curTheme);
+  @return map-get($themeMap, $key);
+}

@@ -1,0 +1,54 @@
+@font-face {
+  font-family: sv-icons;
+  src: url('~@/common/font/iconfont.ttf') format('truetype');
+  font-weight: 400;
+  font-display: 'auto';
+  font-style: normal;
+}
+
+[class*='sv-icons-'],
+[class^='sv-icons-'] {
+  font-family: sv-icons !important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sv-icons-github:before {
+  content: '\ea0a';
+}
+
+.sv-icons-gitee:before {
+  content: '\e60c';
+}
+
+.sv-icons-skin:before {
+  content: '\e651';
+}
+
+.sv-icons-fullscreen:before {
+  content: '\e71e';
+}
+
+.sv-icons-fullscreen-exit:before {
+  content: '\e71f';
+}
+
+.sv-icons-uniapp:before {
+  content: '\e642';
+}
+
+.sv-icons-tool:before {
+  content: "\e6a3";
+}
+
+.sv-icons-tool-fill:before {
+  content: "\e6a4";
+}

@@ -1,0 +1,92 @@
+{
+  "pages": [{
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "enablePullDownRefresh": true
+      }
+    }, {
+      "path": "pages/home/home",
+      "style": {
+        "navigationBarTitleText": "主页"
+      }
+    }, {
+      "path": "pages/mine/mine",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    }, {
+      "path": "uni_modules/sv-id-pages/pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/userinfo",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/cropImage/cropImage",
+      "style": {
+        "navigationBarTitleText": "头像",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/security/security",
+      "style": {
+        "navigationBarTitleText": "账号与安全",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/deactivate/deactivate",
+      "style": {
+        "navigationBarTitleText": "注销账号",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/change-pwd/change-pwd",
+      "style": {
+        "navigationBarTitleText": "修改密码",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/mine/setting/setting",
+      "style": {
+        "navigationBarTitleText": "设置",
+        "enablePullDownRefresh": false
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "sv-client",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
+  },
+  "uniIdRouter": {},
+  "easycom": {
+    "custom": {
+      "^tn-(.*)-(item|group)$": "@tuniao/tnui-vue3-uniapp/components/$1/src/$1-$2.vue",
+      "^tn-(.*)": "@tuniao/tnui-vue3-uniapp/components/$1/src/$1.vue"
+    }
+  },
+  "tabBar": {
+    "height": "1px",
+    "list": [{
+      "pagePath": "pages/index/index"
+    }, {
+      "pagePath": "pages/mine/mine"
+    }, {
+      "pagePath": "pages/home/home"
+    }]
+  }
+}

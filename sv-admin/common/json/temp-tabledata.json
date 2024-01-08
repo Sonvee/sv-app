@@ -1,0 +1,242 @@
+{
+	"data": [{
+			"_id": "test0001",
+			"username": "test0001",
+			"password_secret_version": 1,
+			"nickname": "测试0001",
+			"register_env": {
+				"appid": "APP_2",
+				"uni_platform": "web",
+				"os_name": "ios",
+				"app_name": "uni-sv-client",
+				"app_version": "1.0.0",
+				"app_version_code": "100",
+				"channel": "1001",
+				"client_ip": "127.0.0.1"
+			},
+			"register_date": 1698474810867,
+			"dcloud_appid": [
+				"APP_2"
+			],
+			"my_invite_code": "ELCELL",
+			"role": [
+				"user"
+			],
+			"last_login_date": 1698643109079,
+			"last_login_ip": "127.0.0.1",
+			"login_ip_limit": [],
+			"avatar_file": {},
+			"status": 0
+		},
+		{
+			"_id": "wx0001",
+			"wx_openid": {
+				"mp": "oC18R5rzNXGjazXU4k0KRFf7ajx4",
+				"mp_APP_2": "oC18R5rzNXGjazXU4k0KRFf7ajx4"
+			},
+			"third_party": {
+				"mp_weixin": {
+					"session_key": "bf7vFWWzuYsprIAQMc6WQw=="
+				}
+			},
+			"register_env": {
+				"appid": "APP_2",
+				"uni_platform": "mp-weixin",
+				"os_name": "ios",
+				"app_name": "uni-sv-client",
+				"app_version": "1.0.0",
+				"app_version_code": "100",
+				"channel": "1001",
+				"client_ip": "180.164.218.133"
+			},
+			"register_date": 1698474911213,
+			"dcloud_appid": [
+				"APP_2"
+			],
+			"my_invite_code": "4SC44D",
+			"role": [
+				"user"
+			],
+			"last_login_date": 1698593584385,
+			"last_login_ip": "180.164.218.133",
+			"avatar_file": {},
+			"nickname": "微信用户0001"
+		},
+		{
+			"_id": "test0002",
+			"username": "test0002",
+			"password_secret_version": 1,
+			"nickname": "test0002",
+			"register_env": {
+				"appid": "APP_2",
+				"uni_platform": "web",
+				"os_name": "ios",
+				"app_name": "uni-sv-client",
+				"app_version": "1.0.0",
+				"app_version_code": "100",
+				"channel": "1001",
+				"client_ip": "127.0.0.1"
+			},
+			"register_date": 1698565633433,
+			"dcloud_appid": [
+				"APP_2"
+			],
+			"my_invite_code": "2EUKWG",
+			"role": [
+				"user"
+			],
+			"last_login_date": 1698569207349,
+			"last_login_ip": "127.0.0.1",
+			"login_ip_limit": []
+		},
+		{
+			"_id": "test0003",
+			"username": "test0003",
+			"password_secret_version": 1,
+			"nickname": "test0003",
+			"register_env": {
+				"appid": "APP_2",
+				"uni_platform": "web",
+				"os_name": "ios",
+				"app_name": "uni-sv-client",
+				"app_version": "1.0.0",
+				"app_version_code": "100",
+				"channel": "1001",
+				"client_ip": "127.0.0.1"
+			},
+			"register_date": 1698565990693,
+			"dcloud_appid": [
+				"APP_2"
+			],
+			"my_invite_code": "7EPLSX",
+			"role": [
+				"user"
+			],
+			"last_login_date": 1698568459950,
+			"last_login_ip": "127.0.0.1",
+			"login_ip_limit": []
+		},
+		{
+			"_id": "test0004",
+			"username": "test0004",
+			"password_secret_version": 1,
+			"nickname": "test0004",
+			"register_env": {
+				"appid": "APP_1",
+				"uni_platform": "web",
+				"os_name": "ios",
+				"app_name": "sv-id-pages",
+				"app_version": "1.0.0",
+				"app_version_code": "100",
+				"channel": "1001",
+				"client_ip": "127.0.0.1"
+			},
+			"register_date": 1698591658769,
+			"dcloud_appid": [
+				"APP_1"
+			],
+			"my_invite_code": "8Q7HFP",
+			"role": [
+				"user"
+			],
+			"last_login_date": 1698591659412,
+			"last_login_ip": "127.0.0.1"
+		},
+		{
+			"_id": "6541103aa09a9b1c28907723",
+			"wx_openid": {
+				"mp": "oC18R5rzNXGjazXU4k0KRFf7ajx4",
+				"mp_APP_3": "oC18R5rzNXGjazXU4k0KRFf7ajx4"
+			},
+			"third_party": {
+				"mp_weixin": {
+					"session_key": "dwapm/l4cDtoyoekkT/D2w=="
+				}
+			},
+			"register_env": {
+				"appid": "APP_3",
+				"uni_platform": "mp-weixin",
+				"os_name": "ios",
+				"app_name": "sv-question-bank",
+				"app_version": "1.0.0",
+				"app_version_code": "100",
+				"channel": "1001",
+				"client_ip": "180.164.218.133"
+			},
+			"register_date": 1698762810804,
+			"dcloud_appid": [
+				"APP_3"
+			],
+			"my_invite_code": "N7PHMU",
+			"role": [
+				"user"
+			],
+			"last_login_date": 1698762854020,
+			"last_login_ip": "180.164.218.133",
+			"avatar_file": {},
+			"nickname": "微信用户0002"
+		},
+		{
+			"_id": "admin",
+			"username": "admin",
+			"password_secret_version": 1,
+			"nickname": "管理员",
+			"register_env": {
+				"appid": "APP_4",
+				"uni_platform": "web",
+				"os_name": "windows",
+				"app_name": "sv-admin",
+				"app_version": "1.0.0",
+				"app_version_code": "100",
+				"channel": "1001",
+				"client_ip": "127.0.0.1"
+			},
+			"register_date": 1698826913366,
+			"dcloud_appid": [
+				"APP_4",
+				"APP_3"
+			],
+			"my_invite_code": "NRTDXK",
+			"role": [
+				"admin",
+			],
+			"last_login_date": 1699458702556,
+			"last_login_ip": "127.0.0.1",
+			"login_ip_limit": []
+		},
+		{
+			"_id": "test0005",
+			"username": "test0005",
+			"password_secret_version": 1,
+			"nickname": "测试0005",
+			"register_env": {
+				"appid": "APP_4",
+				"uni_platform": "web",
+				"os_name": "windows",
+				"app_name": "sv-admin",
+				"app_version": "1.0.0",
+				"app_version_code": "100",
+				"channel": "1001",
+				"client_ip": "127.0.0.1"
+			},
+			"register_date": 1699458734116,
+			"dcloud_appid": [
+				"APP_4"
+			],
+			"my_invite_code": "CAMXJQ",
+			"role": [
+				"user"
+			],
+			"last_login_date": 1699458734729,
+			"last_login_ip": "127.0.0.1"
+		}
+	],
+	"code": 200,
+	"success": true,
+	"total": 8,
+	"params": {
+		"pagesize": 10,
+		"pagenum": 1
+	},
+	"message": "Request Success"
+}

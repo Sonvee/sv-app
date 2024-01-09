@@ -1,9 +1,5 @@
-import {
-  defineStore
-} from 'pinia'
-import {
-  ref
-} from 'vue'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useSvidStore = defineStore('svid', () => {
   // 当前登录用户

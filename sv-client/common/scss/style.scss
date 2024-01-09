@@ -1,20 +1,18 @@
+@import './sv-icons.scss';
+@import './uni-icons.scss';
+@import './admin-icons.scss';
+@import './animations.scss';
+@import './uv-ui.scss';
+@import './uni-ui.scss';
+
 /* #ifdef MP-WEIXIN */
 page {
   height: 100%;
-  // 微信小程序根节点为page标签，没有:root根节点
-  // 主体盒子高度：视窗 - (navbar + statusbar) - tabbar(100rpx) - env(safe-area-inset-bottom)
-  // 其中statusbar官方提供var(--status-bar-height)，但是不准，
-  // 需使用图鸟navbar自带的计算返回值height，去动态计算减去
-  --main-height: calc(100vh - 100rpx - env(safe-area-inset-bottom));
 }
 /* #endif */
 
 /* #ifndef MP-WEIXIN */
 :root {
-  // 主体盒子高度：视窗 - (navbar + statusbar) - tabbar(100rpx) - env(safe-area-inset-bottom)
-  // 其中statusbar官方提供var(--status-bar-height)，但是不准，
-  // 需使用图鸟navbar自带的计算返回值height，去动态计算减去
-  --main-height: calc(100vh - 100rpx - env(safe-area-inset-bottom));
 }
 
 uni-page-body {
@@ -47,6 +45,14 @@ uni-page-body {
   margin-left: 0;
 }
 
+[class*='sv-mt-gap-'] {
+  margin-top: 10px;
+}
+
+.sv-mt-gap-0 {
+  margin-top: 0;
+}
+
 /* 全局滚动条样式 */
 /* 宽度 */
 ::-webkit-scrollbar {
@@ -59,11 +65,5 @@ uni-page-body {
 }
 /* 滑块 */
 ::-webkit-scrollbar-thumb {
-  @include useTheme {
-    background-color: getTheme('sv-grey-color');
-    &:hover {
-      background-color: getTheme('sv-grey-highlight-color');
-    }
-  }
   border-radius: 6rpx; /* 圆角 */
 }

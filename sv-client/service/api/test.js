@@ -8,14 +8,6 @@ export function testList(data) {
 	})
 }
 
-export function testLongList(data) {
-	return request({
-		url: '/test/testLongList',
-		method: 'POST',
-		data
-	})
-}
-
 export function testEmpty(data) {
 	return request({
 		url: '/test/testEmpty',

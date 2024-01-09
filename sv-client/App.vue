@@ -19,16 +19,6 @@ export default {
 <style lang="scss">
 /*每个页面公共css */
 @import 'common/scss/style.scss';
-@import 'common/scss/animations.scss';
-@import 'common/scss/uni-icons.scss';
-@import 'common/scss/admin-icons.scss';
-@import 'common/scss/sv-icons.scss';
-@import 'common/scss/tuniao.scss';
-@import 'common/scss/uni-ui.scss';
 // colorui
 @import 'common/colorui/main.css';
-@import 'common/colorui/icon.css';
-@import 'common/colorui/animation.css';
-// 图鸟
-@import '@tuniao/tn-style/dist/uniapp/index.css';
 </style>

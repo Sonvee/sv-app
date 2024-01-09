@@ -1,113 +1,84 @@
 <template>
-  <view class="sv-tn-tabbar">
-    <tn-tabbar
-      :model-value="currentTabbar"
-      :fixed="tabOpt.fixed"
-      :frosted="tabOpt.frosted"
-      :placeholder="tabOpt.placeholder"
-      :icon-size="tabOpt.iconSize"
-      :font-size="tabOpt.fontSize"
-      :top-shadow="tabOpt.topShadow"
-      :switch-animation="tabOpt.switchAnimation"
-      :z-index="tabOpt.zIndex"
-      :before-switch="beforeSwitch"
-      @change="changeTabber"
+  <view class="sv-tab-bar">
+    <uv-tabbar
+      :value="tabIndex"
+      fixed
+      placeholder
+      activeColor="#3A5AFB"
+      inactiveColor="#66ccff"
+      :border="false"
+      :customStyle="{ background: bgColor, backdropFilter: 'blur(8px) brightness(110%)' }"
+      @change="changeTab"
     >
-      <tn-tabbar-item
-        v-for="(item, index) in tabBarList"
-        :key="index"
-        :icon="item.iconPath"
-        :active-icon="item.selectedIconPath"
-        :text="item.text"
-        :name="item.pagePath"
-        :bulge="item.bulge"
-      />
-    </tn-tabbar>
+      <uv-tabbar-item v-for="(item, index) in tabBarList" :key="index" :text="item.text">
+        <!-- 未选中图标 -->
+        <template #inactive-icon>
+          <image class="tab-icon" :src="item.iconPath"></image>
+        </template>
+        <!-- 已选中图标 -->
+        <template #active-icon>
+          <image class="tab-icon" :src="item.selectedIconPath"></image>
+        </template>
+      </uv-tabbar-item>
+    </uv-tabbar>
   </view>
 </template>
 
 <script setup>
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref } from 'vue'
 import { useSysStore } from '@/store/sys'
 
 const props = defineProps({
-  options: {
-    type: Object,
-    default: () => {}
+  bgColor: {
+    type: String,
+    default: 'transparent'
   }
 })
 
-// 导航栏数据
+// 当前tab页索引
+const tabIndex = computed({
+  set(newIndex) {
+    useSysStore().setConfig({ curTabIndex: newIndex })
+  },
+  get() {
+    return useSysStore().getConfig().curTabIndex
+  }
+})
+
+// 导航栏数据 - 保持和官方tabbar数据结构一致
 const tabBarList = [
   {
+    pagePath: '/pages/index/index',
     text: '首页',
-    iconPath: 'home',
-    selectedIconPath: 'home-fill',
-    pagePath: '/pages/index/index'
+    iconPath: '/static/icons/home.png',
+    selectedIconPath: '/static/icons/home-fill.png'
   },
   {
-    text: '主页',
-    iconPath: 'home',
-    selectedIconPath: 'home-fill',
     pagePath: '/pages/home/home',
-    bulge: true
+    text: '主页',
+    iconPath: '/static/icons/home.png',
+    selectedIconPath: '/static/icons/home-fill.png'
   },
   {
+    pagePath: '/pages/mine/mine',
     text: '我的',
-    iconPath: 'my',
-    selectedIconPath: 'my-fill',
-    pagePath: '/pages/mine/mine'
+    iconPath: '/static/icons/mine.png',
+    selectedIconPath: '/static/icons/mine-fill.png'
   }
 ]
 
-// 配色方案跟随主题，此处不进行设置
-const defaultOpt = {
-  fixed: true,
-  placeholder: true,
-  frosted: true,
-  border: false,
-  topShadow: true,
-  iconSize: '20px',
-  fontSize: '12px',
-  switchAnimation: true,
-  zIndex: 996
+function changeTab(index) {
+  tabIndex.value = index
+  const curTab = tabBarList[index]
+  uni.switchTab({ url: curTab.pagePath })
 }
-
-const tabOpt = computed(() => {
-  return Object.assign({ ...defaultOpt }, props.options)
-})
-
-function beforeSwitch() {
-  return new Promise((resolve) => {
-    resolve(true)
-  })
-}
-
-const sysStore = useSysStore()
-
-const currentTabbar = ref(sysStore.getConfig().curTabbarRoute)
-
-function changeTabber(url) {
-  currentTabbar.value = url
-  sysStore.setConfig({
-    curTabbarRoute: url
-  })
-  uni.switchTab({ url })
-}
-
-function handleCurPageRoute() {
-  const pages = getCurrentPages()
-  const page = pages[pages.length - 1]
-  // 需带上'/'前缀
-  return '/' + page.route
-}
-
-watchEffect(() => {
-  const curPage = sysStore.getConfig().curTabbarRoute
-  // 若pinia中还未存储响应式curTabbarRoute，则需要先取当前路由进行初始化
-  if (!curPage) sysStore.setConfig({ curTabbarRoute: handleCurPageRoute() })
-  currentTabbar.value = curPage || handleCurPageRoute()
-})
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.sv-tab-bar {
+  .tab-icon {
+    width: 40rpx;
+    height: 40rpx;
+  }
+}
+</style>

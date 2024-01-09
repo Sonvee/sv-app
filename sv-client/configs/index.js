@@ -1,7 +1,7 @@
 import manifest from '@/manifest.json'
 
-const base_url = 'https://xxxxxx.next.bspapp.com' // 云函数URL化基础路径
-const base_cdn = 'https://xxxxxx.cdn.bspapp.com' // 云存储下载域名
+const base_url = 'https://fc-mp-74bfcbac-6ba6-4f39-8513-8831390ff75a.next.bspapp.com' // 云函数URL化基础路径
+const base_cdn = 'https://mp-74bfcbac-6ba6-4f39-8513-8831390ff75a.cdn.bspapp.com' // 云存储下载域名
 
 const config = {
   name: manifest.name,

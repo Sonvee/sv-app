@@ -1,19 +1,8 @@
-import {
-  useSvidStore
-} from '@/store/svid.js'
-import {
-  useSysStore
-} from '@/store/sys'
-import {
-  dictList
-} from '@/service/api/sys'
-import {
-  mutations,
-  store
-} from '@/uni_modules/sv-id-pages/common/store.js'
-import {
-  isEmpty
-} from 'lodash'
+import { useSvidStore } from '@/store/svid.js'
+import { useSysStore } from '@/store/sys'
+import { dictList } from '@/service/api/sys'
+import { mutations, store } from '@/uni_modules/sv-id-pages/common/store.js'
+import { isEmpty } from 'lodash'
 
 /**
  * 刷新获取最新用户信息 - 本地+云端

@@ -1,9 +1,5 @@
-import {
-  defineStore
-} from 'pinia'
-import {
-  ref
-} from 'vue'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useSysStore = defineStore('sys', () => {
   // 主题
@@ -34,8 +30,7 @@ export const useSysStore = defineStore('sys', () => {
 
   // 系统配置
   const config = ref({
-    navbarHeight: '',
-    curTabbarRoute: '',
+    curTabIndex: 0,
   })
 
   function setConfig(option) {

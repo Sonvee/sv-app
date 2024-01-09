@@ -1,19 +1,8 @@
-import {
-  useSysStore
-} from "@/store/sys"
-import {
-  useSvidStore
-} from "@/store/svid"
-import {
-  isEmpty
-} from "lodash"
-import {
-  storageAuth,
-  storageDicts
-} from "./pinia-storage"
-import {
-  dictList
-} from "@/service/api/sys"
+import { useSysStore } from "@/store/sys"
+import { useSvidStore } from "@/store/svid"
+import { isEmpty } from "lodash"
+import { storageAuth, storageDicts } from "./pinia-storage"
+import { dictList } from "@/service/api/sys"
 
 /**
  * 本地字典提取 - 结合新版服务器缓存字典使用

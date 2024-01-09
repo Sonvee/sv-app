@@ -1,11 +1,6 @@
 import clientConfig from '@/client.config.js';
-import {
-  useSysStore
-} from '@/store/sys.js';
-import {
-  storageAuth,
-  storageDicts
-} from './pinia-storage.js';
+import { useSysStore } from '@/store/sys.js';
+import { storageAuth, storageDicts } from './pinia-storage.js';
 
 // 预处理
 export async function preProcess() {
@@ -45,7 +40,5 @@ function listenLoginSuccess() {
 }
 
 function initSysConfig() {
-  useSysStore().setConfig({
-    curTabbarRoute: clientConfig.index.url
-  })
+  useSysStore().setConfig({})
 }

@@ -56,6 +56,14 @@
         "navigationBarTitleText": "修改密码",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path" : "pages/mine/setting/setting",
+      "style" : 
+      {
+        "navigationBarTitleText" : "设置",
+        "enablePullDownRefresh" : false
+      }
     }
   ],
   "globalStyle": {

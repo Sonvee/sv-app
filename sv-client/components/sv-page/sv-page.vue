@@ -38,9 +38,12 @@ const theme = computed(() => {
   --page-main-height: calc(var(--page-height) - 44px - 50px);
   --page-notab-height: calc(var(--page-height) - 44px);
   --page-nonav-height: calc(var(--page-height) - 50px);
+}
 
-  .page-container {
-    background-color: inherit;
+.page-container {
+  @include useTheme {
+    background-color: getTheme(sv-bg-color);
+    color: getTheme(sv-text-color);
   }
 }
 </style>

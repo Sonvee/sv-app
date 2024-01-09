@@ -7,7 +7,7 @@
       activeColor="#3A5AFB"
       inactiveColor="#66ccff"
       :border="false"
-      :customStyle="{ background: bgColor, backdropFilter: 'blur(8px) brightness(110%)' }"
+      :customStyle="{ background: bgColor, backdropFilter: 'blur(12px) brightness(120%)' }"
       @change="changeTab"
     >
       <uv-tabbar-item v-for="(item, index) in tabBarList" :key="index" :text="item.text">

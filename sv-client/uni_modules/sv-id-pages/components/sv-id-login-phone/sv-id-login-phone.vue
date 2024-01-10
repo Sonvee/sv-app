@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import mixin from '@/uni_modules/sv-id-pages/common/login-page.mixin.js'
 import rules from '@/uni_modules/sv-id-pages/common/validator.js'
 const uniIdCo = uniCloud.importObject('uni-id-co', {
   errorOptions: {
@@ -43,6 +44,7 @@ const uniIdCo = uniCloud.importObject('uni-id-co', {
   }
 })
 export default {
+  mixins: [mixin],
   data() {
     return {
       loginFormData: {

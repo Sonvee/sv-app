@@ -257,7 +257,6 @@ $uni-input-line-height: 35px;
       border-radius: 12px;
       box-sizing: border-box;
       background-color: rgba(255, 255, 255, 0.1);
-
       position: relative;
       transition: transform 0.8s;
       transform-style: preserve-3d;

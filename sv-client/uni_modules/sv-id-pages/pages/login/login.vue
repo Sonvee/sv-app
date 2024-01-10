@@ -25,10 +25,8 @@
 </template>
 
 <script>
-import mixin from '@/uni_modules/sv-id-pages/common/login-page.mixin.js'
 
 export default {
-  mixins: [mixin],
   data() {
     return {
       appName: 'sv-client App',

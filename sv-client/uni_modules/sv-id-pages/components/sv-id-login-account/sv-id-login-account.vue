@@ -48,7 +48,7 @@
           <uni-forms-item name="nickname">
             <uni-easyinput
               v-model="registerFormData.nickname"
-              placeholder="请输入用户昵称"
+              placeholder="请输入用户昵称 (可选)"
               prefixIcon="person-filled"
             ></uni-easyinput>
           </uni-forms-item>
@@ -87,13 +87,16 @@
 </template>
 
 <script>
+import mixin from '@/uni_modules/sv-id-pages/common/login-page.mixin.js'
 import rules from '@/uni_modules/sv-id-pages/common/validator.js'
 const uniIdCo = uniCloud.importObject('uni-id-co', {
   errorOptions: {
     type: 'toast'
   }
 })
+
 export default {
+  mixins: [mixin],
   data() {
     return {
       loginFormData: {
@@ -199,7 +202,6 @@ $uni-input-line-height: 35px;
     border-radius: 24rpx;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.1);
-
     position: relative;
     transition: transform 0.8s;
     transform-style: preserve-3d;
@@ -209,7 +211,6 @@ $uni-input-line-height: 35px;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
-
       position: absolute;
       top: 0;
       left: 0;

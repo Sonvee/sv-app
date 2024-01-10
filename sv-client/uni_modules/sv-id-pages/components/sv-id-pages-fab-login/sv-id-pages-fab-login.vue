@@ -4,7 +4,7 @@
     <view class="quick-login-btn account-login" @click="accountLogin">
       <uni-icons type="staff-filled" size="30" color="#ffffff"></uni-icons>
     </view>
-    <view class="quick-login-btn sms-login" @click="smstLogin">
+    <view class="quick-login-btn sms-login" @click="smsLogin">
       <uni-icons type="email-filled" size="30" color="#ffffff"></uni-icons>
     </view>
     <view class="quick-login-btn phone-login" @click="phoneLogin">
@@ -34,17 +34,23 @@ export default {
       // 账号密码登录
       this.$emit('change-mode', 'account')
     },
-    smstLogin() {
+    smsLogin() {
       // 短信验证码登录
       this.$emit('change-mode', 'sms')
     },
     phoneLogin() {
       // 手机号一键登录
       this.$emit('change-mode', 'phone')
+      
+      // #ifdef H5
+      uni.showToast({
+        title: '当前设备不支持此登录, 请切换其他登录方式吧~',
+        icon: 'none'
+      })
+      // #endif
     },
     weixinLogin() {
       // 微信登录
-
       // #ifndef H5
       uni.showLoading({
         title: '登录中，请稍后',
@@ -67,40 +73,10 @@ export default {
       // #endif
 
       // #ifdef H5
-      // #ifdef VUE2
-      const baseUrl = process.env.BASE_URL
-      // #endif
-      // #ifdef VUE3
-      const baseUrl = import.meta.env.BASE_URL
-      // #endif
-
-      let redirectUrl =
-        location.protocol +
-        '//' +
-        location.host +
-        baseUrl.replace(/\/$/, '') +
-        (window.location.href.includes('#') ? '/#' : '') +
-        '/uni_modules/sv-id-pages/pages/login/login-h5?type=weixin'
-
-      console.log('redirectUrl----', redirectUrl)
-      let ua = window.navigator.userAgent.toLowerCase()
-      if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-        // 在微信公众号内
-        return window.open(`https://open.weixin.qq.com/connect/oauth2/authorize?
-      						appid=${config.appid.weixin.h5}
-      						&redirect_uri=${encodeURIComponent(redirectUrl)}
-      						&response_type=code
-      						&scope=snsapi_userinfo
-      						&state=STATE&connect_redirect=1#wechat_redirect`)
-      } else {
-        // 非微信公众号内
-        return (location.href = `https://open.weixin.qq.com/connect/qrconnect?
-                  appid=${config.appid.weixin.web}
-                  &redirect_uri=${encodeURIComponent(redirectUrl)}
-                  &response_type=code
-                  &scope=snsapi_login
-                  &state=STATE#wechat_redirect`)
-      }
+      uni.showToast({
+        title: '当前设备不支持此登录, 请切换其他登录方式吧~',
+        icon: 'none'
+      })
       // #endif
     },
     loginAction(params, type) {

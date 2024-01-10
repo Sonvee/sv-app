@@ -1,16 +1,38 @@
 <template>
-  <view class="sv-id-pages-account">
+  <view class="sv-id-pages-sms">
     <!-- 表单 -->
     <view class="form">
       <!-- 登录 -->
       <view class="login-form">
         <uni-forms ref="loginform" :model="loginFormData" :rules="rules" label-width="0">
-          <uni-forms-item name="username">
+          <uni-forms-item name="mobile">
             <uni-easyinput
-              v-model="loginFormData.username"
-              placeholder="请输入用户名"
-              prefixIcon="person"
+              v-model="loginFormData.mobile"
+              type="number"
+              placeholder="请输入手机号码"
+              prefixIcon="phone"
+              maxlength="11"
             ></uni-easyinput>
+          </uni-forms-item>
+          <uni-forms-item name="captcha">
+            <uni-captcha
+              class="captcha-style"
+              ref="captcha"
+              v-model="loginFormData.captcha"
+              scene="send-sms-code"
+            />
+          </uni-forms-item>
+          <uni-forms-item name="code">
+            <uni-easyinput
+              v-model="loginFormData.code"
+              placeholder="请输入短信验证码"
+              maxlength="6"
+              type="number"
+            >
+              <template #right>
+                <view class="smscode-text" @click="getSmsCode">{{ smsCodeText }}</view>
+              </template>
+            </uni-easyinput>
           </uni-forms-item>
         </uni-forms>
         <button class="login-btn" type="primary" @click="submitLogin">登录</button>
@@ -20,19 +42,32 @@
 </template>
 
 <script>
+import mixin from '@/uni_modules/sv-id-pages/common/login-page.mixin.js'
 import rules from '@/uni_modules/sv-id-pages/common/validator.js'
 const uniIdCo = uniCloud.importObject('uni-id-co', {
   errorOptions: {
     type: 'toast'
   }
 })
+
 export default {
+  mixins: [mixin],
   data() {
     return {
       loginFormData: {
-        username: ''
+        mobile: '',
+        captcha: '',
+        code: ''
       },
-      rules
+      rules,
+      reverseNumber: 0,
+      reverseTimer: null
+    }
+  },
+  computed: {
+    smsCodeText() {
+      if (this.reverseNumber == 0) return '获取短信验证码'
+      return '重新发送' + '(' + this.reverseNumber + 's)'
     }
   },
   mounted() {
@@ -47,17 +82,74 @@ export default {
         .then((formRes) => {
           // 调用uniIdCo云对象进行登录
           uniIdCo
-            .login(formRes)
+            .loginBySms(formRes)
             .then((res) => {
               this.loginSuccess(res)
             })
             .catch((err) => {
-              //登录失败，自动重新获取验证码
+              console.log('短信验证码登录失败：', err)
+            })
+            .finally((e) => {
+              this.loginFormData.captcha = ''
+              this.loginFormData.code = ''
             })
         })
         .catch((formErr) => {
           console.log('==== 表单校验失败 :', formErr)
         })
+    },
+    // 获取短信验证码
+    getSmsCode() {
+      if (this.reverseNumber > 0) return
+      // 请求验证码
+      uniIdCo
+        .sendSmsCode({
+          mobile: this.loginFormData.mobile,
+          captcha: this.loginFormData.captcha,
+          scene: 'login-by-sms' // [login-by-sms|reset-pwd-by-sms|bind-mobile]
+        })
+        .then((res) => {
+          uni.showToast({
+            title: '短信验证码发送成功',
+            icon: 'none'
+          })
+          console.log('==== res :', res)
+          // 倒计时
+          this.reverseNumber = 60
+          this.countdown()
+        })
+        .catch((err) => {
+          if (err.code == 'uni-id-invalid-sms-template-id') {
+            this.loginFormData.code = '123456'
+            uni.showToast({
+              title: '已启动测试模式,详情【控制台信息】',
+              icon: 'none'
+            })
+            console.warn(err.message)
+            // 倒计时
+            this.reverseNumber = 60
+            this.countdown()
+          } else {
+            // this.$refs.captcha.getImageCaptcha()
+            // this.captcha = ''
+            uni.showToast({
+              title: err.message,
+              icon: 'none',
+            })
+          }
+        })
+    },
+    // 倒计时节流60秒
+    countdown() {
+      if (this.reverseNumber == 0) {
+        clearTimeout(this.reverseTimer)
+        this.reverseTimer = null
+        return
+      }
+      this.reverseNumber--
+      this.reverseTimer = setTimeout(() => {
+        this.countdown()
+      }, 1000)
     }
   }
 }
@@ -66,7 +158,7 @@ export default {
 <style lang="scss">
 $uni-input-line-height: 35px;
 
-.sv-id-pages-account {
+.sv-id-pages-sms {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -78,17 +170,12 @@ $uni-input-line-height: 35px;
     border-radius: 24rpx;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.1);
-
     position: relative;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
 
-    .login-form,
-    .register-form {
+    .login-form {
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
-
       position: absolute;
       top: 0;
       left: 0;
@@ -97,9 +184,6 @@ $uni-input-line-height: 35px;
       padding: 12px;
       border-radius: 24rpx;
 
-      // 隐藏背面
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
       // 毛玻璃
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
@@ -124,32 +208,24 @@ $uni-input-line-height: 35px;
         }
       }
 
-      .skip {
+      .smscode-text {
+        color: #007aff;
         font-size: 12px;
-        color: #cccccc;
-        display: flex;
-        justify-content: space-between;
-        margin: auto 0 24rpx 0;
+        margin-right: 12rpx;
+        cursor: pointer;
+      }
+      .smscode-text:active {
+        color: #66ccff;
       }
 
-      .login-btn,
-      .register-btn {
+      .login-btn {
+        margin-top: auto;
         width: 100%;
         line-height: unset;
         font-size: 14px;
         padding: 16rpx 0;
       }
     }
-
-    .login-form {
-    }
-    .register-form {
-      transform: rotateY(180deg);
-    }
-  }
-
-  .flip {
-    transform: rotateY(180deg);
   }
 }
 </style>

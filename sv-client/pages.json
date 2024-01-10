@@ -58,11 +58,17 @@
       }
     },
     {
-      "path" : "pages/mine/setting/setting",
-      "style" : 
-      {
-        "navigationBarTitleText" : "设置",
-        "enablePullDownRefresh" : false
+      "path": "pages/mine/setting/setting",
+      "style": {
+        "navigationBarTitleText": "设置",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/login/login-h5",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "enablePullDownRefresh": false
       }
     }
   ],

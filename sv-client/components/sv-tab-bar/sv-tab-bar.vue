@@ -4,8 +4,8 @@
       :value="tabIndex"
       fixed
       placeholder
-      activeColor="#3A5AFB"
-      inactiveColor="#66ccff"
+      :activeColor="activeColor"
+      :inactiveColor="inactiveColor"
       :border="false"
       :customStyle="{ background: bgColor, backdropFilter: 'blur(12px) brightness(120%)' }"
       @change="changeTab"
@@ -32,6 +32,14 @@ const props = defineProps({
   bgColor: {
     type: String,
     default: 'transparent'
+  },
+  activeColor: {
+    type: String,
+    default: '#3A5AFB'
+  },
+  inactiveColor: {
+    type: String,
+    default: '#66ccff'
   }
 })
 

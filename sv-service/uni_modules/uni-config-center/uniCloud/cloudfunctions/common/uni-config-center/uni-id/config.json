@@ -23,8 +23,8 @@
 		"tokenExpiresThreshold": 864000,
 		"oauth": {
 			"weixin": {
-				"appid": "",
-				"appsecret": ""
+				"appid": "wx417856313e7d8aff",
+				"appsecret": "13f2907fa847db3360cb1bfd8747608d"
 			},
 			"qq": {
 				"appid": "",
@@ -54,8 +54,8 @@
 		"tokenExpiresThreshold": 864000,
 		"oauth": {
 			"weixin": {
-				"appid": "",
-				"appsecret": ""
+				"appid": "wx417856313e7d8aff",
+				"appsecret": "13f2907fa847db3360cb1bfd8747608d"
 			}
 		}
 	},

@@ -6,17 +6,24 @@
       :bgColor="bgColor"
       :placeholder="placeholder"
       :border="false"
-      :title="pageTitle ?? routeTitle"
       titleStyle="color:unset"
     >
       <template #left>
-        <uv-icon
-          v-if="!isTabbar"
-          color="unset"
-          name="arrow-left"
-          size="20"
-          @click="onBack"
-        ></uv-icon>
+        <slot name="left">
+          <uv-icon
+            v-if="!isTabbar"
+            color="unset"
+            name="arrow-left"
+            size="20"
+            @click="onBack"
+          ></uv-icon>
+        </slot>
+      </template>
+      <template #center>
+        <slot name="center">{{ pageTitle ?? routeTitle }}</slot>
+      </template>
+      <template #right>
+        <slot name="right"></slot>
       </template>
     </uv-navbar>
   </view>

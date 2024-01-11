@@ -7,9 +7,11 @@
     <view class="quick-login-btn sms-login" @click="smsLogin">
       <uni-icons type="email-filled" size="30" color="#ffffff"></uni-icons>
     </view>
+    <!-- #ifdef APP -->
     <view class="quick-login-btn phone-login" @click="phoneLogin">
       <uni-icons type="phone-filled" size="30" color="#ffffff"></uni-icons>
     </view>
+    <!-- #endif -->
     <view class="quick-login-btn weixin-login" @click="weixinLogin">
       <uni-icons type="weixin" size="30" color="#ffffff"></uni-icons>
     </view>
@@ -27,7 +29,26 @@ const uniIdCo = uniCloud.importObject('uni-id-co', {
 
 export default {
   data() {
-    return {}
+    return {
+      univerifyStyle: {
+        //一键登录弹出窗的样式配置参数
+        fullScreen: true, // 是否全屏显示，true表示全屏模式，false表示非全屏模式，默认值为false。
+        backgroundColor: '#ffffff', // 授权页面背景颜色，默认值：#ffffff
+        buttons: {
+          // 自定义登录按钮
+          iconWidth: '45px', // 图标宽度（高度等比例缩放） 默认值：45px
+          list: []
+        },
+        privacyTerms: {
+          defaultCheckBoxState: false, // 条款勾选框初始状态 默认值： true
+          textColor: '#BBBBBB', // 文字颜色 默认值：#BBBBBB
+          termsColor: '#5496E3', //  协议文字颜色 默认值： #5496E3
+          prefix: '我已阅读并同意', // 条款前的文案 默认值：“我已阅读并同意”
+          suffix: '并使用本机号码登录', // 条款后的文案 默认值：“并使用本机号码登录”
+          privacyItems: []
+        }
+      }
+    }
   },
   methods: {
     accountLogin() {
@@ -39,13 +60,40 @@ export default {
       this.$emit('change-mode', 'sms')
     },
     phoneLogin() {
-      // 手机号一键登录
-      this.$emit('change-mode', 'phone')
-      
-      // #ifdef H5
-      uni.showToast({
-        title: '当前设备不支持此登录, 请切换其他登录方式吧~',
-        icon: 'none'
+      // 手机号一键登录 - 只支持APP端
+      // #ifdef APP
+      uni.showLoading({
+        title: '加载中...',
+        mask: true
+      })
+      const univerifyManager = uni.getUniverifyManager()
+      // 调用一键登录弹框
+      return univerifyManager.login({
+        univerifyStyle: this.univerifyStyle,
+        success: (res) => {
+          this.loginAction(res.authResult, 'univerify')
+        },
+        fail(err) {
+          /**
+           * 下列报错不进行提示：
+           * 30002 用户点击了其他登录方式
+           * 30003 用户关闭验证界面
+           * 30006 一键登录失败
+           * 30008 用户点击了自定义按钮
+           * 更多报错信息详见：https://uniapp.dcloud.net.cn/univerify.html#错误码
+           */
+          const notosat = ['30002', '30003', '30006', '30008']
+          if (notosat.includes(err.code + '')) return
+          // 从err.errMsg取出所有中文字符
+          const message = err.errMsg.match(/[\u4e00-\u9fa5]/g).join('')
+          uni.showToast({
+            title: message,
+            icon: 'none'
+          })
+        },
+        complete() {
+          uni.hideLoading()
+        }
       })
       // #endif
     },
@@ -57,14 +105,16 @@ export default {
         mask: true
       })
       uni.login({
-        provider: type,
+        provider: 'weixin',
         onlyAuthorize: true,
         success: (res) => {
-          console.log('==== uni.login success :', res)
-          this.loginAction({ code: res.code }, type)
+          this.loginAction({ code: res.code }, 'weixin')
         },
         fail: (err) => {
-          console.log('==== uni.login fail', err)
+          uni.showToast({
+            title: err,
+            icon: 'none'
+          })
         },
         complete: () => {
           uni.hideLoading()
@@ -83,13 +133,12 @@ export default {
       // 联网验证登录
       let action = 'loginBy' + type.trim().replace(type[0], type[0].toUpperCase())
       uniIdCo[action](params)
-        .then((result) => {
+        .then((res) => {
           uni.showToast({
             title: '登录成功',
-            icon: 'none',
-            duration: 2000
+            icon: 'none'
           })
-          mutations.loginSuccess(result)
+          mutations.loginSuccess(res)
         })
         .catch((err) => {
           uni.showModal({
@@ -97,6 +146,12 @@ export default {
             confirmText: '知道了',
             showCancel: false
           })
+        })
+        .finally(() => {
+          if (type == 'univerify') {
+            uni.closeAuthView()
+          }
+          uni.hideLoading()
         })
     }
   }

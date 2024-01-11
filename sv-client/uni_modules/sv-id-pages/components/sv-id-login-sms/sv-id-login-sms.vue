@@ -101,6 +101,19 @@ export default {
     // 获取短信验证码
     getSmsCode() {
       if (this.reverseNumber > 0) return
+      // 先校验手机号和图形验证码
+      if (!/^1\d{10}$/.test(this.loginFormData.mobile)) {
+        return uni.showToast({
+          title: '手机号格式错误',
+          icon: 'none'
+        })
+      }
+      if (this.loginFormData.captcha.length != 4) {
+        return uni.showToast({
+          title: '请先输入图形验证码',
+          icon: 'none'
+        })
+      }
       // 请求验证码
       uniIdCo
         .sendSmsCode({
@@ -134,7 +147,7 @@ export default {
             // this.captcha = ''
             uni.showToast({
               title: err.message,
-              icon: 'none',
+              icon: 'none'
             })
           }
         })

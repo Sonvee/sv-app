@@ -80,7 +80,7 @@
         <view class="skip">
           <view @click="skipLogin">返回登录</view>
         </view>
-        <button class="register-btn" type="warn" @click="submitRegister">注册</button>
+        <button class="register-btn" type="warn" @click="submitRegister">注册并登录</button>
       </view>
     </view>
   </view>

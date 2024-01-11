@@ -16,23 +16,25 @@
       <view class="login-mode">
         <sv-id-login-account v-if="loginMode == 'account'"></sv-id-login-account>
         <sv-id-login-sms v-else-if="loginMode == 'sms'"></sv-id-login-sms>
-        <sv-id-login-phone v-else-if="loginMode == 'phone'"></sv-id-login-phone>
       </view>
       <!-- 第三方登录 -->
       <sv-id-pages-fab-login @change-mode="changeMode"></sv-id-pages-fab-login>
+      <!-- 隐私政策 -->
+      <view class="agreements">
+        <uni-id-pages-agreements></uni-id-pages-agreements>
+      </view>
     </view>
   </view>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
       appName: 'sv-client App',
       logoSrc: '/static/logo.png', // logo图片地址
       bgImage: '', // 背景图片地址
-      loginMode: 'account' // 登录模式：account sms phone
+      loginMode: 'account' // 登录模式：account sms
     }
   },
   methods: {
@@ -86,6 +88,11 @@ export default {
     .login-mode {
       width: 100%;
     }
+  }
+
+  .agreements {
+    margin-top: auto;
+    margin-bottom: 12px;
   }
 }
 

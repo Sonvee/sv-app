@@ -74,6 +74,14 @@
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/bind-mobile/bind-mobile",
+      "style": {
+        "navigationBarTitleText": "绑定手机",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default"
+      }
     }
   ],
   "globalStyle": {

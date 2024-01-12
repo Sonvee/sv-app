@@ -17,7 +17,7 @@
       <uni-popup-dialog
         type="warn"
         title="系统提示"
-        content="是否已经仔细阅读注销提示，知晓可能带来的后果，并确认要注销？"
+        content="您是否已经仔细阅读注销提示，知晓可能带来的后果，并确认要注销？"
         cancelText="关闭"
         :confirmText="confirmText"
         before-close
@@ -59,14 +59,14 @@ export default {
       // 倒计时
       this.downTimer = setInterval(() => {
         this.countdown--
-        this.clearCountdown()
+        if (this.countdown == 0) {
+          this.clearCountdown()
+        }
       }, 1000)
     },
     clearCountdown() {
-      if (this.countdown == 0) {
-        clearInterval(this.downTimer)
-        this.downTimer = null
-      }
+      clearInterval(this.downTimer)
+      this.downTimer = null
     },
     dialogConfirm() {
       if (this.countdown > 0) return
@@ -85,6 +85,7 @@ export default {
     },
     dialogClose() {
       this.$refs.alertDialog.close()
+      this.clearCountdown()
       this.countdown = 10
     }
   }

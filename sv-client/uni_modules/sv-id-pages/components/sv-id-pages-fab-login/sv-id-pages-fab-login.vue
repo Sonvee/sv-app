@@ -12,15 +12,14 @@
       <uni-icons type="phone-filled" size="30" color="#ffffff"></uni-icons>
     </view>
     <!-- #endif -->
-    <view class="quick-login-btn weixin-login" @click="weixinLogin">
-      <uni-icons type="weixin" size="30" color="#ffffff"></uni-icons>
+    <view class="quick-login-btn third-login" @click="thirdLogin">
+      <uni-icons type="more-filled" size="30" color="#ffffff"></uni-icons>
     </view>
   </view>
 </template>
 
 <script>
 import { mutations } from '@/uni_modules/sv-id-pages/common/store.js'
-import config from '@/uni_modules/sv-id-pages/config.js'
 const uniIdCo = uniCloud.importObject('uni-id-co', {
   errorOptions: {
     type: 'toast'
@@ -31,7 +30,7 @@ export default {
   data() {
     return {
       univerifyStyle: {
-        //一键登录弹出窗的样式配置参数
+        // 一键登录弹出窗的样式配置参数
         fullScreen: true, // 是否全屏显示，true表示全屏模式，false表示非全屏模式，默认值为false。
         backgroundColor: '#ffffff', // 授权页面背景颜色，默认值：#ffffff
         buttons: {
@@ -84,8 +83,8 @@ export default {
            */
           const notosat = ['30002', '30003', '30006', '30008']
           if (notosat.includes(err.code + '')) return
-          // 从err.errMsg取出所有中文字符
-          const message = err.errMsg.match(/[\u4e00-\u9fa5]/g).join('')
+          // 从err.errMsg取出"login:fail "之后的字符
+          const message = err.errMsg.substring(11)
           uni.showToast({
             title: message,
             icon: 'none'
@@ -97,37 +96,9 @@ export default {
       })
       // #endif
     },
-    weixinLogin() {
-      // 微信登录
-      // #ifndef H5
-      uni.showLoading({
-        title: '登录中，请稍后',
-        mask: true
-      })
-      uni.login({
-        provider: 'weixin',
-        onlyAuthorize: true,
-        success: (res) => {
-          this.loginAction({ code: res.code }, 'weixin')
-        },
-        fail: (err) => {
-          uni.showToast({
-            title: err,
-            icon: 'none'
-          })
-        },
-        complete: () => {
-          uni.hideLoading()
-        }
-      })
-      // #endif
-
-      // #ifdef H5
-      uni.showToast({
-        title: '当前设备不支持此登录, 请切换其他登录方式吧~',
-        icon: 'none'
-      })
-      // #endif
+    thirdLogin() {
+      // 第三方快捷登录
+      this.$emit('change-mode', 'third')
     },
     loginAction(params, type) {
       // 联网验证登录
@@ -160,9 +131,8 @@ export default {
 
 <style lang="scss">
 .quick-login {
-  width: 70vw;
-  height: 120rpx;
-  margin-top: 40rpx;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -188,8 +158,8 @@ export default {
   .phone-login {
     background: linear-gradient(135deg, #ffbc11, #ff2f21);
   }
-  .weixin-login {
-    background: linear-gradient(135deg, #36ff4d, #29c53c);
+  .third-login {
+    background: linear-gradient(135deg, #00ffd5, #009e81);
   }
 }
 </style>

@@ -1,12 +1,10 @@
 <template>
-  <sv-page>
-    <view class="security">
-      <uni-list>
-        <uni-list-item title="修改密码" link @click="onChangePwd" />
-        <uni-list-item title="注销账号" link @click="onDeactivate" />
-      </uni-list>
-    </view>
-  </sv-page>
+  <view class="security">
+    <uni-list>
+      <uni-list-item title="修改密码" link @click="onChangePwd" />
+      <uni-list-item title="注销账号" link @click="onDeactivate" />
+    </uni-list>
+  </view>
 </template>
 
 <script>

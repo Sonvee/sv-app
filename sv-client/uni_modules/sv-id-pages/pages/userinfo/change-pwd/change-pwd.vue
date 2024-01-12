@@ -1,35 +1,33 @@
 <template>
-  <sv-page>
-    <view class="change-pwd">
-      <uni-forms ref="form" :value="formData" err-show-type="toast" :label-width="80">
-        <uni-forms-item name="oldPassword" label="旧密码" required>
-          <uni-easyinput
-            v-model="formData.oldPassword"
-            type="password"
-            placeholder="请输入旧密码"
-          ></uni-easyinput>
-        </uni-forms-item>
-        <uni-forms-item name="newPassword" label="新密码" required>
-          <uni-easyinput
-            v-model="formData.newPassword"
-            type="password"
-            placeholder="请输入新密码"
-          ></uni-easyinput>
-        </uni-forms-item>
-        <uni-forms-item name="newPassword2" label="确认密码" required>
-          <uni-easyinput
-            v-model="formData.newPassword2"
-            type="password"
-            placeholder="请再次输入新密码"
-          ></uni-easyinput>
-        </uni-forms-item>
-        <view class="button-group">
-          <button type="warn" style="margin-right: 24rpx" @click="cancel">返回</button>
-          <button type="primary" @click="submit">提交</button>
-        </view>
-      </uni-forms>
-    </view>
-  </sv-page>
+  <view class="change-pwd">
+    <uni-forms ref="form" :value="formData" err-show-type="toast" :label-width="80">
+      <uni-forms-item name="oldPassword" label="旧密码" required>
+        <uni-easyinput
+          v-model="formData.oldPassword"
+          type="password"
+          placeholder="请输入旧密码"
+        ></uni-easyinput>
+      </uni-forms-item>
+      <uni-forms-item name="newPassword" label="新密码" required>
+        <uni-easyinput
+          v-model="formData.newPassword"
+          type="password"
+          placeholder="请输入新密码"
+        ></uni-easyinput>
+      </uni-forms-item>
+      <uni-forms-item name="newPassword2" label="确认密码" required>
+        <uni-easyinput
+          v-model="formData.newPassword2"
+          type="password"
+          placeholder="请再次输入新密码"
+        ></uni-easyinput>
+      </uni-forms-item>
+      <view class="button-group">
+        <button type="warn" style="margin-right: 24rpx" @click="cancel">返回</button>
+        <button type="primary" @click="submit">提交</button>
+      </view>
+    </uni-forms>
+  </view>
 </template>
 
 <script>
@@ -85,9 +83,14 @@ export default {
             .then((e) => {
               uni.showToast({
                 title: '密码修改成功',
-                icon: 'none'
+                icon: 'success',
+                duration: 2000,
+                success: () => {
+                  setTimeout(() => {
+                    mutations.logout()
+                  }, 2000)
+                }
               })
-              mutations.logout()
             })
             .catch((e) => {
               uni.showModal({

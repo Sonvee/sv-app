@@ -38,6 +38,10 @@
         <button class="login-btn" type="primary" @click="submitLogin">登录</button>
       </view>
     </view>
+    <!-- 隐私政策 -->
+    <view class="agreements">
+      <sv-id-pages-agreements ref="agreements"></sv-id-pages-agreements>
+    </view>
   </view>
 </template>
 
@@ -77,6 +81,10 @@ export default {
   methods: {
     // 登录表单校验
     submitLogin() {
+      if (!this.agree) {
+        this.$refs.agreements.popup(this.submitLogin)
+        return
+      }
       this.$refs.loginform
         .validate()
         .then((formRes) => {
@@ -169,8 +177,6 @@ export default {
 </script>
 
 <style lang="scss">
-$uni-input-line-height: 35px;
-
 .sv-id-pages-sms {
   width: 100%;
   display: flex;
@@ -179,7 +185,7 @@ $uni-input-line-height: 35px;
   .form {
     width: 70%;
     height: 780rpx;
-    border: 1px solid #aaaaaa66;
+    border: 1px solid #{var(--svid-border-color)};
     border-radius: 24rpx;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.1);
@@ -204,31 +210,31 @@ $uni-input-line-height: 35px;
       .captcha-style {
         ::v-deep .captcha-img-box {
           background-color: transparent;
-          height: $uni-input-line-height !important;
+          height: var(--svid-input-line-height) !important;
 
           .captcha-img {
-            height: $uni-input-line-height !important;
-            border: 1px dashed #777777;
+            height: var(--svid-input-line-height) !important;
+            border: 1px dashed #{var(--svid-border-color)};
           }
           .loding {
-            height: $uni-input-line-height !important;
-            line-height: $uni-input-line-height;
+            height: var(--svid-input-line-height) !important;
+            line-height: var(--svid-input-line-height);
           }
         }
         ::v-deep .captcha {
-          height: $uni-input-line-height !important;
+          height: var(--svid-input-line-height) !important;
           border-radius: 8rpx;
         }
       }
 
       .smscode-text {
-        color: #007aff;
+        color: var(--svid-color-primary);
         font-size: 12px;
         margin-right: 12rpx;
         cursor: pointer;
       }
       .smscode-text:active {
-        color: #66ccff;
+        opacity: 0.8;
       }
 
       .login-btn {
@@ -239,6 +245,14 @@ $uni-input-line-height: 35px;
         padding: 16rpx 0;
       }
     }
+  }
+
+  .agreements {
+    position: fixed;
+    bottom: 24rpx;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }
 </style>

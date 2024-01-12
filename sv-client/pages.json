@@ -26,7 +26,8 @@
       "path": "uni_modules/sv-id-pages/pages/userinfo/userinfo",
       "style": {
         "navigationBarTitleText": "个人中心",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default"
       }
     },
     {
@@ -40,27 +41,37 @@
       "path": "uni_modules/sv-id-pages/pages/userinfo/security/security",
       "style": {
         "navigationBarTitleText": "账号与安全",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default"
       }
     },
     {
       "path": "uni_modules/sv-id-pages/pages/userinfo/deactivate/deactivate",
       "style": {
         "navigationBarTitleText": "注销账号",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default"
       }
     },
     {
       "path": "uni_modules/sv-id-pages/pages/userinfo/change-pwd/change-pwd",
       "style": {
         "navigationBarTitleText": "修改密码",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default"
       }
     },
     {
       "path": "pages/mine/setting/setting",
       "style": {
         "navigationBarTitleText": "设置",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/webview/webview",
+      "style": {
+        "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
     }

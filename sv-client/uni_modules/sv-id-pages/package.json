@@ -1,13 +1,14 @@
 {
 	"id": "sv-id-pages",
 	"displayName": "sv-id-pages",
-	"version": "1.2.1",
-	"description": "基于uni-id-pages改，适合微信小程序开发，新的易读易修改的界面样式。使用前请看详情介绍。",
+	"version": "2.0.1",
+	"description": "基于uni-id-pages魔改，新的易读易修改的界面样式，使用前请看详情介绍。",
 	"keywords": [
-        "sv-id-pages",
         "uni-id-pages",
         "用户体系",
-        "微信登录"
+        "个人账号",
+        "微信登录",
+        "手机验证码"
     ],
 	"repository": "",
 	"engines": {
@@ -56,20 +57,20 @@
 					"vue3": "y"
 				},
 				"App": {
-					"app-vue": "u",
+					"app-vue": "y",
 					"app-nvue": "u"
 				},
 				"H5-mobile": {
 					"Safari": "u",
-					"Android Browser": "u",
-					"微信浏览器(Android)": "u",
+					"Android Browser": "y",
+					"微信浏览器(Android)": "y",
 					"QQ浏览器(Android)": "u"
 				},
 				"H5-pc": {
 					"Chrome": "y",
 					"IE": "u",
-					"Edge": "u",
-					"Firefox": "u",
+					"Edge": "y",
+					"Firefox": "y",
 					"Safari": "u"
 				},
 				"小程序": {

@@ -3,10 +3,9 @@
 ## 写在前面
 
 1. 基于uni-id-pages，重构部分页面和逻辑代码。
-2. 由于目前只适配了账号密码登录，和微信小程序一键登录，暂未集成uni-id-pages的手机验证码、邮箱、以及其他第三方登录。
-3. 个人觉得直接使用uni-id-pages对于只开发微信小程序的开发者来说有点冗余，而且页面样式不容易改。
-4. 只考虑开发微信小程序，又不想用uni-id-pages，可以考虑使用该插件。
-5. 因为本质上是基于uni-id-pages，适配了uni-id相关的云函数，可从原uni-id-pages迁移，但是要注意部分页面路径需要改动。
+2. 由于目前适配了账号密码登录，手机号一键登录，短信验证码登录，微信登录，QQ登录。
+3. 个人觉得直接使用uni-id-pages中对只开发小程序或app开发者来说可能有点冗余，且uni-id-pages不易改。
+4. 因为本质上是基于uni-id-pages，适配了uni-id相关的云函数，可从原uni-id-pages迁移，但是要注意部分页面路径需要改动。
 
 ## 使用方式
 
@@ -17,7 +16,7 @@
 在uniCloud/cloudfunctions/common/uni-config-center/下
 
 #### 1. uni-captcha验证码配置
-
+原uni-id-pages的验证码个人感觉很难看清，故该插件内已做了相对较易识别的样式，正常情况下已无需再更改。
 详见官方文档[uni-captcha图形验证码](https://uniapp.dcloud.net.cn/uniCloud/uni-captcha.html)
 ```
 {
@@ -47,12 +46,12 @@
 
 #### 2. uni-id配置
 
-uni-id的配置应该不用多说，官方文档[uni-id用户体系](https://uniapp.dcloud.net.cn/uniCloud/uni-id-summary.html)，配置微信小程序的appid和secret等相关参数
+uni-id的配置应该不用多说，官方文档[uni-id用户体系](https://uniapp.dcloud.net.cn/uniCloud/uni-id-summary.html)，配置相关appid和secret等相关参数
 
 ## 特点
 
-1. 适合开发微信小程序，除微信小程序和账号密码登录外，暂不支持APP、手机验证码、邮箱、其他第三方登录。
-2. 去除了除微信小程序和账密登录外其他登录的代码，对于微信小程序开发者来说，该插件体积很小，代码很简洁。
+1. 支持账号密码登录、短信验证码登录、手机号一键登录、微信登录、QQ登录。
+2. 该插件相对uni-id-pages来说，代码更简洁，且富含注释，易二次开发，样式也易修改。
 3. 新的登录与个人空间界面，若需自定义页面样式，也很容易且方便开发者重构。
 4. storage中添加sv-id-pages-userInfo，与uni-id-pages-userInfo并存，但是内容多一些。
 5. 提供url化的接口，遵守云对象url化规范，使用前需要知晓官方文档[云函数URL化](https://uniapp.dcloud.net.cn/uniCloud/http.html)使用方式。

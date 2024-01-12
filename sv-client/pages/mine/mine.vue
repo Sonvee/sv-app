@@ -3,6 +3,7 @@
     <view class="mine">
       <button @click="toSetting">设置</button>
       <button @click="toLogin">登录</button>
+      <button @click="toMine">个人中心</button>
     </view>
   </sv-page>
 </template>
@@ -15,6 +16,10 @@ function toSetting() {
 
 function toLogin() {
   mutations.logout()
+}
+
+function toMine() {
+  uni.navigateTo({ url: '/uni_modules/sv-id-pages/pages/userinfo/userinfo' })
 }
 </script>
 

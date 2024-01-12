@@ -204,8 +204,6 @@ export default {
 </script>
 
 <style lang="scss">
-$uni-input-line-height: 35px;
-
 .sv-id-login {
   height: 100vh;
 
@@ -285,19 +283,19 @@ $uni-input-line-height: 35px;
         .captcha-style {
           ::v-deep .captcha-img-box {
             background-color: transparent;
-            height: $uni-input-line-height !important;
+            height: var(--svid-input-line-height) !important;
 
             .captcha-img {
-              height: $uni-input-line-height !important;
+              height: var(--svid-input-line-height) !important;
               border: 1px dashed #777777;
             }
             .loding {
-              height: $uni-input-line-height !important;
-              line-height: $uni-input-line-height;
+              height: var(--svid-input-line-height) !important;
+              line-height: var(--svid-input-line-height);
             }
           }
           ::v-deep .captcha {
-            height: $uni-input-line-height !important;
+            height: var(--svid-input-line-height) !important;
             border-radius: 16px;
           }
         }

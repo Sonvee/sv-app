@@ -16,12 +16,11 @@
       <view class="login-mode">
         <sv-id-login-account v-if="loginMode == 'account'"></sv-id-login-account>
         <sv-id-login-sms v-else-if="loginMode == 'sms'"></sv-id-login-sms>
+        <sv-id-login-third-party v-else-if="loginMode == 'third'"></sv-id-login-third-party>
       </view>
       <!-- 第三方登录 -->
-      <sv-id-pages-fab-login @change-mode="changeMode"></sv-id-pages-fab-login>
-      <!-- 隐私政策 -->
-      <view class="agreements">
-        <uni-id-pages-agreements></uni-id-pages-agreements>
+      <view class="fab-login">
+        <sv-id-pages-fab-login @change-mode="changeMode"></sv-id-pages-fab-login>
       </view>
     </view>
   </view>
@@ -33,10 +32,11 @@ export default {
     return {
       appName: 'sv-client App',
       logoSrc: '/static/logo.png', // logo图片地址
-      bgImage: '', // 背景图片地址
-      loginMode: 'account' // 登录模式：account sms
+      bgImage: 'https://mp-74bfcbac-6ba6-4f39-8513-8831390ff75a.cdn.bspapp.com/static/xiaxue.gif', // 背景图片地址
+      loginMode: 'account' // 登录模式：account sms third
     }
   },
+  mounted() {},
   methods: {
     changeMode(mode) {
       this.loginMode = mode
@@ -47,6 +47,12 @@ export default {
 
 <style lang="scss">
 .sv-id-login {
+  --svid-text-color: #fff;
+  --svid-text-grey-color: #999;
+  --svid-border-color: #c8c7cc;
+  --svid-color-primary: #007aff;
+  --svid-input-line-height: 35px;
+
   height: 100vh;
 
   .login-bg {
@@ -88,11 +94,12 @@ export default {
     .login-mode {
       width: 100%;
     }
-  }
 
-  .agreements {
-    margin-top: auto;
-    margin-bottom: 12px;
+    .fab-login {
+      width: 70%;
+      height: 120rpx;
+      margin-top: 24rpx;
+    }
   }
 }
 

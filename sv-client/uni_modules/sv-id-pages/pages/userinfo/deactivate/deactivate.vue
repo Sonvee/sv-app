@@ -1,27 +1,45 @@
 <!-- 注销（销毁）账号 -->
 <template>
-  <sv-page>
-    <view class="uni-content">
-      <text class="words" space="emsp">
-        一、注销是不可逆操作，注销后:\n 1.账号将无法登录、无法找回。\n
-        2.账号所有信息都会清除(个人身份信息、粉丝数等；发布的作品、评论、点赞等;交易信息等)，你的朋友将无法通过本应用账号联系你，请自行备份相关信息和数据。\n
-        二、重要提示\n 1.封禁账号(永久封禁、社交封禁、直播权限封禁)不能申请注销。\n
-        2.注销后，你的身份证、三方账号(微信、QQ、微博、支付宝)、手机号等绑定关系将解除，解除后可以绑定到其他账号。\n
-        3.注销后，手机号可以注册新的账号，新账号不会存在之前账号的任何信息(作品、粉丝、评论、个人信息等)。\n
-        4.注销本应用账号前，需尽快处理账号下的资金问题。\n 5.视具体账号情况而定，注销最多需要7天。\n
-      </text>
-      <view class="button-group">
-        <button @click="nextStep" class="next" type="default">下一步</button>
-        <button @click="cancel" type="warn">取消</button>
-      </view>
+  <view class="uni-content">
+    <text class="words" space="emsp">
+      一、注销是不可逆操作，注销后:\n 1.账号将无法登录、无法找回。\n
+      2.账号所有信息都会清除(个人身份信息、粉丝数等；发布的作品、评论、点赞等;交易信息等)，你的朋友将无法通过本应用账号联系你，请自行备份相关信息和数据。\n
+      二、重要提示\n 1.封禁账号(永久封禁、社交封禁、直播权限封禁)不能申请注销。\n
+      2.注销后，你的身份证、三方账号(微信、QQ、微博、支付宝)、手机号等绑定关系将解除，解除后可以绑定到其他账号。\n
+      3.注销后，手机号可以注册新的账号，新账号不会存在之前账号的任何信息(作品、粉丝、评论、个人信息等)。\n
+      4.注销本应用账号前，需尽快处理账号下的资金问题。\n 5.视具体账号情况而定，注销最多需要7天。\n
+    </text>
+    <view class="button-group">
+      <button @click="nextStep" class="next" type="default">下一步</button>
+      <button @click="cancel" type="warn">取消</button>
     </view>
-  </sv-page>
+    <uni-popup ref="alertDialog" type="dialog">
+      <uni-popup-dialog
+        type="warn"
+        title="系统提示"
+        content="是否已经仔细阅读注销提示，知晓可能带来的后果，并确认要注销？"
+        cancelText="关闭"
+        :confirmText="confirmText"
+        before-close
+        @confirm="dialogConfirm"
+        @close="dialogClose"
+      ></uni-popup-dialog>
+    </uni-popup>
+  </view>
 </template>
 
 <script>
 export default {
   data() {
-    return {}
+    return {
+      countdown: 10, // 倒计时默认10秒
+      downTimer: null
+    }
+  },
+  computed: {
+    confirmText() {
+      return this.countdown == 0 ? '确认注销' : `我已知晓 (${this.countdown})`
+    }
   },
   onLoad() {},
   methods: {
@@ -29,27 +47,45 @@ export default {
       uni.navigateBack()
     },
     nextStep() {
-      uni.showModal({
-        content: '已经仔细阅读注销提示，知晓可能带来的后果，并确认要注销',
-        complete: (e) => {
-          if (e.confirm) {
-            const uniIdco = uniCloud.importObject('uni-id-co')
-            uniIdco.closeAccount().then((e) => {
-              uni.showToast({
-                title: '注销成功',
-                duration: 3000
-              })
-              uni.removeStorageSync('uni_id_token')
-              uni.setStorageSync('uni_id_token_expired', 0)
-              uni.navigateTo({
-                url: '/uni_modules/sv-id-pages/pages/login/login'
-              })
-            })
-          } else {
-            uni.navigateBack()
-          }
-        }
+      this.$refs.alertDialog.open()
+      this.startCountdown()
+    },
+    startCountdown() {
+      // 不重复创建计时器
+      if (this.downTimer) {
+        this.clearCountdown()
+        return
+      }
+      // 倒计时
+      this.downTimer = setInterval(() => {
+        this.countdown--
+        this.clearCountdown()
+      }, 1000)
+    },
+    clearCountdown() {
+      if (this.countdown == 0) {
+        clearInterval(this.downTimer)
+        this.downTimer = null
+      }
+    },
+    dialogConfirm() {
+      if (this.countdown > 0) return
+      const uniIdco = uniCloud.importObject('uni-id-co')
+      uniIdco.closeAccount().then((e) => {
+        uni.showToast({
+          title: '注销成功',
+          duration: 3000
+        })
+        uni.removeStorageSync('uni_id_token')
+        uni.setStorageSync('uni_id_token_expired', 0)
+        uni.navigateTo({
+          url: '/uni_modules/sv-id-pages/pages/login/login'
+        })
       })
+    },
+    dialogClose() {
+      this.$refs.alertDialog.close()
+      this.countdown = 10
     }
   }
 }

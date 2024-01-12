@@ -83,6 +83,10 @@
         <button class="register-btn" type="warn" @click="submitRegister">注册并登录</button>
       </view>
     </view>
+    <!-- 隐私政策 -->
+    <view class="agreements">
+      <sv-id-pages-agreements ref="agreements"></sv-id-pages-agreements>
+    </view>
   </view>
 </template>
 
@@ -124,6 +128,10 @@ export default {
   methods: {
     // 登录表单校验
     submitLogin() {
+      if (!this.agree) {
+        this.$refs.agreements.popup(this.submitLogin)
+        return
+      }
       this.$refs.loginform
         .validate()
         .then((formRes) => {
@@ -149,6 +157,10 @@ export default {
     },
     // 注册表单校验
     submitRegister() {
+      if (!this.agree) {
+        this.$refs.agreements.popup(this.submitRegister)
+        return
+      }
       this.$refs.registerform
         .validate()
         .then((formRes) => {
@@ -188,8 +200,6 @@ export default {
 </script>
 
 <style lang="scss">
-$uni-input-line-height: 35px;
-
 .sv-id-pages-account {
   width: 100%;
   display: flex;
@@ -198,7 +208,8 @@ $uni-input-line-height: 35px;
   .form {
     width: 70%;
     height: 780rpx;
-    border: 1px solid #aaaaaa66;
+    margin: 0 auto;
+    border: 1px solid #{var(--svid-border-color)};
     border-radius: 24rpx;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.1);
@@ -229,26 +240,26 @@ $uni-input-line-height: 35px;
       .captcha-style {
         ::v-deep .captcha-img-box {
           background-color: transparent;
-          height: $uni-input-line-height !important;
+          height: var(--svid-input-line-height) !important;
 
           .captcha-img {
-            height: $uni-input-line-height !important;
-            border: 1px dashed #777777;
+            height: var(--svid-input-line-height) !important;
+            border: 1px dashed #{var(--svid-border-color)};
           }
           .loding {
-            height: $uni-input-line-height !important;
-            line-height: $uni-input-line-height;
+            height: var(--svid-input-line-height) !important;
+            line-height: var(--svid-input-line-height);
           }
         }
         ::v-deep .captcha {
-          height: $uni-input-line-height !important;
+          height: var(--svid-input-line-height) !important;
           border-radius: 8rpx;
         }
       }
 
       .skip {
         font-size: 12px;
-        color: #cccccc;
+        color: var(--svid-text-color);
         display: flex;
         justify-content: space-between;
         margin: auto 0 24rpx 0;
@@ -268,6 +279,14 @@ $uni-input-line-height: 35px;
     .register-form {
       transform: rotateY(180deg);
     }
+  }
+
+  .agreements {
+    position: fixed;
+    bottom: 24rpx;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .flip {

@@ -82,10 +82,26 @@
         "enablePullDownRefresh": false,
         "navigationStyle": "default"
       }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/set-pwd/set-pwd",
+      "style": {
+        "navigationBarTitleText": "设置密码",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/unbind/unbind",
+      "style": {
+        "navigationBarTitleText": "解绑注销",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default"
+      }
     }
   ],
   "globalStyle": {
-    "navigationBarTextStyle": "white",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "sv-client",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",

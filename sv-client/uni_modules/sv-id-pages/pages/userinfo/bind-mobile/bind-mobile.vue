@@ -1,7 +1,7 @@
 <template>
-  <view class="sv-bind-mobile">
+  <view class="sv-id-bind-mobile">
     <view class="header">
-      <image class="verify-logo" src="../../../static/icons/verification.png" mode=""></image>
+      <image class="security-logo" :src="'../../../static/security-blue.png'" mode=""></image>
       <text class="tips">为了您的账号安全，需要验证您的设备</text>
     </view>
     <view class="verify-form">
@@ -15,8 +15,7 @@
 </template>
 
 <script>
-import mixin from '@/uni_modules/sv-id-pages/common/login-page.mixin.js'
-import { mutations } from '../../../common/store'
+import { mutations } from '@/uni_modules/sv-id-pages/common/store'
 const uniIdCo = uniCloud.importObject('uni-id-co', {
   errorOptions: {
     type: 'toast'
@@ -24,7 +23,6 @@ const uniIdCo = uniCloud.importObject('uni-id-co', {
 })
 
 export default {
-  mixins: [mixin],
   data() {
     return {}
   },
@@ -32,7 +30,7 @@ export default {
     submitBind(formRes) {
       uniIdCo
         .bindMobileBySms(formRes)
-        .then((res) => {
+        .then(() => {
           uni.showToast({
             title: '绑定成功',
             icon: 'success',
@@ -49,16 +47,13 @@ export default {
             icon: 'none'
           })
         })
-        .finally(() => {})
     }
   }
 }
 </script>
 
 <style lang="scss">
-.sv-bind-mobile {
-  --svid-input-line-height: 35px;
-
+.sv-id-bind-mobile {
   .header {
     height: 240px;
     display: flex;
@@ -66,8 +61,9 @@ export default {
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid #f2f2f2;
+    box-sizing: border-box;
 
-    .verify-logo {
+    .security-logo {
       width: 128px;
       height: 128px;
     }

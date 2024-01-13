@@ -63,7 +63,7 @@ export default {
   .form {
     width: 70%;
     height: 780rpx;
-    border: 1px solid #{var(--svid-border-color)};
+    border: 1px solid #{$uni-border-color};
     border-radius: 24rpx;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.1);

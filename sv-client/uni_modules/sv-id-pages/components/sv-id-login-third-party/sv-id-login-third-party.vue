@@ -8,7 +8,7 @@
           <uni-icons type="weixin" size="16" color="#ffffff"></uni-icons>
           <text decode>&nbsp;微信一键登录</text>
         </button>
-        <button class="login-btn quick-qq" @click="submitLogin('qq')">
+        <button class="login-btn quick-qq" @click="submitLogin('QQ')">
           <uni-icons type="qq" size="16" color="#ffffff"></uni-icons>
           <text decode>&nbsp;QQ一键登录</text>
         </button>
@@ -23,11 +23,8 @@
 
 <script>
 import mixin from '@/uni_modules/sv-id-pages/common/login-page.mixin.js'
-const uniIdCo = uniCloud.importObject('uni-id-co', {
-  errorOptions: {
-    type: 'toast'
-  }
-})
+import { mutations } from '../../common/store'
+const uniIdCo = uniCloud.importObject('uni-id-co', { customUI: true })
 
 export default {
   mixins: [mixin],
@@ -66,8 +63,7 @@ export default {
             title: message,
             icon: 'none'
           })
-        },
-        complete: () => {}
+        }
       })
       // #endif
 
@@ -79,7 +75,6 @@ export default {
       // #endif
     },
     loginAction(params, type) {
-      console.log('==== type :', type)
       // 联网验证登录
       let action = 'loginBy' + type.trim().replace(type[0], type[0].toUpperCase())
       uniIdCo[action](params)
@@ -96,9 +91,6 @@ export default {
             confirmText: '知道了',
             showCancel: false
           })
-        })
-        .finally(() => {
-          uni.hideLoading()
         })
     }
   }

@@ -11,7 +11,7 @@ import { isEmpty } from 'lodash'
 export async function storageAuth(online = false) {
   const svidStore = useSvidStore()
   if (online) await mutations.setCompleteInfo()
-  const auth = uni.getStorageSync('sv-id-pages-userInfo')
+  const auth = store.userInfo
   if (store.hasLogin && isEmpty(auth)) {
     // 若已经到了，且本地缓存被清理，则重新请求接口获取最新用户信息
     storageAuth(true)

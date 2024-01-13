@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-login">
+  <view class="sv-id-login-admin">
     <!-- 背景 -->
     <view class="login-bg">
       <image class="bg-image" :src="bgImage"></image>
@@ -31,7 +31,12 @@
               ></uni-easyinput>
             </uni-forms-item>
             <uni-forms-item name="captcha" v-if="loginCaptchaFlag">
-              <uni-captcha class="captcha-style" ref="captcha" v-model="loginFormData.captcha" scene="login-by-pwd" />
+              <uni-captcha
+                class="sv-uni-captcha"
+                ref="captcha"
+                v-model="loginFormData.captcha"
+                scene="login-by-pwd"
+              />
             </uni-forms-item>
           </uni-forms>
           <view class="skip">
@@ -99,7 +104,8 @@ export default {
     return {
       adminName: 'sv-admin管理系统',
       logoSrc: '/static/logo.png',
-      bgImage: 'https://mp-0ecede5c-a993-48bf-ba4b-45d9a8c7e79b.cdn.bspapp.com/imageservice/login-admin-background.jpg',
+      bgImage:
+        'https://mp-0ecede5c-a993-48bf-ba4b-45d9a8c7e79b.cdn.bspapp.com/imageservice/login-admin-background.jpg',
       loginFormData: {
         username: '',
         password: '',
@@ -204,7 +210,9 @@ export default {
 </script>
 
 <style lang="scss">
-.sv-id-login {
+@import url('@/uni_modules/sv-id-pages/common/style.scss');
+
+.sv-id-login-admin {
   height: 100vh;
 
   .login-bg {
@@ -244,7 +252,8 @@ export default {
       transition: 0.4s;
       text-shadow: 0 0 4px #10d8ff, 0 0 8px #10d8ff;
       &:hover {
-        text-shadow: 0 0 4px #10d8ff, 0 0 8px #10d8ff, 0 0 12px #10d8ff, 0 0 16px #10d8ff, 0 0 20px #10d8ff;
+        text-shadow: 0 0 4px #10d8ff, 0 0 8px #10d8ff, 0 0 12px #10d8ff, 0 0 16px #10d8ff,
+          0 0 20px #10d8ff;
       }
     }
 
@@ -279,26 +288,6 @@ export default {
         // 毛玻璃
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
-
-        .captcha-style {
-          ::v-deep .captcha-img-box {
-            background-color: transparent;
-            height: var(--svid-input-line-height) !important;
-
-            .captcha-img {
-              height: var(--svid-input-line-height) !important;
-              border: 1px dashed #777777;
-            }
-            .loding {
-              height: var(--svid-input-line-height) !important;
-              line-height: var(--svid-input-line-height);
-            }
-          }
-          ::v-deep .captcha {
-            height: var(--svid-input-line-height) !important;
-            border-radius: 16px;
-          }
-        }
 
         .skip {
           font-size: 12px;

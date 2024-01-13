@@ -47,11 +47,7 @@ export default {
 
 <style lang="scss">
 .sv-id-login {
-  --svid-text-color: #fff;
-  --svid-text-grey-color: #999;
-  --svid-border-color: #c8c7cc;
-  --svid-color-primary: #007aff;
-  --svid-input-line-height: 35px;
+  --svid-text-color: #ffffff;
 
   height: 100vh;
 

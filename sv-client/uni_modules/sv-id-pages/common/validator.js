@@ -12,7 +12,6 @@ export default {
       },
       {
         validateFunction: function(rule, value, data, callback) {
-          // console.log(value);
           if (/^1\d{10}$/.test(value) || /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(value)) {
             callback('用户名不能是：手机号或邮箱')
           };
@@ -65,6 +64,20 @@ export default {
       }
     }],
     "label": "手机号"
+  },
+  "usernameAndMobile": {
+    "rules": [{
+      required: true,
+      errorMessage: '请输入用户名或手机号',
+    }, {
+      validateFunction: function(rule, value, data, callback) {
+        if (/[\u4E00-\u9FA5\uF900-\uFA2D]{1,}/.test(value)) {
+          callback('用户名不能包含中文')
+        }
+        return true
+      }
+    }],
+    "label": "账号"
   },
   "code": {
     "rules": [{

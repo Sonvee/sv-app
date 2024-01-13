@@ -124,7 +124,7 @@ view {
   flex-direction: row;
   align-items: center;
   font-size: 12px;
-  color: var(--svid-text-grey-color);
+  color: $uni-text-color-grey;
 }
 
 .checkbox-box,
@@ -141,7 +141,7 @@ view {
   line-height: 26px;
 }
 .agreement {
-  color: var(--svid-color-primary);
+  color: $uni-color-primary;
   cursor: pointer;
 }
 
@@ -150,9 +150,9 @@ view {
 }
 
 .checkbox-box ::v-deep .uni-checkbox-input.uni-checkbox-input-checked {
-  border-color: var(--svid-color-primary);
-  color: var(--svid-color-primary) !important;
-  background-color: var(--svid-color-primary);
+  border-color: $uni-color-primary;
+  color: $uni-color-primary !important;
+  background-color: $uni-color-primary;
 }
 
 .content {

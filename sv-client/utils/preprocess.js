@@ -31,7 +31,7 @@ function hideTabBar() {
 
 function listenLoginSuccess() {
   uni.$on('uni-id-pages-login-success', (e) => {
-    console.log('==== 登录成功 ====');
+    console.log('==== 登录成功 ====', e);
 
     storageAuth()
     storageDicts()

@@ -1,6 +1,6 @@
 <!-- 注销（销毁）账号 -->
 <template>
-  <view class="uni-content">
+  <view class="sv-id-deactivate">
     <text class="words" space="emsp">
       一、注销是不可逆操作，注销后:\n 1.账号将无法登录、无法找回。\n
       2.账号所有信息都会清除(个人身份信息、粉丝数等；发布的作品、评论、点赞等;交易信息等)，你的朋友将无法通过本应用账号联系你，请自行备份相关信息和数据。\n
@@ -93,7 +93,7 @@ export default {
 </script>
 
 <style>
-.uni-content {
+.sv-id-deactivate {
   display: flex;
   flex-direction: column;
   font-size: 28rpx;
@@ -139,7 +139,7 @@ export default {
 }
 
 @media screen and (min-width: 690px) {
-  .uni-content {
+  .sv-id-deactivate {
     max-width: 690px;
     margin-left: calc(50% - 345px);
   }

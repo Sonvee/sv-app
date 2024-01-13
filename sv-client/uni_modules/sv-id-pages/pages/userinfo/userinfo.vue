@@ -2,7 +2,7 @@
   <view class="sv-id-userinfo">
     <uni-list>
       <uni-list-item title="头像" link>
-        <template v-slot:footer>
+        <template #footer>
           <sv-id-pages-avatar width="140rpx" height="140rpx"></sv-id-pages-avatar>
         </template>
       </uni-list-item>
@@ -13,18 +13,17 @@
         @click="setClipboard(userInfo?._id)"
       />
       <uni-list-item
-        v-if="userInfo?.username"
         title="用户名"
         :rightText="userInfo?.username"
         link
         @click="setClipboard(userInfo?.username)"
       />
-      <uni-list-item title="昵称" :rightText="nickname" link @click="onNickname" />
+      <uni-list-item title="昵称" :rightText="userInfo?.nickname" link @click="onNickname" />
     </uni-list>
     <view class="divider"></view>
     <uni-list>
       <uni-list-item v-if="userInfo?.role" title="用户角色" link>
-        <template v-slot:footer>
+        <template #footer>
           <uni-tag v-for="item in userInfo?.role" :key="item" :text="item" type="primary" />
         </template>
       </uni-list-item>
@@ -64,10 +63,7 @@ export default {
   },
   computed: {
     userInfo() {
-      return uni.getStorageSync('sv-id-pages-userInfo')
-    },
-    nickname() {
-      return store.userInfo.nickname
+      return store.userInfo
     }
   },
   methods: {

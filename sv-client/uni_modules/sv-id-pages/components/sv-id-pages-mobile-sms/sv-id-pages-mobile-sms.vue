@@ -11,12 +11,9 @@
         ></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="captcha">
-        <uni-captcha
-          class="captcha-style"
-          ref="captcha"
-          v-model="formData.captcha"
-          :scene="captchaScene"
-        />
+        <view class="sv-uni-captcha">
+          <uni-captcha ref="captcha" v-model="formData.captcha" :scene="captchaScene" />
+        </view>
       </uni-forms-item>
       <uni-forms-item name="code">
         <uni-easyinput
@@ -30,42 +27,53 @@
           </template>
         </uni-easyinput>
       </uni-forms-item>
+      <!-- 其他表单内容自行添加 -->
+      <slot></slot>
     </uni-forms>
-    <button class="login-btn" type="primary" @click="submit">{{ submitText }}</button>
+    <view class="control-btn">
+      <button class="submit-btn" type="primary" @click="submit">{{ submitText }}</button>
+    </view>
   </view>
 </template>
 
 <script>
-import mixin from '@/uni_modules/sv-id-pages/common/login-page.mixin.js'
 import rules from '@/uni_modules/sv-id-pages/common/validator.js'
-const uniIdCo = uniCloud.importObject('uni-id-co', {
-  errorOptions: {
-    type: 'toast'
-  }
-})
+const uniIdCo = uniCloud.importObject('uni-id-co', { customUI: true })
 
 export default {
-  mixins: [mixin],
   props: {
     codeScene: {
       type: String,
-      default: 'login-by-sms' // [login-by-sms|reset-pwd-by-sms|bind-mobile-by-sms]
+      default: 'login-by-sms' // [login-by-sms|reset-pwd-by-sms|bind-mobile-by-sms|set-pwd-by-sms]
     },
     captchaScene: {
       type: String,
-      default: 'send-sms-code' // [send-sms-code|bind-mobile-by-sms]
+      default: 'send-sms-code' // [send-sms-code|bind-mobile-by-sms|set-pwd-by-sms]
+    },
+    // 表单自定义扩展项
+    formExtra: {
+      type: Object,
+      default: () => {}
     }
   },
   data() {
     return {
       formData: {
-        mobile: uni.getStorageSync('uni-id-pages-userInfo')?.mobile || '',
+        mobile: '',
         captcha: '',
         code: ''
       },
       rules,
       reverseNumber: 0,
       reverseTimer: null
+    }
+  },
+  watch: {
+    formExtra: {
+      deep: true,
+      handler(newVal) {
+        this.formData = Object.assign({ ...this.formData }, newVal)
+      }
     }
   },
   computed: {
@@ -81,6 +89,9 @@ export default {
           break
         case 'reset-pwd-by-sms':
           text = '重置密码'
+          break
+        case 'set-pwd-by-sms':
+          text = '设置密码'
           break
         case 'bind-mobile-by-sms':
           text = '绑定手机'
@@ -132,7 +143,6 @@ export default {
             title: '短信验证码发送成功',
             icon: 'none'
           })
-          console.log('==== res :', res)
           // 倒计时
           this.reverseNumber = 60
           this.countdown()
@@ -175,39 +185,19 @@ export default {
 </script>
 
 <style lang="scss">
-.sv-id-mobile-sms {
-  --svid-input-line-height: 35px;
+@import '../../common/style.scss';
 
+.sv-id-mobile-sms {
   height: 100%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 12px;
+  padding: 24rpx;
   border-radius: 24rpx;
 
   // 毛玻璃
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-
-  .captcha-style {
-    ::v-deep .captcha-img-box {
-      background-color: transparent;
-      height: var(--svid-input-line-height) !important;
-
-      .captcha-img {
-        height: var(--svid-input-line-height) !important;
-        border: 1px dashed #{$uni-border-color};
-      }
-      .loding {
-        height: var(--svid-input-line-height) !important;
-        line-height: var(--svid-input-line-height);
-      }
-    }
-    ::v-deep .captcha {
-      height: var(--svid-input-line-height) !important;
-      border-radius: 8rpx;
-    }
-  }
 
   .smscode-text {
     color: $uni-color-primary;
@@ -219,12 +209,16 @@ export default {
     opacity: 0.8;
   }
 
-  .login-btn {
+  .control-btn {
+    display: flex;
     margin-top: auto;
-    width: 100%;
-    line-height: unset;
-    font-size: 14px;
-    padding: 16rpx 0;
+
+    .submit-btn {
+      width: 100%;
+      line-height: unset;
+      font-size: 14px;
+      padding: 16rpx 0;
+    }
   }
 }
 </style>

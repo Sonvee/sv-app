@@ -5,10 +5,10 @@
       <!-- 登录 -->
       <view class="login-form">
         <uni-forms ref="loginform" :model="loginFormData" :rules="rules" label-width="0">
-          <uni-forms-item name="username">
+          <uni-forms-item name="usernameAndMobile">
             <uni-easyinput
-              v-model="loginFormData.username"
-              placeholder="请输入用户名"
+              v-model="loginFormData.usernameAndMobile"
+              placeholder="请输入用户名/手机号"
               prefixIcon="person"
             ></uni-easyinput>
           </uni-forms-item>
@@ -21,12 +21,9 @@
             ></uni-easyinput>
           </uni-forms-item>
           <uni-forms-item name="captcha" v-if="loginCaptchaFlag">
-            <uni-captcha
-              class="captcha-style"
-              ref="captcha"
-              v-model="loginFormData.captcha"
-              scene="login-by-pwd"
-            />
+            <view class="sv-uni-captcha">
+              <uni-captcha ref="captcha" v-model="loginFormData.captcha" scene="login-by-pwd" />
+            </view>
           </uni-forms-item>
         </uni-forms>
         <view class="skip">
@@ -69,12 +66,9 @@
             ></uni-easyinput>
           </uni-forms-item>
           <uni-forms-item name="captcha" v-if="registerCaptchaFlag">
-            <uni-captcha
-              class="captcha-style"
-              ref="captcha"
-              v-model="registerFormData.captcha"
-              scene="register"
-            />
+            <view class="sv-uni-captcha">
+              <uni-captcha ref="captcha" v-model="registerFormData.captcha" scene="register" />
+            </view>
           </uni-forms-item>
         </uni-forms>
         <view class="skip">
@@ -104,7 +98,7 @@ export default {
   data() {
     return {
       loginFormData: {
-        username: '',
+        usernameAndMobile: '',
         password: '',
         captcha: ''
       },
@@ -132,12 +126,21 @@ export default {
         this.$refs.agreements.popup(this.submitLogin)
         return
       }
+      // 判断用用户id登录还是手机号登录
+      let phoneReg = /^1\d{10}$/
+      const { password, captcha } = this.loginFormData
+      let loginObj = { password, captcha }
+      if (phoneReg.test(this.loginFormData.usernameAndMobile)) {
+        loginObj.mobile = this.loginFormData.usernameAndMobile
+      } else {
+        loginObj.username = this.loginFormData.usernameAndMobile
+      }
       this.$refs.loginform
         .validate()
-        .then((formRes) => {
+        .then(() => {
           // 调用uniIdCo云对象进行登录
           uniIdCo
-            .login(formRes)
+            .login(loginObj)
             .then((res) => {
               this.loginSuccess(res)
             })
@@ -181,9 +184,8 @@ export default {
     },
     // 忘记密码
     skipForget() {
-      uni.showToast({
-        title: '请联系管理员找回密码',
-        icon: 'none'
+      uni.navigateTo({
+        url: '/uni_modules/sv-id-pages/pages/userinfo/set-pwd/set-pwd?loginType=resetPwdBySms'
       })
     },
     // 跳转注册
@@ -200,6 +202,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../common/style.scss';
+
 .sv-id-pages-account {
   width: 100%;
   display: flex;
@@ -209,7 +213,7 @@ export default {
     width: 70%;
     height: 780rpx;
     margin: 0 auto;
-    border: 1px solid #{var(--svid-border-color)};
+    border: 1px solid #{$uni-border-color};
     border-radius: 24rpx;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.1);
@@ -236,26 +240,6 @@ export default {
       // 毛玻璃
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-
-      .captcha-style {
-        ::v-deep .captcha-img-box {
-          background-color: transparent;
-          height: var(--svid-input-line-height) !important;
-
-          .captcha-img {
-            height: var(--svid-input-line-height) !important;
-            border: 1px dashed #{var(--svid-border-color)};
-          }
-          .loding {
-            height: var(--svid-input-line-height) !important;
-            line-height: var(--svid-input-line-height);
-          }
-        }
-        ::v-deep .captcha {
-          height: var(--svid-input-line-height) !important;
-          border-radius: 8rpx;
-        }
-      }
 
       .skip {
         font-size: 12px;

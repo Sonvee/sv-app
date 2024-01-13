@@ -53,7 +53,7 @@ uni-id的配置应该不用多说，官方文档[uni-id用户体系](https://uni
 1. 支持账号密码登录、短信验证码登录、手机号一键登录、微信登录、QQ登录。
 2. 该插件相对uni-id-pages来说，代码更简洁，且富含注释，易二次开发，样式也易修改。
 3. 新的登录与个人空间界面，若需自定义页面样式，也很容易且方便开发者重构。
-4. storage中添加sv-id-pages-userInfo，与uni-id-pages-userInfo并存，但是内容多一些。
+4. 扩展uni-id-pages-userInfo内容。
 5. 提供url化的接口，遵守云对象url化规范，使用前需要知晓官方文档[云函数URL化](https://uniapp.dcloud.net.cn/uniCloud/http.html)使用方式。
 6. 对图片上传进行了优化，开发者可自定义头像上传的文件夹，默认会在云存储生成avatarstorage文件夹，头像图片以 用户id + 时间戳 为文件名，在avatarstorage文件夹下保存，并且在用户更新头像时，会对旧头像进行文件资源删除释放处理。
 7. 登录成功监听：（和uni-id-pages原版保持一致，新增回调参数e，即用户登录成功后的id等属性）

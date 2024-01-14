@@ -111,13 +111,14 @@
 
 	.captcha-img-box,
 	.captcha {
-		height: 44px;
-		line-height: 44px;
+		height: 35px;
+		line-height: 35px;
 	}
 
 	.captcha-img-box {
 		position: relative;
-		background-color: #FEFAE7;
+    border: 1px dashed #c8c7cc;
+    box-sizing: border-box;
 	}
 
 	.captcha {
@@ -134,7 +135,7 @@
 	.captcha-img-box,
 	.captcha-img,
 	.loding {
-		height: 44px !important;
+		height: 35px !important;
 		width: 100px;
 	}
 	
@@ -147,7 +148,7 @@
 		color: #bbb;
 		position: absolute;
 		text-align: center;
-		line-height: 45px;
+		line-height: 35px;
 		animation: rotate 1s linear infinite;
 	}
 

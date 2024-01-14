@@ -4,6 +4,7 @@
     <view class="form">
       <!-- 登录 -->
       <sv-id-pages-mobile-sms
+        style="height: 100%"
         codeScene="login-by-sms"
         captchaScene="send-sms-code"
         @submit="submitLogin"
@@ -40,21 +41,31 @@ export default {
         return
       }
       // 调用uniIdCo云对象进行登录
+      uni.showLoading({
+        title: '登录中',
+        mask: true
+      })
       uniIdCo
         .loginBySms(this.form)
         .then((res) => {
+          uni.hideLoading()
           this.loginSuccess(res)
         })
         .catch((err) => {
-          console.log('短信验证码登录失败：', err)
+          uni.hideLoading()
+          uni.showModal({
+            content: err.message,
+            showCancel: false
+          })
         })
-        .finally(() => {})
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import '../../common/style.scss';
+
 .sv-id-pages-sms {
   width: 100%;
   display: flex;
@@ -68,14 +79,13 @@ export default {
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.1);
     position: relative;
-  }
-
-  .agreements {
-    position: fixed;
-    bottom: 24rpx;
-    width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    padding: 24rpx;
+
+    // 毛玻璃
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
 }
 </style>

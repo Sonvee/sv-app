@@ -50,6 +50,9 @@ export default {
   --svid-text-color: #ffffff;
 
   height: 100vh;
+  /* #ifdef APP */
+  touch-action: pan-y;
+  /* #endif */
 
   .login-bg {
     width: 100%;
@@ -60,8 +63,10 @@ export default {
     right: 0;
     left: 0;
     bottom: 0;
+    display: flex;
 
     .bg-image {
+      flex: 1;
       width: 100%;
       height: 100%;
     }

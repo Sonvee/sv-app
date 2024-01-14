@@ -1,7 +1,7 @@
 <template>
   <view class="sv-id-unbind">
     <view class="header">
-      <image class="security-logo" :src="'../../../static/security-red.png'" mode=""></image>
+      <image class="security-logo" :src="securityLogo.red" mode=""></image>
       <text class="tips">为了您的账号安全，需要验证您的设备</text>
     </view>
   </view>
@@ -15,14 +15,14 @@
       link
       @click="onUnBind('weixin')"
     />
-    <uni-list-item
+    <!-- <uni-list-item
       title="解绑QQ"
       :rightText="accountInfo.isQQBound ? '已绑定' : '未绑定'"
       show-extra-icon
       :extra-icon="qqIcon"
       link
-      @click="onUnBind('QQ')"
-    />
+      @click="onUnBind('qq')"
+    /> -->
   </uni-list>
   <view class="divider"></view>
   <uni-list>
@@ -37,11 +37,15 @@
 </template>
 
 <script>
+import securityRed from '../../../static/security-red.png'
 const uniIdCo = uniCloud.importObject('uni-id-co', { customUI: true })
 
 export default {
   data() {
     return {
+      securityLogo: {
+        red: securityRed
+      },
       accountInfo: {},
       weixinIcon: {
         color: '#4cd964',
@@ -74,7 +78,7 @@ export default {
       let action = 'unbind' + type.trim().replace(type[0], type[0].toUpperCase())
       uniIdCo[action]()
         .then((res) => {
-          console.log('==== onUnBind res :', res)
+          console.log('==== unbind res :', res)
           uni.showToast({
             title: '解除绑定成功',
             icon: 'none'

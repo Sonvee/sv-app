@@ -43,6 +43,10 @@ export default {
       }
       // 第三方登录
       // #ifndef H5
+      uni.showLoading({
+        title: '登录中',
+        mask: true
+      })
       uni.login({
         provider: this.provider,
         onlyAuthorize: true,
@@ -50,6 +54,7 @@ export default {
           this.loginAction({ code: res.code }, this.provider)
         },
         fail: (err) => {
+          uni.hideLoading()
           /**
            * 下列报错不进行提示：
            * -2 用户取消
@@ -79,13 +84,20 @@ export default {
       let action = 'loginBy' + type.trim().replace(type[0], type[0].toUpperCase())
       uniIdCo[action](params)
         .then((res) => {
+          uni.hideLoading()
           uni.showToast({
             title: '登录成功',
-            icon: 'none'
+            icon: 'none',
+            duration: 1000,
+            success: () => {
+              setTimeout(() => {
+                mutations.loginSuccess(res)
+              }, 1000)
+            }
           })
-          mutations.loginSuccess(res)
         })
         .catch((err) => {
+          uni.hideLoading()
           uni.showModal({
             content: err.message,
             confirmText: '知道了',
@@ -98,6 +110,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../common/style.scss';
+
 .sv-id-pages-sms {
   width: 100%;
   display: flex;
@@ -141,14 +155,6 @@ export default {
         background: linear-gradient(135deg, #00c8ff, #0263ff);
       }
     }
-  }
-
-  .agreements {
-    position: fixed;
-    bottom: 24rpx;
-    width: 100%;
-    display: flex;
-    justify-content: center;
   }
 }
 </style>

@@ -62,7 +62,7 @@ export default {
       // 手机号一键登录 - 只支持APP端
       // #ifdef APP
       uni.showLoading({
-        title: '加载中...',
+        title: '加载中',
         mask: true
       })
       const univerifyManager = uni.getUniverifyManager()
@@ -70,9 +70,11 @@ export default {
       return univerifyManager.login({
         univerifyStyle: this.univerifyStyle,
         success: (res) => {
+          uni.hideLoading()
           this.loginAction(res.authResult, 'univerify')
         },
         fail(err) {
+          uni.hideLoading()
           /**
            * 下列报错不进行提示：
            * 30002 用户点击了其他登录方式
@@ -89,9 +91,6 @@ export default {
             title: message,
             icon: 'none'
           })
-        },
-        complete() {
-          uni.hideLoading()
         }
       })
       // #endif

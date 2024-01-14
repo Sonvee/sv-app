@@ -5,21 +5,23 @@
         "navigationBarTitleText": "首页",
         "enablePullDownRefresh": false
       }
-    }, {
+    },
+    {
       "path": "pages/home/home",
       "style": {
         "navigationBarTitleText": "主页"
       }
-    }, {
+    },
+    {
       "path": "pages/mine/mine",
       "style": {
         "navigationBarTitleText": "我的"
       }
-    }, {
+    },
+    {
       "path": "uni_modules/sv-id-pages/pages/login/login",
       "style": {
-        "navigationBarTitleText": "登录",
-        "enablePullDownRefresh": false
+        "navigationBarTitleText": "登录"
       }
     },
     {
@@ -27,7 +29,8 @@
       "style": {
         "navigationBarTitleText": "个人中心",
         "enablePullDownRefresh": false,
-        "navigationStyle": "default"
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
       }
     },
     {
@@ -42,7 +45,8 @@
       "style": {
         "navigationBarTitleText": "账号与安全",
         "enablePullDownRefresh": false,
-        "navigationStyle": "default"
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
       }
     },
     {
@@ -50,7 +54,8 @@
       "style": {
         "navigationBarTitleText": "注销账号",
         "enablePullDownRefresh": false,
-        "navigationStyle": "default"
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
       }
     },
     {
@@ -58,7 +63,8 @@
       "style": {
         "navigationBarTitleText": "修改密码",
         "enablePullDownRefresh": false,
-        "navigationStyle": "default"
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
       }
     },
     {
@@ -80,7 +86,8 @@
       "style": {
         "navigationBarTitleText": "绑定手机",
         "enablePullDownRefresh": false,
-        "navigationStyle": "default"
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
       }
     },
     {
@@ -88,7 +95,8 @@
       "style": {
         "navigationBarTitleText": "设置密码",
         "enablePullDownRefresh": false,
-        "navigationStyle": "default"
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
       }
     },
     {
@@ -96,15 +104,25 @@
       "style": {
         "navigationBarTitleText": "解绑注销",
         "enablePullDownRefresh": false,
-        "navigationStyle": "default"
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/realname-verify/realname-verify",
+      "style": {
+        "navigationBarTitleText": "实名认证",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
       }
     }
   ],
   "globalStyle": {
-    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "sv-client",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
+    "navigationBarTextStyle": "white",
     "navigationStyle": "custom"
   },
   "uniIdRouter": {},

@@ -1,6 +1,11 @@
 import clientConfig from '@/client.config.js';
-import { useSysStore } from '@/store/sys.js';
-import { storageAuth, storageDicts } from './pinia-storage.js';
+import {
+  useSysStore
+} from '@/store/sys.js';
+import {
+  storageAuth,
+  storageDicts
+} from './pinia-storage.js';
 
 // 预处理
 export async function preProcess() {
@@ -16,13 +21,15 @@ export async function preProcess() {
 /**
  * 隐藏内置tabbar
  * 官方bug：安卓真机上报错：hideTabBar:fail not TabBar page
- * 解决方法：加短暂的延时器，建议将tabBar中height设置成1px（实测设置成0或0px无效）
+ * 解决方法：加短暂的延时器并开启animation，建议将tabBar中height设置成1px（实测设置成0或0px无效）
  */
 function hideTabBar() {
   // #ifdef APP
   setTimeout(() => {
-    uni.hideTabBar()
-  }, 600)
+    uni.hideTabBar({
+      animation: true
+    })
+  }, 200)
   // #endif
   // #ifndef APP
   uni.hideTabBar()
@@ -40,5 +47,7 @@ function listenLoginSuccess() {
 }
 
 function initSysConfig() {
-  useSysStore().setConfig({})
+  useSysStore().setConfig({
+    curTabIndex: 0
+  })
 }

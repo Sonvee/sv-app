@@ -265,14 +265,6 @@ export default {
     }
   }
 
-  .agreements {
-    position: fixed;
-    bottom: 24rpx;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
   .flip {
     transform: rotateY(180deg);
   }

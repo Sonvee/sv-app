@@ -1,35 +1,37 @@
 <template>
   <view class="sv-id-mobile-sms">
-    <uni-forms ref="formRef" :model="formData" :rules="rules" label-width="0">
-      <uni-forms-item name="mobile">
-        <uni-easyinput
-          v-model="formData.mobile"
-          type="number"
-          placeholder="请输入手机号码"
-          prefixIcon="phone"
-          maxlength="11"
-        ></uni-easyinput>
-      </uni-forms-item>
-      <uni-forms-item name="captcha">
-        <view class="sv-uni-captcha">
-          <uni-captcha ref="captcha" v-model="formData.captcha" :scene="captchaScene" />
-        </view>
-      </uni-forms-item>
-      <uni-forms-item name="code">
-        <uni-easyinput
-          v-model="formData.code"
-          placeholder="请输入短信验证码"
-          maxlength="6"
-          type="number"
-        >
-          <template #right>
-            <view class="smscode-text" @click="getSmsCode">{{ smsCodeText }}</view>
-          </template>
-        </uni-easyinput>
-      </uni-forms-item>
-      <!-- 其他表单内容自行添加 -->
-      <slot></slot>
-    </uni-forms>
+    <view class="sv-id-mobile-sms-form">
+      <uni-forms ref="formRef" :model="formData" :rules="rules" label-width="0">
+        <uni-forms-item name="mobile">
+          <uni-easyinput
+            v-model="formData.mobile"
+            type="number"
+            placeholder="请输入手机号码"
+            prefixIcon="phone"
+            maxlength="11"
+          ></uni-easyinput>
+        </uni-forms-item>
+        <uni-forms-item name="captcha">
+          <view class="sv-uni-captcha">
+            <uni-captcha ref="captcha" v-model="formData.captcha" :scene="captchaScene" />
+          </view>
+        </uni-forms-item>
+        <uni-forms-item name="code">
+          <uni-easyinput
+            v-model="formData.code"
+            placeholder="请输入短信验证码"
+            maxlength="6"
+            type="number"
+          >
+            <template #right>
+              <view class="smscode-text" @click="getSmsCode">{{ smsCodeText }}</view>
+            </template>
+          </uni-easyinput>
+        </uni-forms-item>
+        <!-- 其他表单内容自行添加 -->
+        <slot></slot>
+      </uni-forms>
+    </view>
     <view class="control-btn">
       <button class="submit-btn" type="primary" @click="submit">{{ submitText }}</button>
     </view>
@@ -108,8 +110,8 @@ export default {
     submit() {
       this.$refs.formRef
         .validate()
-        .then((formRes) => {
-          this.$emit('submit', formRes)
+        .then(() => {
+          this.$emit('submit', this.formData)
         })
         .catch((formErr) => {
           console.log('==== 表单校验失败 :', formErr)
@@ -131,6 +133,10 @@ export default {
           icon: 'none'
         })
       }
+      uni.showLoading({
+        title: '发送中',
+        mask: true
+      })
       // 请求验证码
       uniIdCo
         .sendSmsCode({
@@ -138,7 +144,8 @@ export default {
           captcha: this.formData.captcha,
           scene: this.codeScene // [login-by-sms|reset-pwd-by-sms|bind-mobile]
         })
-        .then((res) => {
+        .then(() => {
+          uni.hideLoading()
           uni.showToast({
             title: '短信验证码发送成功',
             icon: 'none'
@@ -148,6 +155,7 @@ export default {
           this.countdown()
         })
         .catch((err) => {
+          uni.hideLoading()
           if (err.code == 'uni-id-invalid-sms-template-id') {
             this.formData.code = '123456'
             uni.showToast({
@@ -186,32 +194,27 @@ export default {
 
 <style lang="scss">
 @import '../../common/style.scss';
-
 .sv-id-mobile-sms {
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  padding: 24rpx;
-  border-radius: 24rpx;
 
-  // 毛玻璃
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  .sv-id-mobile-sms-form {
+    flex: 1;
 
-  .smscode-text {
-    color: $uni-color-primary;
-    font-size: 12px;
-    margin-right: 12rpx;
-    cursor: pointer;
-  }
-  .smscode-text:active {
-    opacity: 0.8;
+    .smscode-text {
+      color: $uni-color-primary;
+      font-size: 12px;
+      margin-right: 12rpx;
+      cursor: pointer;
+    }
+    .smscode-text:active {
+      opacity: 0.8;
+    }
   }
 
   .control-btn {
     display: flex;
-    margin-top: auto;
 
     .submit-btn {
       width: 100%;

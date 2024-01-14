@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useSysStore } from '@/store/sys'
 
 const props = defineProps({
@@ -30,6 +30,15 @@ const statusBarHeight = uni.getSystemInfoSync().statusBarHeight + 'px'
 const theme = computed(() => {
   return useSysStore().getThemes()
 })
+const themeBgColor = computed(() => {
+  let color = ''
+  if (theme.value == 'light') {
+    color = '#f8f8f8'
+  } else {
+    color = '#202020'
+  }
+  return color
+})
 </script>
 
 <style lang="scss">
@@ -38,6 +47,9 @@ const theme = computed(() => {
   --page-main-height: calc(var(--page-height) - 44px - 50px);
   --page-notab-height: calc(var(--page-height) - 44px);
   --page-nonav-height: calc(var(--page-height) - 50px);
+
+  height: 100vh;
+  background-color: v-bind(themeBgColor);
 }
 
 .page-container {

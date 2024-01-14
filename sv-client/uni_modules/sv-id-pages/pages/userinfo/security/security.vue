@@ -2,11 +2,7 @@
   <view class="sv-id-security">
     <view class="header">
       <view class="security-score">
-        <image
-          class="security-logo"
-          :src="'../../../static/security-' + securityStatus.color + '.png'"
-          mode=""
-        ></image>
+        <image class="security-logo" :src="securityLogo[securityStatus.color]" mode=""></image>
         <view class="score-text">
           <view class="score-num">{{ scoreNum }}</view>
           <view>安全评分</view>
@@ -34,14 +30,21 @@
         link
         @click="onBindThird('weixin')"
       />
-      <uni-list-item
+      <!-- <uni-list-item
         title="绑定QQ"
         :rightText="accountInfo.isQQBound ? '已绑定' : '去绑定'"
         show-extra-icon
         :extra-icon="accountInfo.isQQBound ? correctIcon : warningIcon"
         link
-        @click="onBindThird('QQ')"
-      />
+        @click="onBindThird('qq')"
+      /> -->
+      <!-- <uni-list-item
+        title="实名认证"
+        show-extra-icon
+        :extra-icon="warningIcon"
+        link
+        @click="onRealName"
+      /> -->
       <uni-list-item
         title="修改密码"
         show-extra-icon
@@ -64,12 +67,22 @@
 </template>
 
 <script>
+import securityBlue from '../../../static/security-blue.png'
+import securityRed from '../../../static/security-red.png'
+import securityGreen from '../../../static/security-green.png'
+import securityOrange from '../../../static/security-orange.png'
 import { store } from '../../../common/store'
 const uniIdCo = uniCloud.importObject('uni-id-co', { customUI: true })
 
 export default {
   data() {
     return {
+      securityLogo: {
+        blue: securityBlue,
+        red: securityRed,
+        green: securityGreen,
+        orange: securityOrange
+      },
       scoreNum: 0,
       accountInfo: {},
       correctIcon: {
@@ -128,7 +141,6 @@ export default {
   methods: {
     getAccountInfo() {
       uniIdCo.getAccountInfo().then((res) => {
-        console.log('==== getAccountInfo res :', res)
         this.accountInfo = res
         const { isMobileBound, isPasswordSet, isUsernameSet, isWeixinBound, isQQBound } = res
         // 每项20分, 第三方只能算一项
@@ -143,6 +155,32 @@ export default {
       })
     },
     onBindThird(e) {
+      if (e == 'weixin' && this.accountInfo.isWeixinBound) {
+        uni.showModal({
+          title: '系统提示',
+          content: '已绑定微信，切换绑定需要先解绑微信',
+          confirmText: '去解绑',
+          success: ({ confirm }) => {
+            if (confirm) {
+              uni.navigateTo({ url: '/uni_modules/sv-id-pages/pages/userinfo/unbind/unbind' })
+            }
+          }
+        })
+        return
+      }
+      if (e == 'qq' && this.accountInfo.isQQBound) {
+        uni.showModal({
+          title: '系统提示',
+          content: '已绑定QQ，切换绑定需要先解绑QQ',
+          confirmText: '去解绑',
+          success: ({ confirm }) => {
+            if (confirm) {
+              uni.navigateTo({ url: '/uni_modules/sv-id-pages/pages/userinfo/unbind/unbind' })
+            }
+          }
+        })
+        return
+      }
       // #ifndef H5
       uni.login({
         provider: e,
@@ -167,6 +205,13 @@ export default {
         }
       })
       // #endif
+
+      // #ifdef H5
+      uni.showToast({
+        title: 'H5端暂不提供第三方绑定，请在移动端上操作',
+        icon: 'none'
+      })
+      // #endif
     },
     bindAction(params, type) {
       // 联网验证登录
@@ -186,6 +231,11 @@ export default {
             showCancel: false
           })
         })
+    },
+    onRealName() {
+      uni.navigateTo({
+        url: '/uni_modules/sv-id-pages/pages/userinfo/realname-verify/realname-verify'
+      })
     },
     onChangePwd() {
       uni.navigateTo({

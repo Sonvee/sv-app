@@ -1,5 +1,5 @@
 <template>
-  <sv-page>
+  <sv-page :showTabBar="false">
     <view class="setting">
       <view class="tg">切换主题</view>
       <button size="mini" @click="onTheme('light')">白昼</button>
@@ -18,7 +18,7 @@ function onTheme(theme) {
 
 <style lang="scss">
 .setting {
-  height: var(--page-main-height);
+  height: var(--page-notab-height);
 
   @include useTheme {
     background-color: getTheme(sv-bg-color);

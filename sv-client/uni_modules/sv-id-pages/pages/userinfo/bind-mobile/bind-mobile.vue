@@ -1,10 +1,10 @@
 <template>
   <view class="sv-id-bind-mobile">
     <view class="header">
-      <image class="security-logo" :src="'../../../static/security-blue.png'" mode=""></image>
+      <image class="security-logo" :src="securityLogo.blue" mode=""></image>
       <text class="tips">为了您的账号安全，需要验证您的设备</text>
     </view>
-    <view class="verify-form">
+    <view class="form">
       <sv-id-pages-mobile-sms
         codeScene="bind-mobile-by-sms"
         captchaScene="send-sms-code"
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import securityBlue from '../../../static/security-blue.png'
 import { mutations } from '@/uni_modules/sv-id-pages/common/store'
 const uniIdCo = uniCloud.importObject('uni-id-co', {
   errorOptions: {
@@ -24,7 +25,11 @@ const uniIdCo = uniCloud.importObject('uni-id-co', {
 
 export default {
   data() {
-    return {}
+    return {
+      securityLogo: {
+        blue: securityBlue
+      }
+    }
   },
   methods: {
     submitBind(formRes) {
@@ -74,8 +79,13 @@ export default {
     }
   }
 
-  .verify-form {
-    position: relative;
+  .form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 24rpx;
+    border-radius: 24rpx;
   }
 }
 </style>

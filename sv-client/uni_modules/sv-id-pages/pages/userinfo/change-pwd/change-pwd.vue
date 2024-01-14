@@ -1,7 +1,7 @@
 <template>
   <view class="sv-id-change-pwd">
     <view class="header">
-      <image class="security-logo" :src="'../../../static/security-orange.png'" mode=""></image>
+      <image class="security-logo" :src="securityLogo.orange" mode=""></image>
       <text class="tips">为了您的账号安全，需要验证密码</text>
     </view>
     <view class="pwd-form">
@@ -30,13 +30,14 @@
         <view class="control-btn">
           <button class="submit-btn" type="primary" @click="submit">确认修改</button>
         </view>
-        <view class="tips" @click="toSetPwd">未设置/忘记旧密码？</view>
+        <view class="lost" @click="toSetPwd">未设置/忘记旧密码？</view>
       </uni-forms>
     </view>
   </view>
 </template>
 
 <script>
+import securityOrange from '../../../static/security-orange.png'
 import passwordMod from '@/uni_modules/sv-id-pages/common/password.js'
 import { mutations, store } from '@/uni_modules/sv-id-pages/common/store'
 const uniIdCo = uniCloud.importObject('uni-id-co', { customUI: true })
@@ -44,6 +45,9 @@ const uniIdCo = uniCloud.importObject('uni-id-co', { customUI: true })
 export default {
   data() {
     return {
+      securityLogo: {
+        orange: securityOrange
+      },
       formData: {
         oldPassword: '',
         newPassword: '',
@@ -108,7 +112,9 @@ export default {
     },
     toSetPwd() {
       if (store.userInfo.mobile) {
-        uni.navigateTo({ url: '/uni_modules/sv-id-pages/pages/userinfo/set-pwd/set-pwd' })
+        uni.navigateTo({
+          url: '/uni_modules/sv-id-pages/pages/userinfo/set-pwd/set-pwd'
+        })
       } else {
         uni.showModal({
           title: '系统提示',
@@ -169,7 +175,8 @@ export default {
       }
     }
 
-    .tips {
+    .lost {
+      display: inline-block;
       margin-top: 48rpx;
       font-size: 12px;
       color: $uni-color-primary;

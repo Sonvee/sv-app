@@ -1,7 +1,7 @@
 {
 	"id": "sv-id-pages",
 	"displayName": "sv-id-pages",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "基于uni-id-pages魔改，新的易读易修改的界面样式，使用前请看详情介绍。",
 	"keywords": [
         "uni-id-pages",

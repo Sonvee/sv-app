@@ -8,10 +8,10 @@
           <uni-icons type="weixin" size="16" color="#ffffff"></uni-icons>
           <text decode>&nbsp;微信一键登录</text>
         </button>
-        <button class="login-btn quick-qq" @click="submitLogin('QQ')">
+        <!-- <button class="login-btn quick-qq" @click="submitLogin('qq')">
           <uni-icons type="qq" size="16" color="#ffffff"></uni-icons>
           <text decode>&nbsp;QQ一键登录</text>
-        </button>
+        </button> -->
       </view>
     </view>
     <!-- 隐私政策 -->

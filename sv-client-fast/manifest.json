@@ -17,7 +17,9 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {},
+        "modules" : {
+            "OAuth" : {}
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
@@ -38,21 +40,33 @@
                     "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
-                ]
+                ],
+                "minSdkVersion" : 21
             },
             /* ios打包配置 */
             "ios" : {},
             /* SDK配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "oauth" : {
+                    "univerify" : {},
+                    "weixin" : {
+                        "appid" : "wx417856313e7d8aff",
+                        "UniversalLinks" : ""
+                    }
+                }
+            }
         }
     },
     /* 快应用特有相关 */
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wx417856313e7d8aff",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : true,
+            "es6" : true,
+            "postcss" : true,
+            "minified" : true
         },
         "usingComponents" : true
     },
@@ -68,5 +82,15 @@
     "uniStatistics" : {
         "enable" : false
     },
-    "vueVersion" : "3"
+    "vueVersion" : "3",
+    "h5" : {
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : true
+            }
+        },
+        "router" : {
+            "base" : "/client-fast/"
+        }
+    }
 }

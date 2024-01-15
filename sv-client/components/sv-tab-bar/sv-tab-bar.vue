@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useSysStore } from '@/store/sys'
 
 const props = defineProps({

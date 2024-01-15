@@ -1,5 +1,5 @@
 <template>
-  <sv-page>
+  <sv-page showTabBar>
     <view class="mine">
       <button @click="toSetting">设置</button>
       <button @click="toLogin">登录</button>

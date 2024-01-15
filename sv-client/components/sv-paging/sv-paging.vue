@@ -1,6 +1,5 @@
 <template>
   <z-paging
-    v-bind="$attrs"
     v-model="dataList"
     ref="paging"
     :fixed="options.fixed"

@@ -1,7 +1,6 @@
 import { useSysStore } from "@/store/sys"
-import { useSvidStore } from "@/store/svid"
-import { isEmpty } from "lodash"
-import { storageAuth, storageDicts } from "./pinia-storage"
+import { isEmpty } from "lodash-es"
+import { storageDicts } from "./pinia-storage"
 import { dictList } from "@/service/api/sys"
 
 /**
@@ -44,21 +43,6 @@ export async function getDictById(dict_id, mapType = false) {
     } else {
       result = dict
     }
-  }
-  return result
-}
-
-/**
- * 获取账号缓存数据 - 本地与服务端结合版
- */
-export async function getAuthFromCache() {
-  // 默认从本地缓存中取
-  const svidStore = useSvidStore()
-  let result = svidStore.getAuth()
-  if (isEmpty(result)) {
-    // 缓存丢失，从服务器获取
-    await storageAuth()
-    result = svidStore.getAuth()
   }
   return result
 }

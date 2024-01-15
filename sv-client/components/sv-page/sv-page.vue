@@ -19,7 +19,7 @@ const props = defineProps({
   },
   showTabBar: {
     type: Boolean,
-    default: true
+    default: false
   }
 })
 
@@ -48,7 +48,7 @@ const themeBgColor = computed(() => {
   --page-notab-height: calc(var(--page-height) - 44px);
   --page-nonav-height: calc(var(--page-height) - 50px);
 
-  height: 100vh;
+  min-height: 100vh;
   background-color: v-bind(themeBgColor);
 }
 

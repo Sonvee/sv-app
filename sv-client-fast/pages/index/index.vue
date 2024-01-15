@@ -1,52 +1,26 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
-	</view>
+  <view class="index">
+    首页
+    <text class="sv-icons-github"></text>
+    <uv-button type="primary" text="月落"></uv-button>
+    {{ now }}
+  </view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				title: 'Hello'
-			}
-		},
-		onLoad() {
+<script setup>
+import dayjs from 'dayjs'
 
-		},
-		methods: {
+import { testList } from '../../service/api/test'
+const now = dayjs().format('YYYY-MM-DD HH:mm:ss')
 
-		}
-	}
+testList().then((res) => {
+  console.log('==== res :', res)
+})
 </script>
 
-<style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
+<style lang="scss">
+.index {
+  height: 100%;
+  border: 10px solid #66ccff;
+}
 </style>

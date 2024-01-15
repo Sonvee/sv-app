@@ -2,10 +2,10 @@
 import svIdPageInit from '@/uni_modules/sv-id-pages/init.js'
 import { preProcess } from '@/utils/preprocess'
 export default {
-  onLaunch: async function () {
+  onLaunch: function () {
     console.log('App Launch')
-    await svIdPageInit()
-    await preProcess()
+    svIdPageInit()
+    preProcess()
   },
   onShow: function () {
     console.log('App Show')

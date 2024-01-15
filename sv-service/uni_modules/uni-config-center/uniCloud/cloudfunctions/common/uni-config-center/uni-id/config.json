@@ -54,8 +54,8 @@
     "tokenExpiresThreshold": 864000,
     "oauth": {
       "weixin": {
-        "appid": "wx417856313e7d8aff",
-        "appsecret": "13f2907fa847db3360cb1bfd8747608d"
+        "appid": "",
+        "appsecret": ""
       }
     }
   },
@@ -84,8 +84,8 @@
     "sms": {
       "name": "",
       "codeExpiresIn": 180,
-      "smsKey": "09ad8733bc90621ac87356abb66d3c0b",
-      "smsSecret": "0c10add827c300cb3bf07ed5df4e9811",
+      "smsKey": "",
+      "smsSecret": "",
       "scene": {
         "bind-mobile-by-sms": {
           "templateId": "",

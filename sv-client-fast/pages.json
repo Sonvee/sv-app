@@ -1,17 +1,139 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
-	"uniIdRouter": {}
+  "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
+    },
+    {
+      "path": "pages/mine/mine",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/mine/setting/setting",
+      "style": {
+        "navigationBarTitleText": "设置",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/userinfo",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/cropImage/cropImage",
+      "style": {
+        "navigationBarTitleText": "头像",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/security/security",
+      "style": {
+        "navigationBarTitleText": "账号与安全",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/deactivate/deactivate",
+      "style": {
+        "navigationBarTitleText": "注销账号",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/change-pwd/change-pwd",
+      "style": {
+        "navigationBarTitleText": "修改密码",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/webview/webview",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/bind-mobile/bind-mobile",
+      "style": {
+        "navigationBarTitleText": "绑定手机",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/set-pwd/set-pwd",
+      "style": {
+        "navigationBarTitleText": "设置密码",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/userinfo/unbind/unbind",
+      "style": {
+        "navigationBarTitleText": "解绑注销",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "sv-client-fast",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "uniIdRouter": {},
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uv-(.*)": "@climblee/uv-ui/components/uv-$1/uv-$1.vue"
+    }
+  },
+  "tabBar": {
+    "color": "#66ccff",
+    "selectedColor": "#3A5AFB",
+    "list": [{
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/static/icons/home.png",
+        "selectedIconPath": "/static/icons/home-fill.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "/static/icons/mine.png",
+        "selectedIconPath": "/static/icons/mine-fill.png"
+      }
+    ]
+  }
 }

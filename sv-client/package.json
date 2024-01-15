@@ -1,5 +1,5 @@
 {
-  "name": "uni-sv-client",
+  "name": "sv-client",
   "version": "1.0.0",
   "description": "uniapp 客户端框架",
   "main": "main.js",
@@ -11,11 +11,12 @@
     "url": "https://gitee.com/Sonweir/uni-sv-client"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sonve",
   "license": "ISC",
   "dependencies": {
     "@climblee/uv-ui": "^1.1.19-4",
     "dayjs": "^1.11.10",
-    "lodash": "^4.17.21"
-  }
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {}
 }

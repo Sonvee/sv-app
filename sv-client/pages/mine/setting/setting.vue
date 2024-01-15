@@ -1,5 +1,5 @@
 <template>
-  <sv-page :showTabBar="false">
+  <sv-page>
     <view class="setting">
       <view class="tg">切换主题</view>
       <button size="mini" @click="onTheme('light')">白昼</button>

@@ -69,6 +69,7 @@ const codeMap = {
   400: "Request Failed",
   40001: "Params Error",
   40002: "No Data",
+  40003: "Data Already Exists",
   401: "Unauthorized",
   403: "Forbidden",
   404: "404 Not Found",
@@ -107,16 +108,24 @@ function result(params) {
 
 /**
  * token校验 - 接口安全处理，身份验证之后才能请求访问数据
- * @param {Object} options 必传属性: clientInfo:this.getClientInfo(), token:'用户token' 可选参数: strict严格模式 默认false
+ * @param {Object} options 必传属性: clientInfo:this.getClientInfo(), token:'用户token', mode:模式 默认open
  * @return {Object} {code:0,errCode:0,errMsg,exp:过期时间,iat:创建时间,permission,role,uid}
- * @todo 最好是将http的statusCode状态码手动改为401
  */
 async function checkToken(options) {
   const {
     clientInfo,
     token,
-    strict = false // 严格模式
+    mode = 'open' // 模式: open开放不校验 easy登录即可 normal需要API_READ只读或API_WRITE读写权限 strict需要API_WRITE读写权限
   } = options
+
+  // 模式open 开放接口不进行token校验
+  if (mode === 'open') {
+    return {
+      code: 200,
+      message: "Open Request",
+    }
+  }
+
   const uniIdCommon = uniIdCo.createInstance({
     clientInfo
   })
@@ -139,47 +148,53 @@ async function checkToken(options) {
       result
     }
   }
+
+  // 模式easy 成功登录即可
+  if (mode === 'easy') {
+    return {
+      code: 200,
+      message: "Token校验成功",
+      token,
+      result
+    }
+  }
+
   /**
-   * 角色校验 - 规则：
-   * 1. admin拥有所有权限
+   * 角色校验 - 规则：admin拥有所有权限
    */
   if (result.role.includes('admin')) {
     return {
       code: 200,
-      message: "Token角色校验成功",
+      message: "admin拥有所有权限",
       token,
       result
     }
   }
+
   /**
-   * 权限校验 - 规则：
-   * 1. API_READ只读 < API_WRITE读写
-   * 2. 开启strict严格模式的接口，必须拥有API_WRITE可读写权限才能访问
+   * 模式normal 拥有API_READ或API_WRITE权限才可请求
    */
-  if (strict && !result.permission.includes('API_WRITE')) {
-    return {
-      code: 403,
-      message: "Token权限校验 非法请求",
-      token,
-      result
-    }
-  }
-  if (result.permission.includes('API_WRITE')) {
+  if (mode === 'normal' && (result.permission.includes('API_READ') || result.permission.includes('API_WRITE'))) {
     return {
       code: 200,
-      message: "Token权限校验 读写",
+      message: "Token权限校验成功",
       token,
       result
     }
   }
-  if (result.permission.includes('API_READ')) {
+
+  /**
+   * 模式strict 拥有API_WRITE权限才可请求
+   */
+  if (mode === 'strict' && result.permission.includes('API_WRITE')) {
     return {
       code: 200,
-      message: "Token权限校验 只读",
+      message: "Token可读写权限校验成功",
       token,
       result
     }
   }
+
   // 其他情况均未授权
   return {
     code: 403,

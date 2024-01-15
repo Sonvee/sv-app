@@ -1,7 +1,22 @@
 const handler = require('sv-handle-res')
 
 module.exports = {
-  _before: function() { // 通用预处理器
+  _before: async function() { // 通用预处理器
+    // token身份安全校验
+    const WHITE_LIST = [] // 校验白名单，例如'/testList'
+    const apiPath = this.getHttpInfo().path
+    // 不是白名单的api需要进行校验
+    if (!WHITE_LIST.includes(apiPath)) {
+      const cToken = await handler.checkToken({
+        clientInfo: this.getClientInfo(),
+        token: this.getHttpInfo().headers.authorization,
+        mode: 'easy'
+      })
+      if (cToken.code !== 200) {
+        throw cToken
+      }
+    }
+
     this.params = {} // 初始化参数
     this.startTime = Date.now() // 在before内记录开始时间并在this上挂载，以供后续流程使用
     // 使用 content-type: application/json 的请求头，参数在body中

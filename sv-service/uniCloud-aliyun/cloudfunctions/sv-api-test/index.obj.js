@@ -10,7 +10,7 @@ module.exports = {
       const cToken = await handler.checkToken({
         clientInfo: this.getClientInfo(),
         token: this.getHttpInfo().headers.authorization,
-        mode: 'easy'
+        mode: 'open'
       })
       if (cToken.code !== 200) {
         throw cToken

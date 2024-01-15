@@ -1,26 +1,12 @@
-import {
-  useSvidStore
-} from '@/store/svid.js'
-import {
-  useSysStore
-} from '@/store/sys'
-import {
-  useNavStore
-} from '@/store/nav'
-import {
-  permissionList,
-  roleList
-} from '@/service/api/svid.js'
-import {
-  appList,
-  dictList
-} from '@/service/api/sys'
+import { useSvidStore } from '@/store/svid.js'
+import { useSysStore } from '@/store/sys'
+import { useNavStore } from '@/store/nav'
+import { permissionList, roleList } from '@/service/api/svid.js'
+import { appList, dictList } from '@/service/api/sys'
 
 export async function storageAuth() {
   const svidStore = useSvidStore()
-  const app = getApp()
-  await app.$svIdPagesStore.mutations.setCompleteInfo()
-  const auth = uni.getStorageSync('sv-id-pages-userInfo')
+  const auth = getApp().$svIdPagesStore.store.userInfo
   svidStore.setAuth(auth)
 }
 

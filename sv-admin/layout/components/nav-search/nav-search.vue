@@ -61,8 +61,13 @@ defineExpose({
 .sv-nav-search {
   width: 0;
   transition: width 0.8s;
-  :deep(.el-input .el-input__wrapper) {
-    transition: padding 0.8s;
+
+  @include useTheme {
+    :deep(.el-select__wrapper) {
+      transition: padding 0.8s;
+      background-color: unset !important;
+      --el-select-multiple-input-color: #{getTheme('sv-text-color')} !important;
+    }
   }
 }
 .stretch {
@@ -70,7 +75,8 @@ defineExpose({
 }
 .shrink {
   width: 0;
-  :deep(.el-input .el-input__wrapper) {
+
+  :deep(.el-select__wrapper) {
     padding: 0;
   }
 }

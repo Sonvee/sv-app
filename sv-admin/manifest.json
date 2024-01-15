@@ -72,6 +72,11 @@
     "h5" : {
         "router" : {
             "base" : "/admin/"
+        },
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : true
+            }
         }
     }
 }

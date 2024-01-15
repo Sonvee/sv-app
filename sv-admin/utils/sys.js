@@ -1,30 +1,10 @@
-import {
-  appList,
-  dictList,
-  menuList
-} from '@/service/api/sys.js'
 import adminConfig from '@/admin.config.js'
-import {
-  cloneDeep,
-  concat,
-  flatMap,
-  isEmpty,
-  omit
-} from 'lodash'
-import {
-  useSysStore
-} from '@/store/sys'
-import {
-  storageAuth,
-  storageDicts,
-} from './pinia-storage'
-import {
-  permissionList,
-  roleList
-} from '@/service/api/svid'
-import {
-  useSvidStore
-} from '@/store/svid'
+import { appList, dictList, menuList } from '@/service/api/sys.js'
+import { cloneDeep, concat, flatMap, isEmpty, omit } from 'lodash-es'
+import { useSysStore } from '@/store/sys'
+import { storageAuth, storageDicts, } from './pinia-storage'
+import { permissionList, roleList } from '@/service/api/svid'
+import { useSvidStore } from '@/store/svid'
 
 /**
  * 客户端获取菜单数据，并处理树状结构 - 弃用 议直接在客户端生成树状数据

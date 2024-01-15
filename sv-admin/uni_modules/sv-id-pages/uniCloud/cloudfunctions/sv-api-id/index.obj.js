@@ -33,7 +33,7 @@ module.exports = {
     const cToken = await handler.checkToken({
       clientInfo: this.getClientInfo(),
       token: this.getHttpInfo().headers.authorization,
-      strict: apiPath.includes('List') ? false : true // 所有List接口解除严格模式
+      mode: apiPath.includes('List') ? 'open' : 'strict' // 所有List接口均开放
     })
     if (cToken.code !== 200) {
       throw cToken

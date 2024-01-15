@@ -10,7 +10,7 @@
 }
 
 .sv-el-sidebar {
-  border-right: unset;
+  border-right: unset !important;
   @include useTheme {
     --el-menu-bg-color: #{getTheme('sv-background-color')};
     --el-menu-text-color: #{getTheme('sv-text-color')};
@@ -101,6 +101,11 @@
     }
 
     :deep(.input) {
+      color: #{getTheme('sv-text-color')};
+    }
+
+    :deep(.el-select .el-select__wrapper) {
+      --el-fill-color-blank: #{getTheme('sv-background-color')};
       color: #{getTheme('sv-text-color')};
     }
 

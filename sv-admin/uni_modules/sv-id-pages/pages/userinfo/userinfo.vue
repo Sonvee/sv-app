@@ -2,7 +2,7 @@
   <view class="sv-id-userinfo">
     <uni-list>
       <uni-list-item title="头像" link>
-        <template v-slot:footer>
+        <template #footer>
           <sv-id-pages-avatar width="140rpx" height="140rpx"></sv-id-pages-avatar>
         </template>
       </uni-list-item>
@@ -12,19 +12,12 @@
         link
         @click="setClipboard(userInfo?._id)"
       />
-      <uni-list-item
-        v-if="userInfo?.username"
-        title="用户名"
-        :rightText="userInfo?.username"
-        link
-        @click="setClipboard(userInfo?.username)"
-      />
-      <uni-list-item title="昵称" :rightText="nickname" link @click="onNickname" />
+      <uni-list-item title="昵称" :rightText="userInfo?.nickname" link @click="onNickname" />
     </uni-list>
     <view class="divider"></view>
     <uni-list>
       <uni-list-item v-if="userInfo?.role" title="用户角色" link>
-        <template v-slot:footer>
+        <template #footer>
           <uni-tag v-for="item in userInfo?.role" :key="item" :text="item" type="primary" />
         </template>
       </uni-list-item>
@@ -44,7 +37,7 @@
     <uni-list>
       <uni-list-item class="text-center" title="退出登录" clickable @click="onLogout" />
     </uni-list>
-    <uni-popup ref="dialog" type="dialog">
+    <uni-popup ref="nicknameDialog" type="dialog">
       <uni-popup-dialog
         mode="input"
         :value="userInfo?.nickname"
@@ -58,16 +51,32 @@
 
 <script>
 import { store, mutations } from '../../common/store'
+
 export default {
   data() {
     return {}
   },
   computed: {
     userInfo() {
-      return uni.getStorageSync('sv-id-pages-userInfo')
-    },
-    nickname() {
-      return store.userInfo.nickname
+      return store.userInfo
+    }
+  },
+  onLoad() {
+    // 未登录将跳转到登录页面
+    if (!store.hasLogin) {
+      uni.showModal({
+        title: '系统提示',
+        content: '还没有登录哦，请先登录吧~',
+        confirmText: '去登录',
+        cancelText: '就不!',
+        success: ({ confirm }) => {
+          if (confirm) {
+            mutations.logout()
+          } else {
+            uni.navigateBack()
+          }
+        }
+      })
     }
   },
   methods: {
@@ -79,14 +88,14 @@ export default {
       })
     },
     onNickname() {
-      this.$refs.dialog.open()
+      this.$refs.nicknameDialog.open()
     },
     async setNickname(e) {
       if (!e) return
       await mutations.updateUserInfo({
         nickname: e
       })
-      this.$refs.dialog.close()
+      this.$refs.nicknameDialog.close()
     },
     onSecurity() {
       uni.navigateTo({
@@ -98,7 +107,7 @@ export default {
         title: '退出登录',
         content: '确认退出登录吗?',
         showCancel: true,
-        success: ({ confirm, cancel }) => {
+        success: ({ confirm }) => {
           if (confirm) {
             mutations.logout()
           }
@@ -133,21 +142,6 @@ export default {
 .text-center {
   ::v-deep .uni-list-item__content-title {
     justify-content: center;
-  }
-}
-
-.qrcode {
-  width: 80vw;
-  height: 60vh;
-  background-color: #ffffff;
-  border-radius: 24rpx;
-  padding: 24rpx;
-  box-sizing: border-box;
-
-  .qr-code {
-    width: 200px;
-    height: 200px;
-    background-color: #66ccff;
   }
 }
 </style>

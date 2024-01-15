@@ -13,7 +13,7 @@ module.exports = {
     const cToken = await handler.checkToken({
       clientInfo: this.getClientInfo(),
       token: this.getUniIdToken(),
-      strict: true // 开启严格模式
+      mode: 'strict' // 开启严格模式
     })
     if (cToken.code !== 200) {
       return cToken

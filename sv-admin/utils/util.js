@@ -1,6 +1,4 @@
-import {
-  dayjs
-} from "element-plus";
+import { dayjs } from "element-plus";
 import pagesJson from '@/pages.json'
 
 /**

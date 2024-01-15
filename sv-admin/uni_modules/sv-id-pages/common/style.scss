@@ -1,0 +1,33 @@
+/* 样式穿透在微信小程序中无效，可以全局引入该样式，或者直接在uni-captcha中修改样式 */
+.sv-uni-captcha {
+  :deep(.captcha-box) {
+    .captcha-img-box {
+      background-color: transparent;
+      height: 35px !important;
+      border: 1px dashed #c8c7cc;
+      box-sizing: border-box;
+    }
+    .captcha-img {
+      height: 35px !important;
+    }
+    .loding {
+      height: 35px !important;
+      line-height: 35px;
+    }
+  }
+
+  :deep(.captcha) {
+    height: 35px !important;
+    line-height: 35px;
+    border-radius: 8rpx;
+  }
+}
+
+// 隐私政策
+.agreements {
+  position: fixed;
+  bottom: calc(12rpx + env(safe-area-inset-bottom));
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

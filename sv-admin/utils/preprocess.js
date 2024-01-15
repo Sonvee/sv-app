@@ -1,12 +1,6 @@
-import {
-  useSysStore
-} from '../store/sys.js';
-import {
-  refreshPiniaStorage
-} from './pinia-storage.js';
-import {
-  changeTheme
-} from './sys.js';
+import { useSysStore } from '../store/sys.js';
+import { refreshPiniaStorage } from './pinia-storage.js';
+import { changeTheme } from './sys.js';
 
 // 预处理
 export async function preProcess() {

@@ -28,5 +28,7 @@ function toMine() {
 
 <style lang="scss">
 .mine {
+  height: 100%;
+  padding: 24rpx;
 }
 </style>

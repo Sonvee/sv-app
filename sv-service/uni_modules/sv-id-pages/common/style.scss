@@ -31,3 +31,90 @@
   display: flex;
   justify-content: center;
 }
+
+// 动画
+.flip {
+  transform: rotateY(180deg);
+}
+
+.focus-in-contract {
+  animation: focus-in-contract 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes focus-in-contract {
+  0% {
+    letter-spacing: 1em;
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+.neon-flash {
+  animation: neon-flash 4s linear infinite;
+}
+
+@keyframes neon-flash {
+  0% {
+    text-shadow: 0 0 4px #088cff, 0 0 8px #088cff;
+  }
+  25% {
+    text-shadow: 0 0 4px #088cff, 0 0 8px #088cff, 0 0 12px #088cff;
+  }
+  50% {
+    text-shadow: 0 0 4px #088cff, 0 0 8px #088cff, 0 0 12px #088cff, 0 0 16px #088cff,
+      0 0 20px #088cff;
+  }
+  75% {
+    text-shadow: 0 0 4px #088cff, 0 0 8px #088cff, 0 0 12px #088cff;
+  }
+  100% {
+    text-shadow: 0 0 4px #088cff, 0 0 8px #088cff;
+  }
+}
+
+.vibrate {
+  animation: vibrate 10s linear infinite both;
+}
+
+@keyframes vibrate {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-20px, 20px);
+  }
+  40% {
+    transform: translate(-20px, -20px);
+  }
+  60% {
+    transform: translate(20px, 20px);
+  }
+  80% {
+    transform: translate(20px, -20px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.pulsate {
+  animation: pulsate 10s infinite;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  0% {
+    transform: scale(1);
+  }
+}

@@ -14,6 +14,13 @@
       }
     },
     {
+      "path": "uni_modules/sv-id-pages/pages/webview/webview",
+      "style": {
+        "navigationBarTitleText": "隐私政策协议",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
       "path": "pages/media/media",
       "style": {
         "navigationBarTitleText": "媒体库",
@@ -158,7 +165,7 @@
   "uniIdRouter": {
     "loginPage": "uni_modules/sv-id-pages/pages/login/login-admin",
     "needLogin": [
-      "^((?!sv-id-pages\/pages\/login).)*$"
+      "^(?!.*(sv-id-pages\/pages\/login|sv-id-pages\/pages\/webview)).*$"
     ],
     "resToLogin": true
   }

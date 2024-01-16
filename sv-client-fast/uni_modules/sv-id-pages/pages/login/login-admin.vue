@@ -1,19 +1,27 @@
 <template>
   <view class="sv-id-login-admin">
-    <!-- 背景 -->
-    <view class="login-bg">
-      <image class="bg-image" :src="bgImage"></image>
-    </view>
-    <view class="login-main">
-      <!-- logo -->
-      <view class="logo">
-        <image :src="logoSrc" style="width: 100%; height: 100%"></image>
+    <view class="intro">
+      <view class="header">
+        <image class="header-logo" :src="logoSrc" mode="heightFix"></image>
+        <view class="header-title">
+          <view class="title-text">{{ adminName }}</view>
+          <view class="title-text-sub">{{ adminDescription }}</view>
+        </view>
       </view>
-      <view class="title focus-in-contract">{{ adminName }}</view>
-      <!-- 表单 -->
+      <view class="middle">
+        <image class="middle-cover" src="../../static/cover.svg" mode="widthFix"></image>
+      </view>
+    </view>
+    <view class="wave-divider">
+      <image class="wave-image" src="../../static/wave.svg"></image>
+    </view>
+    <view class="form-main">
+      <view class="circle-big vibrate"></view>
+      <view class="circle-small pulsate"></view>
       <view class="form" :class="{ flip: flipFlag }">
         <!-- 登录 -->
         <view class="login-form">
+          <view class="form-title neon-flash">{{ adminName }} 欢迎您！</view>
           <uni-forms ref="loginform" :model="loginFormData" :rules="rules" label-width="0">
             <uni-forms-item name="username">
               <uni-easyinput
@@ -47,6 +55,7 @@
         </view>
         <!-- 注册 -->
         <view class="register-form">
+          <view class="form-title neon-flash">{{ adminName }} 欢迎您！</view>
           <uni-forms ref="registerform" :model="registerFormData" :rules="rules" label-width="0">
             <uni-forms-item name="username">
               <uni-easyinput
@@ -103,9 +112,8 @@ export default {
   data() {
     return {
       adminName: 'sv-admin管理系统',
+      adminDescription: '开源好用的uniapp云端一体管理后台',
       logoSrc: '/static/logo.png',
-      bgImage:
-        'https://mp-0ecede5c-a993-48bf-ba4b-45d9a8c7e79b.cdn.bspapp.com/imageservice/login-admin-background.jpg',
       loginFormData: {
         username: '',
         password: '',
@@ -136,7 +144,7 @@ export default {
   },
   onReady() {
     // 表单验证规则（uni-id-pages同步）
-    this.$refs.loginform.setRules(this.rules)
+    // this.$refs.loginform.setRules(this.rules)
   },
   methods: {
     // 登录表单校验
@@ -210,60 +218,111 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('@/uni_modules/sv-id-pages/common/style.scss');
+@import '../../common/style.scss';
 
 .sv-id-login-admin {
   height: 100vh;
+  display: flex;
+  background: linear-gradient(135deg, #c2ffd8, #465efb);
 
-  .login-bg {
-    width: 100%;
+  .intro {
+    flex-grow: 1.5;
+    background: linear-gradient(to right, #75f4ff, #d3efff);
+    position: relative;
+    overflow: hidden;
+
+    .header {
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      display: flex;
+      height: 52px;
+      box-sizing: border-box;
+
+      .header-logo {
+        flex-shrink: 0;
+        height: inherit;
+      }
+      .header-title {
+        height: inherit;
+        margin-left: 12px;
+        white-space: nowrap;
+
+        .title-text {
+          line-height: 30px;
+          font-size: 20px;
+          font-weight: 700;
+          color: $uni-color-primary;
+        }
+
+        .title-text-sub {
+          line-height: 22px;
+          font-size: 14px;
+          color: $uni-color-error;
+        }
+      }
+    }
+
+    .middle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+
+      .middle-cover {
+        width: 100%;
+      }
+    }
+  }
+  .wave-divider {
+    width: 5%;
     height: 100%;
-    z-index: -999;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+    overflow: hidden;
 
-    .bg-image {
+    .wave-image {
       width: 100%;
       height: 100%;
     }
   }
-
-  .login-main {
-    width: 100%;
-    height: 100%;
+  .form-main {
+    flex-grow: 1;
+    position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 
-    .logo {
-      width: 100px;
-      height: 100px;
+    .circle-big {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: rgba(33, 55, 255, 0.2);
+      position: absolute;
+      right: 100px;
+      top: 100px;
+      filter: blur(20px);
+      pointer-events: none;
     }
-
-    .title {
-      height: 60px;
-      line-height: 60px;
-      font-size: 20px;
-      color: #ffffff;
-      transition: 0.4s;
-      text-shadow: 0 0 4px #10d8ff, 0 0 8px #10d8ff;
-      &:hover {
-        text-shadow: 0 0 4px #10d8ff, 0 0 8px #10d8ff, 0 0 12px #10d8ff, 0 0 16px #10d8ff,
-          0 0 20px #10d8ff;
-      }
+    .circle-small {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: rgba(71, 237, 255, 0.2);
+      position: absolute;
+      left: 100px;
+      bottom: 150px;
+      filter: blur(10px);
+      pointer-events: none;
     }
 
     .form {
-      width: 400px;
-      height: 340px;
-      border: 1px solid #aaaaaa66;
+      width: 50%;
+      height: 40%;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #f1f1f166;
       border-radius: 12px;
       box-sizing: border-box;
-      background-color: rgba(255, 255, 255, 0.1);
       position: relative;
       transition: transform 0.8s;
       transform-style: preserve-3d;
@@ -289,9 +348,17 @@ export default {
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
 
+        .form-title {
+          font-size: 18px;
+          color: #ffffff;
+          font-weight: 700;
+          margin-bottom: 12px;
+          text-align: center;
+        }
+
         .skip {
           font-size: 12px;
-          color: #cccccc;
+          color: #ffffff;
           display: flex;
           justify-content: space-between;
           margin: auto 0 12px 0;
@@ -312,28 +379,42 @@ export default {
         transform: rotateY(180deg);
       }
     }
+
+    .flip {
+      transform: rotateY(180deg);
+    }
   }
 }
 
-.flip {
-  transform: rotateY(180deg);
-}
-
-.focus-in-contract {
-  animation: focus-in-contract 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-@keyframes focus-in-contract {
-  0% {
-    letter-spacing: 1em;
-    -webkit-filter: blur(12px);
-    filter: blur(12px);
-    opacity: 0;
+// 响应式布局
+@media screen and (max-width: 1600px) {
+  .intro {
+    flex-grow: 1.2 !important;
   }
-  100% {
-    -webkit-filter: blur(0px);
-    filter: blur(0px);
-    opacity: 1;
+}
+@media screen and (max-width: 1400px) {
+  .intro {
+    flex-grow: 0.8 !important;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .intro {
+    flex-grow: 0.4 !important;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .intro {
+    flex-grow: 0 !important;
+  }
+  .header {
+    position: fixed !important;
+    top: 8% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  .form {
+    min-width: 280px;
+    min-height: 360px;
   }
 }
 </style>

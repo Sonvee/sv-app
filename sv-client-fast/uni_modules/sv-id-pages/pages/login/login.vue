@@ -46,6 +46,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../common/style.scss';
+
 .sv-id-login {
   --svid-text-color: #ffffff;
 
@@ -101,47 +103,6 @@ export default {
       height: 120rpx;
       margin-top: 24rpx;
     }
-  }
-}
-
-.focus-in-contract {
-  animation: focus-in-contract 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-@keyframes focus-in-contract {
-  0% {
-    letter-spacing: 1em;
-    -webkit-filter: blur(12px);
-    filter: blur(12px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-filter: blur(0px);
-    filter: blur(0px);
-    opacity: 1;
-  }
-}
-
-.neon-flash {
-  animation: neon-flash-anim 4s linear infinite;
-}
-
-@keyframes neon-flash-anim {
-  0% {
-    text-shadow: 0 0 4px #10d8ff, 0 0 8px #10d8ff;
-  }
-  25% {
-    text-shadow: 0 0 4px #10d8ff, 0 0 8px #10d8ff, 0 0 12px #10d8ff;
-  }
-  50% {
-    text-shadow: 0 0 4px #10d8ff, 0 0 8px #10d8ff, 0 0 12px #10d8ff, 0 0 16px #10d8ff,
-      0 0 20px #10d8ff;
-  }
-  75% {
-    text-shadow: 0 0 4px #10d8ff, 0 0 8px #10d8ff, 0 0 12px #10d8ff;
-  }
-  100% {
-    text-shadow: 0 0 4px #10d8ff, 0 0 8px #10d8ff;
   }
 }
 </style>

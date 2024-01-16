@@ -115,10 +115,6 @@ export default {
       flipFlag: false // 卡片翻转
     }
   },
-  mounted() {
-    // 表单验证规则（uni-id-pages同步）
-    this.$refs.loginform.setRules(this.rules)
-  },
   methods: {
     // 登录表单校验
     submitLogin() {

@@ -8,8 +8,18 @@
         <el-input v-model="filterForm.name" placeholder="请输入用户名/昵称" clearable />
       </el-form-item>
       <el-form-item label="账号类型">
-        <el-select v-model="filterForm.platform" placeholder="选择账号类型" clearable>
-          <el-option :label="item.label" :value="item.value" v-for="item in platformList" :key="item" />
+        <el-select
+          class="sv-el-select"
+          v-model="filterForm.platform"
+          placeholder="选择账号类型"
+          clearable
+        >
+          <el-option
+            :label="item.label"
+            :value="item.value"
+            v-for="item in platformList"
+            :key="item"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -64,7 +74,7 @@ function reset() {
   width: 100%;
   padding: 10px 10px 0 10px;
   box-sizing: border-box;
-  
+
   @include useTheme {
     border-bottom: 1px solid #{getTheme('sv-border-color')};
   }

@@ -1,145 +1,4 @@
-:root {
-}
-
-.sv-el-navbar {
-  --el-menu-horizontal-height: #{$sv-nav-bar-height};
-  @include useTheme {
-    --el-menu-bg-color: #{getTheme('sv-background-color')};
-    --el-menu-border-color: #{getTheme('sv-border-color')};
-  }
-}
-
-.sv-el-sidebar {
-  border-right: unset !important;
-  @include useTheme {
-    --el-menu-bg-color: #{getTheme('sv-background-color')};
-    --el-menu-text-color: #{getTheme('sv-text-color')};
-    --el-menu-active-color: #{getTheme('sv-primary-color')};
-    --el-menu-hover-text-color: #{getTheme('sv-primary-color')};
-    --el-menu-hover-bg-color: #{getTheme('sv-hover-color')};
-  }
-}
-
-.sv-el-input {
-  @include useTheme {
-    --el-input-text-color: #{getTheme('sv-text-color')};
-    --el-input-bg-color: #{getTheme('sv-background-color')};
-  }
-}
-
-.sv-el-select {
-  @include useTheme {
-    :deep(.el-input) {
-      --el-input-bg-color: #{getTheme('sv-background-color')};
-      --el-input-text-color: #{getTheme('sv-text-color')};
-    }
-  }
-}
-
-.sv-el-table {
-  @include useTheme {
-    --el-table-bg-color: #{getTheme('sv-background-color')};
-    --el-table-tr-bg-color: #{getTheme('sv-background-color')};
-    --el-table-border-color: #{getTheme('sv-border-color')};
-    --el-table-header-bg-color: #{getTheme('sv-mask-highlight-color')};
-    --el-table-header-text-color: #{getTheme('sv-text-sub-color')};
-    --el-table-text-color: #{getTheme('sv-text-color')};
-    --el-table-row-hover-bg-color: #{getTheme('sv-hover-color')};
-    --el-table-expanded-cell-bg-color: #{getTheme('sv-background-color')};
-    --el-fill-color-blank: #{getTheme('sv-background-color')};
-
-    :deep(.el-button) {
-      --el-fill-color-light: #{getTheme('sv-hover-color')};
-      &:active {
-        color: #{getTheme('sv-primary-color')};
-        background-color: #{getTheme('sv-hover-color')};
-      }
-    }
-    :deep(.el-button-group .el-button) {
-      --el-button-text-color: #{getTheme('sv-text-color')};
-      --el-button-hover-bg-color: #{getTheme('sv-hover-color')};
-      --el-button-hover-text-color: #{getTheme('sv-hover-color')};
-      --el-fill-color-light: #{getTheme('sv-mask-highlight-color')};
-      &:active {
-        background-color: #{getTheme('sv-hover-color')};
-      }
-    }
-  }
-
-  @include useDarkTheme {
-    :deep(.el-button) {
-      --el-button-text-color: #{getTheme('sv-text-color')};
-    }
-  }
-}
-
-.sv-el-pagination {
-  @include useTheme {
-    --el-pagination-bg-color: #{getTheme('sv-background-color')};
-    --el-pagination-text-color: #{getTheme('sv-text-color')};
-    --el-pagination-button-bg-color: #{getTheme('sv-background-color')};
-    --el-pagination-button-color: #{getTheme('sv-text-color')};
-    --el-text-color-regular: #{getTheme('sv-text-color')};
-    --el-pagination-button-disabled-bg-color: #{getTheme('sv-background-color')};
-
-    :deep(.el-input) {
-      --el-input-bg-color: #{getTheme('sv-background-color')};
-      --el-input-text-color: #{getTheme('sv-text-color')};
-    }
-  }
-}
-.sv-el-form {
-  @include useTheme {
-    --el-text-color-regular: #{getTheme('sv-text-color')};
-    --el-input-bg-color: #{getTheme('sv-background-color')};
-    color-scheme: #{getTheme('sv-theme-key')};
-
-    :deep(.el-input) {
-      --el-input-text-color: #{getTheme('sv-text-color')};
-      --el-input-bg-color: #{getTheme('sv-background-color')};
-      --el-disabled-bg-color: #{getTheme('sv-mask-color')};
-    }
-
-    :deep(.input) {
-      color: #{getTheme('sv-text-color')};
-    }
-
-    :deep(.el-select .el-select__wrapper) {
-      --el-fill-color-blank: #{getTheme('sv-background-color')};
-      color: #{getTheme('sv-text-color')};
-    }
-
-    :deep(.el-date-editor) {
-      --el-input-text-color: #{getTheme('sv-text-color')};
-      --el-input-bg-color: #{getTheme('sv-background-color')};
-    }
-
-    :deep(.el-textarea__inner) {
-      --el-input-bg-color: #{getTheme('sv-background-color')};
-    }
-
-    :deep(.el-input-number) {
-      --el-fill-color-light: #{getTheme('sv-background-color')};
-    }
-
-    :deep(.el-input-group__append) {
-      --el-fill-color-light: #{getTheme('sv-mask-color')};
-    }
-
-    :deep(.sv-dynamic-input) {
-      .disable {
-        background-color: #{getTheme('sv-mask-color')};
-      }
-    }
-  }
-}
-
-.sv-el-drawer {
-  @include useTheme {
-    --el-drawer-bg-color: #{getTheme('sv-background-color')};
-  }
-}
-
+// element-plus全局样式
 .el-loading-mask {
   @include useTheme {
     // hex拼接alpha形成半透明遮罩色
@@ -154,18 +13,19 @@
     --el-bg-color-overlay: #{getTheme('sv-popper-bg-color')};
     --el-fill-color-light: #{getTheme('sv-hover-color')};
     --el-dropdown-menuItem-hover-fill: #{getTheme('sv-hover-color')};
-    --el-dropdown-menuItem-hover-color: #{getTheme('sv-primary-color')};
+    --el-dropdown-menuItem-hover-color: #{$uni-color-primary};
     --el-fill-color-blank: #{getTheme('sv-popper-bg-color')};
-    --el-text-color-primary: #{getTheme('sv-border-highlight-color')};
+    --el-text-color-primary: #{getTheme('sv-border-hl-color')};
     --el-border-color-light: #{getTheme('sv-border-color')};
     --el-disabled-bg-color: #{getTheme('sv-popper-bg-color')};
-    --el-border-color-extra-light: #{getTheme('sv-hover-highlight-color')};
+    --el-disabled-border-color: #{getTheme('sv-border-color')};
+    --el-border-color-extra-light: #{getTheme('sv-hover-hl-color')};
 
     :deep(.el-date-table) {
       --el-datepicker-inrange-bg-color: #{getTheme('sv-hover-color')};
     }
     :deep(.el-time-spinner__item.is-active) {
-      --el-text-color-primary: #{getTheme('sv-primary-color')};
+      --el-text-color-primary: #{$uni-color-primary};
     }
     :deep(.el-table) {
       --el-bg-color: #{getTheme('sv-popper-bg-color')};
@@ -174,6 +34,26 @@
     :deep(.el-dropdown-menu) {
       --el-border-color-lighter: #{getTheme('sv-border-color')};
     }
+
+    :deep(.el-table-filter__content) {
+      .el-table-filter__checkbox-group .el-checkbox {
+        display: flex;
+        align-items: center;
+        height: 30px;
+      }
+    }
+    :deep(.el-table-filter__bottom) {
+      --el-border-color-lighter: #{getTheme('sv-border-color')};
+
+      & button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+      }
+      & button.is-disabled {
+        cursor: not-allowed;
+      }
+    }
   }
 }
 
@@ -181,8 +61,154 @@
   @include useTheme {
     --el-bg-color: #{getTheme('sv-popper-bg-color')};
     --el-border-color-lighter: #{getTheme('sv-border-color')};
-    --el-messagebox-title-color: #{getTheme('sv-text-highlight-color')};
+    --el-messagebox-title-color: #{getTheme('sv-text-hl-color')};
     --el-messagebox-content-color: #{getTheme('sv-text-color')};
+  }
+}
+
+// 指定sv-element-plus全局样式
+.sv-el-menu {
+  --el-menu-horizontal-height: #{$sv-nav-bar-height};
+  --el-menu-active-color: #{$uni-color-primary};
+  --el-menu-hover-text-color: #{$uni-color-primary};
+  border-right: unset !important;
+
+  @include useTheme {
+    --el-menu-border-color: #{getTheme('sv-border-color')};
+    --el-menu-bg-color: #{getTheme('sv-bg-color')};
+    --el-menu-text-color: #{getTheme('sv-text-color')};
+    --el-menu-hover-bg-color: #{getTheme('sv-hover-color')};
+  }
+}
+
+.sv-el-tag {
+  @include useDarkTheme {
+    background-color: getTheme('sv-bg-color');
+  }
+  &:active {
+    @include useTheme {
+      background-color: getTheme('sv-mask-hl-color');
+    }
+  }
+}
+
+.sv-el-form {
+  @include useTheme {
+    --el-fill-color-blank: #{getTheme('sv-bg-color')};
+    --el-text-color-regular: #{getTheme('sv-text-color')};
+  }
+}
+
+.sv-el-table {
+  @include useTheme {
+    --el-fill-color-blank: #{getTheme('sv-bg-color')};
+    --el-table-bg-color: #{getTheme('sv-bg-color')};
+    --el-table-tr-bg-color: #{getTheme('sv-bg-color')};
+    --el-table-border-color: #{getTheme('sv-border-color')};
+    --el-table-header-bg-color: #{getTheme('sv-mask-hl-color')};
+    --el-table-header-text-color: #{getTheme('sv-text-sub-color')};
+    --el-table-text-color: #{getTheme('sv-text-color')};
+    --el-table-row-hover-bg-color: #{getTheme('sv-hover-color')};
+    --el-table-expanded-cell-bg-color: #{getTheme('sv-bg-color')};
+
+    :deep(.el-button) {
+      --el-fill-color-light: #{getTheme('sv-hover-color')};
+      &:active {
+        color: $uni-color-primary;
+        background-color: #{getTheme('sv-hover-color')};
+      }
+    }
+    :deep(.el-button-group .el-button) {
+      --el-button-text-color: #{getTheme('sv-text-color')};
+      --el-button-hover-bg-color: #{getTheme('sv-hover-color')};
+      --el-button-hover-text-color: #{getTheme('sv-hover-color')};
+      --el-fill-color-light: #{getTheme('sv-mask-hl-color')};
+      &:active {
+        background-color: #{getTheme('sv-hover-color')};
+      }
+    }
+  }
+
+  @include useDarkTheme {
+    --el-table-fixed-left-column: inset 10px 0 10px -10px rgba(255, 255, 255, 0.15);
+    --el-table-fixed-right-column: inset -10px 0 10px -10px rgba(255, 255, 255, 0.15);
+
+    :deep(.el-button) {
+      --el-button-text-color: #{getTheme('sv-text-color')};
+    }
+  }
+}
+
+.sv-el-pagination {
+  @include useTheme {
+    --el-fill-color-blank: transparent;
+    --el-text-color-regular: #{getTheme('sv-text-color')};
+    --el-pagination-button-color: #{getTheme('sv-text-sub-color')};
+
+    // 部分样式在uniapp中会丢失，需要手动覆盖样式
+    .btn-prev,
+    .btn-next {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: getTheme('sv-text-sub-color');
+
+      &[aria-disabled='true'] {
+        cursor: no-drop;
+      }
+
+      &:active {
+        background: #{getTheme('sv-hover-color')} !important;
+      }
+    }
+  }
+}
+
+.sv-el-drawer {
+  @include useTheme {
+    --el-drawer-bg-color: #{getTheme('sv-bg-color')};
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .sv-el-drawer {
+    width: 40% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sv-el-drawer {
+    width: 80% !important;
+  }
+}
+
+.sv-el-input-number {
+  @include useTheme {
+    --el-fill-color-light: #{getTheme('sv-bg-color')};
+  }
+}
+
+.sv-el-input {
+  @include useTheme {
+    --el-input-bg-color: #{getTheme('sv-bg-color')};
+    --el-disabled-bg-color: #{getTheme('sv-mask-color')};
+    --el-text-color-regular: #{getTheme('sv-text-color')};
+
+    :deep(.el-input-group__append) {
+      background-color: transparent;
+    }
+  }
+}
+
+.sv-el-select {
+  min-width: 150px;
+}
+
+.sv-el-dialog {
+  @include useTheme {
+    --el-dialog-bg-color: #{getTheme('sv-dialog-bg-color')};
+    --el-text-color-primary: #{getTheme('sv-text-color')};
+    border: 1px solid #{getTheme('sv-border-color')};
   }
 }
 
@@ -194,47 +220,11 @@
   }
 }
 
-.sv-el-dialog {
+.el-message-box {
   @include useTheme {
-    --el-dialog-bg-color: #{getTheme('sv-dialog-bg-color')};
-    --el-text-color-primary: #{getTheme('sv-text-color')};
-    border: 1px solid #{getTheme('sv-border-color')};
-  }
-}
-
-// uni-media-library媒体库插件配色
-.sv-media-lib {
-  @include useTheme {
-    background-color: #{getTheme('sv-background-color')};
-    .media-info-wrap {
-      background-color: #{getTheme('sv-background-color')};
-      border-left: 1px solid #{getTheme('sv-border-color')};
-
-      .title {
-        color: #{getTheme('sv-text-sub-color')};
-      }
-
-      .info-item {
-        .label {
-          color: #{getTheme('sv-text-sub-color')};
-        }
-        .content {
-          color: #{getTheme('sv-text-color')};
-        }
-      }
-    }
-    .tabs {
-      border-bottom: 1px solid #{getTheme('sv-border-color')};
-      .tabs-nav {
-        background-color: #{getTheme('sv-background-color')};
-
-        .tab-label {
-          color: #{getTheme('sv-text-sub-color')};
-        }
-        .active {
-          color: #{getTheme('sv-primary-color')};
-        }
-      }
-    }
+    --el-bg-color: #{getTheme('sv-popper-bg-color')};
+    --el-border-color-lighter: #{getTheme('sv-border-color')};
+    --el-messagebox-title-color: #{getTheme('sv-text-hl-color')};
+    --el-messagebox-content-color: #{getTheme('sv-text-color')};
   }
 }

@@ -98,7 +98,7 @@ function filterIcons() {
     .icon:hover {
       @include useTheme {
         background-color: getTheme('sv-hover-color');
-        color: getTheme('sv-primary-color');
+        color: $uni-color-primary;
       }
     }
   }

@@ -1,5 +1,7 @@
 @import './layout.scss';
 @import './element-plus.scss';
+@import './uni-ui.scss';
+@import './sv-ui.scss';
 @import './animations.scss';
 @import './sv-icons.scss';
 @import './uni-icons.scss';
@@ -32,7 +34,7 @@ a {
   position: relative;
   overflow: auto;
   @include useTheme {
-    background-color: getTheme('sv-background-color');
+    background-color: getTheme('sv-bg-color');
     color: getTheme('sv-text-color');
   }
 }
@@ -47,7 +49,7 @@ a {
   position: relative;
   overflow: auto;
   @include useTheme {
-    background-color: getTheme('sv-background-color');
+    background-color: getTheme('sv-bg-color');
     color: getTheme('sv-text-color');
   }
 }
@@ -208,7 +210,7 @@ a {
   @include useTheme {
     background-color: getTheme('sv-grey-color');
     &:hover {
-      background-color: getTheme('sv-grey-highlight-color');
+      background-color: getTheme('sv-grey-hl-color');
     }
   }
   border-radius: 3px; /* 圆角 */

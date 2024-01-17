@@ -1,5 +1,5 @@
 <template>
-  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef" :size="appWidth">
+  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef">
     <template #header>
       <h3>编辑</h3>
     </template>
@@ -50,6 +50,7 @@
           </el-form-item>
           <el-form-item prop="my_invite_code" label="邀请码">
             <el-input
+              class="sv-el-input"
               v-model="formData.my_invite_code"
               disabled
               placeholder="请输入邀请码"
@@ -62,7 +63,7 @@
     <template #footer>
       <!-- 密码修改 -->
       <el-popover
-        :width="`calc(${appWidth} / 1.25)`"
+        width="260px"
         placement="top-start"
         trigger="click"
         v-model:visible="showPwdReset"
@@ -124,10 +125,6 @@ const props = defineProps({
 })
 
 const emits = defineEmits(['submit'])
-
-const appWidth = computed(() => {
-  return uni.getSystemInfoSync().deviceType == 'pc' ? '40%' : '80%'
-})
 
 // 判断当前用户是否是admin - 临时开启visitor权限，游客仅供浏览
 const isAdmin = computed(() => {

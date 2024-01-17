@@ -47,14 +47,8 @@
       </el-table-column>
     </el-table>
     <!-- 详情弹窗 -->
-    <el-dialog
-      class="sv-el-dialog"
-      :width="appWidth"
-      v-model="dialogVisible"
-      :title="curCache?.key"
-      align-center
-    >
-      <el-scrollbar height="500px">
+    <el-dialog class="sv-el-dialog" v-model="dialogVisible" :title="curCache?.key" align-center>
+      <el-scrollbar>
         <sv-json-view :obj="curCache?.value" :key="jsonviewKey"></sv-json-view>
       </el-scrollbar>
     </el-dialog>
@@ -69,10 +63,6 @@ import { refreshSvidStorage, refreshSysStorage } from '@/utils/pinia-storage'
 
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
-
-const appWidth = computed(() => {
-  return uni.getSystemInfoSync().deviceType == 'pc' ? '50%' : '90%'
-})
 
 // 初始获取表格数据
 handleTable()
@@ -200,7 +190,7 @@ function del(item) {
   }
 }
 
-::v-deep .nopadding-cell {
+:deep(.nopadding-cell) {
   // 取消该单元格内边距
   padding: 0 !important;
 }
@@ -209,5 +199,25 @@ function del(item) {
   height: 30px;
   display: block;
   margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  :deep(.sv-el-dialog) {
+    width: 50%;
+
+    .el-scrollbar__wrap {
+      height: 500px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :deep(.sv-el-dialog) {
+    width: 82%;
+
+    .el-scrollbar__wrap {
+      height: 400px;
+    }
+  }
 }
 </style>

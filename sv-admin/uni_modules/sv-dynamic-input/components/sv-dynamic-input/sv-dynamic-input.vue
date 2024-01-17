@@ -1,15 +1,17 @@
 <template>
   <view class="sv-dynamic-input">
     <view class="row-item" v-for="(item, index) in dynamicList" :key="index">
-      <view :style="{ minWidth: labelWidth }">key</view>
-      <input type="text" class="input" v-model="item.key" />
+      <view :style="{ minWidth: labelWidth, textAlign }">{{ lableText }}</view>
+      <input type="text" class="input" v-model="item[lableKey]" />
       <view class="divider"></view>
-      <view :style="{ minWidth: labelWidth }">value</view>
-      <input type="text" class="input" v-model="item.value" />
+      <view :style="{ minWidth: labelWidth, textAlign }">{{ valueText }}</view>
+      <input type="text" class="input" v-model="item[valueKey]" />
       <view class="divider"></view>
       <view class="control">
         <view class="control-add" :class="{ disable: bandAdd }" @click="addRow(index)">＋</view>
-        <view class="control-delete" :class="{ disable: bandDelete }" @click="deleteRow(index)">－</view>
+        <view class="control-delete" :class="{ disable: bandDelete }" @click="deleteRow(index)">
+          －
+        </view>
       </view>
     </view>
   </view>
@@ -21,9 +23,32 @@ export default {
     // 原数据
     data: {
       type: [Array, Object],
-      default: () => {
-        return [{ key: '', value: '' }]
-      }
+      default: () => []
+    },
+    // 自定义key键名
+    lableKey: {
+      type: String,
+      default: 'key'
+    },
+    // 自定义key名称
+    lableText: {
+      type: String,
+      default: '键'
+    },
+    // 自定义value键名
+    valueKey: {
+      type: String,
+      default: 'value'
+    },
+    // 自定义value名称
+    valueText: {
+      type: String,
+      default: '值'
+    },
+    // 对齐方式
+    textAlign: {
+      type: String,
+      default: 'center'
     },
     // 标题宽度
     labelWidth: {
@@ -78,7 +103,10 @@ export default {
   methods: {
     addRow(index) {
       if (this.dynamicList.length < this.maxRow) {
-        this.dynamicList.splice(++index, 0, { key: '', value: '' })
+        const emptyObj = {}
+        emptyObj[this.lableKey] = ''
+        emptyObj[this.valueKey] = ''
+        this.dynamicList.splice(++index, 0, emptyObj)
       }
     },
     deleteRow(index) {
@@ -92,7 +120,14 @@ export default {
      * @return 标准数组[{key:'a', value:'1'},{key:'b', value:'2'}...]
      */
     handleData(e) {
-      return Array.isArray(e) ? e : Object.entries(e).map(([key, value]) => ({ key, value }))
+      return Array.isArray(e)
+        ? e
+        : Object.entries(e).map(([key, value]) => {
+            const newObj = {}
+            newObj[this.lableKey] = key
+            newObj[this.valueKey] = value
+            return newObj
+          })
     },
     /**
      * 将标准数组转换为对象
@@ -104,7 +139,7 @@ export default {
       //   acc[cur.key] = cur.value
       //   return acc
       // }, {})
-      return Object.fromEntries(arr.map((obj) => [obj.key, obj.value]))
+      return Object.fromEntries(arr.map((obj) => [obj[this.lableKey], obj[this.valueKey]]))
     }
   }
 }
@@ -145,7 +180,7 @@ export default {
 
 .control-add:active,
 .control-delete:active {
-  background-color: #f6f6f6;
+  opacity: 0.8;
 }
 
 .control-add {
@@ -153,7 +188,7 @@ export default {
 }
 
 .disable {
-  background-color: #f6f6f6;
+  background-color: rgba(120, 120, 120, 0.2);
   opacity: 0.3;
   border: none;
   cursor: no-drop;
@@ -165,6 +200,5 @@ export default {
   padding: 0 10px;
   border-radius: 4px;
   font-size: inherit;
-  color: #606266;
 }
 </style>

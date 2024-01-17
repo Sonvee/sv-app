@@ -8,7 +8,7 @@
 <script>
 export default {
   onLoad({ url, title }) {
-    if (url.substring(0, 4) != 'http') {
+    if (url?.substring(0, 4) != 'http') {
       uni.showModal({
         title: '错误',
         content: '不是一个有效的网站链接,' + '"' + url + '"',

@@ -1,8 +1,8 @@
 <template>
-  <el-popover placement="bottom-start" trigger="click" width="auto">
+  <el-popover placement="bottom-start" trigger="click" width="auto" @show="onShow" @hide="onHide">
     <template #reference>
       <view class="sv-nav-btn-menu">
-        <view class="uni-icons-bars"></view>
+        <view :class="[showMenuTree ? 'uni-icons-settings' : 'uni-icons-list']"></view>
       </view>
     </template>
     <view class="menu-tree">
@@ -28,6 +28,15 @@ function onMenu(e) {
     document.body.click()
   }
 }
+
+const showMenuTree = ref(false)
+function onShow() {
+  showMenuTree.value = true
+}
+
+function onHide() {
+  showMenuTree.value = false
+}
 </script>
 
 <style lang="scss">
@@ -48,7 +57,7 @@ function onMenu(e) {
   }
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 768px) {
   .sv-nav-btn-menu {
     display: none;
   }

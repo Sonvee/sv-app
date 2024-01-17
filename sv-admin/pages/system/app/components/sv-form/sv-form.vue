@@ -1,5 +1,5 @@
 <template>
-  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef" :size="appWidth">
+  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef">
     <template #header>
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
@@ -33,7 +33,7 @@
             <el-input v-model="formData.appid" placeholder="请输入应用ID" clearable />
           </el-form-item>
           <el-form-item prop="name" label="应用名称" required>
-            <el-input v-model="formData.name" placeholder="请输入应用名称" clearable/>
+            <el-input v-model="formData.name" placeholder="请输入应用名称" clearable />
           </el-form-item>
           <el-form-item prop="description" label="应用描述">
             <el-input
@@ -85,10 +85,6 @@ const props = defineProps({
 })
 
 const emits = defineEmits(['submit'])
-
-const appWidth = computed(() => {
-  return uni.getSystemInfoSync().deviceType == 'pc' ? '40%' : '80%'
-})
 
 // 表单数据
 const formData = ref({})

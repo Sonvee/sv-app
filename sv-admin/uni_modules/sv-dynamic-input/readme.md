@@ -7,9 +7,32 @@ props: {
   // 原数据
   data: {
     type: [Array, Object],
-    default: () => {
-      return [{ key: '', value: '' }]
-    }
+    default: () => []
+  },
+  // 自定义key键名
+  lableKey: {
+    type: String,
+    default: 'key'
+  },
+  // 自定义key名称
+  lableText: {
+    type: String,
+    default: '键'
+  },
+  // 自定义value键名
+  valueKey: {
+    type: String,
+    default: 'value'
+  },
+  // 自定义value名称
+  valueText: {
+    type: String,
+    default: '值'
+  },
+  // 对齐方式
+  textAlign: {
+    type: String,
+    default: 'center'
   },
   // 标题宽度
   labelWidth: {

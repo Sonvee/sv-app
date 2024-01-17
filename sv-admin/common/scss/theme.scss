@@ -1,53 +1,39 @@
 $themes: (
   light: (
     // 页面主配色
-    sv-background-color: #ffffff,
+    sv-bg-color: #ffffff,
     sv-text-color: #212121,
-    sv-text-highlight-color: #000000,
+    sv-text-hl-color: #000000,
     sv-text-sub-color: #616161,
     sv-border-color: #dcdfe6,
-    sv-border-highlight-color: #dadce2,
+    sv-border-hl-color: #dadce2,
     sv-grey-color: #cccccc,
-    sv-grey-highlight-color: #b2b2b2,
+    sv-grey-hl-color: #b2b2b2,
     sv-mask-color: #f6f6f6,
-    sv-mask-highlight-color: #f2f2f2,
+    sv-mask-hl-color: #f2f2f2,
     sv-card-color: #fafafa,
     sv-hover-color: #ecf5ff,
-    sv-hover-highlight-color: #e6eef4,
+    sv-hover-hl-color: #e6eef4,
     sv-popper-bg-color: #fbfbfb,
-    sv-dialog-bg-color: #fafafa,
-    // 行为主配色
-    sv-primary-color: #409eff,
-    sv-success-color: #67c23a,
-    sv-warning-color: #e6a23c,
-    sv-danger-color: #f56c6c,
-    sv-error-color: #ff1515,
-    sv-info-color: #909399
+    sv-dialog-bg-color: #fafafa
   ),
   dark: (
     // 页面主配色
-    sv-background-color: #161616,
+    sv-bg-color: #161616,
     sv-text-color: #e1e1e1,
-    sv-text-highlight-color: #ffffff,
+    sv-text-hl-color: #ffffff,
     sv-text-sub-color: #ababab,
     sv-border-color: #4c4d4f,
-    sv-border-highlight-color: #4e4f51,
+    sv-border-hl-color: #4e4f51,
     sv-grey-color: #434343,
-    sv-grey-highlight-color: #727272,
+    sv-grey-hl-color: #727272,
     sv-mask-color: #262626,
-    sv-mask-highlight-color: #242424,
+    sv-mask-hl-color: #242424,
     sv-card-color: #141414,
     sv-hover-color: #18222c,
-    sv-hover-highlight-color: #1b2836,
+    sv-hover-hl-color: #1b2836,
     sv-popper-bg-color: #2d2d2d,
-    sv-dialog-bg-color: #141414,
-    // 行为主配色
-    sv-primary-color: #69b2ff,
-    sv-success-color: #77df42,
-    sv-warning-color: #f7ae40,
-    sv-danger-color: #ff7070,
-    sv-error-color: #ff3434,
-    sv-info-color: #cdd2da
+    sv-dialog-bg-color: #141414
   )
 );
 

@@ -17,7 +17,9 @@
       "path": "uni_modules/sv-id-pages/pages/webview/webview",
       "style": {
         "navigationBarTitleText": "隐私政策协议",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "topWindow": false,
+        "leftWindow": false
       }
     },
     {
@@ -126,13 +128,17 @@
       "pages": [{
           "path": "404",
           "style": {
-            "navigationBarTitleText": "404"
+            "navigationBarTitleText": "404",
+            "topWindow": false,
+            "leftWindow": false
           }
         },
         {
           "path": "403",
           "style": {
-            "navigationBarTitleText": "403"
+            "navigationBarTitleText": "403",
+            "topWindow": false,
+            "leftWindow": false
           }
         }
       ]

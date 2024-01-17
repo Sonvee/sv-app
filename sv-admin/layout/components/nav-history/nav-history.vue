@@ -1,7 +1,7 @@
 <template>
   <view class="sv-nav-history">
     <el-tag
-      class="history-tags"
+      class="sv-el-tag"
       v-for="item in historyList"
       :key="item.value"
       :closable="item.url !== 'pages/index/index'"
@@ -12,7 +12,7 @@
       {{ item.name }}
     </el-tag>
     <el-tag
-      class="history-tags"
+      class="sv-el-tag"
       v-if="historyList.length > 1"
       :closable="false"
       effect="plain"
@@ -101,17 +101,6 @@ defineExpose({
   display: flex;
   align-items: flex-end;
   column-gap: 4px;
-
-  .history-tags {
-    @include useDarkTheme {
-      background-color: getTheme('sv-background-color');
-    }
-    &:active {
-      @include useTheme {
-        background-color: getTheme('sv-mask-highlight-color');
-      }
-    }
-  }
 }
 
 @media screen and (max-width: 767px) {

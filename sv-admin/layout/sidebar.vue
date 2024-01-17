@@ -2,7 +2,7 @@
   <div class="layout-side-bar">
     <el-scrollbar v-loading="loading">
       <el-menu
-        class="sv-el-sidebar"
+        class="sv-el-menu"
         mode="vertical"
         unique-opened
         :collapse="isCollapse"
@@ -75,7 +75,7 @@ watch(
 
   @include useTheme {
     border-right: 1px solid #{getTheme('sv-border-color')};
-    background-color: getTheme('sv-background-color');
+    background-color: getTheme('sv-bg-color');
   }
 }
 </style>

@@ -31,7 +31,13 @@
         :filter-method="(value, row) => row.state == value"
       />
       <el-table-column prop="device_id" label="唯一设备标识" :width="200" show-overflow-tooltip />
-      <el-table-column prop="ua" label="userAgent" align="center" show-overflow-tooltip />
+      <el-table-column
+        prop="ua"
+        label="userAgent"
+        :min-width="200"
+        align="center"
+        show-overflow-tooltip
+      />
       <el-table-column
         prop="create_date"
         label="创建时间"

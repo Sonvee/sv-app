@@ -34,7 +34,7 @@ function onLogo() {
 
   &:hover {
     @include useTheme {
-      background-color: getTheme('sv-mask-highlight-color');
+      background-color: getTheme('sv-mask-hl-color');
     }
   }
 
@@ -44,7 +44,7 @@ function onLogo() {
 
   .logo-text {
     max-width: 130px;
-    font-size: $sv-logo-title-size;
+    font-size: 14px;
     font-weight: 700;
     padding-left: 12px;
   }

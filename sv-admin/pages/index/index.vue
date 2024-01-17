@@ -146,9 +146,7 @@ uni.$on('uni-id-pages-login-success', (e) => {
 .hello {
   font-size: 20px;
   font-weight: 700;
-  @include useTheme {
-    color: getTheme('sv-primary-color');
-  }
+  color: $uni-color-primary;
 }
 
 .hello-sub {
@@ -159,9 +157,7 @@ uni.$on('uni-id-pages-login-success', (e) => {
 }
 
 .link {
-  @include useTheme {
-    color: getTheme('sv-primary-color');
-  }
+  color: $uni-color-primary;
 }
 
 .donate-title {
@@ -182,7 +178,7 @@ uni.$on('uni-id-pages-login-success', (e) => {
   width: 200px;
   height: 200px;
   @include useTheme {
-    background: getTheme('sv-background-color');
+    background: getTheme('sv-bg-color');
     color: getTheme('sv-text-color');
     border: 1px solid #{getTheme('sv-border-color')};
   }

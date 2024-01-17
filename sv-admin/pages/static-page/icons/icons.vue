@@ -38,14 +38,10 @@ function toHelp() {
     border-radius: 6px;
     font-size: 12px;
     cursor: pointer;
-    @include useTheme {
-      color: getTheme('sv-primary-color');
-    }
+    color: $uni-color-primary;
   }
   .help:active {
-    @include useTheme {
-      color: getTheme('sv-success-color');
-    }
+    color: $uni-color-success;
   }
 }
 </style>

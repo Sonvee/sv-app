@@ -3,13 +3,15 @@
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
-      <el-button type="primary" plain size="small" :icon="RefreshRight" @click="refresh">刷新</el-button>
+      <el-button type="primary" plain size="small" :icon="RefreshRight" @click="refresh">
+        刷新
+      </el-button>
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
       <el-table-column prop="role_id" label="角色ID" :width="160" fixed="left" />
       <el-table-column prop="role_name" label="角色名称" :width="160" />
-      <el-table-column prop="permission" label="角色权限" show-overflow-tooltip>
+      <el-table-column prop="permission" label="角色权限" :min-width="300" show-overflow-tooltip>
         <template #default="scope">
           <el-tag
             v-for="(item, index) in scope.row.permission"
@@ -43,7 +45,12 @@
       </el-table-column>
     </el-table>
     <!-- 表单抽屉弹窗 -->
-    <sv-form v-model="showForm" :form-init="formInit" :form-mode="formMode" @submit="submitForm"></sv-form>
+    <sv-form
+      v-model="showForm"
+      :form-init="formInit"
+      :form-mode="formMode"
+      @submit="submitForm"
+    ></sv-form>
   </view>
 </template>
 

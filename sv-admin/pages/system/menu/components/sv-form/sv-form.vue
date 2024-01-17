@@ -23,7 +23,13 @@
             <el-input v-model="formData.url" placeholder="请输入菜单路径" clearable />
           </el-form-item>
           <el-form-item prop="parent_id" label="父级ID">
-            <el-input v-model="formData.parent_id" disabled placeholder="请输入父级ID" clearable />
+            <el-input
+              class="sv-el-input"
+              v-model="formData.parent_id"
+              disabled
+              placeholder="请输入父级ID"
+              clearable
+            />
           </el-form-item>
           <el-form-item prop="icon" label="图标">
             <sv-icon-select
@@ -35,7 +41,12 @@
             <view class="tips" @click="toUniIcons">如何使用自定义图标？</view>
           </el-form-item>
           <el-form-item prop="sort" label="序号">
-            <el-input-number v-model="formData.sort" :min="0" @change="changeSort" />
+            <el-input-number
+              class="sv-el-input-number"
+              v-model="formData.sort"
+              :min="0"
+              @change="changeSort"
+            />
           </el-form-item>
           <el-form-item prop="permission" label="权限">
             <el-checkbox-group v-model="formData.permission">

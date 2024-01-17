@@ -3,7 +3,7 @@
     <view class="sv-nav">
       <nav-logo></nav-logo>
       <el-menu
-        class="sv-el-navbar"
+        class="sv-el-menu"
         mode="horizontal"
         :ellipsis="false"
         unique-opened
@@ -158,7 +158,7 @@ function openMenu() {}
   width: 100%;
   box-sizing: border-box;
   @include useTheme {
-    background-color: getTheme('sv-background-color');
+    background-color: getTheme('sv-bg-color');
   }
 
   .sv-nav {
@@ -166,7 +166,7 @@ function openMenu() {}
     display: flex;
     align-items: center;
 
-    .sv-el-navbar {
+    .sv-el-menu {
       width: 100%;
       display: flex;
       align-items: center;

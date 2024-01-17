@@ -5,12 +5,17 @@
         <el-input v-model="filterForm.name" placeholder="请输入用户名/昵称" clearable />
       </el-form-item>
       <el-form-item label="账号类型">
-        <el-select v-model="filterForm.platform" placeholder="选择账号类型" clearable>
+        <el-select
+          class="sv-el-select"
+          v-model="filterForm.platform"
+          placeholder="选择账号类型"
+          clearable
+        >
           <el-option
+            v-for="item in platformList"
+            :key="item.label"
             :label="item.label"
             :value="item.value"
-            v-for="item in platformList"
-            :key="item"
           />
         </el-select>
       </el-form-item>

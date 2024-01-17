@@ -1,5 +1,5 @@
 <template>
-  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef" :size="appWidth">
+  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef">
     <template #header>
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
@@ -36,7 +36,12 @@
             <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
           </el-form-item>
           <el-form-item prop="age" label="年龄">
-            <el-input-number v-model="formData.age" :min="0" :max="100" />
+            <el-input-number
+              class="sv-el-input-number"
+              v-model="formData.age"
+              :min="0"
+              :max="100"
+            />
           </el-form-item>
           <el-form-item prop="gender" label="性别">
             <el-radio-group v-model="formData.gender">
@@ -47,6 +52,7 @@
           </el-form-item>
           <el-form-item prop="my_invite_code" label="邀请码">
             <el-input
+              class="sv-el-input"
               v-model="formData.my_invite_code"
               disabled
               placeholder="请输入邀请码"
@@ -114,10 +120,6 @@ const props = defineProps({
 })
 
 const emits = defineEmits(['submit'])
-
-const appWidth = computed(() => {
-  return uni.getSystemInfoSync().deviceType == 'pc' ? '40%' : '80%'
-})
 
 // 表单数据
 const formData = ref({})
@@ -236,4 +238,5 @@ function selectedIcon(icon) {
   width: 100%;
   height: 100%;
 }
+
 </style>

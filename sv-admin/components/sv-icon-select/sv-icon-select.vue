@@ -1,6 +1,6 @@
 <template>
   <view class="sv-icon-select">
-    <el-input v-bind="$attrs">
+    <el-input v-bind="$attrs" class="sv-el-input">
       <template #append>
         <el-popover placement="bottom-start" :width="popWidth" trigger="click">
           <template #reference>
@@ -49,9 +49,7 @@ function selected(e) {
     padding: 0 10px;
     cursor: pointer;
     &:active {
-      @include useTheme {
-        color: getTheme('sv-primary-color');
-      }
+      color: $uni-color-primary;
     }
   }
 }

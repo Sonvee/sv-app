@@ -1,5 +1,5 @@
 <template>
-  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef" :size="appWidth">
+  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef">
     <template #header>
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
@@ -63,10 +63,6 @@ const props = defineProps({
 })
 
 const emits = defineEmits(['submit'])
-
-const appWidth = computed(() => {
-  return uni.getSystemInfoSync().deviceType == 'pc' ? '40%' : '100%'
-})
 
 // 表单数据
 const formData = ref({})

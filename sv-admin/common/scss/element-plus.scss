@@ -137,6 +137,16 @@
       --el-button-text-color: #{getTheme('sv-text-color')};
     }
   }
+
+  // 响应式处理 - 移动端取消列固定
+  @media screen and (max-width: 768px) {
+    .el-table__header-wrapper .el-table-fixed-column--right,
+    .el-table__header-wrapper .el-table-fixed-column--left,
+    .el-table__body-wrapper .el-table-fixed-column--right,
+    .el-table__body-wrapper .el-table-fixed-column--left {
+      position: unset !important;
+    }
+  }
 }
 
 .sv-el-pagination {

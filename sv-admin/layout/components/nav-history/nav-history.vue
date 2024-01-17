@@ -101,6 +101,8 @@ defineExpose({
   display: flex;
   align-items: flex-end;
   column-gap: 4px;
+  max-width: 600px;
+  overflow-x: auto;
 }
 
 @media screen and (max-width: 767px) {

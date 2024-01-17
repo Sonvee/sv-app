@@ -1,6 +1,6 @@
 <template>
   <el-select
-    :class="['sv-nav-search', 'sv-el-select', show ? 'stretch' : 'shrink']"
+    :class="['sv-nav-search', show ? 'stretch' : 'shrink']"
     v-model="searchValue"
     filterable
     remote

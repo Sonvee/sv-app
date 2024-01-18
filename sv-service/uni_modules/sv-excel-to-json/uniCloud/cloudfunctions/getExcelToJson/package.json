@@ -1,0 +1,15 @@
+{
+  "name": "getExcelToJson",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ml-excel-to-json": "file:../common/ml-excel-to-json"
+  },
+  "extensions": {}
+}

@@ -1,5 +1,4 @@
 import { dayjs } from "element-plus";
-import pagesJson from '@/pages.json'
 
 /**
  * 时间日期格式化
@@ -96,24 +95,3 @@ export function parseStringToObject(str) {
   var obj = JSON.parse(fixedString)
   return obj
 }
-
-// pages.json路由表匹配
-function generateRouteTable(json) {
-  var routeTable = [];
-  json.pages.forEach(page => {
-    routeTable.push({
-      url: page.path,
-      name: page.style.navigationBarTitleText
-    });
-  });
-  json.subPackages.forEach(subPackage => {
-    subPackage.pages.forEach(page => {
-      routeTable.push({
-        url: `${subPackage.root}/${page.path}`,
-        name: page.style.navigationBarTitleText
-      });
-    });
-  });
-  return routeTable;
-}
-export const pageRouteTable = generateRouteTable(pagesJson)

@@ -2,6 +2,10 @@
   <view class="table-page-container">
     <!-- 表格头部控制栏 -->
     <view class="control">
+      <el-button type="primary" plain size="small" :icon="Download" @click="onImport">
+        导入
+      </el-button>
+      <el-button type="primary" plain size="small" :icon="Upload" @click="onExport">导出</el-button>
       <view style="flex: 1"></view>
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
@@ -67,9 +71,10 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { RefreshRight } from '@element-plus/icons-vue'
+import { RefreshRight, Upload, Download } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
+import { logExport } from '@/utils/file'
 import { logList } from '@/service/api/svid'
 
 const tableData = ref([]) // 菜单表格
@@ -125,6 +130,15 @@ function handleSizeChange(e) {
 function handleCurrentChange(e) {
   pagingParams.value.pagenum = e
   handleTable(pagingParams.value)
+}
+
+// 导入
+function onImport() {}
+// 导出
+async function onExport() {
+  const dataRes = await logList(pagingParams.value)
+  const dataSource = dataRes.data
+  logExport(dataSource)
 }
 </script>
 

@@ -8,8 +8,8 @@ import {
 export const useNavStore = defineStore('nav', () => {
   // 导航栏历史
   const historyList = ref([{
+    url: 'pages/index/index',
     name: '首页',
-    url: 'pages/index/index'
   }])
 
   function addHistory(history) {
@@ -29,8 +29,8 @@ export const useNavStore = defineStore('nav', () => {
 
   function clearHistory() {
     historyList.value = [{
+      url: 'pages/index/index',
       name: '首页',
-      url: 'pages/index/index'
     }]
   }
 

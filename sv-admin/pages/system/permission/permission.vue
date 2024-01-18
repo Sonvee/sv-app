@@ -3,7 +3,8 @@
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
-      <el-button type="primary" plain size="small" :icon="RefreshRight" @click="refresh">刷新</el-button>
+      <view style="flex: 1"></view>
+      <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
@@ -30,7 +31,12 @@
       </el-table-column>
     </el-table>
     <!-- 表单抽屉弹窗 -->
-    <sv-form v-model="showForm" :form-init="formInit" :form-mode="formMode" @submit="submitForm"></sv-form>
+    <sv-form
+      v-model="showForm"
+      :form-init="formInit"
+      :form-mode="formMode"
+      @submit="submitForm"
+    ></sv-form>
   </view>
 </template>
 
@@ -40,7 +46,12 @@ import SvForm from './components/sv-form/sv-form.vue'
 import { RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
-import { permissionAdd, permissionDelete, permissionList, permissionUpdate } from '@/service/api/svid'
+import {
+  permissionAdd,
+  permissionDelete,
+  permissionList,
+  permissionUpdate
+} from '@/service/api/svid'
 import { storagePermissions } from '@/utils/pinia-storage'
 
 const tableData = ref([]) // 菜单表格
@@ -150,6 +161,8 @@ function del(item) {
   .header,
   .control {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .sv-pagination {
@@ -159,7 +172,7 @@ function del(item) {
   }
 }
 
-::v-deep .nopadding-cell {
+:deep(.nopadding-cell) {
   // 取消该单元格内边距
   padding: 0 !important;
 }

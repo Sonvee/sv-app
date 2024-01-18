@@ -2,9 +2,14 @@
   <view class="table-page-container">
     <!-- 表格头部控制栏 -->
     <view class="control">
-      <el-button type="primary" plain size="small" :icon="Plus" @click="addFirst">新增一级菜单</el-button>
-      <el-button type="primary" plain size="small" :icon="Sort" @click="toggleExpandAll">展开/折叠</el-button>
-      <el-button type="primary" plain size="small" :icon="RefreshRight" @click="refresh">刷新</el-button>
+      <el-button type="primary" plain size="small" :icon="Plus" @click="addFirst">
+        新增一级菜单
+      </el-button>
+      <el-button type="primary" plain size="small" :icon="Sort" @click="toggleExpandAll">
+        展开/折叠
+      </el-button>
+      <view style="flex: 1"></view>
+      <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
     <el-table
@@ -29,7 +34,12 @@
       <el-table-column prop="url" label="路径" show-overflow-tooltip :width="320" />
       <el-table-column prop="permission" label="权限" show-overflow-tooltip>
         <template #default="scope">
-          <el-tag v-for="item in scope.row.permission" :key="item" effect="plain" style="margin: 4px">
+          <el-tag
+            v-for="item in scope.row.permission"
+            :key="item"
+            effect="plain"
+            style="margin: 4px"
+          >
             {{ item }}
           </el-tag>
         </template>
@@ -60,7 +70,13 @@
           <el-button-group v-if="scope.row?.type !== 'static'">
             <el-button text size="small" :icon="Plus" @click="add(scope.row)">新增</el-button>
             <el-button text size="small" :icon="EditPen" @click="edit(scope.row)">编辑</el-button>
-            <el-button v-if="!scope.row?.children?.length > 0" text size="small" :icon="Delete" @click="del(scope.row)">
+            <el-button
+              v-if="!scope.row?.children?.length > 0"
+              text
+              size="small"
+              :icon="Delete"
+              @click="del(scope.row)"
+            >
               删除
             </el-button>
           </el-button-group>
@@ -68,7 +84,12 @@
       </el-table-column>
     </el-table>
     <!-- 表单抽屉弹窗 -->
-    <sv-form v-model="showForm" :form-init="formInit" :form-mode="formMode" @submit="submitForm"></sv-form>
+    <sv-form
+      v-model="showForm"
+      :form-init="formInit"
+      :form-mode="formMode"
+      @submit="submitForm"
+    ></sv-form>
   </view>
 </template>
 
@@ -215,6 +236,8 @@ function del(item) {
   .header,
   .control {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 </style>

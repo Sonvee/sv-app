@@ -1,6 +1,6 @@
 <template>
   <el-select
-    :class="['sv-nav-search', show ? 'stretch' : 'shrink']"
+    :class="['nav-search', show ? 'stretch' : 'shrink']"
     v-model="searchValue"
     filterable
     remote
@@ -58,7 +58,7 @@ defineExpose({
 </script>
 
 <style lang="scss">
-.sv-nav-search {
+.nav-search {
   width: 0;
   transition: width 0.8s;
 

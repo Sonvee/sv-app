@@ -1,6 +1,6 @@
 <template>
   <view class="sv-table-header">
-    <el-form class="sv-el-form" inline :model="filterForm">
+    <el-form class="sv-el-form" inline :model="filterForm" :size="size">
       <el-form-item label="字典ID/名称">
         <el-input v-model="filterForm.name" placeholder="请输入字典ID/名称" clearable />
       </el-form-item>
@@ -14,6 +14,13 @@
 
 <script setup>
 import { ref } from 'vue'
+
+const props = defineProps({
+  size: {
+    type: String,
+    default: 'small' // 'large' | 'default' | 'small'
+  }
+})
 
 const emits = defineEmits(['submit'])
 
@@ -45,7 +52,7 @@ function reset() {
     border-bottom: 1px solid #{getTheme('sv-border-color')};
   }
 
-  ::v-deep .el-form-item {
+  :deep(.el-form-item) {
     margin-bottom: 20px;
   }
 }

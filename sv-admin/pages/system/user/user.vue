@@ -1,15 +1,20 @@
 <template>
   <view class="table-page-container">
     <!-- 筛选栏 -->
-    <view class="header">
+    <view class="header" v-if="showHeader">
       <sv-table-header @submit="submitFilter"></sv-table-header>
     </view>
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
-      <el-button type="primary" plain size="small" :icon="RefreshRight" @click="refresh">
-        刷新
-      </el-button>
+      <view style="flex: 1"></view>
+      <el-button
+        type="primary"
+        link
+        :icon="showHeader ? View : Hide"
+        @click="showHeader = !showHeader"
+      ></el-button>
+      <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
@@ -110,6 +115,7 @@
         v-model:current-page="pagingParams.pagenum"
         v-model:page-size="pagingParams.pagesize"
         :page-sizes="[10, 20, 30, 40, 50]"
+        :pager-count="5"
         :total="total"
         small
         :layout="paginationLayout"
@@ -131,26 +137,37 @@
 import { computed, nextTick, ref } from 'vue'
 import SvTableHeader from './components/sv-table-header/sv-table-header.vue'
 import SvForm from './components/sv-form/sv-form.vue'
-import { UserFilled, RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-vue'
+import { View, Hide, RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { userAdd, userDelete, userList, userUpdate } from '@/service/api/svid'
 import { timeFormat } from '@/utils/util'
 import { getDictById } from '@/utils/sys'
 
+const showHeader = ref(false) // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const pagingParams = ref({ pagesize: 20, pagenum: 1 }) // 表格分页默认参数
 const total = ref(0) // 表格总数
-const paginationLayout = computed(() => {
-  return uni.getSystemInfoSync().deviceType == 'pc'
-    ? 'total, sizes, prev, pager, next, jumper'
-    : 'prev, pager, next, jumper'
-})
-
+const paginationLayout = ref('') // 分页项
 const filterParams = ref({}) // 筛选参数
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
 const formMode = ref('') // 表单模式 add / edit
+
+JudgeDeviceType()
+function JudgeDeviceType() {
+  const deviceType = uni.getSystemInfoSync().deviceType
+  switch (deviceType) {
+    case 'pc':
+      showHeader.value = true
+      paginationLayout.value = 'total, sizes, prev, pager, next, jumper'
+      break
+    default:
+      showHeader.value = false
+      paginationLayout.value = 'prev, pager, next, jumper'
+      break
+  }
+}
 
 // 初始获取表格数据
 handleTable(pagingParams.value)
@@ -288,6 +305,8 @@ function handleCurrentChange(e) {
   .header,
   .control {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .sv-table {
@@ -300,7 +319,7 @@ function handleCurrentChange(e) {
   }
 }
 
-::v-deep .nopadding-cell {
+:deep(.nopadding-cell) {
   // 取消该单元格内边距
   padding: 0 !important;
 }

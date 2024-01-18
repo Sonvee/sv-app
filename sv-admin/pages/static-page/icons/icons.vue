@@ -1,7 +1,7 @@
 <template>
   <view class="page-container static-icons-page">
     <view class="icons-page-container">
-      <sv-icon-list class="sv-icon-list" :colnum="appWidth"></sv-icon-list>
+      <sv-icon-list class="sv-icon-list" :colnum="colnum"></sv-icon-list>
     </view>
     <view class="help card" @click="toHelp">如何使用自定义图标</view>
   </view>
@@ -12,7 +12,7 @@ import { computed } from 'vue'
 import SvIconList from '@/components/sv-icon-select/sv-icon-list.vue'
 import adminConfig from '@/admin.config.js'
 
-const appWidth = computed(() => {
+const colnum = computed(() => {
   return uni.getSystemInfoSync().deviceType == 'pc' ? 7 : 3
 })
 

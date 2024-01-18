@@ -1,6 +1,6 @@
 <template>
   <view class="sv-table-header">
-    <el-form class="sv-el-form" inline :model="filterForm">
+    <el-form class="sv-el-form" inline :model="filterForm" :size="size">
       <el-form-item label="用户名/昵称">
         <el-input v-model="filterForm.name" placeholder="请输入用户名/昵称" clearable />
       </el-form-item>
@@ -49,6 +49,13 @@
 <script setup>
 import { ref } from 'vue'
 
+const props = defineProps({
+  size: {
+    type: String,
+    default: 'small' // 'large' | 'default' | 'small'
+  }
+})
+
 const emits = defineEmits(['submit'])
 
 // 过滤条件表单
@@ -95,7 +102,7 @@ function reset() {
     border-bottom: 1px solid #{getTheme('sv-border-color')};
   }
 
-  ::v-deep .el-form-item {
+  :deep(.el-form-item) {
     margin-bottom: 20px;
   }
 }

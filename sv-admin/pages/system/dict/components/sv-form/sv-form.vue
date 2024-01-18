@@ -20,7 +20,7 @@
             <el-input v-model="formData.dict_name" placeholder="请输入字典名称" clearable />
           </el-form-item>
           <el-form-item prop="dict" label="字典内容" required>
-            <sv-dynamic-input v-model:data="formData.dict"></sv-dynamic-input>
+            <sv-dynamic-input v-model:data="formData.dict" labelWidth="30px"></sv-dynamic-input>
           </el-form-item>
           <el-form-item prop="comment" label="备注">
             <el-input

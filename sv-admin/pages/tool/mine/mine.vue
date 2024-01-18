@@ -3,7 +3,12 @@
     <el-row :gutter="10">
       <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
         <view class="mine-row-1 card">
-          <el-avatar :size="100" shape="square" :src="authInfo?.avatar_file?.url" />
+          <el-avatar
+            class="sv-avatar"
+            :src="authInfo?.avatar_file?.url"
+            :size="86"
+            shape="square"
+          />
           <view class="content">
             <el-descriptions class="sv-el-descriptions" :column="2" size="small">
               <template #title>
@@ -18,23 +23,17 @@
                   编辑
                 </el-button>
               </template>
-              <el-descriptions-item label="昵称">{{ authInfo.nickname }}</el-descriptions-item>
+              <el-descriptions-item label="昵称">
+                {{ authInfo.nickname || '--' }}
+              </el-descriptions-item>
               <el-descriptions-item label="身份">
-                <el-tag
-                  v-for="(item, index) in authInfo.role"
-                  :key="item"
-                  :class="'sv-ml-gap-' + index"
-                  size="small"
-                  effect="plain"
-                >
-                  {{ item }}
-                </el-tag>
+                {{ authInfo.role?.toString() || '--' }}
               </el-descriptions-item>
               <el-descriptions-item label="IP地址">
-                {{ authInfo.last_login_ip }}
+                {{ authInfo.last_login_ip || '--' }}
               </el-descriptions-item>
               <el-descriptions-item label="登录时间">
-                {{ timeFormat(authInfo.last_login_date) }}
+                {{ timeFormat(authInfo.last_login_date) || '--' }}
               </el-descriptions-item>
             </el-descriptions>
           </view>
@@ -122,19 +121,23 @@ async function submitForm(e) {
 <style lang="scss">
 .page-container {
   .mine-row-1 {
-    height: 120px;
     padding: 10px;
     display: flex;
+    box-sizing: border-box;
+
+    .sv-avatar {
+      flex-shrink: 0;
+      margin-right: 12px;
+    }
 
     .content {
       flex-grow: 1;
       flex-shrink: 0;
-      margin-left: 12px;
     }
   }
 
   .mine-row-1 {
-    height: 120px;
+    height: 108px;
   }
 
   .mine-row-2 {
@@ -150,5 +153,12 @@ async function submitForm(e) {
 
 .el-col {
   margin-bottom: 10px;
+}
+
+// 移动端隐藏头像
+@media screen and (max-width: 768px) {
+  .sv-avatar {
+    display: none !important;
+  }
 }
 </style>

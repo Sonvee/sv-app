@@ -2,21 +2,19 @@
   <view class="table-page-container">
     <!-- 表格头部控制栏 -->
     <view class="control">
-      <el-button type="danger" plain size="small" :icon="Delete" @click="clear">清空</el-button>
-      <el-button type="primary" plain size="small" :icon="RefreshRight" @click="refresh">
-        刷新
-      </el-button>
-      <view class="placeholder"></view>
       <el-button type="primary" plain size="small" :icon="Refresh" @click="svidRefresh">
         更新svid缓存
       </el-button>
       <el-button type="primary" plain size="small" :icon="Refresh" @click="sysRefresh">
         更新sys缓存
       </el-button>
+      <el-button type="danger" plain size="small" :icon="Delete" @click="clear">清空</el-button>
+      <view style="flex: 1"></view>
+      <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
-      <el-table-column label="键名" :width="300">
+      <el-table-column label="键名" :min-width="300">
         <template #default="scope">
           {{ scope.row.key }}
           <el-tooltip effect="light" placement="right" content="复制">
@@ -30,7 +28,7 @@
           </el-tooltip>
         </template>
       </el-table-column>
-      <el-table-column label="键值详情">
+      <el-table-column label="键值详情" align="center" :min-width="100">
         <template #default="scope">
           <el-button type="primary" size="small" @click="onKeyDetail(scope.row.key)">
             查看详情
@@ -174,13 +172,11 @@ function del(item) {
 
 <style lang="scss">
 .table-page-container {
+  .header,
   .control {
     margin-bottom: 10px;
     display: flex;
-
-    .placeholder {
-      flex-grow: 1;
-    }
+    flex-wrap: wrap;
   }
 
   .sv-pagination {

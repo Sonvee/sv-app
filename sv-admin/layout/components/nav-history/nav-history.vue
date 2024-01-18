@@ -1,25 +1,27 @@
 <template>
   <view class="sv-nav-history">
-    <el-tag
-      class="sv-el-tag"
-      v-for="item in historyList"
-      :key="item.value"
-      :closable="item.url !== 'pages/index/index'"
-      :effect="curtag?.url == item.url ? 'dark' : 'plain'"
-      @close="removeTag(item)"
-      @click="onTag(item)"
-    >
-      {{ item.name }}
-    </el-tag>
-    <el-tag
-      class="sv-el-tag"
-      v-if="historyList.length > 1"
-      :closable="false"
-      effect="plain"
-      @click="onClearHistory"
-    >
-      <el-icon><Delete /></el-icon>
-    </el-tag>
+    <el-scrollbar ref="scrollbarRef" @wheel.prevent="handleScroll">
+      <view class="sv-nav-tags">
+        <el-tag
+          class="sv-el-tag"
+          v-for="item in historyList"
+          :key="item.value"
+          :closable="item.url !== 'pages/index/index'"
+          :effect="curtag?.url == item.url ? 'dark' : 'plain'"
+          @close="removeTag(item)"
+          @click="onTag(item)"
+        >
+          <view style="cursor: pointer">
+            {{ item.name }}
+          </view>
+        </el-tag>
+        <view class="history-clear" v-if="historyList.length > 1" @click="onClearHistory">
+          <el-tooltip content="清空记录" placement="right">
+            <el-icon><Delete /></el-icon>
+          </el-tooltip>
+        </view>
+      </view>
+    </el-scrollbar>
   </view>
 </template>
 
@@ -32,6 +34,13 @@ import { Delete } from '@element-plus/icons-vue'
 const route = useRoute()
 
 const navStore = useNavStore()
+
+// 横向滚动
+const scrollbarRef = ref()
+function handleScroll(e) {
+  const wheelDelta = e.wheelDelta || -e.deltaY * 40
+  scrollbarRef.value.setScrollLeft(scrollbarRef.value.wrapRef.scrollLeft - wheelDelta)
+}
 
 const historyList = ref([])
 
@@ -97,15 +106,41 @@ defineExpose({
 
 <style lang="scss">
 .sv-nav-history {
+  width: calc(100vw - #{$sv-side-bar-width} - 480px);
   padding: 0 6px;
-  display: flex;
-  align-items: flex-end;
-  column-gap: 4px;
-  max-width: 600px;
-  overflow-x: auto;
+  cursor: e-resize;
+
+  :deep(.el-scrollbar__bar.is-horizontal) {
+    display: none !important; // 隐藏横向滚动条
+  }
+
+  .sv-nav-tags {
+    display: flex;
+    column-gap: 6px;
+  }
+
+  .history-clear {
+    padding: 0 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    right: 0;
+    color: $uni-color-error;
+    cursor: pointer;
+
+    @include useTheme {
+      background-color: getTheme('sv-bg-color');
+    }
+
+    &:active {
+      color: $uni-color-danger;
+    }
+  }
 }
 
-@media screen and (max-width: 767px) {
+// 移动端隐藏历史记录栏
+@media screen and (max-width: 854px) {
   .sv-nav-history {
     display: none;
   }

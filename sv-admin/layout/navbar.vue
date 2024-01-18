@@ -13,15 +13,20 @@
         <!-- 历史记录 -->
         <nav-history ref="historyRef"></nav-history>
 
+        <!-- 移动端菜单列表按钮 -->
         <nav-btn-menu></nav-btn-menu>
+
+        <!-- 占位 -->
         <view class="flex-grow"></view>
 
         <!-- 工具栏 -->
-        <nav-search :show="showSearch" ref="searchRef"></nav-search>
-        <view class="sv-menu-icon" @click="globalSearch">
-          <el-tooltip effect="light" content="全局搜索" placement="bottom">
-            <view class="uni-icons-search icon-btn"></view>
-          </el-tooltip>
+        <view class="sv-menu-search">
+          <nav-search :show="showSearch" ref="searchRef"></nav-search>
+          <view class="sv-menu-icon" @click="globalSearch">
+            <el-tooltip effect="light" content="全局搜索" placement="bottom">
+              <view class="uni-icons-search icon-btn"></view>
+            </el-tooltip>
+          </view>
         </view>
         <view class="sv-menu-icon" @click="docUrl">
           <el-tooltip effect="light" content="文档地址" placement="bottom">
@@ -171,6 +176,7 @@ function openMenu() {}
       display: flex;
       align-items: center;
 
+      .sv-menu-search,
       .sv-menu-item,
       .sv-menu-icon {
         height: 100%;
@@ -213,8 +219,8 @@ function openMenu() {}
 
         &:hover {
           .icon-btn {
-            transition: transform 0.8s;
-            transform: rotate(360deg) scale(1.25);
+            transition: transform 0.3s;
+            transform: scale(1.2);
             @include useTheme {
               color: getTheme('sv-text-color');
             }
@@ -226,6 +232,13 @@ function openMenu() {}
         flex-grow: 1;
       }
     }
+  }
+}
+
+// 移动端隐藏搜索
+@media screen and (max-width: 854px) {
+  .sv-menu-search {
+    display: none !important;
   }
 }
 </style>

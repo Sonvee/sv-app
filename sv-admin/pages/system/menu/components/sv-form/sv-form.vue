@@ -35,7 +35,6 @@
             <sv-icon-select
               v-model="formData.icon"
               clearable
-              :pop-width="400"
               @selected="selectedIcon"
             ></sv-icon-select>
             <view class="tips" @click="toUniIcons">如何使用自定义图标？</view>

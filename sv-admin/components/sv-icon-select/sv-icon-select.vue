@@ -9,7 +9,7 @@
               内置图标
             </view>
           </template>
-          <sv-icon-list :height="popHeight" @selected="selected"></sv-icon-list>
+          <sv-icon-list :height="popHeight" @selected="selected" :colnum="colnum"></sv-icon-list>
         </el-popover>
       </template>
     </el-input>
@@ -17,20 +17,31 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import SvIconList from './sv-icon-list.vue'
 
-defineProps({
-  popWidth: {
-    type: [String, Number],
-    default: 300
-  },
-  popHeight: {
-    type: [String, Number],
-    default: 400
-  }
-})
-
 const emits = defineEmits(['selected'])
+
+const popWidth = ref(300)
+const popHeight = ref(200)
+const colnum = ref(3)
+
+JudgeDeviceType()
+function JudgeDeviceType() {
+  const deviceType = uni.getSystemInfoSync().deviceType
+  switch (deviceType) {
+    case 'pc':
+      popWidth.value = 400
+      popHeight.value = 400
+      colnum.value = 4
+      break
+    default:
+      popWidth.value = 300
+      popHeight.value = 200
+      colnum.value = 3
+      break
+  }
+}
 
 function selected(e) {
   emits('selected', e)

@@ -1,15 +1,20 @@
 <template>
   <view class="table-page-container">
     <!-- 筛选栏 -->
-    <view class="header">
+    <view class="header" v-if="showHeader">
       <sv-table-header @submit="submitFilter"></sv-table-header>
     </view>
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
-      <el-button type="primary" plain size="small" :icon="RefreshRight" @click="refresh">
-        刷新
-      </el-button>
+      <view style="flex: 1"></view>
+      <el-button
+        type="primary"
+        link
+        :icon="showHeader ? View : Hide"
+        @click="showHeader = !showHeader"
+      ></el-button>
+      <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
@@ -48,7 +53,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column prop="comment" label="备注" show-overflow-tooltip />
+      <el-table-column prop="comment" label="备注" :min-width="200" show-overflow-tooltip />
       <el-table-column
         prop="create_date"
         label="创建时间"
@@ -81,18 +86,40 @@
 <script setup>
 import { ref } from 'vue'
 import SvForm from './components/sv-form/sv-form.vue'
-import { RefreshRight, Plus, EditPen, Delete, DocumentCopy } from '@element-plus/icons-vue'
+import {
+  View,
+  Hide,
+  RefreshRight,
+  Plus,
+  EditPen,
+  Delete,
+  DocumentCopy
+} from '@element-plus/icons-vue'
 import SvTableHeader from './components/sv-table-header/sv-table-header.vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
 import { dictAdd, dictDelete, dictList, dictUpdate } from '@/service/api/sys'
 import { storageDicts } from '@/utils/pinia-storage'
 
+const showHeader = ref(false) // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
 const formMode = ref('') // 表单模式 add / edit
+
+JudgeDeviceType()
+function JudgeDeviceType() {
+  const deviceType = uni.getSystemInfoSync().deviceType
+  switch (deviceType) {
+    case 'pc':
+      showHeader.value = true
+      break
+    default:
+      showHeader.value = false
+      break
+  }
+}
 
 // 初始获取表格数据
 handleTable()
@@ -206,6 +233,8 @@ function copyDictId(dict_id) {
   .header,
   .control {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .sv-pagination {
@@ -215,7 +244,7 @@ function copyDictId(dict_id) {
   }
 }
 
-::v-deep .nopadding-cell {
+:deep(.nopadding-cell) {
   // 取消该单元格内边距
   padding: 0 !important;
 }

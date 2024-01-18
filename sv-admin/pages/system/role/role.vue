@@ -3,9 +3,8 @@
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
-      <el-button type="primary" plain size="small" :icon="RefreshRight" @click="refresh">
-        刷新
-      </el-button>
+      <view style="flex: 1"></view>
+      <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
@@ -170,6 +169,8 @@ function del(item) {
   .header,
   .control {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .sv-pagination {
@@ -179,7 +180,7 @@ function del(item) {
   }
 }
 
-::v-deep .nopadding-cell {
+:deep(.nopadding-cell) {
   // 取消该单元格内边距
   padding: 0 !important;
 }

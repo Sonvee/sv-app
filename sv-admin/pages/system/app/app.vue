@@ -3,11 +3,18 @@
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
-      <el-button type="primary" plain size="small" :icon="RefreshRight" @click="refresh">刷新</el-button>
+      <view style="flex: 1"></view>
+      <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
-      <el-table-column prop="icon_url" label="图标" align="center" class-name="nopadding-cell" :width="60">
+      <el-table-column
+        prop="icon_url"
+        label="图标"
+        align="center"
+        class-name="nopadding-cell"
+        :width="60"
+      >
         <template #default="scope">
           <image class="avatar-image" v-if="scope.row.icon_url" :src="scope.row.icon_url" />
         </template>
@@ -36,7 +43,12 @@
       </el-table-column>
     </el-table>
     <!-- 表单抽屉弹窗 -->
-    <sv-form v-model="showForm" :form-init="formInit" :form-mode="formMode" @submit="submitForm"></sv-form>
+    <sv-form
+      v-model="showForm"
+      :form-init="formInit"
+      :form-mode="formMode"
+      @submit="submitForm"
+    ></sv-form>
   </view>
 </template>
 
@@ -162,6 +174,8 @@ function del(item) {
   .header,
   .control {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .sv-pagination {
@@ -171,7 +185,7 @@ function del(item) {
   }
 }
 
-::v-deep .nopadding-cell {
+:deep(.nopadding-cell) {
   // 取消该单元格内边距
   padding: 0 !important;
 }

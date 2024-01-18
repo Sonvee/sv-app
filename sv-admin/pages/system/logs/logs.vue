@@ -2,9 +2,8 @@
   <view class="table-page-container">
     <!-- 表格头部控制栏 -->
     <view class="control">
-      <el-button type="primary" plain size="small" :icon="RefreshRight" @click="refresh">
-        刷新
-      </el-button>
+      <view style="flex: 1"></view>
+      <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
@@ -55,6 +54,7 @@
         v-model:current-page="pagingParams.pagenum"
         v-model:page-size="pagingParams.pagesize"
         :page-sizes="[10, 20, 30, 40, 50]"
+        :pager-count="5"
         :total="total"
         small
         :layout="paginationLayout"
@@ -66,22 +66,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { RefreshRight } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
 import { logList } from '@/service/api/svid'
-import { computed } from '@vue/reactivity'
 
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const pagingParams = ref({ pagesize: 20, pagenum: 1 }) // 表格分页默认参数
 const total = ref(0) // 表格总数
-const paginationLayout = computed(() => {
-  return uni.getSystemInfoSync().deviceType == 'pc'
-    ? 'total, sizes, prev, pager, next, jumper'
-    : 'prev, pager, next, jumper'
-})
+const paginationLayout = ref('') // 分页项
+
+JudgeDeviceType()
+function JudgeDeviceType() {
+  const deviceType = uni.getSystemInfoSync().deviceType
+  switch (deviceType) {
+    case 'pc':
+      paginationLayout.value = 'total, sizes, prev, pager, next, jumper'
+      break
+    default:
+      paginationLayout.value = 'prev, pager, next, jumper'
+      break
+  }
+}
 
 // 初始获取表格数据
 handleTable(pagingParams.value)
@@ -125,16 +133,19 @@ function handleCurrentChange(e) {
   .header,
   .control {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .sv-pagination {
+    width: 100%;
     padding: 10px 0;
     display: flex;
     justify-content: flex-end;
   }
 }
 
-::v-deep .nopadding-cell {
+:deep(.nopadding-cell) {
   // 取消该单元格内边距
   padding: 0 !important;
 }

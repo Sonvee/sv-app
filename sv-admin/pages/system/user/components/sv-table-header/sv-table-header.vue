@@ -7,6 +7,16 @@
       <el-form-item label="用户名/昵称">
         <el-input v-model="filterForm.name" placeholder="请输入用户名/昵称" clearable />
       </el-form-item>
+      <el-form-item label="角色">
+        <el-select class="sv-el-select" v-model="filterForm.role" placeholder="选择角色" clearable>
+          <el-option
+            v-for="item in roleList"
+            :key="item.role_id"
+            :label="item.role_name"
+            :value="item.role_id"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item label="账号类型">
         <el-select
           class="sv-el-select"
@@ -15,10 +25,10 @@
           clearable
         >
           <el-option
+            v-for="item in platformList"
+            :key="item.value"
             :label="item.label"
             :value="item.value"
-            v-for="item in platformList"
-            :key="item"
           />
         </el-select>
       </el-form-item>
@@ -32,6 +42,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useSvidStore } from '@/store/svid'
 
 const props = defineProps({
   size: {
@@ -46,8 +57,12 @@ const emits = defineEmits(['submit'])
 const filterForm = ref({
   _id: '',
   name: '',
-  platform: ''
+  platform: '',
+  role: []
 })
+
+// 停启用状态选择器
+const roleList = useSvidStore().getRoles()
 
 // 停启用状态选择器
 const platformList = [

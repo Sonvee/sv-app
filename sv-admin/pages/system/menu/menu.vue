@@ -31,8 +31,8 @@
         </template>
       </el-table-column>
       <el-table-column sortable prop="sort" label="序号" :width="100" />
-      <el-table-column prop="url" label="路径" show-overflow-tooltip :width="320" />
-      <el-table-column prop="permission" label="权限" show-overflow-tooltip>
+      <el-table-column prop="url" label="路径" show-overflow-tooltip :width="420" />
+      <el-table-column prop="permission" label="权限" :min-width="120" show-overflow-tooltip>
         <template #default="scope">
           <el-tag
             v-for="item in scope.row.permission"

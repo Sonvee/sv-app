@@ -1,33 +1,49 @@
 import { importToJson, exportToExcel } from '@/uni_modules/sv-excel-json-each/jssdk/parseExcel.js'
 
-// 日志导出
+/**
+ * 
+ */
+
+function logFileFormat() {
+
+}
+
+/**
+ * 日志导出
+ * @param {Object} dataSource 接口原数据
+ */
 export function logExport(dataSource) {
   console.log('logExport', dataSource)
 
   const data = [{
-      id: '1',
-      name: 'test'
+      uid: '1',
+      nickname: '昵称1'
     },
     {
-      id: '3',
-      name: 'hello3'
+      uid: '2',
+      nickname: '昵称2'
     }
   ]
   exportToExcel({
     params: {
       data,
-      title: 'hello test',
-      mapping: { name: '姓名' },
+      title: 'logs',
+      mapping: {
+        uid: "用户id",
+        nickname: '用户昵称'
+      },
       type: 'file',
-      merges: [{ start: [0, 1], end: [0, 4] }]
+      // merges: [{ start: [0, 1], end: [0, 4] }]
     },
     autoDownload: true,
-    fileName: 'hello world'
   }).then((res) => {
     console.log('onExport ===>', res)
   })
 }
 
+/**
+ * 导入
+ */
 export function logImport() {
   let sheetList = [{
       index: 0,

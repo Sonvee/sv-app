@@ -1,9 +1,0 @@
-{
-  "name": "getJsonToExcel",
-  "dependencies": {
-    "ml-excel-to-json": "file:../common/ml-excel-to-json"
-  },
-  "extensions": {
-    "uni-cloud-jql": {}
-  }
-}

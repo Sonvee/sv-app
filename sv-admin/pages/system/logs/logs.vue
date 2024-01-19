@@ -74,7 +74,7 @@ import { ref, computed } from 'vue'
 import { RefreshRight, Upload, Download } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
-import { logExport } from '@/utils/file'
+import { logExport, logImport } from '@/utils/file'
 import { logList } from '@/service/api/svid'
 
 const tableData = ref([]) // 菜单表格
@@ -133,7 +133,9 @@ function handleCurrentChange(e) {
 }
 
 // 导入
-function onImport() {}
+function onImport() {
+  logImport()
+}
 // 导出
 async function onExport() {
   const dataRes = await logList(pagingParams.value)

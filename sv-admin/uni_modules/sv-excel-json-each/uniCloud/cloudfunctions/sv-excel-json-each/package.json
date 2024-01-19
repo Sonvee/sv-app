@@ -1,0 +1,7 @@
+{
+  "name": "sv-excel-json-each",
+  "dependencies": {
+    "sv-excel-json-hander": "file:../common/sv-excel-json-hander"
+  },
+  "extensions": {}
+}

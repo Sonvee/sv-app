@@ -56,6 +56,14 @@ export function appAdd(data) {
   })
 }
 
+export function appAddList(data) {
+  return request({
+    url: '/sys/appAddList',
+    method: 'POST',
+    data
+  })
+}
+
 export function appDelete(data) {
   return request({
     url: '/sys/appDelete',

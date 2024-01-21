@@ -10,6 +10,7 @@ const {
 const {
   appList,
   appAdd,
+  appAddList,
   appDelete,
   appUpdate
 } = require('./module/app/index.js')
@@ -66,6 +67,7 @@ module.exports = {
    */
   appList,
   appAdd,
+  appAddList,
   appDelete,
   appUpdate,
 

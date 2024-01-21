@@ -3,6 +3,10 @@
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
+      <el-button type="primary" plain size="small" :icon="Download" @click="onImport">
+        导入
+      </el-button>
+      <el-button type="primary" plain size="small" :icon="Upload" @click="onExport">导出</el-button>
       <view style="flex: 1"></view>
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
@@ -21,8 +25,13 @@
       </el-table-column>
       <el-table-column prop="appid" label="应用ID" :width="160" />
       <el-table-column prop="name" label="应用名称" :width="160" />
-      <el-table-column prop="description" label="应用描述" show-overflow-tooltip />
-      <el-table-column prop="introduction" label="应用简介" show-overflow-tooltip />
+      <el-table-column prop="description" label="应用描述" :min-width="240" show-overflow-tooltip />
+      <el-table-column
+        prop="introduction"
+        label="应用简介"
+        :min-width="240"
+        show-overflow-tooltip
+      />
       <el-table-column
         prop="create_date"
         label="创建时间"
@@ -55,11 +64,12 @@
 <script setup>
 import { ref } from 'vue'
 import SvForm from './components/sv-form/sv-form.vue'
-import { RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-vue'
+import { RefreshRight, Plus, EditPen, Delete, Upload, Download } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
 import { appAdd, appDelete, appList, appUpdate } from '@/service/api/sys'
 import { storageApps } from '@/utils/pinia-storage'
+import { appExport, appImport } from '@/utils/file'
 
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
@@ -166,6 +176,23 @@ function del(item) {
       refresh()
     })
     .catch(() => {})
+}
+
+// 导入
+async function onImport() {
+  appImport((res) => {
+    ElMessage({
+      type: res.code == 200 ? 'success' : 'warning',
+      message: res.message
+    })
+    refresh()
+  })
+}
+
+// 导出
+async function onExport() {
+  const dataRes = await appList()
+  appExport(dataRes.data)
 }
 </script>
 

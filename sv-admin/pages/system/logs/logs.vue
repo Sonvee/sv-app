@@ -2,9 +2,6 @@
   <view class="table-page-container">
     <!-- 表格头部控制栏 -->
     <view class="control">
-      <el-button type="primary" plain size="small" :icon="Download" @click="onImport">
-        导入
-      </el-button>
       <el-button type="primary" plain size="small" :icon="Upload" @click="onExport">导出</el-button>
       <view style="flex: 1"></view>
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
@@ -43,7 +40,7 @@
       />
       <el-table-column
         prop="create_date"
-        label="创建时间"
+        label="操作时间"
         :formatter="(row) => timeFormat(row.create_date)"
         align="center"
         :width="180"
@@ -74,7 +71,7 @@ import { ref, computed } from 'vue'
 import { RefreshRight, Upload, Download } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
-import { logExport, logImport } from '@/utils/file'
+import { logExport } from '@/utils/file'
 import { logList } from '@/service/api/svid'
 
 const tableData = ref([]) // 菜单表格
@@ -132,10 +129,6 @@ function handleCurrentChange(e) {
   handleTable(pagingParams.value)
 }
 
-// 导入
-function onImport() {
-  logImport()
-}
 // 导出
 async function onExport() {
   const dataRes = await logList(pagingParams.value)

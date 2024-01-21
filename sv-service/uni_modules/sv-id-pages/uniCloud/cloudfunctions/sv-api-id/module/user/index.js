@@ -81,7 +81,7 @@ module.exports = {
     }
 
     if (role && role.length > 0) {
-      conditions.role = dbCmd.in(role)
+      conditions.role = dbCmd.in([role])
     }
 
     // 将所有有效的筛选条件添加到查询对象中
@@ -125,7 +125,7 @@ module.exports = {
 
     if (role) {
       conditions.push({
-        "role": dbCmd.in(role)
+        "role": dbCmd.in([role])
       })
     }
 

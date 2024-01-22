@@ -180,9 +180,21 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1600px) {
   .sv-el-drawer {
     width: 40% !important;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .sv-el-drawer {
+    width: 60% !important;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .sv-el-drawer {
+    width: 80% !important;
   }
 }
 

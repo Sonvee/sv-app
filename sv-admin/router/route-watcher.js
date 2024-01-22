@@ -1,4 +1,5 @@
 import adminConfig from '@/admin.config.js'
+import { isEmpty } from 'lodash-es';
 
 /**
  * 路由鉴权规则：
@@ -48,10 +49,15 @@ export function routeWatcher(route) {
     return
   }
 
-  const {
-    role,
-    permission
-  } = uniCloud.getCurrentUserInfo()
+  const { role, permission } = uniCloud.getCurrentUserInfo()
+
+  if (isEmpty(role) && route.path !== adminConfig.login.url) {
+    // 角色丢失，需要重新登录，重定向至登录页
+    uni.redirectTo({
+      url: adminConfig.login.url
+    })
+    return
+  }
 
   // 路由鉴权
   if (role.includes('admin')) {

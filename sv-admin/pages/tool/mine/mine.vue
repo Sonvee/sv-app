@@ -3,12 +3,7 @@
     <el-row :gutter="10">
       <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
         <view class="mine-row-1 card">
-          <el-avatar
-            class="sv-avatar"
-            :src="authInfo?.avatar_file?.url"
-            :size="86"
-            shape="square"
-          />
+          <el-avatar class="sv-avatar" :src="authInfo?.avatar_file?.url" :size="86" shape="square" />
           <view class="content">
             <el-descriptions class="sv-el-descriptions" :column="2" size="small">
               <template #title>
@@ -19,9 +14,7 @@
               </template>
               <template #extra>
                 <el-button link size="small" :icon="RefreshRight" @click="refresh">刷新</el-button>
-                <el-button link size="small" :icon="EditPen" @click="edit(authInfo)">
-                  编辑
-                </el-button>
+                <el-button link size="small" :icon="EditPen" @click="edit(authInfo)">编辑</el-button>
               </template>
               <el-descriptions-item label="昵称">
                 {{ authInfo.nickname || '--' }}
@@ -65,21 +58,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, compute } from 'vue'
 import { getNowTimeName, timeFormat } from '@/utils/util'
 import { User, RefreshRight, EditPen } from '@element-plus/icons-vue'
-import { getAuthFromCache } from '@/utils/sys'
 import SvForm from './components/sv-form/sv-form.vue'
 import { userUpdate } from '@/service/api/svid'
 import { ElNotification } from 'element-plus'
 import { storageAuth } from '@/utils/pinia-storage'
 
-const authInfo = ref({})
-
-async function handleCache() {
-  authInfo.value = await getAuthFromCache()
-}
-handleCache()
+const authInfo = compute(() => getApp().$svIdPagesStore.store.userInfo)
 
 function refresh() {
   handleCache()

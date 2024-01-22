@@ -1,13 +1,22 @@
 <template>
   <view class="page-container forbidden-page">
     <view data-glitch="403 Forbidden" class="glitch-text text-403">403 Forbidden</view>
-    <view data-glitch="GO BACK" class="glitch-btn btn-back" @click="goback">GO BACK</view>
+    <view class="btns">
+      <view data-glitch="GO BACK" class="glitch-btn" @click="goback">GO BACK</view>
+      <view data-glitch="GO HOME" class="glitch-btn btn-home" @click="gohome">GO HOME</view>
+    </view>
   </view>
 </template>
 
 <script setup>
 function goback() {
   uni.navigateBack()
+}
+
+function gohome() {
+  uni.navigateTo({
+    url: '/pages/index/index'
+  })
 }
 </script>
 
@@ -22,8 +31,15 @@ function goback() {
     font-size: 60rpx;
   }
 
-  .btn-back {
+  .btns {
+    display: flex;
+    column-gap: 80rpx;
     margin-top: 48rpx;
+  }
+
+  .btn-home {
+    box-shadow: 6px 0px 0px #ff5e59 !important;
+    background: linear-gradient(45deg, transparent 5%, #007aff 5%) !important;
   }
 }
 

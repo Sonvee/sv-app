@@ -179,5 +179,17 @@ export default [
   'sv-icons-gitee',
   'sv-icons-github',
   'sv-icons-tool',
-  'sv-icons-tool-fill'
+  'sv-icons-tool-fill',
+  'sv-icons-word',
+  'sv-icons-word-fill',
+  'sv-icons-ppt-fill',
+  'sv-icons-ppt',
+  'sv-icons-excel-fill',
+  'sv-icons-excel',
+  'sv-icons-txt',
+  'sv-icons-txt-fill',
+  'sv-icons-pdf-fill',
+  'sv-icons-pdf',
+  'sv-icons-json',
+  'sv-icons-json-fill',
 ]

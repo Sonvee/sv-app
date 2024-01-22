@@ -3,22 +3,18 @@
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
-      <el-button type="primary" plain size="small" :icon="Download" @click="onImport">
-        导入
-      </el-button>
-      <el-button type="primary" plain size="small" :icon="Upload" @click="onExport">导出</el-button>
       <view style="flex: 1"></view>
+      <sv-excel-menu
+        type="app"
+        :menu="['downloadTemplate', 'noCoverImport', 'coverImport', 'allPageExport']"
+        @noCoverImport="importOver"
+        @coverImport="importOver"
+      ></sv-excel-menu>
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
-      <el-table-column
-        prop="icon_url"
-        label="图标"
-        align="center"
-        class-name="nopadding-cell"
-        :width="60"
-      >
+      <el-table-column prop="icon_url" label="图标" align="center" class-name="nopadding-cell" :width="60">
         <template #default="scope">
           <image class="avatar-image" v-if="scope.row.icon_url" :src="scope.row.icon_url" />
         </template>
@@ -26,12 +22,7 @@
       <el-table-column prop="appid" label="应用ID" :width="160" />
       <el-table-column prop="name" label="应用名称" :width="160" />
       <el-table-column prop="description" label="应用描述" :min-width="240" show-overflow-tooltip />
-      <el-table-column
-        prop="introduction"
-        label="应用简介"
-        :min-width="240"
-        show-overflow-tooltip
-      />
+      <el-table-column prop="introduction" label="应用简介" :min-width="240" show-overflow-tooltip />
       <el-table-column
         prop="create_date"
         label="创建时间"
@@ -52,24 +43,18 @@
       </el-table-column>
     </el-table>
     <!-- 表单抽屉弹窗 -->
-    <sv-form
-      v-model="showForm"
-      :form-init="formInit"
-      :form-mode="formMode"
-      @submit="submitForm"
-    ></sv-form>
+    <sv-form v-model="showForm" :form-init="formInit" :form-mode="formMode" @submit="submitForm"></sv-form>
   </view>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import SvForm from './components/sv-form/sv-form.vue'
-import { RefreshRight, Plus, EditPen, Delete, Upload, Download } from '@element-plus/icons-vue'
+import { RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
 import { appAdd, appDelete, appList, appUpdate } from '@/service/api/sys'
 import { storageApps } from '@/utils/pinia-storage'
-import { appExport, appImport } from '@/utils/file'
 
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
@@ -179,20 +164,12 @@ function del(item) {
 }
 
 // 导入
-async function onImport() {
-  appImport((res) => {
-    ElMessage({
-      type: res.code == 200 ? 'success' : 'warning',
-      message: res.message
-    })
-    refresh()
+function importOver(res) {
+  ElMessage({
+    type: res.code == 200 ? 'success' : 'warning',
+    message: res.message
   })
-}
-
-// 导出
-async function onExport() {
-  const dataRes = await appList()
-  appExport(dataRes.data)
+  refresh()
 }
 </script>
 

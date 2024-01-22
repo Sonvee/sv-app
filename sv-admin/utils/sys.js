@@ -2,7 +2,7 @@ import adminConfig from '@/admin.config.js'
 import { appList, dictList, menuList } from '@/service/api/sys.js'
 import { cloneDeep, concat, flatMap, isEmpty, omit } from 'lodash-es'
 import { useSysStore } from '@/store/sys'
-import { storageAuth, storageDicts, } from './pinia-storage'
+import { storageDicts, } from './pinia-storage'
 import { permissionList, roleList } from '@/service/api/svid'
 import { useSvidStore } from '@/store/svid'
 
@@ -225,21 +225,6 @@ export async function getPermissionFromCache() {
     result = res.data || []
     // 存入本地缓存，下次直接读取，节约服务器资源
     svidStore.setPermissions(res.data)
-  }
-  return result
-}
-
-/**
- * 获取账号缓存数据 - 本地与服务端结合版
- */
-export async function getAuthFromCache() {
-  // 默认从本地缓存中取
-  const svidStore = useSvidStore()
-  let result = svidStore.getAuth()
-  if (isEmpty(result)) {
-    // 缓存丢失，从服务器获取
-    await storageAuth()
-    result = svidStore.getAuth()
   }
   return result
 }

@@ -16,10 +16,9 @@ export default {
   },
   watch: {
     $route: {
-      // immediate: true,
       deep: true,
-      handler(newVal, oldVal) {
-        // 全局监听路由
+      handler(newVal) {
+        // 挂载全局路由监听者
         routeWatcher(newVal)
       }
     }

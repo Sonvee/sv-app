@@ -6,21 +6,6 @@ import {
 } from 'vue'
 
 export const useSvidStore = defineStore('svid', () => {
-  // 当前登录用户
-  const auth = ref({})
-
-  function setAuth(user) {
-    auth.value = user
-  }
-
-  function getAuth() {
-    return auth.value
-  }
-
-  function clearAuth() {
-    auth.value = {}
-  }
-
   // 角色
   const roles = ref([])
 
@@ -52,11 +37,6 @@ export const useSvidStore = defineStore('svid', () => {
   }
 
   return {
-    auth,
-    setAuth,
-    getAuth,
-    clearAuth,
-
     roles,
     setRoles,
     getRoles,

@@ -27,7 +27,7 @@
 <script setup>
 import { ref } from 'vue'
 import { Search } from '@element-plus/icons-vue'
-import icons from './uni-icons.js'
+import icons from './icons.js'
 
 const props = defineProps({
   colnum: {

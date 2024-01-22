@@ -31,6 +31,16 @@
     }
   ],
   "subPackages": [{
+      "root": "pages/business",
+      "pages": [{
+        "path": "business1/business1",
+        "style": {
+          "navigationBarTitleText": "业务模块一",
+          "enablePullDownRefresh": false
+        }
+      }]
+    },
+    {
       "root": "pages/system",
       "pages": [{
           "path": "user/user",

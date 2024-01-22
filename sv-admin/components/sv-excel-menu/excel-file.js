@@ -1,11 +1,61 @@
 import { importToJson, exportToExcel } from '@/uni_modules/sv-excel-json-each/jssdk/parseExcel.js'
 import { dayjs } from 'element-plus'
-import { appAddList } from '../service/api/sys';
+import { appAddList, appList } from '@/service/api/sys';
+import { logList } from '@/service/api/svid';
 
 /**
- * 键名转换 - 中->英
+ * Excel模板下载
+ * @param {string} type 模板类型
+ */
+export function fileTemplate(type) {
+  switch (type) {
+    case 'app':
+      appTemplate()
+      break
+  }
+}
+
+/**
+ * Excel文件导入
+ * @param {string} type 文件类型
+ * @param {boolean} cover 是否覆盖 默认否
+ * @param {Function} callback 回调函数 参数：请求apiAddList返回结果res
+ */
+export function fileImport(type, cover = false, callback) {
+  switch (type) {
+    case 'app':
+      appImport(cover, (res) => {
+        if (callback) callback(res)
+      })
+      break
+  }
+}
+
+/**
+ * Excel文件导出
+ * @param {string} type 文件类型
+ * @param {boolean} all 导出当页还是全部 默认当页
+ * @param {Object} params 导出接口参数，用于请求数据
+ */
+export function fileExport(type, all = false, params, callback) {
+  if (all) params.pagesize = -1
+  console.log('==== fileExport :', type, all, params);
+  switch (type) {
+    case 'logs':
+      logExport(params)
+      break
+    case 'app':
+      appExport(params)
+      break
+  }
+  if (callback) callback()
+}
+
+
+/**
+ * 键名转换 - 中->英 - 暂时弃用
  * @param {Object} data 导入表的原始数据
- * @param {Object} keyMap 表mapping
+ * @param {Object} keyMap mapping映射表
  */
 function replaceMapKey(data, keyMap) {
   return data.map(item => {
@@ -21,9 +71,10 @@ function replaceMapKey(data, keyMap) {
   });
 }
 
+
+
 /**
  * 日志导出
- * @param {Object} data 接口原数据
  */
 const logMapping = {
   uid: '用户ID',
@@ -36,8 +87,10 @@ const logMapping = {
   userAgent: 'userAgent',
   create_date: '操作时间',
 }
-export function logExport(data) {
-  const handleData = data.map((item) => {
+
+async function logExport(params) {
+  const dataRes = await logList(params)
+  const handleData = dataRes.data?.map((item) => {
     return {
       uid: item.user_id && item.user_id[0]?._id,
       nickname: item.user_id && item.user_id[0]?.nickname,
@@ -60,7 +113,7 @@ export function logExport(data) {
     },
     autoDownload: true,
   }).then((res) => {
-    console.log('onExport ===>', res)
+    // console.log('onExport ===>', res)
   })
 }
 
@@ -76,8 +129,10 @@ const appMapping = {
   introduction: '应用简介',
   create_date: '创建时间',
 }
-export function appExport(data) {
-  const handleData = data.map((item) => {
+
+async function appExport(params) {
+  const dataRes = await appList(params)
+  const handleData = dataRes.data?.map((item) => {
     return {
       icon_url: item.icon_url,
       appid: item.appid,
@@ -97,14 +152,14 @@ export function appExport(data) {
     },
     autoDownload: true,
   }).then((res) => {
-    console.log('onExport ===>', res)
+    // console.log('onExport ===>', res)
   })
 }
 
 /**
  * 应用导入
  */
-export async function appImport(callback) {
+async function appImport(cover, callback) {
   let sheetList = [{ index: 0 }, { index: 1 }]
   const toJsonRes = await importToJson(sheetList)
   const dataRes = toJsonRes.data.data || []
@@ -119,6 +174,32 @@ export async function appImport(callback) {
       create_date: dayjs(item['创建时间']).valueOf(),
     }
   })
-  const importRes = await appAddList({ data: handleData, cover: false })
+  console.table(toJsonRes.data);
+  console.table(handleData);
+  const importRes = await appAddList({ data: handleData, cover })
   if (callback) callback(importRes)
+}
+
+/**
+ * 应用模板
+ */
+async function appTemplate() {
+  exportToExcel({
+    params: {
+      data: [{
+        icon_url: 'https://....',
+        appid: '__UNI__80B7BFB',
+        name: '应用名称样例',
+        description: '应用描述样例',
+        introduction: '应用简介样例',
+        create_date: '2024-01-22 13:35:00',
+      }], // 若空数据数组，需要有个空对象
+      title: 'app',
+      mapping: appMapping,
+      type: 'file',
+    },
+    autoDownload: true,
+  }).then((res) => {
+    // console.log('onExport ===>', res)
+  })
 }

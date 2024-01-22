@@ -20,6 +20,11 @@
 
 uni-page-body {
   height: 100%;
+
+  @include useTheme {
+    background-color: getTheme('sv-bg-color');
+    color: getTheme('sv-text-color');
+  }
 }
 
 a {
@@ -33,10 +38,6 @@ a {
   box-sizing: border-box;
   position: relative;
   overflow: auto;
-  @include useTheme {
-    background-color: getTheme('sv-bg-color');
-    color: getTheme('sv-text-color');
-  }
 }
 
 .table-page-container {
@@ -48,10 +49,6 @@ a {
   flex-direction: column;
   position: relative;
   overflow: auto;
-  @include useTheme {
-    background-color: getTheme('sv-bg-color');
-    color: getTheme('sv-text-color');
-  }
 }
 
 .flex {

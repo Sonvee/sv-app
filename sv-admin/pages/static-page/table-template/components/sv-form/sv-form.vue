@@ -36,12 +36,7 @@
             <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
           </el-form-item>
           <el-form-item prop="age" label="年龄">
-            <el-input-number
-              class="sv-el-input-number"
-              v-model="formData.age"
-              :min="0"
-              :max="100"
-            />
+            <el-input-number class="sv-el-input-number" v-model="formData.age" :min="0" :max="100" />
           </el-form-item>
           <el-form-item prop="gender" label="性别">
             <el-radio-group v-model="formData.gender">
@@ -68,12 +63,7 @@
           </el-form-item>
           <el-form-item prop="status" label="状态">
             <el-select v-model="formData.status" placeholder="状态">
-              <el-option
-                v-for="item in statusList"
-                :key="item.value"
-                :label="item.text"
-                :value="item.value"
-              />
+              <el-option v-for="item in statusList" :key="item.value" :label="item.text" :value="item.value" />
             </el-select>
           </el-form-item>
           <el-form-item prop="forbidden" label="封禁">
@@ -93,6 +83,11 @@
               :pop-width="400"
               @selected="selectedIcon"
             ></sv-icon-select>
+          </el-form-item>
+          <el-form-item prop="rich-text" label="富文本">
+            <view style="width: 100%; height: 800px; background-color: #66ccff33">
+              <sp-editor></sp-editor>
+            </view>
           </el-form-item>
         </el-form>
       </view>
@@ -238,5 +233,4 @@ function selectedIcon(icon) {
   width: 100%;
   height: 100%;
 }
-
 </style>

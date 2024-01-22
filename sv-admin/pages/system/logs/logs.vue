@@ -2,19 +2,18 @@
   <view class="table-page-container">
     <!-- 表格头部控制栏 -->
     <view class="control">
-      <el-button type="primary" plain size="small" :icon="Upload" @click="onExport">导出</el-button>
       <view style="flex: 1"></view>
+      <sv-excel-menu
+        type="logs"
+        :menu="['curPageExport', 'allPageExport']"
+        :exportParams="pagingParams"
+      ></sv-excel-menu>
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
       <el-table-column prop="user_id[0]._id" label="用户ID" :width="240" show-overflow-tooltip />
-      <el-table-column
-        prop="user_id[0].nickname"
-        label="用户昵称"
-        :width="160"
-        show-overflow-tooltip
-      />
+      <el-table-column prop="user_id[0].nickname" label="用户昵称" :width="160" show-overflow-tooltip />
       <el-table-column prop="ip" label="IP地址" :width="150" />
       <el-table-column prop="appid" label="登录客户端" :width="150" align="center" />
       <el-table-column prop="type" label="操作类型" :width="120" />
@@ -31,13 +30,7 @@
         :filter-method="(value, row) => row.state == value"
       />
       <el-table-column prop="device_id" label="唯一设备标识" :width="200" show-overflow-tooltip />
-      <el-table-column
-        prop="ua"
-        label="userAgent"
-        :min-width="200"
-        align="center"
-        show-overflow-tooltip
-      />
+      <el-table-column prop="ua" label="userAgent" :min-width="200" align="center" show-overflow-tooltip />
       <el-table-column
         prop="create_date"
         label="操作时间"
@@ -67,11 +60,10 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { RefreshRight, Upload, Download } from '@element-plus/icons-vue'
+import { ref } from 'vue'
+import { RefreshRight } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
-import { logExport } from '@/utils/file'
 import { logList } from '@/service/api/svid'
 
 const tableData = ref([]) // 菜单表格
@@ -127,13 +119,6 @@ function handleSizeChange(e) {
 function handleCurrentChange(e) {
   pagingParams.value.pagenum = e
   handleTable(pagingParams.value)
-}
-
-// 导出
-async function onExport() {
-  const dataRes = await logList(pagingParams.value)
-  const dataSource = dataRes.data
-  logExport(dataSource)
 }
 </script>
 

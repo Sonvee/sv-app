@@ -4,12 +4,6 @@ import { useNavStore } from '@/store/nav'
 import { permissionList, roleList } from '@/service/api/svid.js'
 import { appList, dictList } from '@/service/api/sys'
 
-export async function storageAuth() {
-  const svidStore = useSvidStore()
-  const auth = getApp().$svIdPagesStore.store.userInfo
-  svidStore.setAuth(auth)
-}
-
 export async function storagePermissions() {
   const svidStore = useSvidStore()
   const permissionRes = await permissionList()
@@ -39,7 +33,6 @@ export async function storageDicts() {
  */
 export function refreshSvidStorage() {
   return Promise.all([
-    storageAuth(),
     storageRoles(),
     storagePermissions()
   ])
@@ -54,7 +47,6 @@ export function refreshSysStorage() {
 
 export function refreshPiniaStorage() {
   return Promise.all([
-    storageAuth(),
     storageRoles(),
     storagePermissions(),
     storageApps(),
@@ -67,7 +59,6 @@ export function refreshPiniaStorage() {
  */
 export function clearSvidStorage() {
   const svidStore = useSvidStore()
-  svidStore.clearAuth()
   svidStore.clearRoles()
   svidStore.clearPermissions()
 }

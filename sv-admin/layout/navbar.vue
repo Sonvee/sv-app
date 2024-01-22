@@ -38,11 +38,7 @@
             <view class="sv-icons-skin icon-btn"></view>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item
-                  v-for="item in adminConfig.navBar.themes"
-                  :key="item.value"
-                  :command="item.value"
-                >
+                <el-dropdown-item v-for="item in adminConfig.navBar.themes" :key="item.value" :command="item.value">
                   {{ item.text }}
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -59,11 +55,7 @@
         <view class="sv-menu-item">
           <el-dropdown trigger="click" placement="bottom-end" @command="handleCommand">
             <span class="flex-vc">
-              <el-avatar
-                v-if="authInfo?.avatar_file?.url"
-                :src="authInfo?.avatar_file?.url"
-                :size="36"
-              />
+              <el-avatar v-if="authInfo?.avatar_file?.url" :src="authInfo?.avatar_file?.url" :size="36" />
               <view class="authname">{{ authInfo?.nickname }}</view>
             </span>
             <template #dropdown>
@@ -80,14 +72,14 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import NavLogo from './components/nav-logo/nav-logo.vue'
 import NavHistory from './components/nav-history/nav-history.vue'
 import NavSearch from './components/nav-search/nav-search.vue'
 import NavBtnMenu from './components/nav-btn-menu/nav-btn-menu.vue'
 import { clearPiniaStorage } from '@/utils/pinia-storage'
 import { useFullscreen } from '@vueuse/core'
-import { changeTheme, getAuthFromCache } from '@/utils/sys'
+import { changeTheme } from '@/utils/sys'
 import adminConfig from '@/admin.config.js'
 
 // 注意：topWindow和leftWindow等的生命周期在app渲染之前，需要注意相关写法
@@ -114,14 +106,10 @@ function handleCommand(command) {
   }
 }
 
-const authInfo = ref({})
-async function handleCache() {
-  authInfo.value = await getAuthFromCache()
-}
+const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
 
 // 监听登录成功后，刷新用户信息
 uni.$on('uni-id-pages-login-success', (e) => {
-  handleCache()
   historyRef.value.handleHistory()
   searchRef.value.handleMenuNode()
 })
@@ -129,7 +117,6 @@ uni.$on('uni-id-pages-login-success', (e) => {
 // 登录成功时才会进行初始化
 onMounted(() => {
   if (getApp().$svIdPagesStore.store.hasLogin) {
-    handleCache()
     historyRef.value.handleHistory()
     searchRef.value.handleMenuNode()
   }

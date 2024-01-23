@@ -27,7 +27,13 @@ const props = defineProps({
 const emits = defineEmits(['update:html', 'change'])
 
 const mode = 'simple' // [ default | simple ]
-const toolbarConfig = {}
+const toolbarConfig = {
+  // insertKeys: {
+  //   index: 40, // 插入的位置，基于当前的 toolbarKeys
+  //   keys: ['menu-key1', 'menu-key2']
+  // }
+  excludeKeys: []
+}
 const editorConfig = {
   placeholder: '请输入内容...',
   MENU_CONF: {
@@ -74,7 +80,7 @@ watch(htmlValue, (newHtml) => {
 
 const handleCreated = (editor) => {
   editorIns.value = editor // 记录 editor 实例，重要！
-
+  console.log('==== editor :', editor.getAllMenuKeys());
   onUploadImage()
 }
 

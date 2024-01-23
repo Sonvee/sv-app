@@ -1,5 +1,5 @@
 <template>
-  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef">
+  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef" @open="openDrawer" @close="closeDrawer">
     <template #header>
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
@@ -85,9 +85,12 @@
             ></sv-icon-select>
           </el-form-item>
           <el-form-item prop="rich-text" label="富文本">
-            <view style="width: 100%; height: 800px; background-color: #66ccff33">
-              <sp-editor></sp-editor>
-            </view>
+            <sv-wangeditor
+              v-if="showEditor"
+              v-model:html="formData.comment"
+              ref="editorRef"
+              @change="changeEditor"
+            ></sv-wangeditor>
           </el-form-item>
         </el-form>
       </view>
@@ -122,7 +125,7 @@ const formData = ref({})
 const initData = {
   avatar_file: {},
   username: '',
-  nickname: '',
+  nickname: '123',
   age: 0,
   gender: 0,
   mobile: '',
@@ -132,7 +135,8 @@ const initData = {
   dcloud_appid: [],
   status: 0,
   forbidden: false,
-  icon: ''
+  icon: '',
+  comment: '<div>hello world</div>'
 }
 
 watchEffect(() => {
@@ -176,9 +180,19 @@ const appList = [
 const drawerRef = ref() // 抽屉
 const formRef = ref() // 表单
 
+const showEditor = ref(false)
+
+function openDrawer() {
+  showEditor.value = true
+}
+
+function closeDrawer() {
+  showEditor.value = false
+}
+
 // 关闭抽屉
 function cancel() {
-  drawerRef.value.close()
+  drawerRef.value.handleClose()
 }
 // 确认提交表单
 function confirm() {
@@ -194,7 +208,7 @@ function confirm() {
       // formData.value.avatar_file.url = upRes.fileID // 替换云存储中网络地址
 
       emits('submit', { data: formData.value, mode: props.formMode })
-      drawerRef.value.close()
+      drawerRef.value.handleClose()
     } else {
       console.log('==== 校验失败 :', fields)
     }
@@ -225,6 +239,14 @@ function uploadFail(e) {
 // 选中图标
 function selectedIcon(icon) {
   formData.value.icon = icon
+}
+
+/**
+ * 富文本
+ */
+const editorRef = ref()
+function changeEditor(e) {
+  console.log('==== changeEditor e :', e)
 }
 </script>
 

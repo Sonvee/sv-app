@@ -210,7 +210,7 @@ const formRef = ref() // 表单
 
 // 关闭抽屉
 function cancel() {
-  drawerRef.value.close()
+  drawerRef.value.handleClose()
 }
 // 确认提交表单
 function confirm() {
@@ -243,7 +243,7 @@ function confirm() {
       // console.log('==== formData.value :', formData.value)
 
       emits('submit', { data: formData.value })
-      drawerRef.value.close()
+      drawerRef.value.handleClose()
     } else {
       console.log('==== 校验失败 :', fields)
     }

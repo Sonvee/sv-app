@@ -32,38 +32,11 @@ const toolbarConfig = {
   //   index: 40, // 插入的位置，基于当前的 toolbarKeys
   //   keys: ['menu-key1', 'menu-key2']
   // }
-  excludeKeys: []
+  excludeKeys: ['uploadImage']
 }
 const editorConfig = {
   placeholder: '请输入内容...',
-  MENU_CONF: {
-    // wangEditor自带的上传图片文件配置
-    uploadImage: {
-      // 服务端地址
-      server: '/api/upload/image',
-      // 上传之前触发
-      onBeforeUpload(file) {
-        console.log('onBeforeUpload', file)
-        return file
-      },
-      // 上传进度的回调函数
-      onProgress(progress) {
-        console.log('onProgress', progress)
-      },
-      // 单个文件上传成功之后
-      onSuccess(file, res) {
-        console.log('上传成功', file, res)
-      },
-      // 单个文件上传失败
-      onFailed(file, res) {
-        console.log('上传失败', file, res)
-      },
-      // 上传错误，或者触发 timeout 超时
-      onError(file, err, res) {
-        console.log('上传出错', file, err, res)
-      }
-    }
-  }
+  MENU_CONF: {}
 }
 // 编辑器实例，必须用 shallowRef
 const editorIns = shallowRef()
@@ -80,7 +53,7 @@ watch(htmlValue, (newHtml) => {
 
 const handleCreated = (editor) => {
   editorIns.value = editor // 记录 editor 实例，重要！
-  console.log('==== editor :', editor.getAllMenuKeys());
+  console.log('==== editor :', editor.getAllMenuKeys())
   onUploadImage()
 }
 

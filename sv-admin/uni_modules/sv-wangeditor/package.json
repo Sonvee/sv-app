@@ -1,8 +1,8 @@
 {
   "id": "sv-wangeditor",
-  "displayName": "基于wangEditor的H5富文本编辑器(开发中)",
-  "version": "1.0.0",
-  "description": "基于wangEditor的H5富文本编辑器，还在开发中，尚未完善",
+  "displayName": "基于wangEditor的H5富文本编辑器",
+  "version": "1.0.1",
+  "description": "基于wangEditor的H5富文本编辑器，可使用unicloud上传删除图片视频等",
   "keywords": [
     "富文本",
     "wangEditor"
@@ -12,7 +12,7 @@
     "HBuilderX": "^3.1.0"
   },
   "dcloudext": {
-    "type": "component-vue",
+    "type": "unicloud-template-function",
     "sale": {
       "regular": {
         "price": "0.00"
@@ -36,9 +36,9 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "y",
+        "tcb": "n",
         "aliyun": "y",
-        "alipay": "y"
+        "alipay": "n"
       },
       "client": {
         "Vue": {

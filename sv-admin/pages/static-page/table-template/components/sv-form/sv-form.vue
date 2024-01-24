@@ -85,12 +85,14 @@
             ></sv-icon-select>
           </el-form-item>
           <el-form-item prop="rich-text" label="富文本">
-            <sv-wangeditor
-              v-if="showEditor"
-              v-model:html="formData.comment"
-              ref="editorRef"
-              @change="changeEditor"
-            ></sv-wangeditor>
+            <view style="height: 800px;width: 100%;">
+              <sv-wangeditor
+                v-if="showEditor"
+                v-model:html="formData.comment"
+                ref="editorRef"
+                @change="changeEditor"
+              ></sv-wangeditor>
+            </view>
           </el-form-item>
         </el-form>
       </view>
@@ -206,9 +208,9 @@ function confirm() {
        */
       // const upRes = await uploadFile(formData.value.avatar_file, 'avatarstorage')
       // formData.value.avatar_file.url = upRes.fileID // 替换云存储中网络地址
-
-      emits('submit', { data: formData.value, mode: props.formMode })
-      drawerRef.value.handleClose()
+      editorRef.value.save()
+      // emits('submit', { data: formData.value, mode: props.formMode })
+      // drawerRef.value.handleClose()
     } else {
       console.log('==== 校验失败 :', fields)
     }

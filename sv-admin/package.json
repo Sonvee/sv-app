@@ -14,7 +14,7 @@
     "@vue/reactivity": "^3.3.8",
     "@vueuse/core": "^10.6.1",
     "@wangeditor/editor": "^5.1.23",
-    "@wangeditor/editor-for-vue": "^1.0.2",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "element-plus": "^2.5.1",
     "lodash-es": "^4.17.21"
   }

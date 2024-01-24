@@ -6,10 +6,9 @@
   "keywords": [
     "EXCEL",
     "JSON"
-],
+  ],
   "repository": "",
-"engines": {
-  },
+  "engines": {},
   "dcloudext": {
     "type": "unicloud-template-function",
     "sale": {

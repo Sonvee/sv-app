@@ -58,15 +58,14 @@
 </template>
 
 <script setup>
-import { ref, compute } from 'vue'
+import { ref, computed } from 'vue'
 import { getNowTimeName, timeFormat } from '@/utils/util'
 import { User, RefreshRight, EditPen } from '@element-plus/icons-vue'
 import SvForm from './components/sv-form/sv-form.vue'
 import { userUpdate } from '@/service/api/svid'
 import { ElNotification } from 'element-plus'
-import { storageAuth } from '@/utils/pinia-storage'
 
-const authInfo = compute(() => getApp().$svIdPagesStore.store.userInfo)
+const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
 
 function refresh() {
   handleCache()
@@ -91,8 +90,6 @@ async function submitForm(e) {
       message: result?.message || 'Request Success',
       type: 'success'
     })
-    // 刷新本地缓存
-    await storageAuth()
 
     await handleCache()
   } else {

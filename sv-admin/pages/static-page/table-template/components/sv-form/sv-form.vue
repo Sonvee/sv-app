@@ -85,7 +85,7 @@
             ></sv-icon-select>
           </el-form-item>
           <el-form-item prop="rich-text" label="富文本">
-            <view style="height: 800px;width: 100%;">
+            <view style="height: 500px;width: 100%;">
               <sv-wangeditor
                 v-if="showEditor"
                 v-model:html="formData.comment"

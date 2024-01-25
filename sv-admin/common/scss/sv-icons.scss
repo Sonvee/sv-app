@@ -21,6 +21,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sv-icons-agreements:before {
+  content: "\100ff";
+}
+
+.sv-icons-agreements-service:before {
+  content: "\100fd";
+}
+
+.sv-icons-agreements-privacy:before {
+  content: "\100fe";
+}
+
 .sv-icons-json-fill:before {
   content: "\ea42";
 }

@@ -27,8 +27,8 @@ export default {
   ],
   // 政策协议
   agreements: {
-    serviceUrl: 'https://xxx', // 用户服务协议链接
-    privacyUrl: 'https://xxx', // 隐私政策条款链接
+    serviceUrl: '/uni_modules/sv-id-pages/pages/agreements/service', // 用户服务协议链接 - 采用本地页面 无需更改
+    privacyUrl: '/uni_modules/sv-id-pages/pages/agreements/privacy', // 隐私政策条款链接 - 采用本地页面 无需更改
     // 哪些场景下显示，1.注册（包括登录并注册，如：微信登录、苹果登录、短信验证码登录）、2.登录（如：用户名密码登录）
     scope: [
       'register', 'login', 'realNameVerify'

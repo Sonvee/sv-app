@@ -82,9 +82,8 @@ export default {
       })
     },
     navigateTo({ url, title }) {
-      uni.navigateTo({
-        url: `/uni_modules/sv-id-pages/pages/webview/webview?url=${url}&title=${title}`
-      })
+      console.log('==== title :', title)
+      uni.navigateTo({ url })
     },
     hasAnd(agreements, index) {
       return agreements.length - 1 > index

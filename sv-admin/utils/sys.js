@@ -119,6 +119,8 @@ export function clickMenuItem(url) {
   if (url === '/') {
     url = adminConfig.index.url
   }
+  
+  // uni.navigateTo({
   uni.redirectTo({
     url: url,
     fail: () => {

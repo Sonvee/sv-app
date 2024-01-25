@@ -192,4 +192,7 @@ export default [
   'sv-icons-pdf',
   'sv-icons-json',
   'sv-icons-json-fill',
+  'sv-icons-agreements',
+  'sv-icons-agreements-service',
+  'sv-icons-agreements-privacy',
 ]

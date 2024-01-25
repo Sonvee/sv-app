@@ -5,7 +5,15 @@
       "style": {
         "navigationBarTitleText": "首页"
       }
-    }, {
+    },
+    {
+      "path": "pages/media/media",
+      "style": {
+        "navigationBarTitleText": "媒体库",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
       "path": "uni_modules/sv-id-pages/pages/login/login-admin",
       "style": {
         "navigationBarTitleText": "登录",
@@ -14,19 +22,19 @@
       }
     },
     {
-      "path": "uni_modules/sv-id-pages/pages/webview/webview",
+      "path": "uni_modules/sv-id-pages/pages/agreements/privacy",
       "style": {
-        "navigationBarTitleText": "隐私政策协议",
-        "enablePullDownRefresh": false,
+        "navigationBarTitleText": "政策与协议",
         "topWindow": false,
         "leftWindow": false
       }
     },
     {
-      "path": "pages/media/media",
+      "path": "uni_modules/sv-id-pages/pages/agreements/service",
       "style": {
-        "navigationBarTitleText": "媒体库",
-        "enablePullDownRefresh": false
+        "navigationBarTitleText": "政策与协议",
+        "topWindow": false,
+        "leftWindow": false
       }
     }
   ],
@@ -181,7 +189,7 @@
   "uniIdRouter": {
     "loginPage": "uni_modules/sv-id-pages/pages/login/login-admin",
     "needLogin": [
-      "^(?!.*(sv-id-pages\/pages\/login|sv-id-pages\/pages\/webview)).*$"
+      "^(?!.*(sv-id-pages\/pages\/login|sv-id-pages\/pages\/agreements|pages\/error)).*$"
     ],
     "resToLogin": true
   }

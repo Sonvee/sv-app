@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-privacy">
+  <view class="sv-id-agreements-privacy">
     隐私政策条款
   </view>
 </template>
@@ -7,4 +7,8 @@
 <script setup>
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .sv-id-agreements-privacy{
+    
+  }
+</style>

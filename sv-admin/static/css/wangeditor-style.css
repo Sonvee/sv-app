@@ -1,5 +1,4 @@
-:root,
-:host {
+.sv-wangeditor {
   --w-e-textarea-bg-color: #fff;
   --w-e-textarea-color: #333;
   --w-e-textarea-border-color: #ccc;

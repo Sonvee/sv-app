@@ -21,30 +21,34 @@
           <a href="https://uniapp.dcloud.net.cn" target="_blank">
             <image
               class="title-image"
-              src="https://web-assets.dcloud.net.cn/unidoc/zh/uni.png"
+              src="/static/logo.png"
               mode="heightFix"
+              title="uniapp"
             ></image>
           </a>
           <a href="https://uniapp.dcloud.net.cn/uniCloud" target="_blank">
             <image
               class="title-image"
-              src="https://web-assets.dcloud.net.cn/unidoc/zh/uniCloud.png"
+              src="/static/logo.png"
               mode="heightFix"
+              title="unicloud"
             ></image>
           </a>
           <a href="https://cn.vuejs.org" target="_blank">
             <image
               class="title-image"
-              src="https://avatars.githubusercontent.com/u/6128107?s=200&v=4"
+              src="/static/logo.png"
               mode="heightFix"
+              title="vue3"
             ></image>
           </a>
           <a href="https://element-plus.gitee.io/zh-CN" target="_blank">
             <image
               class="title-image"
               style="margin-right: 0"
-              src="https://avatars.githubusercontent.com/u/68583457?s=48&v=4"
+              src="/static/logo.png"
               mode="heightFix"
+              title="element-plus"
             ></image>
           </a>
         </view>

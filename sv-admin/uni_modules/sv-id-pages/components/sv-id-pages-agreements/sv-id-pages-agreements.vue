@@ -82,7 +82,6 @@ export default {
       })
     },
     navigateTo({ url, title }) {
-      console.log('==== title :', title)
       uni.navigateTo({ url })
     },
     hasAnd(agreements, index) {

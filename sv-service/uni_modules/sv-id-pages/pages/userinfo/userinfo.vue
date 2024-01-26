@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-userinfo">
+  <view class="sv-id-pages sv-id-userinfo">
     <uni-list>
       <uni-list-item title="头像" link>
         <template #footer>
@@ -123,7 +123,7 @@ export default {
   height: 100%;
   background-color: $uni-bg-color-grey;
 
-  ::v-deep .uni-list-item__content-title {
+  :deep(.uni-list-item__content-title) {
     height: 100%;
     display: flex;
     align-items: center;
@@ -140,7 +140,7 @@ export default {
 }
 
 .text-center {
-  ::v-deep .uni-list-item__content-title {
+  :deep(.uni-list-item__content-title) {
     justify-content: center;
   }
 }

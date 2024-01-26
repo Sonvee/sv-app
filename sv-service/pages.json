@@ -41,6 +41,20 @@
         "navigationBarTitleText": "注销账号",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/agreements/privacy",
+      "style": {
+        "navigationBarTitleText": "隐私政策条款",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/agreements/service",
+      "style": {
+        "navigationBarTitleText": "用户服务协议",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "globalStyle": {

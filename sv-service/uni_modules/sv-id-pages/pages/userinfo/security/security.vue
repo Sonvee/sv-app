@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-security">
+  <view class="sv-id-pages sv-id-security">
     <view class="header">
       <view class="security-score">
         <image class="security-logo" :src="securityLogo[securityStatus.color]" mode=""></image>

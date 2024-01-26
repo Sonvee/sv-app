@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-change-pwd">
+  <view class="sv-id-pages sv-id-change-pwd">
     <view class="header">
       <image class="security-logo" :src="securityLogo.orange" mode=""></image>
       <text class="tips">为了您的账号安全，需要验证密码</text>

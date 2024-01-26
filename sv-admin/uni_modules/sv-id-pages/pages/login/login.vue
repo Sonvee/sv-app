@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-login">
+  <view class="sv-id-pages sv-id-login">
     <!-- 背景 -->
     <view class="login-bg">
       <image class="bg-image" :src="bgImage"></image>

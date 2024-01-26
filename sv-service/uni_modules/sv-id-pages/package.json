@@ -1,7 +1,7 @@
 {
 	"id": "sv-id-pages",
 	"displayName": "基于uni-id-pages魔改的用户体系，新的易读易修改的界面样式，更适合二次开发",
-	"version": "2.0.5",
+	"version": "2.0.8",
 	"description": "基于uni-id-pages魔改的用户体系，样式更易修改和二次开发，并去部分冗余代码，更具整洁与精悍",
 	"keywords": [
         "uni-id-pages",

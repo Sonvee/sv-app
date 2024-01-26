@@ -1,6 +1,6 @@
 <!-- 注销（销毁）账号 -->
 <template>
-  <view class="sv-id-deactivate">
+  <view class="sv-id-pages sv-id-deactivate">
     <text class="words" space="emsp">
       一、注销是不可逆操作，注销后:\n 1.账号将无法登录、无法找回。\n
       2.账号所有信息都会清除(个人身份信息、粉丝数等；发布的作品、评论、点赞等;交易信息等)，你的朋友将无法通过本应用账号联系你，请自行备份相关信息和数据。\n

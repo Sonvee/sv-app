@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-userinfo">
+  <view class="sv-id-pages sv-id-userinfo">
     <uni-list>
       <uni-list-item title="头像" link>
         <template #footer>

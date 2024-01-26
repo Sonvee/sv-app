@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-login-admin">
+  <view class="sv-id-pages sv-id-login-admin">
     <view class="intro">
       <view class="header">
         <image class="header-logo" :src="logoSrc" mode="heightFix"></image>
@@ -12,12 +12,13 @@
         <image class="middle-cover" src="../../static/cover.svg" mode="widthFix"></image>
       </view>
     </view>
-    <view class="wave-divider">
-      <image class="wave-image" src="../../static/wave.svg"></image>
-    </view>
     <view class="form-main">
+      <view class="wave-divider">
+        <image class="wave-image" src="../../static/wave.svg"></image>
+      </view>
       <view class="circle-big vibrate"></view>
       <view class="circle-small pulsate"></view>
+
       <view class="form" :class="{ flip: flipFlag }">
         <!-- 登录 -->
         <view class="login-form">
@@ -67,7 +68,7 @@
             <uni-forms-item name="nickname">
               <uni-easyinput
                 v-model="registerFormData.nickname"
-                placeholder="请输入管理员昵称"
+                placeholder="请输入管理员昵称 (可选)"
                 prefixIcon="person-filled"
               ></uni-easyinput>
             </uni-forms-item>
@@ -93,6 +94,10 @@
           </view>
           <button class="register-btn" type="warn" @click="submitRegister">注册</button>
         </view>
+      </view>
+      <!-- 隐私政策 -->
+      <view class="agreements">
+        <sv-id-pages-agreements ref="agreements"></sv-id-pages-agreements>
       </view>
     </view>
   </view>
@@ -142,13 +147,13 @@ export default {
       this.existAdmin = false
     }
   },
-  onReady() {
-    // 表单验证规则（uni-id-pages同步）
-    // this.$refs.loginform.setRules(this.rules)
-  },
   methods: {
     // 登录表单校验
     submitLogin() {
+      if (!this.agree) {
+        this.$refs.agreements.popup(this.submitLogin)
+        return
+      }
       this.$refs.loginform
         .validate()
         .then((formRes) => {
@@ -275,16 +280,7 @@ export default {
       }
     }
   }
-  .wave-divider {
-    width: 5%;
-    height: 100%;
-    overflow: hidden;
 
-    .wave-image {
-      width: 100%;
-      height: 100%;
-    }
-  }
   .form-main {
     flex-grow: 1;
     position: relative;
@@ -292,6 +288,21 @@ export default {
     justify-content: center;
     align-items: center;
     position: relative;
+
+    .wave-divider {
+      width: 10%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      overflow: hidden;
+
+      .wave-image {
+        width: 100%;
+        height: 100%;
+      }
+    }
 
     .circle-big {
       width: 300px;

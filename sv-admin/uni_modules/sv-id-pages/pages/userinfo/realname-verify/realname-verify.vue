@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-realname-verify">暂未开放</view>
+  <view class="sv-id-pages sv-id-realname-verify">暂未开放</view>
 </template>
 
 <script>

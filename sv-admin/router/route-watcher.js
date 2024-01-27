@@ -1,6 +1,6 @@
-import adminConfig from '@/admin.config.js'
-import svidConfig from '@/uni_modules/sv-id-pages/config.js'
 import { isEmpty } from 'lodash-es';
+import adminConfig from '@/admin.config.js'
+import pagesJson from '@/pages.json'
 
 /**
  * 路由鉴权规则：
@@ -8,14 +8,6 @@ import { isEmpty } from 'lodash-es';
  * 2. master拥有管理员权限，核心页面不开放，重定向至403
  * 3. user只有普通用户权限，只展示白名单页面，其他页面均重定向至403
  */
-
-// 无需登录开放页面
-const OPEN_LIST = [
-  adminConfig.error.notfound, // 403
-  adminConfig.error.forbidden, // 404
-  svidConfig.agreements.privacyUrl, // 隐私政策条款
-  svidConfig.agreements.serviceUrl // 用户服务协议
-]
 
 // 白名单页面
 const WHILE_LIST = [
@@ -25,6 +17,7 @@ const WHILE_LIST = [
   adminConfig.error.forbidden, // 404
   adminConfig.login.url, // 登录页一定要在白名单中，否则会导致登录与403之间无限循环跳转
   '/pages/tool/mine/mine',
+  '/pages/tool/cache/cache',
   '/pages/static-page/table-template/table-template',
   '/pages/static-page/icons/icons',
 ];
@@ -48,7 +41,7 @@ const ADMIN_LIST = [
  * @param {Object} route 当前路由对象
  */
 export function routeWatcher(route) {
-  // console.log('routeWatcher --->', route);
+  console.log('routeWatcher --->', route);
 
   // 页面不存在，重定向至404页
   if (route.matched?.length <= 0) {
@@ -59,7 +52,8 @@ export function routeWatcher(route) {
   }
 
   // 无需登录的开放页面不用进行后续操作
-  if (OPEN_LIST.includes(route.path)) return
+  const regex = new RegExp(pagesJson.uniIdRouter.needLogin[0]);
+  if (!regex.test(route.path)) return
 
   // 页面鉴权
   const { role, permission } = uniCloud.getCurrentUserInfo()

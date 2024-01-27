@@ -21,6 +21,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sv-icons-portal-home:before {
+  content: "\e61d";
+}
+
+.sv-icons-portal:before {
+  content: "\e65e";
+}
+
 .sv-icons-agreements:before {
   content: "\100ff";
 }

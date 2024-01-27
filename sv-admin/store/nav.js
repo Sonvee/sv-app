@@ -1,9 +1,5 @@
-import {
-  defineStore
-} from 'pinia'
-import {
-  ref
-} from 'vue'
+import { defineStore } from 'pinia'
+import { ref, shallowRef } from 'vue'
 
 export const useNavStore = defineStore('nav', () => {
   // 导航栏历史
@@ -39,7 +35,7 @@ export const useNavStore = defineStore('nav', () => {
     addHistory,
     removeHistory,
     getHistory,
-    clearHistory
+    clearHistory,
   }
 }, {
   unistorage: true // 开启后对 state 的数据读写都将持久化

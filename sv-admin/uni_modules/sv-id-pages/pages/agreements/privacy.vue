@@ -1,9 +1,7 @@
 <template>
   <view class="sv-id-pages sv-id-agreements-privacy">
     <h2 class="head-title-2">
-      <!-- #ifdef H5 -->
-      <uni-icons class="icons-back" type="undo-filled" size="32" @click="goHome"></uni-icons>
-      <!-- #endif -->
+      <uni-icons class="icons-back" type="undo-filled" size="32" @click="goBack"></uni-icons>
       隐私政策条款
     </h2>
     <article>
@@ -57,13 +55,8 @@
 <script setup>
 import manifest from '@/manifest.json'
 
-function goHome() {
-  uni.redirectTo({
-    url: '/',
-    fail() {
-      uni.navigateBack()
-    }
-  })
+function goBack() {
+  uni.navigateBack()
 }
 </script>
 

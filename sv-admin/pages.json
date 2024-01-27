@@ -39,6 +39,25 @@
     }
   ],
   "subPackages": [{
+      "root": "pages/web",
+      "pages": [{
+          "path": "home/home",
+          "style": {
+            "navigationBarTitleText": "主页",
+            "topWindow": false,
+            "leftWindow": false
+          }
+        },
+        {
+          "path": "mine/mine",
+          "style": {
+            "navigationBarTitleText": "我的空间",
+            "topWindow": false,
+            "leftWindow": false
+          }
+        }
+      ]
+    }, {
       "root": "pages/business",
       "pages": [{
         "path": "business1/business1",
@@ -189,7 +208,7 @@
   "uniIdRouter": {
     "loginPage": "uni_modules/sv-id-pages/pages/login/login-admin",
     "needLogin": [
-      "^(?!.*(sv-id-pages\/pages\/login|sv-id-pages\/pages\/agreements|pages\/error)).*$"
+      "^(?!.*(sv-id-pages\/pages\/login|sv-id-pages\/pages\/agreements|pages\/error|pages\/web)).*$"
     ],
     "resToLogin": true
   }

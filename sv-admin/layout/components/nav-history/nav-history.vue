@@ -91,9 +91,8 @@ watch(
       url: newVal.route,
       name: newVal.navigationBar?.titleText
     }
-    // 监听路由，添加历史记录（只记录url: pages/非error页面）
-    // console.log(curRoute);
-    if (/^pages\/(?!error)/.test(curRoute.url)) {
+    // 监听路由，添加历史记录（排除error和login页面）
+    if (/^(?!.*(?:pages\/error|sv-id-pages\/pages\/login)).*pages\/.*/.test(curRoute.url)) {
       navStore.addHistory(curRoute)
     }
   }

@@ -20,7 +20,7 @@
             <el-input v-model="formData.name" placeholder="请输入菜单名称" clearable />
           </el-form-item>
           <el-form-item prop="url" label="路径">
-            <el-input v-model="formData.url" placeholder="请输入菜单路径" clearable />
+            <el-input v-model.trim="formData.url" placeholder="请输入菜单路径" clearable />
           </el-form-item>
           <el-form-item prop="parent_id" label="父级ID">
             <el-input

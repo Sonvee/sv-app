@@ -120,8 +120,8 @@ export function clickMenuItem(url) {
     url = adminConfig.index.url
   }
   
-  // uni.navigateTo({
-  uni.redirectTo({
+  // uni.redirectTo({
+  uni.navigateTo({
     url: url,
     fail: () => {
       uni.showModal({

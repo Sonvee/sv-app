@@ -41,7 +41,7 @@ const ADMIN_LIST = [
  * @param {Object} route 当前路由对象
  */
 export function routeWatcher(route) {
-  console.log('routeWatcher --->', route);
+  // console.log('routeWatcher --->', route);
 
   // 页面不存在，重定向至404页
   if (route.matched?.length <= 0) {

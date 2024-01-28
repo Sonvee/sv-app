@@ -1,16 +1,7 @@
 <template>
-  <view>
-    主页
-    <button @click="next">下一页</button>
-  </view>
+  <view>主页</view>
 </template>
 
-<script setup>
-function next() {
-  uni.navigateTo({
-    url: '/pages/web/mine/mine'
-  })
-}
-</script>
+<script setup></script>
 
 <style lang="scss"></style>

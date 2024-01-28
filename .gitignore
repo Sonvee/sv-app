@@ -4,6 +4,9 @@
 .vite/
 .hbuilderx/
 
+# cache
+sv-docs/docs/.vitepress/cache/
+
 # system ignore
 node_modules/
 dist/

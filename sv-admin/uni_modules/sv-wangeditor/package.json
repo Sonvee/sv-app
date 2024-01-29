@@ -1,7 +1,7 @@
 {
   "id": "sv-wangeditor",
   "displayName": "基于wangEditor的H5富文本编辑器",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "基于wangEditor的H5富文本编辑器，可使用unicloud上传删除图片视频等",
   "keywords": [
     "富文本",

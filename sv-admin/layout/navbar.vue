@@ -2,13 +2,7 @@
   <view class="layout-nav-bar">
     <view class="sv-nav">
       <nav-logo></nav-logo>
-      <el-menu
-        class="sv-el-menu"
-        mode="horizontal"
-        :ellipsis="false"
-        unique-opened
-        menu-trigger="click"
-      >
+      <el-menu class="sv-el-menu" mode="horizontal" :ellipsis="false">
         <!-- 历史记录 -->
         <nav-history ref="historyRef"></nav-history>
 
@@ -174,7 +168,10 @@ function globalSearch() {
         align-items: center;
         cursor: pointer;
         flex-shrink: 0;
+      }
 
+      .sv-menu-item,
+      .sv-menu-icon {
         &:hover {
           @include useTheme {
             background-color: getTheme('sv-hover-color');
@@ -189,9 +186,11 @@ function globalSearch() {
           }
         }
       }
+
       .sv-menu-item {
         padding: 0 20px;
       }
+
       .sv-menu-icon {
         width: 36px;
         display: flex;

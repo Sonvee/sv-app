@@ -8,7 +8,7 @@
             <view class="text-line-1 hello">{{ authInfo?.username }} {{ getNowTimeName(true) }}! 欢迎回来 ~</view>
             <view class="text-line-3 hello-sub">
               &emsp;&emsp;本框架自2023.10.22日开始新建文件夹到现在，依然还有很多需要完善的地方，也与sv-client客户端、sv-service管理端框架，在
-              <a href="https://gitee.com/Sonweir/sv-admin" target="_blank" class="link">Gitee</a>
+              <a href="https://gitee.com/Sonve/sv-app" target="_blank" class="link">Gitee</a>
               与
               <a href="https://ext.dcloud.net.cn/plugin?id=15434" target="_blank" class="link">uniapp插件市场</a>
               同步开源，希望能够在大家的支持下不断进步完善，谢谢♪(･ω･)ﾉ

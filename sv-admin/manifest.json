@@ -72,7 +72,7 @@
     "h5" : {
         "router" : {
             "base" : "/admin/",
-            "mode" : "history"
+            "mode" : "hash"
         },
         "optimization" : {
             "treeShaking" : {

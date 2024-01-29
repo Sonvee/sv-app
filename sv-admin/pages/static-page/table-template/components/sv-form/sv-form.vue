@@ -1,5 +1,13 @@
 <template>
-  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef" @open="openDrawer" @close="closeDrawer">
+  <el-drawer
+    v-bind="$attrs"
+    class="sv-el-drawer"
+    ref="drawerRef"
+    @open="openDrawer"
+    @close="closeDrawer"
+    destroy-on-close
+    :close-on-click-modal="false"
+  >
     <template #header>
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
@@ -36,7 +44,12 @@
             <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
           </el-form-item>
           <el-form-item prop="age" label="年龄">
-            <el-input-number class="sv-el-input-number" v-model="formData.age" :min="0" :max="100" />
+            <el-input-number
+              class="sv-el-input-number"
+              v-model="formData.age"
+              :min="0"
+              :max="100"
+            />
           </el-form-item>
           <el-form-item prop="gender" label="性别">
             <el-radio-group v-model="formData.gender">
@@ -63,7 +76,12 @@
           </el-form-item>
           <el-form-item prop="status" label="状态">
             <el-select v-model="formData.status" placeholder="状态">
-              <el-option v-for="item in statusList" :key="item.value" :label="item.text" :value="item.value" />
+              <el-option
+                v-for="item in statusList"
+                :key="item.value"
+                :label="item.text"
+                :value="item.value"
+              />
             </el-select>
           </el-form-item>
           <el-form-item prop="forbidden" label="封禁">
@@ -85,7 +103,7 @@
             ></sv-icon-select>
           </el-form-item>
           <el-form-item prop="rich-text" label="富文本">
-            <view style="height: 500px;width: 100%;">
+            <view style="height: 500px; width: 100%">
               <sv-wangeditor
                 v-if="showEditor"
                 v-model:html="formData.comment"
@@ -127,7 +145,7 @@ const formData = ref({})
 const initData = {
   avatar_file: {},
   username: '',
-  nickname: '123',
+  nickname: '',
   age: 0,
   gender: 0,
   mobile: '',
@@ -190,6 +208,7 @@ function openDrawer() {
 
 function closeDrawer() {
   showEditor.value = false
+  console.log('==== closeDrawer: ')
 }
 
 // 关闭抽屉
@@ -208,9 +227,11 @@ function confirm() {
        */
       // const upRes = await uploadFile(formData.value.avatar_file, 'avatarstorage')
       // formData.value.avatar_file.url = upRes.fileID // 替换云存储中网络地址
+
       editorRef.value.save()
-      // emits('submit', { data: formData.value, mode: props.formMode })
-      // drawerRef.value.handleClose()
+
+      emits('submit', { data: formData.value, mode: props.formMode })
+      drawerRef.value.handleClose()
     } else {
       console.log('==== 校验失败 :', fields)
     }

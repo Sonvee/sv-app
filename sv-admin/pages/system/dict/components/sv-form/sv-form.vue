@@ -1,5 +1,13 @@
 <template>
-  <el-drawer v-bind="$attrs" class="sv-el-drawer" ref="drawerRef">
+  <el-drawer
+    v-bind="$attrs"
+    class="sv-el-drawer"
+    ref="drawerRef"
+    @open="openDrawer"
+    @close="closeDrawer"
+    destroy-on-close
+    :close-on-click-modal="false"
+  >
     <template #header>
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
@@ -89,6 +97,10 @@ const rules = ref({
 
 const drawerRef = ref() // 抽屉
 const formRef = ref() // 表单
+
+function openDrawer() {}
+
+function closeDrawer() {}
 
 // 关闭抽屉
 function cancel() {

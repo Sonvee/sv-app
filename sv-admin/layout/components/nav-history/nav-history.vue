@@ -120,7 +120,7 @@ watch(
       name: newVal.navigationBar?.titleText
     }
     // 监听路由，添加历史记录（排除error、login、web页面）
-    if (/^(?!.*(?:pages\/error|sv-id-pages\/pages\/login|pages\/web)).*pages\/.*/.test(curRoute.url)) {
+    if (/^(?!.*(?:pages\/error|sv-id-pages\/pages\/login|sv-id-pages\/pages\/agreements|pages\/web)).*pages\/.*/.test(curRoute.url)) {
       navStore.addHistory(curRoute)
     }
   }

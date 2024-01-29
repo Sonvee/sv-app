@@ -1,10 +1,29 @@
 import adminConfig from '@/admin.config.js'
-import { appList, dictList, menuList } from '@/service/api/sys.js'
-import { cloneDeep, concat, flatMap, isEmpty, omit } from 'lodash-es'
-import { useSysStore } from '@/store/sys'
-import { storageDicts, } from './pinia-storage'
-import { permissionList, roleList } from '@/service/api/svid'
-import { useSvidStore } from '@/store/svid'
+import {
+  appList,
+  dictList,
+  menuList
+} from '@/service/api/sys.js'
+import {
+  cloneDeep,
+  concat,
+  flatMap,
+  isEmpty,
+  omit
+} from 'lodash-es'
+import {
+  useSysStore
+} from '@/store/sys'
+import {
+  storageDicts,
+} from './pinia-storage'
+import {
+  permissionList,
+  roleList
+} from '@/service/api/svid'
+import {
+  useSvidStore
+} from '@/store/svid'
 
 /**
  * 客户端获取菜单数据，并处理树状结构 - 弃用 议直接在客户端生成树状数据
@@ -119,7 +138,7 @@ export function clickMenuItem(url) {
   if (url === '/') {
     url = adminConfig.index.url
   }
-  
+
   // uni.redirectTo({
   uni.navigateTo({
     url: url,
@@ -253,12 +272,8 @@ export async function getAppFromCache() {
  * @param {Object} arr 标准数组[{key:'a', value:'1'},{key:'b', value:'2'}...]
  * @return 对象{a:'1',b:'2',...}
  */
-function handleMap(arr) {
-  // return arr.reduce((acc, cur) => {
-  //   acc[cur.key] = cur.value
-  //   return acc
-  // }, {})
-  return Object.fromEntries(arr.map((obj) => [obj.key, obj.value]))
+export function handleMap(arr, keyName = "key", valueName = "value") {
+  return Object.fromEntries(arr.map((obj) => [obj[keyName], obj[valueName]]))
 }
 
 /**

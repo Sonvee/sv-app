@@ -62,7 +62,7 @@
             type="success"
             effect="plain"
           >
-            {{ item }}
+            {{ appMap[item] }}
           </el-tag>
         </template>
       </el-table-column>
@@ -141,7 +141,7 @@ import { View, Hide, RefreshRight, Plus, EditPen, Delete } from '@element-plus/i
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { userAdd, userDelete, userList, userUpdate } from '@/service/api/svid'
 import { timeFormat } from '@/utils/util'
-import { getDictById } from '@/utils/sys'
+import { getAppFromCache, getDictById, handleMap } from '@/utils/sys'
 
 const showHeader = ref(false) // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
@@ -201,9 +201,14 @@ const statusMap = {
 
 const platformDict = ref({})
 const genderDict = ref({})
+const appMap = ref({})
+
 async function handleDict() {
   platformDict.value = await getDictById('uni_id_users_platform', true)
   genderDict.value = await getDictById('uni_id_users_gender', true)
+
+  const appList = await getAppFromCache()
+  appMap.value = handleMap(appList, 'appid', 'name')
 }
 handleDict()
 

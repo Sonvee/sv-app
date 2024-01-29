@@ -20,9 +20,9 @@ const base_url = 'https://xxxxxx.next.bspapp.com' // 云函数URL化基础路径
 const base_cdn = 'https://xxxxxx.cdn.bspapp.com' // 云存储下载域名
 ```
 
-2. cloudfunctions中诸如sv-api开头的皆依赖于common中sv-handle-res，因此需要给这些api云对象安装依赖
+2. cloudfunctions中诸如sv-api开头的皆依赖于common中sv-handler，因此需要给这些api云对象安装依赖
 
-    安装方式：在sv-api开头的api云对象文件夹上鼠标右键管理公共模块或扩展库依赖，在选择项目下的公共模块中勾选sv-handle-res（uniCloud扩展库中JQL语法支持库按需添加），勾选后同鼠标右键使用命令行窗口打开所在目录，运行命令：`npm i`
+    安装方式：在sv-api开头的api云对象文件夹上鼠标右键管理公共模块或扩展库依赖，在选择项目下的公共模块中勾选sv-handler（uniCloud扩展库中JQL语法支持库按需添加），勾选后同鼠标右键使用命令行窗口打开所在目录，运行命令：`npm i`
   
 
 3. 云对象路径配置（重要）

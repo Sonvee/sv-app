@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-login-admin">
+  <view class="sv-id-pages sv-id-login-admin">
     <view class="intro">
       <view class="header">
         <image class="header-logo" :src="logoSrc" mode="heightFix"></image>

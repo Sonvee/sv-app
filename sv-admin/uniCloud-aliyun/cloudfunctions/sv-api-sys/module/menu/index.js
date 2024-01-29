@@ -1,4 +1,4 @@
-const handler = require('sv-handle-res')
+const handler = require('sv-handler')
 const db = uniCloud.database()
 const dbCmd = db.command
 

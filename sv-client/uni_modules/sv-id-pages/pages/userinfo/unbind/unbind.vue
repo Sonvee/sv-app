@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-id-unbind">
+  <view class="sv-id-pages sv-id-unbind">
     <view class="header">
       <image class="security-logo" :src="securityLogo.red" mode=""></image>
       <text class="tips">为了您的账号安全，需要验证您的设备</text>

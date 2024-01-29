@@ -1,6 +1,6 @@
 <!-- 图片裁剪页 -->
 <template>
-  <view class="sv-id-crop-image">
+  <view class="sv-id-pages sv-id-crop-image">
     <limeClipper
       :width="options.width"
       :scale-ratio="2"

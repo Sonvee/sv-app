@@ -1,7 +1,7 @@
 {
   "id": "sv-excel-json-each",
   "displayName": "EXCEL与JSON互转",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "EXCEL与JSON互转，根据原墨联大佬的ml-excel-to-json插件修改，仅供本人自用",
   "keywords": [
     "EXCEL",
@@ -14,10 +14,10 @@
     "type": "unicloud-template-function",
     "sale": {
       "regular": {
-        "price": 0
+        "price": "0.00"
       },
       "sourcecode": {
-        "price": 0
+        "price": "0.00"
       }
     },
     "contact": {

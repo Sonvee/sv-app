@@ -1,4 +1,4 @@
-const { excelTojson, jsonToexcel } = require('sv-excel-json-hander');
+const { excelTojson, jsonToexcel } = require('sv-excel-json-handler');
 
 module.exports = {
   _before: function() { // 通用预处理器

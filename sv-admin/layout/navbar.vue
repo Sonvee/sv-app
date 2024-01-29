@@ -8,7 +8,6 @@
         :ellipsis="false"
         unique-opened
         menu-trigger="click"
-        @select="handleSelect"
       >
         <!-- 历史记录 -->
         <nav-history ref="historyRef"></nav-history>
@@ -94,10 +93,6 @@ import adminConfig from '@/admin.config.js'
 
 const historyRef = ref()
 const searchRef = ref()
-
-function handleSelect(index, indexPath, item) {
-  console.log('handleSelect', index, indexPath, item)
-}
 
 function handleCommand(command) {
   switch (command) {

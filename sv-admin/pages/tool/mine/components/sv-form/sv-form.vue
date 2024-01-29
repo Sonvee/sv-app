@@ -38,7 +38,12 @@
             />
           </el-form-item>
           <el-form-item prop="username" label="用户名" required>
-            <el-input v-model="formData.username" placeholder="请输入用户名" clearable />
+            <el-input
+              v-model="formData.username"
+              placeholder="请输入用户名"
+              clearable
+              :disabled="!isAdmin"
+            />
           </el-form-item>
           <el-form-item prop="nickname" label="昵称" required>
             <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
@@ -51,10 +56,20 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item prop="mobile" label="手机号码">
-            <el-input v-model="formData.mobile" placeholder="请输入手机号码" clearable />
+            <el-input
+              v-model="formData.mobile"
+              placeholder="请输入手机号码"
+              clearable
+              :disabled="!isAdmin"
+            />
           </el-form-item>
           <el-form-item prop="email" label="邮箱">
-            <el-input v-model="formData.email" placeholder="请输入邮箱" clearable />
+            <el-input
+              v-model="formData.email"
+              placeholder="请输入邮箱"
+              clearable
+              :disabled="!isAdmin"
+            />
           </el-form-item>
           <el-form-item prop="my_invite_code" label="邀请码">
             <el-input
@@ -84,7 +99,7 @@
             class="sv-el-form"
             ref="pwdFormRef"
             :model="pwdFormData"
-            :rules="pwdRules"
+            :rules="rules"
             label-position="left"
           >
             <el-form-item prop="oldPassword" label="旧密码" required>
@@ -120,9 +135,10 @@
 </template>
 
 <script setup>
-import { computed, ref, watchEffect } from 'vue'
+import { ref, watchEffect, computed } from 'vue'
 import { assignOverride, uploadFile } from '@/utils/util'
-import { getAppFromCache, getDictById, getRoleFromCache } from '@/utils/sys'
+import { rules } from '@/utils/verification.js'
+import { getDictById } from '@/utils/sys'
 import { ElNotification } from 'element-plus'
 
 const props = defineProps({
@@ -134,17 +150,10 @@ const props = defineProps({
 
 const emits = defineEmits(['submit'])
 
-// 判断当前用户是否是admin - 临时开启visitor权限，游客仅供浏览
-const isAdmin = computed(() => {
-  const { role } = uniCloud.getCurrentUserInfo()
-  return role.includes('admin') || role.includes('visitor')
-})
-
 // 表单数据
 const formData = ref({})
 // 初始数据
 const initData = {
-  _id: '',
   avatar_file: {},
   username: '',
   nickname: '',
@@ -154,55 +163,10 @@ const initData = {
   my_invite_code: ''
 }
 
-// 校验规则 - 同步svid严格校验
-const rules = ref({
-  username: [
-    {
-      required: true,
-      message: '请输入用户名'
-    },
-    {
-      min: 3,
-      max: 32,
-      message: '用户名长度在 3 到 32 个字符'
-    },
-    {
-      validator: (rule, value, callback) => {
-        if (/^1\d{10}$/.test(value) || /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(value)) {
-          callback('用户名不能是：手机号或邮箱')
-        }
-        if (/^\d+$/.test(value)) {
-          callback('用户名不能为纯数字')
-        }
-        if (/[\u4E00-\u9FA5\uF900-\uFA2D]{1,}/.test(value)) {
-          callback('用户名不能包含中文')
-        }
-        return true
-      }
-    }
-  ],
-  nickname: [
-    {
-      required: true,
-      message: '请输入昵称'
-    },
-    {
-      min: 3,
-      max: 32,
-      message: '昵称长度在 3 到 32 个字符'
-    },
-    {
-      validator: (rule, value, callback) => {
-        if (/^1\d{10}$/.test(value) || /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(value)) {
-          callback('用户名不能是：手机号或邮箱')
-        }
-        if (/^\d+$/.test(value)) {
-          callback('用户名不能为纯数字')
-        }
-        return true
-      }
-    }
-  ]
+// 判断当前用户是否是admin - 临时开启visitor权限，游客仅供浏览
+const isAdmin = computed(() => {
+  const { role } = uniCloud.getCurrentUserInfo()
+  return role.includes('admin')
 })
 
 // 账号性别字典数组
@@ -286,54 +250,6 @@ function uploadFail(e) {
 }
 
 const pwdFormRef = ref()
-const pwdRules = ref({
-  oldPassword: [
-    {
-      required: true,
-      message: '请输入密码'
-    },
-    {
-      min: 8,
-      max: 16,
-      message: '密码长度在 8 到 16 个字符'
-    },
-    {
-      validator: (rule, value, callback) => {
-        if (
-          !new RegExp(
-            /^(?![0-9]+$)(?![a-zA-Z]+$)(?![~!@#$%^&*_\-+=`|\\(){}[\]:;"'<>,.?/]+$)[0-9a-zA-Z~!@#$%^&*_\-+=`|\\(){}[\]:;"'<>,.?/]{8,16}$/
-          ).test(value)
-        ) {
-          callback('密码必须为字母、数字和特殊符号任意两种的组合，密码长度必须在8-16位之间')
-        }
-        return true
-      }
-    }
-  ],
-  newPassword: [
-    {
-      required: true,
-      message: '请输入密码'
-    },
-    {
-      min: 8,
-      max: 16,
-      message: '密码长度在 8 到 16 个字符'
-    },
-    {
-      validator: (rule, value, callback) => {
-        if (
-          !new RegExp(
-            /^(?![0-9]+$)(?![a-zA-Z]+$)(?![~!@#$%^&*_\-+=`|\\(){}[\]:;"'<>,.?/]+$)[0-9a-zA-Z~!@#$%^&*_\-+=`|\\(){}[\]:;"'<>,.?/]{8,16}$/
-          ).test(value)
-        ) {
-          callback('密码必须为字母、数字和特殊符号任意两种的组合，密码长度必须在8-16位之间')
-        }
-        return true
-      }
-    }
-  ]
-})
 
 const pwdFormData = ref({
   oldPassword: '',

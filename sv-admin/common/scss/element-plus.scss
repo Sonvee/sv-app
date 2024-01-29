@@ -250,3 +250,9 @@
     --el-messagebox-content-color: #{getTheme('sv-text-color')};
   }
 }
+
+.sv-el-avatar {
+  @include useTheme {
+    --el-avatar-bg-color: #{getTheme('sv-bg-color')};
+  }
+}

@@ -3,14 +3,26 @@
     <el-row :gutter="10">
       <el-col :xs="24" :sm="24" :md="24" :lg="14" :xl="16">
         <view class="index-row-1 flex-vc card">
-          <el-avatar :size="100" shape="square" :src="authInfo?.avatar_file?.url" />
-          <view class="flex-col-vc" style="height: 100%; flex: 1; justify-content: space-evenly; padding-left: 10px">
-            <view class="text-line-1 hello">{{ authInfo?.username }} {{ getNowTimeName(true) }}! 欢迎回来 ~</view>
+          <el-avatar
+            class="sv-el-avatar"
+            :size="100"
+            shape="square"
+            :src="authInfo?.avatar_file?.url"
+          />
+          <view
+            class="flex-col-vc"
+            style="height: 100%; flex: 1; justify-content: space-evenly; padding-left: 10px"
+          >
+            <view class="text-line-1 hello">
+              {{ authInfo?.username }} {{ getNowTimeName(true) }}! 欢迎回来 ~
+            </view>
             <view class="text-line-3 hello-sub">
               &emsp;&emsp;本框架自2023.10.22日开始新建文件夹到现在，依然还有很多需要完善的地方，也与sv-client客户端、sv-service管理端框架，在
               <a href="https://gitee.com/Sonve/sv-app" target="_blank" class="link">Gitee</a>
               与
-              <a href="https://ext.dcloud.net.cn/plugin?id=15434" target="_blank" class="link">uniapp插件市场</a>
+              <a href="https://ext.dcloud.net.cn/plugin?id=15434" target="_blank" class="link">
+                uniapp插件市场
+              </a>
               同步开源，希望能够在大家的支持下不断进步完善，谢谢♪(･ω･)ﾉ
             </view>
           </view>
@@ -35,12 +47,7 @@
             ></image>
           </a>
           <a href="https://cn.vuejs.org" target="_blank">
-            <image
-              class="title-image"
-              src="/static/logo.png"
-              mode="heightFix"
-              title="vue3"
-            ></image>
+            <image class="title-image" src="/static/logo.png" mode="heightFix" title="vue3"></image>
           </a>
           <a href="https://element-plus.gitee.io/zh-CN" target="_blank">
             <image

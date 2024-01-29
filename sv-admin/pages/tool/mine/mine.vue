@@ -4,7 +4,7 @@
       <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
         <view class="mine-row-1 card">
           <el-avatar
-            class="sv-avatar"
+            class="sv-el-avatar"
             :src="authInfo?.avatar_file?.url"
             :size="86"
             shape="square"
@@ -18,7 +18,6 @@
                 </el-text>
               </template>
               <template #extra>
-                <el-button link size="small" :icon="RefreshRight" @click="refresh">刷新</el-button>
                 <el-button link size="small" :icon="EditPen" @click="edit(authInfo)">
                   编辑
                 </el-button>
@@ -67,43 +66,32 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { getNowTimeName, timeFormat } from '@/utils/util'
-import { User, RefreshRight, EditPen } from '@element-plus/icons-vue'
+import { User, EditPen } from '@element-plus/icons-vue'
 import SvForm from './components/sv-form/sv-form.vue'
-import { userUpdate } from '@/service/api/svid'
-import { ElNotification } from 'element-plus'
 
 const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
-
-function refresh() {}
 
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
 
 // 编辑
 function edit(item) {
-  // console.log('==== item :', item)
   formInit.value = item
   showForm.value = true
 }
 
 // 提交表单
-async function submitForm(e) {
-  let result = await userUpdate(e.data)
-  if (result.success || result.errCode == 0) {
-    ElNotification({
-      title: 'Success',
-      message: result?.message || 'Request Success',
-      type: 'success'
-    })
-
-    refresh()
+function submitForm(e) {
+  let updateParams = {}
+  // 判断当前用户是否是admin
+  const { role } = uniCloud.getCurrentUserInfo()
+  if (role.includes('admin')) {
+    updateParams = e.data
   } else {
-    ElNotification({
-      title: 'Error',
-      message: result?.message || result?.error?.message,
-      type: 'error'
-    })
+    const { nickname, avatar_file, gender } = e.data
+    updateParams = { nickname, avatar_file, gender }
   }
+  getApp().$svIdPagesStore.mutations.updateUserInfo(updateParams)
 }
 </script>
 
@@ -114,14 +102,10 @@ async function submitForm(e) {
     display: flex;
     box-sizing: border-box;
 
-    .sv-avatar {
-      flex-shrink: 0;
-      margin-right: 12px;
-    }
-
     .content {
       flex-grow: 1;
       flex-shrink: 0;
+      margin-left: 12px;
     }
   }
 

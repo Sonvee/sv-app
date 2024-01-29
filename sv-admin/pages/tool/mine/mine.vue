@@ -3,7 +3,12 @@
     <el-row :gutter="10">
       <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
         <view class="mine-row-1 card">
-          <el-avatar class="sv-avatar" :src="authInfo?.avatar_file?.url" :size="86" shape="square" />
+          <el-avatar
+            class="sv-avatar"
+            :src="authInfo?.avatar_file?.url"
+            :size="86"
+            shape="square"
+          />
           <view class="content">
             <el-descriptions class="sv-el-descriptions" :column="2" size="small">
               <template #title>
@@ -14,7 +19,9 @@
               </template>
               <template #extra>
                 <el-button link size="small" :icon="RefreshRight" @click="refresh">刷新</el-button>
-                <el-button link size="small" :icon="EditPen" @click="edit(authInfo)">编辑</el-button>
+                <el-button link size="small" :icon="EditPen" @click="edit(authInfo)">
+                  编辑
+                </el-button>
               </template>
               <el-descriptions-item label="昵称">
                 {{ authInfo.nickname || '--' }}
@@ -67,9 +74,7 @@ import { ElNotification } from 'element-plus'
 
 const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
 
-function refresh() {
-  handleCache()
-}
+function refresh() {}
 
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
@@ -91,7 +96,7 @@ async function submitForm(e) {
       type: 'success'
     })
 
-    await handleCache()
+    refresh()
   } else {
     ElNotification({
       title: 'Error',

@@ -22,11 +22,12 @@ module.exports = {
     let {
       _id,
       name = '',
+      role,
       platform = '',
       pagesize = 20,
       pagenum = 1
     } = this.params
-    
+
     // 转换为Number类型
     pagesize = +pagesize
     pagenum = +pagenum
@@ -37,36 +38,6 @@ module.exports = {
     const count = await db.collection('uni-id-users').count()
     // 页数统计
     const pages = Math.ceil(count.total / pagesize)
-
-    // _id单搜，优先级最大
-    if (_id) {
-      userRes = await db.collection('uni-id-users').doc(_id).get()
-      if (userRes.data.length > 0) {
-        throw handler.result({
-          data: userRes.data,
-          total: count.total,
-          pagesize,
-          pagenum,
-          pages,
-          params: {
-            _id
-          }
-        })
-      } else {
-        throw handler.result({
-          data: userRes.data,
-          total: count.total,
-          pagesize,
-          pagenum,
-          pages,
-          params: {
-            _id
-          },
-          code: 400,
-          message: '未查询到该_id用户',
-        })
-      }
-    }
 
     // 页码不可小于1
     if (pagenum < 1) {
@@ -90,46 +61,81 @@ module.exports = {
     }
 
     // 分页查询
-    if (name && !platform) {
-      // 用户名/昵称 模糊查询 单字匹配
-      // userRes = await db.collection('uni-id-users').where(dbCmd.or({
-      //   "username": new RegExp(name.split("").join("|"), 'g')
-      // }, {
-      //   "nickname": new RegExp(name.split("").join("|"), 'g')
-      // })).skip(pagesize * (pagenum - 1)).limit(pagesize).get()
+    let query = db.collection('uni-id-users')
 
-      // 用户名/昵称 模糊查询 全字匹配
-      userRes = await db.collection('uni-id-users')
-        .where(dbCmd.or({
-          "username": new RegExp(name, 'g')
-        }, {
-          "nickname": new RegExp(name, 'g')
-        })).skip(pagesize * (pagenum - 1)).limit(pagesize).get()
-
-    } else if (!name && platform) {
-      // 用户平台
-      userRes = await db.collection('uni-id-users').where({
-        "register_env.uni_platform": dbCmd.eq(platform)
-      }).skip(pagesize * (pagenum - 1)).limit(pagesize).get()
-
-    } else if (name && platform) {
-      // 都筛选
-      userRes = await db.collection('uni-id-users').where(
-        dbCmd.and(
-          dbCmd.or({
-            "username": new RegExp(name.split("").join("|"), 'g')
-          }, {
-            "nickname": new RegExp(name.split("").join("|"), 'g')
-          }), {
-            "register_env.uni_platform": dbCmd.eq(platform)
-          }
-        )
-      ).skip(pagesize * (pagenum - 1)).limit(pagesize).get()
-
-    } else {
-      // 不进行筛选
-      userRes = await db.collection('uni-id-users').skip(pagesize * (pagenum - 1)).limit(pagesize).get()
+    // 构建筛选条件(对象形式) - 写法一
+    /* const conditions = {}
+    if (_id) {
+      conditions._id = dbCmd.eq(_id)
     }
+
+    if (name) {
+      conditions.$or = [
+        { username: { $regex: name, $options: 'i' } },
+        { nickname: { $regex: name, $options: 'i' } },
+      ]
+    }
+
+    if (platform) {
+      conditions['register_env.uni_platform'] = dbCmd.eq(platform)
+    }
+
+    if (role && role.length > 0) {
+      conditions.role = dbCmd.in([role])
+    }
+
+    // 将所有有效的筛选条件添加到查询对象中
+    if (Object.keys(conditions).length > 0) {
+      query = query.where(conditions)
+    } */
+
+    // 构建筛选条件(数组形式) - 写法二
+    let conditions = []
+
+    if (_id) {
+      conditions.push({
+        "_id": dbCmd.eq(_id)
+      })
+    }
+
+    if (name) {
+      // 模糊查询（不区分大小写）
+      conditions.push({
+        "$or": [{
+            username: {
+              $regex: name,
+              $options: 'i'
+            }
+          },
+          {
+            nickname: {
+              $regex: name,
+              $options: 'i'
+            }
+          },
+        ]
+      });
+    }
+
+    if (platform) {
+      conditions.push({
+        "register_env.uni_platform": dbCmd.eq(platform)
+      })
+    }
+
+    if (role) {
+      conditions.push({
+        "role": dbCmd.in([role])
+      })
+    }
+
+    // 合并所有条件
+    if (conditions.length > 0) {
+      query = query.where(dbCmd.and(...conditions))
+    }
+
+    userRes = await query.orderBy('register_date', 'asc')
+      .skip(pagesize * (pagenum - 1)).limit(pagesize).get()
 
     return handler.result({
       data: userRes.data,

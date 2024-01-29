@@ -15,10 +15,23 @@
             {{ item.name }}
           </view>
         </el-tag>
-        <view class="history-clear" v-if="historyList.length > 1" @click="onClearHistory">
-          <el-tooltip content="清空记录" placement="right">
-            <el-icon><Delete /></el-icon>
-          </el-tooltip>
+        <view class="history-clear" v-if="historyList.length > 1">
+          <el-dropdown size="small" @command="onDelHistory" placement="bottom-start">
+            <el-button type="success" link>
+              <template #icon>
+                <view class="sv-icons-clear"></view>
+              </template>
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item :icon="Close" command="del_cur">关闭当前</el-dropdown-item>
+                <el-dropdown-item :icon="Right" command="del_right">关闭右侧</el-dropdown-item>
+                <el-dropdown-item :icon="Back" command="del_left">关闭左侧</el-dropdown-item>
+                <el-dropdown-item :icon="Remove" command="del_other">关闭其他</el-dropdown-item>
+                <el-dropdown-item :icon="Delete" command="del_all">关闭所有</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
         </view>
       </view>
     </el-scrollbar>
@@ -29,7 +42,7 @@
 import { ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useNavStore } from '@/store/nav.js'
-import { Delete } from '@element-plus/icons-vue'
+import { Delete, Close, Right, Back, Remove } from '@element-plus/icons-vue'
 
 const route = useRoute()
 
@@ -68,9 +81,24 @@ function onTag(item) {
   }
 }
 
-function onClearHistory() {
-  // 清空历史记录
-  navStore.clearHistory()
+function onDelHistory(cmd) {
+  switch (cmd) {
+    case 'del_cur':
+      removeTag(curtag.value)
+      break
+    case 'del_right':
+      navStore.clearRightHistory(curtag.value)
+      break
+    case 'del_left':
+      navStore.clearLeftHistory(curtag.value)
+      break
+    case 'del_other':
+      navStore.clearOtherHistory(curtag.value)
+      break
+    case 'del_all':
+      navStore.clearHistory()
+      break
+  }
   historyList.value = navStore.getHistory()
 }
 
@@ -80,7 +108,7 @@ const curtag = computed(() => {
       route: url,
       navigationBar: { titleText: name }
     } = route.meta
-    return { name, url }
+    return { url, name }
   }
 })
 

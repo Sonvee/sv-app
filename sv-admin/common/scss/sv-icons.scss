@@ -21,6 +21,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sv-icons-clear:before {
+  content: "\e900";
+}
+
 .sv-icons-portal-home:before {
   content: "\e61d";
 }

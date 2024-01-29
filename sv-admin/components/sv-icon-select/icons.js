@@ -196,5 +196,6 @@ export default [
   'sv-icons-agreements-service',
   'sv-icons-agreements-privacy',
   'sv-icons-portal',
-  'sv-icons-portal-home'
+  'sv-icons-portal-home',
+  'sv-icons-clear'
 ]

@@ -51,6 +51,11 @@ a {
   overflow: auto;
 }
 
+.web-page {
+  height: 100%;
+  overflow: auto;
+}
+
 .flex {
   display: flex;
 }
@@ -210,5 +215,5 @@ a {
       background-color: getTheme('sv-grey-hl-color');
     }
   }
-  border-radius: 3px; /* 圆角 */
+  border-radius: 3px;
 }

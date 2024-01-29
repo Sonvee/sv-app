@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, shallowRef } from 'vue'
+import { ref } from 'vue'
 
 export const useNavStore = defineStore('nav', () => {
   // 导航栏历史
@@ -17,6 +17,7 @@ export const useNavStore = defineStore('nav', () => {
 
   function removeHistory(history) {
     const historyIndex = historyList.value.findIndex(item => item.url === history.url)
+    if (historyIndex === 0) return // 不关闭首页
     historyList.value.splice(historyIndex, 1)
   }
 

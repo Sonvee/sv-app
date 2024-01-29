@@ -38,7 +38,11 @@
             <view class="sv-icons-skin icon-btn"></view>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item v-for="item in adminConfig.navBar.themes" :key="item.value" :command="item.value">
+                <el-dropdown-item
+                  v-for="item in adminConfig.navBar.themes"
+                  :key="item.value"
+                  :command="item.value"
+                >
                   {{ item.text }}
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -55,7 +59,11 @@
         <view class="sv-menu-item">
           <el-dropdown trigger="click" placement="bottom-end" @command="handleCommand">
             <span class="flex-vc">
-              <el-avatar v-if="authInfo?.avatar_file?.url" :src="authInfo?.avatar_file?.url" :size="36" />
+              <el-avatar
+                v-if="authInfo?.avatar_file?.url"
+                :src="authInfo?.avatar_file?.url"
+                :size="36"
+              />
               <view class="authname">{{ authInfo?.nickname }}</view>
             </span>
             <template #dropdown>
@@ -111,14 +119,12 @@ const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
 // 监听登录成功后，刷新用户信息
 uni.$on('uni-id-pages-login-success', (e) => {
   historyRef.value.handleHistory()
-  searchRef.value.handleMenuNode()
 })
 
 // 登录成功时才会进行初始化
 onMounted(() => {
   if (getApp().$svIdPagesStore.store.hasLogin) {
     historyRef.value.handleHistory()
-    searchRef.value.handleMenuNode()
   }
 })
 
@@ -126,7 +132,7 @@ function handleTheme(command) {
   changeTheme(command)
 }
 
-const { isFullscreen, enter, exit, toggle } = useFullscreen()
+const { toggle } = useFullscreen()
 function fullScreen() {
   // 切换全屏
   toggle()
@@ -139,9 +145,10 @@ function docUrl() {
 const showSearch = ref(false)
 function globalSearch() {
   showSearch.value = !showSearch.value
+  if (showSearch.value) {
+    searchRef.value.handleMenuNode()
+  }
 }
-
-function openMenu() {}
 </script>
 
 <style lang="scss">

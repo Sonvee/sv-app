@@ -1,17 +1,16 @@
 {
   "id": "sv-json-view",
-  "displayName": "sv-json-view",
-  "version": "1.0.0",
+  "displayName": "json数据格式化可视化展示",
+  "version": "1.0.3",
   "description": "json数据格式化可视化展示",
   "keywords": [
-    "sv-json-view",
     "json",
     "格式化",
     "可视化"
 ],
   "repository": "",
-"engines": {
-    "HBuilderX": "^3.5.5"
+  "engines": {
+    "HBuilderX": "^3.1.0"
   },
   "dcloudext": {
     "type": "component-vue",
@@ -43,13 +42,13 @@
       },
       "client": {
         "Vue": {
-          "vue2": "u",
+          "vue2": "n",
           "vue3": "y"
         },
         "App": {
           "app-vue": "y",
           "app-nvue": "u",
-          "app-uvue": "u",
+          "app-uvue": "u"
         },
         "H5-mobile": {
           "Safari": "y",

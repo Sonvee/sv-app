@@ -8,28 +8,28 @@ sv-client 客户端框架
 
 密码：visitor666
 
-[在线体验sv-client](https://static-mp-241cd6b9-ed64-49bc-ab70-a57dce02eb11.next.bspapp.com/client/#/)
+[在线体验sv-client](https://static-mp-74bfcbac-6ba6-4f39-8513-8831390ff75a.next.bspapp.com/client/#/)
 
 ### 前言
 1. 用户体系: [sv-id-pages](https://ext.dcloud.net.cn/plugin?id=15141) 基于uni-id-pages开发的用户体系
-2. 客户端: [sv-client](https://ext.dcloud.net.cn/plugin?id=15175) 配套的客户端框架，配套使用时建议将服务空间关联至sv-service
-3. 管理端: [sv-admin](https://ext.dcloud.net.cn/plugin?id=15434) 配套的管理端框架，配套使用时建议将服务空间关联至sv-service
-4. 服务端: [sv-service](https://ext.dcloud.net.cn/plugin?id=15431) 配套的服务端框架
+2. 服务端: [sv-service](https://ext.dcloud.net.cn/plugin?id=16529) 配套的服务端框架
+3. 客户端: [sv-client](https://ext.dcloud.net.cn/plugin?id=16530) 配套的客户端框架，配套使用时建议将服务空间关联至sv-service
+4. 管理端: [sv-admin](https://ext.dcloud.net.cn/plugin?id=16531) 配套的管理端框架，配套使用时建议将服务空间关联至sv-service
 
 ### 特点
 1. 云函数url化: 封装uni.request，仿axios写法，对url化的云函数接口进行请求
-2. 页面路由: 基于[uniapp-route-guards](https://ext.dcloud.net.cn/plugin?id=1955)的页面路由守卫
-3. 状态管理: pinia状态管理仓库，基于[pinia-plugin-unistorage](https://ext.dcloud.net.cn/plugin?id=8081)的状态持久化
-4. 组件库: 基于[uv-ui](https://ext.dcloud.net.cn/plugin?id=12287)的uniapp全端兼容组件库
-5. 自定义navbar和tabbar，皆可动态配置
-6. 图标库: 内置uni-icons与admin-icons图标库，以及用户自定义sv-icons图标库，与sv-admin端同步，详情请移步博客: [`在uniapp、uni-admin中使用阿里巴巴矢量库自定义字体图标`](https://blog.csdn.net/qq_48702470/article/details/134409205)
-7. 工具库: lodash，dayjs
+2. 状态管理: pinia状态管理仓库，基于[pinia-plugin-unistorage](https://ext.dcloud.net.cn/plugin?id=8081)的状态持久化
+3. 组件库: 基于[uv-ui](https://ext.dcloud.net.cn/plugin?id=12287)的uniapp全端兼容组件库
+4. 自定义navbar和tabbar，皆可动态配置
+5. 图标库: 内置uni-icons与admin-icons图标库，以及用户自定义sv-icons图标库，与sv-admin端同步，详情请移步博客: [`在uniapp、uni-admin中使用阿里巴巴矢量库自定义字体图标`](https://blog.csdn.net/qq_48702470/article/details/134409205)
+6. 工具库: lodash，dayjs
+7. 皮肤一键切换，目前内置light、dark两种主题色
 8. 项目结构干净整洁，不掺杂其他冗余的成分，极力追求于精悍
 
 ### 项目初始化首要配置项
 1. configs/index.js
 ```
-const base_url = 'https://xxxxxx.next.bspapp.com' // 云函数URL化基础路径
+const base_url = 'https://fc-xxxxxx.next.bspapp.com' // 云函数URL化基础路径
 const base_cdn = 'https://xxxxxx.cdn.bspapp.com' // 云存储下载域名
 ```
 2. uni-config-center/uni-id/config.json
@@ -56,4 +56,4 @@ const base_cdn = 'https://xxxxxx.cdn.bspapp.com' // 云存储下载域名
 
 
 ### 结语
-若在开发过程中遇到框架的bug或希望更新的内容，还请给我反馈和提出[点击此处进行issues](https://gitee.com/Sonweir/sv-client/issues)我会及时响应并做出更新
+本应用体系还在不断完善中...

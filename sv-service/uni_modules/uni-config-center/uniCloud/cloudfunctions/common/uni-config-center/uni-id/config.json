@@ -94,9 +94,9 @@
       }
     },
     "univerify": {
-      "appid": "__UNI__68D4B72",
-      "apiKey": "e6711eb2ec75698343aba947ede02306",
-      "apiSecret": "e4ce041e3aaadbdd58b4327d06884832"
+      "appid": "",
+      "apiKey": "",
+      "apiSecret": ""
     }
   }
 }

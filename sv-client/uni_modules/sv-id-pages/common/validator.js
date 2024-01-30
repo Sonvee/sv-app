@@ -65,7 +65,7 @@ export default {
     }],
     "label": "手机号"
   },
-  "usernameAndMobile": {
+  "usernameOrMobile": {
     "rules": [{
       required: true,
       errorMessage: '请输入用户名或手机号',

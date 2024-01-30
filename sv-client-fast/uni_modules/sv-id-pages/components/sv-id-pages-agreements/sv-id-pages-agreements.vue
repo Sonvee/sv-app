@@ -1,5 +1,5 @@
 <template>
-  <view class="root" v-if="agreements.length">
+  <view class="sv-id-pages-agreements" v-if="agreements.length">
     <template v-if="needAgreements">
       <checkbox-group @change="setAgree">
         <label class="checkbox-box">
@@ -82,13 +82,7 @@ export default {
       })
     },
     navigateTo({ url, title }) {
-      console.log('==== url,title :', url, title)
-      uni.navigateTo({
-        url: '/uni_modules/sv-id-pages/pages/webview/webview?url=' + url + '&title=' + title,
-        success: (res) => {},
-        fail: () => {},
-        complete: () => {}
-      })
+      uni.navigateTo({ url })
     },
     hasAnd(agreements, index) {
       return agreements.length - 1 > index
@@ -120,7 +114,7 @@ view {
 }
 
 /* #endif */
-.root {
+.sv-id-pages-agreements {
   flex-direction: row;
   align-items: center;
   font-size: 12px;
@@ -160,7 +154,7 @@ view {
   flex-direction: row;
 }
 
-.root ::v-deep .uni-popup__error {
+.sv-id-pages-agreements ::v-deep .uni-popup__error {
   color: #333333;
 }
 </style>

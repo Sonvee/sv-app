@@ -5,9 +5,9 @@
       <!-- 登录 -->
       <view class="login-form">
         <uni-forms ref="loginform" :model="loginFormData" :rules="rules" label-width="0">
-          <uni-forms-item name="usernameAndMobile">
+          <uni-forms-item name="usernameOrMobile">
             <uni-easyinput
-              v-model="loginFormData.usernameAndMobile"
+              v-model="loginFormData.usernameOrMobile"
               placeholder="请输入用户名/手机号"
               prefixIcon="person"
             ></uni-easyinput>
@@ -98,7 +98,7 @@ export default {
   data() {
     return {
       loginFormData: {
-        usernameAndMobile: '',
+        usernameOrMobile: '',
         password: '',
         captcha: ''
       },
@@ -126,10 +126,10 @@ export default {
       let phoneReg = /^1\d{10}$/
       const { password, captcha } = this.loginFormData
       let loginObj = { password, captcha }
-      if (phoneReg.test(this.loginFormData.usernameAndMobile)) {
-        loginObj.mobile = this.loginFormData.usernameAndMobile
+      if (phoneReg.test(this.loginFormData.usernameOrMobile)) {
+        loginObj.mobile = this.loginFormData.usernameOrMobile
       } else {
-        loginObj.username = this.loginFormData.usernameAndMobile
+        loginObj.username = this.loginFormData.usernameOrMobile
       }
       this.$refs.loginform
         .validate()

@@ -1,6 +1,6 @@
 [
   {
-    "permission_id": "READ_MENU",
+    "permission_id": "MENU_READ",
     "permission_name": "读取菜单权限",
     "comment": "读取菜单权限",
     "create_date": 0

@@ -39,6 +39,7 @@
           </el-form-item>
           <el-form-item prop="username" label="用户名" required>
             <el-input
+              class="sv-el-input"
               v-model="formData.username"
               placeholder="请输入用户名"
               clearable
@@ -57,6 +58,7 @@
           </el-form-item>
           <el-form-item prop="mobile" label="手机号码">
             <el-input
+              class="sv-el-input"
               v-model="formData.mobile"
               placeholder="请输入手机号码"
               clearable
@@ -65,6 +67,7 @@
           </el-form-item>
           <el-form-item prop="email" label="邮箱">
             <el-input
+              class="sv-el-input"
               v-model="formData.email"
               placeholder="请输入邮箱"
               clearable
@@ -85,23 +88,12 @@
     </template>
     <template #footer>
       <!-- 密码修改 -->
-      <el-popover
-        width="260px"
-        placement="top-start"
-        trigger="click"
-        v-model:visible="showPwdReset"
-      >
+      <el-popover width="260px" placement="top-start" trigger="click" v-model:visible="showPwdReset">
         <template #reference>
           <el-button style="float: left" type="danger">修改密码</el-button>
         </template>
         <view class="reset-pwd-form">
-          <el-form
-            class="sv-el-form"
-            ref="pwdFormRef"
-            :model="pwdFormData"
-            :rules="rules"
-            label-position="left"
-          >
+          <el-form class="sv-el-form" ref="pwdFormRef" :model="pwdFormData" :rules="rules" label-position="left">
             <el-form-item prop="oldPassword" label="旧密码" required>
               <el-input
                 v-model="pwdFormData.oldPassword"

@@ -1,141 +1,154 @@
-[
-  {
-    "menu_id": "index",
-    "name": "首页",
-    "icon": "uni-icons-home",
-    "url": "/",
-    "sort": 0,
-    "parent_id": "",
-    "permission": [],
-    "enable": true
-  }, {
-    "menu_id": "system_management",
-    "name": "系统管理",
-    "icon": "admin-icons-fl-xitong",
-    "url": "/pages/system",
-    "sort": 1,
-    "parent_id": "",
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "system_user",
-    "name": "用户管理",
-    "icon": "admin-icons-manager-user",
-    "url": "/pages/system/user/user",
-    "sort": 11,
-    "parent_id": "system_management",
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "system_role",
-    "name": "角色管理",
-    "url": "/pages/system/role/role",
-    "parent_id": "system_management",
-    "icon": "admin-icons-manager-role",
-    "sort": 12,
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "system_permission",
-    "name": "权限管理",
-    "url": "/pages/system/permission/permission",
-    "parent_id": "system_management",
-    "icon": "admin-icons-manager-permission",
-    "sort": 13,
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "system_menu",
-    "name": "菜单管理",
-    "icon": "admin-icons-manager-menu",
-    "url": "/pages/system/menu/menu",
-    "sort": 14,
-    "parent_id": "system_management",
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "system_app",
-    "name": "应用管理",
-    "url": "/pages/system/app/app",
-    "parent_id": "system_management",
-    "icon": "admin-icons-manager-app",
-    "sort": 15,
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "system_dict",
-    "name": "字典管理",
-    "url": "/pages/system/dict/dict",
-    "parent_id": "system_management",
-    "icon": "admin-icons-help",
-    "sort": 16,
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "system_logs",
-    "name": "日志管理",
-    "url": "/pages/system/logs/logs",
-    "parent_id": "system_management",
-    "icon": "admin-icons-doc",
-    "sort": 17,
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "tool_management",
-    "name": "系统工具",
-    "url": "/pages/tool",
-    "parent_id": "",
-    "icon": "sv-icons-tool",
-    "sort": 2,
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "tool_mine",
-    "name": "个人中心",
-    "url": "/pages/tool/mine/mine",
-    "parent_id": "tool_management",
-    "icon": "admin-icons-user",
-    "sort": 21,
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "tool_apidoc",
-    "name": "接口文档",
-    "url": "/pages/tool/apidoc/apidoc",
-    "parent_id": "tool_management",
-    "icon": "uni-icons-paperclip",
-    "sort": 22,
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "tool_cache",
-    "name": "缓存管理",
-    "url": "/pages/tool/cache/cache",
-    "parent_id": "tool_management",
-    "icon": "admin-icons-eco",
-    "sort": 23,
-    "permission": [],
-    "enable": true
-  },
-  {
-    "menu_id": "media_lib",
-    "name": "媒体库",
-    "url": "/pages/media/media",
-    "parent_id": "",
-    "icon": "uni-icons-images",
-    "sort": 3,
-    "permission": [],
-    "enable": true
-  }
-]
+[{
+  "menu_id": "index",
+  "name": "首页",
+  "icon": "uni-icons-home",
+  "url": "/",
+  "sort": 0,
+  "parent_id": "",
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "web",
+  "name": "门户网站",
+  "url": "/pages/web/home/home",
+  "parent_id": "",
+  "icon": "sv-icons-portal",
+  "sort": 1,
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "business ",
+  "name": "业务模块",
+  "url": "/pages/business",
+  "parent_id": "",
+  "icon": "admin-icons-trend",
+  "sort": 2,
+  "permission": ["READ_MENU", "API_READ", "API_WRITE"],
+  "enable": true
+}, {
+  "menu_id": "business_business1",
+  "name": "业务模块一",
+  "url": "/pages/business/business1/business1",
+  "parent_id": "business ",
+  "icon": "admin-icons-stat",
+  "sort": 21,
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "system",
+  "name": "系统模块",
+  "icon": "admin-icons-fl-xitong",
+  "url": "/pages/system",
+  "sort": 10,
+  "parent_id": "",
+  "permission": ["READ_MENU", "API_READ", "API_WRITE"],
+  "enable": true
+}, {
+  "menu_id": "system_user",
+  "name": "用户管理",
+  "icon": "admin-icons-manager-user",
+  "url": "/pages/system/user/user",
+  "sort": 101,
+  "parent_id": "system",
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "system_role",
+  "name": "角色管理",
+  "url": "/pages/system/role/role",
+  "parent_id": "system",
+  "icon": "admin-icons-manager-role",
+  "sort": 102,
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "system_permission",
+  "name": "权限管理",
+  "url": "/pages/system/permission/permission",
+  "parent_id": "system",
+  "icon": "admin-icons-manager-permission",
+  "sort": 103,
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "system_menu",
+  "name": "菜单管理",
+  "icon": "admin-icons-manager-menu",
+  "url": "/pages/system/menu/menu",
+  "sort": 104,
+  "parent_id": "system",
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "system_app",
+  "name": "应用管理",
+  "url": "/pages/system/app/app",
+  "parent_id": "system",
+  "icon": "admin-icons-manager-app",
+  "sort": 105,
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "system_dict",
+  "name": "字典管理",
+  "url": "/pages/system/dict/dict",
+  "parent_id": "system",
+  "icon": "admin-icons-help",
+  "sort": 106,
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "system_logs",
+  "name": "日志管理",
+  "url": "/pages/system/logs/logs",
+  "parent_id": "system",
+  "icon": "admin-icons-doc",
+  "sort": 107,
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "tool",
+  "name": "系统工具",
+  "url": "/pages/tool",
+  "parent_id": "",
+  "icon": "sv-icons-tool",
+  "sort": 20,
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "tool_mine",
+  "name": "个人中心",
+  "url": "/pages/tool/mine/mine",
+  "parent_id": "tool",
+  "icon": "admin-icons-user",
+  "sort": 201,
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "tool_apidoc",
+  "name": "接口文档",
+  "url": "/pages/tool/apidoc/apidoc",
+  "parent_id": "tool",
+  "icon": "uni-icons-paperclip",
+  "sort": 202,
+  "permission": ["READ_MENU"],
+  "enable": true
+}, {
+  "menu_id": "tool_cache",
+  "name": "缓存管理",
+  "url": "/pages/tool/cache/cache",
+  "parent_id": "tool",
+  "icon": "admin-icons-eco",
+  "sort": 203,
+  "permission": [],
+  "enable": true
+}, {
+  "menu_id": "media",
+  "name": "媒体库",
+  "url": "/pages/media/media",
+  "parent_id": "",
+  "icon": "uni-icons-images",
+  "sort": 30,
+  "permission": ["READ_MENU", "API_WRITE", "API_READ"],
+  "enable": true
+}]

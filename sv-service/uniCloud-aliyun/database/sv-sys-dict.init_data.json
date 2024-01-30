@@ -19,7 +19,7 @@
       "value": "注销"
     }],
     "comment": "uni_id_users用户表状态字典",
-    "create_date": 1700062415000
+    "create_date": 0
   },
   {
     "dict_id": "uni_id_users_gender",
@@ -35,7 +35,7 @@
       "value": "女"
     }],
     "comment": "uni_id_users用户表性别字典",
-    "create_date": 1700063128547
+    "create_date": 0
   },
   {
     "dict_id": "uni_id_users_platform",
@@ -48,6 +48,6 @@
       "value": "微信用户"
     }],
     "comment": "",
-    "create_date": 1700448408117
+    "create_date": 0
   }
 ]

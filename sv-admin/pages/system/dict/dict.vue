@@ -101,25 +101,12 @@ import { timeFormat } from '@/utils/util'
 import { dictAdd, dictDelete, dictList, dictUpdate } from '@/service/api/sys'
 import { storageDicts } from '@/utils/pinia-storage'
 
-const showHeader = ref(false) // 头部筛选栏显示
+const showHeader = ref(uni.getSystemInfoSync().deviceType == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
 const formMode = ref('') // 表单模式 add / edit
-
-JudgeDeviceType()
-function JudgeDeviceType() {
-  const deviceType = uni.getSystemInfoSync().deviceType
-  switch (deviceType) {
-    case 'pc':
-      showHeader.value = true
-      break
-    default:
-      showHeader.value = false
-      break
-  }
-}
 
 // 初始获取表格数据
 handleTable()

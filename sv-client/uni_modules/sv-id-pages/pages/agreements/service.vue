@@ -66,11 +66,20 @@
   </view>
 </template>
 
-<script setup>
+<script>
 import manifest from '@/manifest.json'
 
-function goBack() {
-  uni.navigateBack()
+export default {
+  data() {
+    return {
+      manifest
+    }
+  },
+  methods: {
+    goBack() {
+      uni.navigateBack()
+    }
+  }
 }
 </script>
 

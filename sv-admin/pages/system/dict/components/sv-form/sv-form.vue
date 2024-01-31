@@ -75,7 +75,7 @@ const emits = defineEmits(['submit'])
 // 表单数据
 const formData = ref({})
 // 初始数据
-const initData = {
+const formBase = {
   dict_id: '',
   dict_name: '',
   dict: [{ key: '', value: '' }],
@@ -85,7 +85,7 @@ const initData = {
 
 watchEffect(() => {
   // 表单数据初始化更新
-  formData.value = Object.assign({ ...initData }, props.formInit)
+  formData.value = Object.assign({ ...formBase }, props.formInit)
 })
 
 // 校验规则

@@ -8,29 +8,22 @@
         <el-input v-model="filterForm.name" placeholder="请输入用户名/昵称" clearable />
       </el-form-item>
       <el-form-item label="角色">
-        <el-select class="sv-el-select" v-model="filterForm.role" placeholder="选择角色" clearable>
-          <el-option
-            v-for="item in roleList"
-            :key="item.role_id"
-            :label="item.role_name"
-            :value="item.role_id"
-          />
-        </el-select>
+        <sv-dict-select
+          v-model="filterForm.role"
+          placeholder="选择角色"
+          :dictList="useSvidStore().getRoles()"
+          keyName="role_name"
+          valueName="role_id"
+        ></sv-dict-select>
       </el-form-item>
       <el-form-item label="账号类型">
-        <el-select
-          class="sv-el-select"
+        <sv-dict-select
           v-model="filterForm.platform"
           placeholder="选择账号类型"
-          clearable
-        >
-          <el-option
-            v-for="item in platformList"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
+          dictType="uni_id_users_platform"
+          keyName="key"
+          valueName="value"
+        ></sv-dict-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit">搜索</el-button>
@@ -61,21 +54,6 @@ const filterForm = ref({
   role: []
 })
 
-// 停启用状态选择器
-const roleList = useSvidStore().getRoles()
-
-// 停启用状态选择器
-const platformList = [
-  {
-    label: '官方账户',
-    value: 'web'
-  },
-  {
-    label: '微信用户',
-    value: 'mp-weixin'
-  }
-]
-
 // 提交
 function submit() {
   emits('submit', filterForm.value)
@@ -86,7 +64,8 @@ function reset() {
   filterForm.value = {
     _id: '',
     name: '',
-    platform: ''
+    platform: '',
+    role: []
   }
 }
 </script>

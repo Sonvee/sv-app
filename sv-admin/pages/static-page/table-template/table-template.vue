@@ -8,12 +8,7 @@
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
       <view style="flex: 1"></view>
-      <el-button
-        type="primary"
-        link
-        :icon="showHeader ? View : Hide"
-        @click="showHeader = !showHeader"
-      ></el-button>
+      <el-button type="primary" link :icon="showHeader ? View : Hide" @click="showHeader = !showHeader"></el-button>
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
@@ -27,23 +22,13 @@
         fixed="left"
       >
         <template #default="scope">
-          <image
-            class="avatar-image"
-            v-if="scope.row.avatar_file"
-            :src="scope.row.avatar_file?.url"
-          />
+          <image class="avatar-image" v-if="scope.row.avatar_file" :src="scope.row.avatar_file?.url" />
         </template>
       </el-table-column>
       <el-table-column prop="username" label="用户名" :width="180" fixed="left" />
       <el-table-column prop="nickname" label="昵称" :width="180" />
       <el-table-column prop="my_invite_code" label="邀请码" :width="120" />
-      <el-table-column
-        prop="dcloud_appid"
-        label="可用APP"
-        :min-width="300"
-        align="center"
-        show-overflow-tooltip
-      >
+      <el-table-column prop="dcloud_appid" label="可用APP" :min-width="300" align="center" show-overflow-tooltip>
         <template #default="scope">
           <el-tag
             v-for="(item, index) in scope.row.dcloud_appid"
@@ -85,26 +70,15 @@
     </el-table>
     <!-- 分页 -->
     <view class="sv-pagination">
-      <el-pagination
-        class="sv-el-pagination"
-        v-model:current-page="pagingParams.pagenum"
-        v-model:page-size="pagingParams.pagesize"
-        :page-sizes="[5, 10, 20, 30, 40]"
-        :pager-count="5"
+      <sv-pagination
+        :pagingParams="pagingParams"
         :total="total"
-        small
-        :layout="paginationLayout"
         @update:page-size="handleSizeChange"
         @update:current-page="handleCurrentChange"
       />
     </view>
     <!-- 表单抽屉弹窗 -->
-    <sv-form
-      v-model="showForm"
-      :form-init="formInit"
-      :form-mode="formMode"
-      @submit="submitForm"
-    ></sv-form>
+    <sv-form v-model="showForm" :form-init="formInit" :form-mode="formMode" @submit="submitForm"></sv-form>
   </view>
 </template>
 
@@ -117,31 +91,15 @@ import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
 import tempdata from '@/common/json/temp-tabledata.json'
 
-const showHeader = ref(false) // 头部筛选栏显示
+const showHeader = ref(uni.getSystemInfoSync().deviceType == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
-const paginationLayout = ref('') // 分页项
 const pagingParams = ref({ pagesize: 10, pagenum: 1 }) // 表格分页默认参数
 const filterParams = ref({}) // 筛选参数
 const total = ref(0) // 表格总数
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
 const formMode = ref('') // 表单模式 add / edit
-
-JudgeDeviceType()
-function JudgeDeviceType() {
-  const deviceType = uni.getSystemInfoSync().deviceType
-  switch (deviceType) {
-    case 'pc':
-      showHeader.value = true
-      paginationLayout.value = 'total, sizes, prev, pager, next, jumper'
-      break
-    default:
-      showHeader.value = false
-      paginationLayout.value = 'prev, pager, next, jumper'
-      break
-  }
-}
 
 // 初始获取表格数据
 handleTable(pagingParams.value)
@@ -279,12 +237,6 @@ function handleCurrentChange(e) {
     margin-bottom: 10px;
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .sv-pagination {
-    padding: 10px 0;
-    display: flex;
-    justify-content: flex-end;
   }
 }
 

@@ -2,8 +2,7 @@
   "pages": [{
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "首页",
-        "enablePullDownRefresh": false
+        "navigationBarTitleText": "首页"
       }
     },
     {
@@ -21,8 +20,7 @@
     {
       "path": "pages/mine/setting/setting",
       "style": {
-        "navigationBarTitleText": "设置",
-        "enablePullDownRefresh": false
+        "navigationBarTitleText": "设置"
       }
     },
     {
@@ -35,7 +33,6 @@
       "path": "uni_modules/sv-id-pages/pages/userinfo/userinfo",
       "style": {
         "navigationBarTitleText": "个人中心",
-        "enablePullDownRefresh": false,
         "navigationStyle": "default",
         "navigationBarTextStyle": "black"
       }
@@ -43,15 +40,13 @@
     {
       "path": "uni_modules/sv-id-pages/pages/userinfo/cropImage/cropImage",
       "style": {
-        "navigationBarTitleText": "头像",
-        "enablePullDownRefresh": false
+        "navigationBarTitleText": "头像"
       }
     },
     {
       "path": "uni_modules/sv-id-pages/pages/userinfo/security/security",
       "style": {
         "navigationBarTitleText": "账号与安全",
-        "enablePullDownRefresh": false,
         "navigationStyle": "default",
         "navigationBarTextStyle": "black"
       }
@@ -60,7 +55,6 @@
       "path": "uni_modules/sv-id-pages/pages/userinfo/deactivate/deactivate",
       "style": {
         "navigationBarTitleText": "注销账号",
-        "enablePullDownRefresh": false,
         "navigationStyle": "default",
         "navigationBarTextStyle": "black"
       }
@@ -69,23 +63,14 @@
       "path": "uni_modules/sv-id-pages/pages/userinfo/change-pwd/change-pwd",
       "style": {
         "navigationBarTitleText": "修改密码",
-        "enablePullDownRefresh": false,
         "navigationStyle": "default",
         "navigationBarTextStyle": "black"
-      }
-    },
-    {
-      "path": "uni_modules/sv-id-pages/pages/webview/webview",
-      "style": {
-        "navigationBarTitleText": "",
-        "enablePullDownRefresh": false
       }
     },
     {
       "path": "uni_modules/sv-id-pages/pages/userinfo/bind-mobile/bind-mobile",
       "style": {
         "navigationBarTitleText": "绑定手机",
-        "enablePullDownRefresh": false,
         "navigationStyle": "default",
         "navigationBarTextStyle": "black"
       }
@@ -94,7 +79,6 @@
       "path": "uni_modules/sv-id-pages/pages/userinfo/set-pwd/set-pwd",
       "style": {
         "navigationBarTitleText": "设置密码",
-        "enablePullDownRefresh": false,
         "navigationStyle": "default",
         "navigationBarTextStyle": "black"
       }
@@ -103,16 +87,22 @@
       "path": "uni_modules/sv-id-pages/pages/userinfo/unbind/unbind",
       "style": {
         "navigationBarTitleText": "解绑注销",
-        "enablePullDownRefresh": false,
         "navigationStyle": "default",
         "navigationBarTextStyle": "black"
       }
     },
     {
-      "path": "uni_modules/sv-id-pages/pages/userinfo/realname-verify/realname-verify",
+      "path": "uni_modules/sv-id-pages/pages/agreements/service",
       "style": {
-        "navigationBarTitleText": "实名认证",
-        "enablePullDownRefresh": false,
+        "navigationBarTitleText": "用户服务协议",
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "uni_modules/sv-id-pages/pages/agreements/privacy",
+      "style": {
+        "navigationBarTitleText": "隐私政策条款",
         "navigationStyle": "default",
         "navigationBarTextStyle": "black"
       }

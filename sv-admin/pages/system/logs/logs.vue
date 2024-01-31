@@ -42,20 +42,12 @@
       ></el-table-column>
     </el-table>
     <!-- 分页 -->
-    <view class="sv-pagination">
-      <el-pagination
-        class="sv-el-pagination"
-        v-model:current-page="pagingParams.pagenum"
-        v-model:page-size="pagingParams.pagesize"
-        :page-sizes="[10, 20, 30, 40, 50]"
-        :pager-count="5"
-        :total="total"
-        small
-        :layout="paginationLayout"
-        @update:page-size="handleSizeChange"
-        @update:current-page="handleCurrentChange"
-      />
-    </view>
+    <sv-pagination
+      :pagingParams="pagingParams"
+      :total="total"
+      @update:page-size="handleSizeChange"
+      @update:current-page="handleCurrentChange"
+    />
   </view>
 </template>
 
@@ -70,20 +62,6 @@ const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const pagingParams = ref({ pagesize: 20, pagenum: 1 }) // 表格分页默认参数
 const total = ref(0) // 表格总数
-const paginationLayout = ref('') // 分页项
-
-JudgeDeviceType()
-function JudgeDeviceType() {
-  const deviceType = uni.getSystemInfoSync().deviceType
-  switch (deviceType) {
-    case 'pc':
-      paginationLayout.value = 'total, sizes, prev, pager, next, jumper'
-      break
-    default:
-      paginationLayout.value = 'prev, pager, next, jumper'
-      break
-  }
-}
 
 // 初始获取表格数据
 handleTable(pagingParams.value)
@@ -129,13 +107,6 @@ function handleCurrentChange(e) {
     margin-bottom: 10px;
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .sv-pagination {
-    width: 100%;
-    padding: 10px 0;
-    display: flex;
-    justify-content: flex-end;
   }
 }
 

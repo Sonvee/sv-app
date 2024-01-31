@@ -8,12 +8,7 @@
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
       <view style="flex: 1"></view>
-      <el-button
-        type="primary"
-        link
-        :icon="showHeader ? View : Hide"
-        @click="showHeader = !showHeader"
-      ></el-button>
+      <el-button type="primary" link :icon="showHeader ? View : Hide" @click="showHeader = !showHeader"></el-button>
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
@@ -27,33 +22,21 @@
         fixed="left"
       >
         <template #default="scope">
-          <image
-            class="avatar-image"
-            v-if="scope.row.avatar_file"
-            :src="scope.row.avatar_file?.url"
-          />
+          <image class="avatar-image" v-if="scope.row.avatar_file" :src="scope.row.avatar_file?.url" />
         </template>
       </el-table-column>
       <el-table-column prop="username" label="用户名" :width="180" fixed="left" />
       <el-table-column prop="nickname" label="昵称" :width="180" />
-      <el-table-column
-        prop="gender"
-        label="性别"
-        align="center"
-        :width="80"
-        :formatter="(row) => genderDict[row?.gender]"
-      />
+      <el-table-column prop="gender" label="性别" align="center" :width="80">
+        <template #default="scope">
+          <sv-dict-tag :data="scope.row.gender" type="uni_id_users_gender"></sv-dict-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="mobile" label="手机号码" align="center" :width="160" />
       <el-table-column prop="email" label="邮箱" align="center" :width="160" />
       <el-table-column prop="role" label="角色" align="center" :width="160" />
       <el-table-column prop="my_invite_code" label="邀请码" :width="100" />
-      <el-table-column
-        prop="dcloud_appid"
-        label="可用APP"
-        align="center"
-        :width="300"
-        show-overflow-tooltip
-      >
+      <el-table-column prop="dcloud_appid" label="可用APP" align="center" :width="300" show-overflow-tooltip>
         <template #default="scope">
           <el-tag
             v-for="(item, index) in scope.row?.dcloud_appid"
@@ -66,13 +49,11 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column
-        prop="register_env.uni_platform"
-        label="账号类型"
-        :formatter="(row) => platformDict[row?.register_env?.uni_platform]"
-        align="center"
-        :width="100"
-      />
+      <el-table-column prop="register_env.uni_platform" label="账号类型" align="center" :width="100">
+        <template #default="scope">
+          <sv-dict-tag :data="scope.row?.register_env?.uni_platform || 'web'" type="uni_id_users_platform" />
+        </template>
+      </el-table-column>
       <!-- 用户状态：0 正常 1 禁用 2 审核中 3 审核拒绝 -->
       <el-table-column prop="status" label="状态" align="center" :width="100">
         <template #default="scope">
@@ -109,64 +90,47 @@
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <view class="sv-pagination">
-      <el-pagination
-        class="sv-el-pagination"
-        v-model:current-page="pagingParams.pagenum"
-        v-model:page-size="pagingParams.pagesize"
-        :page-sizes="[10, 20, 30, 40, 50]"
-        :pager-count="5"
-        :total="total"
-        small
-        :layout="paginationLayout"
-        @update:page-size="handleSizeChange"
-        @update:current-page="handleCurrentChange"
-      />
-    </view>
+    <sv-pagination
+      :pagingParams="pagingParams"
+      :total="total"
+      @update:page-size="handleSizeChange"
+      @update:current-page="handleCurrentChange"
+    />
     <!-- 表单抽屉弹窗 -->
-    <sv-form
-      v-model="showForm"
-      :form-init="formInit"
-      :form-mode="formMode"
-      @submit="submitForm"
-    ></sv-form>
+    <sv-form v-model="showForm" :form-init="formInit" :form-mode="formMode" @submit="submitForm"></sv-form>
   </view>
 </template>
 
 <script setup>
-import { computed, nextTick, ref } from 'vue'
+import { ref } from 'vue'
 import SvTableHeader from './components/sv-table-header/sv-table-header.vue'
 import SvForm from './components/sv-form/sv-form.vue'
 import { View, Hide, RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { userAdd, userDelete, userList, userUpdate } from '@/service/api/svid'
 import { timeFormat } from '@/utils/util'
-import { getAppFromCache, getDictById, handleMap } from '@/utils/sys'
+import { handleMap } from '@/utils/sys'
+import { useSysStore } from '@/store/sys'
 
-const showHeader = ref(false) // 头部筛选栏显示
+const showHeader = ref(uni.getSystemInfoSync().deviceType == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const pagingParams = ref({ pagesize: 20, pagenum: 1 }) // 表格分页默认参数
 const total = ref(0) // 表格总数
-const paginationLayout = ref('') // 分页项
 const filterParams = ref({}) // 筛选参数
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
 const formMode = ref('') // 表单模式 add / edit
 
-JudgeDeviceType()
-function JudgeDeviceType() {
-  const deviceType = uni.getSystemInfoSync().deviceType
-  switch (deviceType) {
-    case 'pc':
-      showHeader.value = true
-      paginationLayout.value = 'total, sizes, prev, pager, next, jumper'
-      break
-    default:
-      showHeader.value = false
-      paginationLayout.value = 'prev, pager, next, jumper'
-      break
-  }
+const appMap = handleMap(useSysStore().getApps(), 'appid', 'name')
+// 用户状态
+const statusMap = {
+  undefined: { text: '正常', type: '' }, // undefined也为正常
+  0: { text: '正常', type: '' },
+  1: { text: '禁用', type: 'danger' },
+  2: { text: '审核中', type: 'success' },
+  3: { text: '审核拒绝', type: 'warning' },
+  4: { text: '注销', type: 'info' }
 }
 
 // 初始获取表格数据
@@ -188,29 +152,6 @@ async function handleTable(params) {
 
   loading.value = false
 }
-
-// 状态格式化 用户状态：0 正常 1 禁用 2 审核中 3 审核拒绝
-const statusMap = {
-  undefined: { text: '正常', type: '' }, // undefined也为正常
-  0: { text: '正常', type: '' },
-  1: { text: '禁用', type: 'danger' },
-  2: { text: '审核中', type: 'success' },
-  3: { text: '审核拒绝', type: 'warning' },
-  4: { text: '注销', type: 'info' }
-}
-
-const platformDict = ref({})
-const genderDict = ref({})
-const appMap = ref({})
-
-async function handleDict() {
-  platformDict.value = await getDictById('uni_id_users_platform', true)
-  genderDict.value = await getDictById('uni_id_users_gender', true)
-
-  const appList = await getAppFromCache()
-  appMap.value = handleMap(appList, 'appid', 'name')
-}
-handleDict()
 
 // 刷新
 function refresh() {
@@ -312,15 +253,6 @@ function handleCurrentChange(e) {
     margin-bottom: 10px;
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .sv-table {
-  }
-
-  .sv-pagination {
-    padding: 10px 0;
-    display: flex;
-    justify-content: flex-end;
   }
 }
 

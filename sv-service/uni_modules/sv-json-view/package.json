@@ -1,7 +1,7 @@
 {
   "id": "sv-json-view",
   "displayName": "json数据格式化可视化展示",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "json数据格式化可视化展示",
   "keywords": [
     "json",

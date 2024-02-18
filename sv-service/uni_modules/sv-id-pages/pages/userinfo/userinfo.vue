@@ -8,39 +8,49 @@
       </uni-list-item>
       <uni-list-item
         title="用户ID"
-        :rightText="userInfo?._id"
+        :rightText="userInfo._id"
         link
-        @click="setClipboard(userInfo?._id)"
-      />
-      <uni-list-item title="昵称" :rightText="userInfo?.nickname" link @click="onNickname" />
+        @click="setClipboard(userInfo._id)"
+      ></uni-list-item>
+      <uni-list-item
+        title="昵称"
+        :rightText="userInfo.nickname"
+        link
+        @click="onNickname"
+      ></uni-list-item>
     </uni-list>
     <view class="divider"></view>
     <uni-list>
-      <uni-list-item v-if="userInfo?.role" title="用户角色" link>
+      <uni-list-item v-if="userInfo.role" title="用户角色" link>
         <template #footer>
-          <uni-tag v-for="item in userInfo?.role" :key="item" :text="item" type="primary" />
+          <uni-tag v-for="item in userInfo.role" :key="item" :text="item" type="primary" />
         </template>
       </uni-list-item>
       <uni-list-item
-        v-if="userInfo?.my_invite_code"
+        v-if="userInfo.my_invite_code"
         title="邀请码"
-        :rightText="userInfo?.my_invite_code"
+        :rightText="userInfo.my_invite_code"
         link
-        @click="setClipboard(userInfo?.my_invite_code)"
-      />
+        @click="setClipboard(userInfo.my_invite_code)"
+      ></uni-list-item>
     </uni-list>
     <view class="divider"></view>
     <uni-list>
-      <uni-list-item title="账号与安全" link @click="onSecurity" />
+      <uni-list-item title="账号与安全" link @click="onSecurity"></uni-list-item>
     </uni-list>
     <view class="divider"></view>
     <uni-list>
-      <uni-list-item class="text-center" title="退出登录" clickable @click="onLogout" />
+      <uni-list-item
+        class="text-center"
+        title="退出登录"
+        clickable
+        @click="onLogout"
+      ></uni-list-item>
     </uni-list>
     <uni-popup ref="nicknameDialog" type="dialog">
       <uni-popup-dialog
         mode="input"
-        :value="userInfo?.nickname"
+        :value="userInfo.nickname"
         title="设置昵称"
         placeholder="请输入要设置的昵称"
         @confirm="setNickname"

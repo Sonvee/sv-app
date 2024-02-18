@@ -1,3 +1,7 @@
+## 1.8.7（2024-02-02）
+- 新增 uni-popup-dialog 新增属性focus：input模式下，是否自动自动聚焦
+## 1.8.6（2024-01-30）
+- 新增 uni-popup-dialog 新增属性maxLength:限制输入框字数
 ## 1.8.5（2024-01-26）
 - 新增 uni-popup-dialog 新增属性showClose:控制关闭按钮的显示
 ## 1.8.4（2023-11-15）

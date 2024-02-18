@@ -15,3 +15,10 @@ Excel与JSON互相转换，源于[EXCEL转JSON函数](https://ext.dcloud.net.cn/
   
     1. 由于uni.chooseFile只支持H5端，现添加微信小程序的wx.chooseMessageFile和App端Native.js(目前只支持安卓)调用文件选择面板，因此现已兼容H5、安卓App、微信小程序三端。
     2. 修改当type为base64模式时，不提供自动下载功能，仅当type为file模式时开启autoDownload才提供自动下载功能
+
+
+## 写在最后
+若对插件有任何疑问或者优化建议，欢迎在评论区留言，在插件市场中的私信消息本人可能不经常留意，导致没能及时回复，
+可以加入本人的插件问答QQ交流群: 852637893，欢迎进群交流。
+
+<img width="200" src="https://mp-0ecede5c-a993-48bf-ba4b-45d9a8c7e79b.cdn.bspapp.com/resource/qqqun.jpg" alt="交流群:852637893"/>

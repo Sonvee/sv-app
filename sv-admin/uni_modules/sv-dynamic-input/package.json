@@ -1,7 +1,7 @@
 {
   "id": "sv-dynamic-input",
   "displayName": "动态录入键值对（动态添加字典字段）",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "动态录入键值对（适用于表单动态添加字典字段）",
   "keywords": [
     "动态",
@@ -10,8 +10,7 @@
     "键值对"
 ],
   "repository": "",
-  "engines": {
-    "HBuilderX": "^3.1.0"
+"engines": {
   },
   "dcloudext": {
     "type": "component-vue",
@@ -29,7 +28,7 @@
     "declaration": {
       "ads": "无",
       "data": "件不采集任何数据",
-      "permissions": "无"
+      "permissions": "无 "
     },
     "npmurl": ""
   },
@@ -47,29 +46,29 @@
           "vue3": "y"
         },
         "App": {
-          "app-vue": "u",
-          "app-nvue": "u",
+          "app-vue": "y",
+          "app-nvue": "y",
           "app-uvue": "u"
         },
         "H5-mobile": {
-          "Safari": "u",
-          "Android Browser": "u",
-          "微信浏览器(Android)": "u",
-          "QQ浏览器(Android)": "u"
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
         },
         "H5-pc": {
           "Chrome": "y",
-          "IE": "u",
+          "IE": "y",
           "Edge": "y",
           "Firefox": "y",
-          "Safari": "u"
+          "Safari": "y"
         },
         "小程序": {
           "微信": "y",
           "阿里": "y",
-          "百度": "u",
-          "字节跳动": "u",
-          "QQ": "u",
+          "百度": "y",
+          "字节跳动": "y",
+          "QQ": "y",
           "钉钉": "u",
           "快手": "u",
           "飞书": "u",

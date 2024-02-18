@@ -1,4 +1,4 @@
-import { importToJson, exportToExcel } from '@/uni_modules/sv-excel-json-each/jssdk/parseExcel.js'
+import { importToJson, exportToExcel } from '@/uni_modules/sv-excel-json-each/js_sdk/parseExcel.js'
 import { dayjs } from 'element-plus'
 import { appAddList, appList } from '@/service/api/sys';
 import { logList } from '@/service/api/svid';

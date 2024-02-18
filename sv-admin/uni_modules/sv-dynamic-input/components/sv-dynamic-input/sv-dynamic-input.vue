@@ -66,6 +66,12 @@ export default {
       default: 999
     }
   },
+  // #ifdef VUE2
+  model: {
+    prop: 'data',
+    event: 'change'
+  },
+  // #endif
   data() {
     return {
       dynamicList: [],
@@ -97,6 +103,7 @@ export default {
           this.bandDelete = true
         }
         this.$emit('update:data', newVal)
+        this.$emit('change', newVal)
       }
     }
   },

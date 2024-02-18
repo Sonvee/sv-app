@@ -1,7 +1,7 @@
 {
 	"id": "sv-id-pages",
-	"displayName": "基于uni-id-pages魔改的用户体系，新的易读易修改的界面样式，更适合二次开发",
-	"version": "2.1.8",
+	"displayName": "基于uni-id-pages魔改的用户体系，新的易读易修改的界面样式",
+	"version": "2.1.9",
 	"description": "基于uni-id-pages魔改的用户体系，样式更易修改和二次开发，并去部分冗余代码，更具整洁与精悍",
 	"keywords": [
         "uni-id-pages",
@@ -11,17 +11,16 @@
         "手机验证码"
     ],
 	"repository": "",
-	"engines": {
-		"HBuilderX": "^3.5.2"
+    "engines": {
 	},
 	"dcloudext": {
 		"type": "unicloud-template-page",
 		"sale": {
 			"regular": {
-				"price": "0.00"
+				"price": 0
 			},
 			"sourcecode": {
-				"price": "0.00"
+				"price": 0
 			}
 		},
 		"contact": {
@@ -61,17 +60,17 @@
 					"app-nvue": "u"
 				},
 				"H5-mobile": {
-					"Safari": "u",
+					"Safari": "y",
 					"Android Browser": "y",
 					"微信浏览器(Android)": "y",
-					"QQ浏览器(Android)": "u"
+					"QQ浏览器(Android)": "y"
 				},
 				"H5-pc": {
 					"Chrome": "y",
-					"IE": "u",
+					"IE": "y",
 					"Edge": "y",
 					"Firefox": "y",
-					"Safari": "u"
+					"Safari": "y"
 				},
 				"小程序": {
 					"微信": "y",

@@ -1,7 +1,17 @@
-import { importToJson, exportToExcel } from '@/uni_modules/sv-excel-json-each/js_sdk/parseExcel.js'
-import { dayjs } from 'element-plus'
-import { appAddList, appList } from '@/service/api/sys';
-import { logList } from '@/service/api/svid';
+import {
+  importToJson,
+  exportToExcel
+} from '@/uni_modules/sv-excel-json-each/js_sdk/parseExcel.js'
+import {
+  dayjs
+} from 'element-plus'
+import {
+  appAddList,
+  appList
+} from '@/service/api/sys';
+import {
+  logList
+} from '@/service/api/svid';
 
 /**
  * Excel模板下载
@@ -38,14 +48,14 @@ export function fileImport(type, cover = false, callback) {
  * @param {Object} params 导出接口参数，用于请求数据
  */
 export function fileExport(type, all = false, params, callback) {
-  if (all) params.pagesize = -1
-  console.log('==== fileExport :', type, all, params);
+  let param = { ...params }
+  if (all) param.pagesize = -1
   switch (type) {
     case 'logs':
-      logExport(params)
+      logExport(param)
       break
     case 'app':
-      appExport(params)
+      appExport(param)
       break
   }
   if (callback) callback()
@@ -160,7 +170,11 @@ async function appExport(params) {
  * 应用导入
  */
 async function appImport(cover, callback) {
-  let sheetList = [{ index: 0 }, { index: 1 }]
+  let sheetList = [{
+    index: 0
+  }, {
+    index: 1
+  }]
   const toJsonRes = await importToJson(sheetList)
   const dataRes = toJsonRes.data.data || []
   // 转换为接口原数据格式
@@ -176,7 +190,10 @@ async function appImport(cover, callback) {
   })
   console.table(toJsonRes.data);
   console.table(handleData);
-  const importRes = await appAddList({ data: handleData, cover })
+  const importRes = await appAddList({
+    data: handleData,
+    cover
+  })
   if (callback) callback(importRes)
 }
 

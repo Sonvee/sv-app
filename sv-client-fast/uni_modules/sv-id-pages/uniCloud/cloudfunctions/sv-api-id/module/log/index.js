@@ -22,8 +22,13 @@ module.exports = {
     // 使用getTemp先过滤处理获取临时表再联表查询，推荐用法
     // 注意结尾的方法是getTemp，对表过滤得到临时表
     const tempIdDB = dbJQL.collection('uni-id-users').field('_id,nickname').getTemp()
-    const logRes = await dbJQL.collection('uni-id-log', tempIdDB).orderBy('create_date', 'desc')
-      .skip(pagesize * (pagenum - 1)).limit(pagesize).get()
+    let logRes
+    if (pagesize > 1) {
+      logRes = await dbJQL.collection('uni-id-log', tempIdDB).orderBy('create_date', 'desc')
+        .skip(pagesize * (pagenum - 1)).limit(pagesize).get()
+    } else {
+      logRes = await dbJQL.collection('uni-id-log', tempIdDB).orderBy('create_date', 'desc').get()
+    }
 
     // 总数统计
     const count = await db.collection('uni-id-log').count()

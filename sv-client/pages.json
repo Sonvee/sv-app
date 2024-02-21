@@ -18,12 +18,6 @@
       }
     },
     {
-      "path": "pages/mine/setting/setting",
-      "style": {
-        "navigationBarTitleText": "设置"
-      }
-    },
-    {
       "path": "uni_modules/sv-id-pages/pages/login/login",
       "style": {
         "navigationBarTitleText": "登录"
@@ -108,6 +102,15 @@
       }
     }
   ],
+  "subPackages": [{
+    "root": "pages/mine/setting",
+    "pages": [{
+      "path": "setting",
+      "style": {
+        "navigationBarTitleText": "设置"
+      }
+    }]
+  }],
   "globalStyle": {
     "navigationBarTitleText": "sv-client",
     "navigationBarBackgroundColor": "#F8F8F8",

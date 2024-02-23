@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/',
+  base: '/docs',
   outDir: '../dist',
   lang: 'zh-CN',
   title: "sv-docs",

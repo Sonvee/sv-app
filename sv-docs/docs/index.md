@@ -4,22 +4,22 @@ layout: home
 
 hero:
   name: "sv-docs"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  text: "主标题"
+  tagline: 副标题
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Markdown 样例
+      link: /src/examples/markdown-examples
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: API 样例
+      link: /src/examples/api-examples
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: A 卡片
+    details: A 卡片介绍内容
+  - title: B 卡片
+    details: B 卡片介绍内容
+  - title: C 卡片
+    details: C 卡片介绍内容
 ---
 

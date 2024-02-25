@@ -28,18 +28,15 @@ const colnum = ref(3)
 
 JudgeDeviceType()
 function JudgeDeviceType() {
-  const deviceType = uni.getSystemInfoSync().deviceType
-  switch (deviceType) {
-    case 'pc':
-      popWidth.value = 400
-      popHeight.value = 400
-      colnum.value = 4
-      break
-    default:
-      popWidth.value = 300
-      popHeight.value = 200
-      colnum.value = 3
-      break
+  const windowWidth = uni.getSystemInfoSync().windowWidth
+  if (windowWidth > 600) {
+    popWidth.value = 400
+    popHeight.value = 400
+    colnum.value = 4
+  } else {
+    popWidth.value = 300
+    popHeight.value = 200
+    colnum.value = 3
   }
 }
 

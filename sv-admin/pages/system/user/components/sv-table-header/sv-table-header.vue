@@ -51,7 +51,7 @@ const filterForm = ref({
   _id: '',
   name: '',
   platform: '',
-  role: []
+  role: ''
 })
 
 // 提交
@@ -65,7 +65,7 @@ function reset() {
     _id: '',
     name: '',
     platform: '',
-    role: []
+    role: ''
   }
 }
 </script>

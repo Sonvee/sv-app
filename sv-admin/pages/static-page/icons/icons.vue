@@ -13,7 +13,7 @@ import SvIconList from '@/components/sv-icon-select/sv-icon-list.vue'
 import adminConfig from '@/admin.config.js'
 
 const colnum = computed(() => {
-  return uni.getSystemInfoSync().deviceType == 'pc' ? 7 : 3
+  return uni.getSystemInfoSync().windowWidth > 600 ? 7 : 3
 })
 
 function toHelp() {

@@ -112,7 +112,7 @@ import { timeFormat } from '@/utils/util'
 import { handleMap } from '@/utils/sys'
 import { useSysStore } from '@/store/sys'
 
-const showHeader = ref(uni.getSystemInfoSync().deviceType == 'pc') // 头部筛选栏显示
+const showHeader = ref(uni.getSystemInfoSync().windowWidth > 600) // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const pagingParams = ref({ pagesize: 20, pagenum: 1 }) // 表格分页默认参数

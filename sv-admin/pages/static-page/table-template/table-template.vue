@@ -91,7 +91,7 @@ import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
 import tempdata from '@/common/json/temp-tabledata.json'
 
-const showHeader = ref(uni.getSystemInfoSync().deviceType == 'pc') // 头部筛选栏显示
+const showHeader = ref(uni.getSystemInfoSync().windowWidth > 600) // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const pagingParams = ref({ pagesize: 10, pagenum: 1 }) // 表格分页默认参数

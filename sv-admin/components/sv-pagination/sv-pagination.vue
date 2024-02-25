@@ -36,14 +36,11 @@ const paginationLayout = ref('')
 
 JudgeDeviceType()
 function JudgeDeviceType() {
-  const deviceType = uni.getSystemInfoSync().deviceType
-  switch (deviceType) {
-    case 'pc':
-      paginationLayout.value = 'total, sizes, prev, pager, next, jumper'
-      break
-    default:
-      paginationLayout.value = 'prev, pager, next, jumper'
-      break
+  const windowWidth = uni.getSystemInfoSync().windowWidth
+  if (windowWidth > 600) {
+    paginationLayout.value = 'total, sizes, prev, pager, next, jumper'
+  } else {
+    paginationLayout.value = 'prev, pager, next, total'
   }
 }
 </script>

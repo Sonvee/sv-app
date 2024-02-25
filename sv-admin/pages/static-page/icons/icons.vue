@@ -11,9 +11,10 @@
 import { computed } from 'vue'
 import SvIconList from '@/components/sv-icon-select/sv-icon-list.vue'
 import adminConfig from '@/admin.config.js'
+import { useSysStore } from '@/store/sys'
 
 const colnum = computed(() => {
-  return uni.getSystemInfoSync().windowWidth > 600 ? 7 : 3
+  return useSysStore().platform == 'pc' ? 7 : 3
 })
 
 function toHelp() {

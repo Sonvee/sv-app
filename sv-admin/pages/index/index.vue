@@ -86,11 +86,11 @@
           <view class="flex" style="justify-content: space-evenly; padding: 10px 0">
             <image
               class="pay-image"
-              src="https://mp-0ecede5c-a993-48bf-ba4b-45d9a8c7e79b.cdn.bspapp.com/pay/pay-ali.jpg"
+              src="https://mp-74bfcbac-6ba6-4f39-8513-8831390ff75a.cdn.bspapp.com/pay/pay-ali.jpg"
             ></image>
             <image
               class="pay-image"
-              src="https://mp-0ecede5c-a993-48bf-ba4b-45d9a8c7e79b.cdn.bspapp.com/pay/pay-wx.jpg"
+              src="https://mp-74bfcbac-6ba6-4f39-8513-8831390ff75a.cdn.bspapp.com/pay/pay-wx.jpg"
             ></image>
           </view>
           <view class="flex-hc">

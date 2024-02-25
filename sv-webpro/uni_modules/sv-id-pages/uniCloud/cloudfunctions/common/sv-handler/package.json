@@ -1,0 +1,16 @@
+{
+  "name": "sv-handler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash.chunk": "^4.2.0",
+    "uni-id-common": "file:../../../../../uni-id-common/uniCloud/cloudfunctions/common/uni-id-common"
+  }
+}

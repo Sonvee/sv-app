@@ -4,30 +4,35 @@
 
 ```
 props: {
+  // 尺寸
+  size: {
+    type: String,
+    default: 'default' // small | default | large
+  },
   // 原数据
   data: {
     type: [Array, Object],
     default: () => []
   },
-  // 自定义key键名
+  // 自定义key键名字段
   lableKey: {
     type: String,
     default: 'key'
   },
-  // 自定义key名称
+  // 自定义key键名名称
   lableText: {
     type: String,
-    default: '键'
+    default: '键名'
   },
-  // 自定义value键名
+  // 自定义value键值字段
   valueKey: {
     type: String,
     default: 'value'
   },
-  // 自定义value名称
+  // 自定义value键值名称
   valueText: {
     type: String,
-    default: '值'
+    default: '键值'
   },
   // 对齐方式
   textAlign: {
@@ -48,6 +53,14 @@ props: {
   maxRow: {
     type: Number,
     default: 999
+  },
+  keyPlaceholder: {
+    type: String,
+    default: '请输入键名'
+  },
+  valuePlaceholder: {
+    type: String,
+    default: '请输入键值'
   }
 }
 

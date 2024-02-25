@@ -1,0 +1,20 @@
+[
+  {
+    "permission_id": "MENU_READ",
+    "permission_name": "读取菜单权限",
+    "comment": "读取菜单权限",
+    "create_date": 0
+  },
+  {
+    "permission_id": "API_READ",
+    "permission_name": "api接口只读权限",
+    "comment": "api接口只读权限",
+    "create_date": 0
+  },
+  {
+    "permission_id": "API_WRITE",
+    "permission_name": "api接口读写权限",
+    "comment": "api接口读写权限",
+    "create_date": 0
+  }
+]

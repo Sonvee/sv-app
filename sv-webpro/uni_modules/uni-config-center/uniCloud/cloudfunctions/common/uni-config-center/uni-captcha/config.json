@@ -1,0 +1,23 @@
+{
+	"width": 150,
+	"height": 40,
+	"background": "",
+	"size": 4,
+	"noise": 4,
+	"color": true,
+	"fontSize": 60,
+	"ignoreChars": "",
+	"mathExpr": false,
+	"mathMin": 1,
+	"mathMax": 9,
+	"mathOperator": "",
+	"expiresDate": 180,
+	"scene": {
+		"login": {
+			"mathExpr": true
+		},
+		"register": {
+			"expiresDate": 60
+		}
+	}
+}

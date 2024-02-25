@@ -25,11 +25,11 @@
               <el-descriptions-item label="昵称">
                 {{ authInfo.nickname || '--' }}
               </el-descriptions-item>
-              <el-descriptions-item label="身份">
-                {{ authInfo.role?.toString() || '--' }}
-              </el-descriptions-item>
               <el-descriptions-item label="IP地址">
                 {{ authInfo.last_login_ip || '--' }}
+              </el-descriptions-item>
+              <el-descriptions-item label="身份">
+                {{ authInfo.role?.toString() || '--' }}
               </el-descriptions-item>
               <el-descriptions-item label="登录时间">
                 {{ timeFormat(authInfo.last_login_date) || '--' }}

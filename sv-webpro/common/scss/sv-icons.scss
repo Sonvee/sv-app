@@ -1,0 +1,127 @@
+@font-face {
+  font-family: sv-icons;
+  src: url('~@/common/font/iconfont.ttf') format('truetype');
+  font-weight: 400;
+  font-display: 'auto';
+  font-style: normal;
+}
+
+[class*='sv-icons-'],
+[class^='sv-icons-'] {
+  font-family: sv-icons !important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sv-icons-clear:before {
+  content: "\e900";
+}
+
+.sv-icons-portal-home:before {
+  content: "\e61d";
+}
+
+.sv-icons-portal:before {
+  content: "\e65e";
+}
+
+.sv-icons-agreements:before {
+  content: "\100ff";
+}
+
+.sv-icons-agreements-service:before {
+  content: "\100fd";
+}
+
+.sv-icons-agreements-privacy:before {
+  content: "\100fe";
+}
+
+.sv-icons-json-fill:before {
+  content: "\ea42";
+}
+
+.sv-icons-json:before {
+  content: "\ea43";
+}
+
+.sv-icons-pdf:before {
+  content: "\ea44";
+}
+
+.sv-icons-pdf-fill:before {
+  content: "\ea45";
+}
+
+.sv-icons-txt-fill:before {
+  content: "\ea46";
+}
+
+.sv-icons-txt:before {
+  content: "\ea47";
+}
+
+.sv-icons-excel:before {
+  content: "\ea48";
+}
+
+.sv-icons-excel-fill:before {
+  content: "\ea49";
+}
+
+.sv-icons-ppt:before {
+  content: "\ea4a";
+}
+
+.sv-icons-ppt-fill:before {
+  content: "\ea4b";
+}
+
+.sv-icons-word-fill:before {
+  content: "\ea4c";
+}
+
+.sv-icons-word:before {
+  content: "\ea4d";
+}
+
+.sv-icons-tool:before {
+  content: "\e6a3";
+}
+
+.sv-icons-tool-fill:before {
+  content: "\e6a4";
+}
+
+.sv-icons-github:before {
+  content: "\ea0a";
+}
+
+.sv-icons-gitee:before {
+  content: "\e60c";
+}
+
+.sv-icons-skin:before {
+  content: "\e651";
+}
+
+.sv-icons-fullscreen:before {
+  content: "\e71e";
+}
+
+.sv-icons-fullscreen-exit:before {
+  content: "\e71f";
+}
+
+.sv-icons-uniapp:before {
+  content: "\e642";
+}
+

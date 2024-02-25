@@ -2,7 +2,7 @@
   <view class="sv-table-header">
     <el-form class="sv-el-form" inline :model="filterForm" :size="size">
       <el-form-item label="字典ID/名称">
-        <el-input v-model="filterForm.name" placeholder="请输入字典ID/名称" clearable />
+        <el-input v-model="filterForm.name" placeholder="请输入字典ID/名称" clearable style="width: 150px;"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit">搜索</el-button>

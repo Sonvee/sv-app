@@ -47,8 +47,8 @@
             </template>
             <!-- 内嵌表格 -->
             <el-table :data="scope.row.dict">
-              <el-table-column prop="key" label="字典键" />
-              <el-table-column prop="value" label="字典值" />
+              <el-table-column prop="key" label="字典键名" />
+              <el-table-column prop="value" label="字典键值" />
             </el-table>
           </el-popover>
         </template>
@@ -100,8 +100,9 @@ import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
 import { dictAdd, dictDelete, dictList, dictUpdate } from '@/service/api/sys'
 import { storageDicts } from '@/utils/pinia-storage'
+import { useSysStore } from '@/store/sys'
 
-const showHeader = ref(uni.getSystemInfoSync().windowWidth > 600) // 头部筛选栏显示
+const showHeader = ref(useSysStore().platform == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const showForm = ref(false) // 显示表单

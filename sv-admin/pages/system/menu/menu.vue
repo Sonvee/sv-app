@@ -46,7 +46,7 @@
       </el-table-column>
       <el-table-column label="状态" align="center" :width="80">
         <template #default="scope">
-          <el-tag :type="scope.row.enable ? '' : 'danger'" effect="dark">
+          <el-tag :type="scope.row.enable ? 'primary' : 'danger'" effect="dark">
             {{ scope.row.enable ? '启用' : '停用' }}
           </el-tag>
         </template>

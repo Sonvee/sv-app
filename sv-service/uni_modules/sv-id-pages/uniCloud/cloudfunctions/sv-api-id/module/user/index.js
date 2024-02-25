@@ -32,12 +32,8 @@ module.exports = {
     pagesize = +pagesize
     pagenum = +pagenum
 
-    let userRes
+    let userRes, count, pages
 
-    // 总数统计
-    const count = await db.collection('uni-id-users').count()
-    // 页数统计
-    const pages = Math.ceil(count.total / pagesize)
 
     // 页码不可小于1
     if (pagenum < 1) {
@@ -50,6 +46,11 @@ module.exports = {
     // 全量查询
     if (pagesize < 1) {
       userRes = await db.collection('uni-id-users').get()
+      // 总数统计
+      count = await db.collection('uni-id-users').count()
+      // 页数统计
+      pages = Math.ceil(count.total / pagesize)
+
       throw handler.result({
         data: userRes.data,
         total: count.total,
@@ -137,11 +138,14 @@ module.exports = {
     userRes = await query.orderBy('register_date', 'asc')
       .skip(pagesize * (pagenum - 1)).limit(pagesize).get()
 
+    total = userRes.data.length
+    pages = Math.ceil(total / pagesize)
+
     return handler.result({
       data: userRes.data,
-      total: count.total,
       pagesize,
       pagenum,
+      total,
       pages,
       params: this.params
     })

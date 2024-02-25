@@ -18,6 +18,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useSysStore } from '@/store/sys'
 import SvIconList from './sv-icon-list.vue'
 
 const emits = defineEmits(['selected'])
@@ -28,8 +29,7 @@ const colnum = ref(3)
 
 JudgeDeviceType()
 function JudgeDeviceType() {
-  const windowWidth = uni.getSystemInfoSync().windowWidth
-  if (windowWidth > 600) {
+  if (useSysStore().platform == 'pc') {
     popWidth.value = 400
     popHeight.value = 400
     colnum.value = 4

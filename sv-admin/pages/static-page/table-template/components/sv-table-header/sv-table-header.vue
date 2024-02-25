@@ -2,7 +2,7 @@
   <view class="sv-table-header">
     <el-form class="sv-el-form" inline :model="filterForm" :size="size">
       <el-form-item label="用户名/昵称">
-        <el-input v-model="filterForm.name" placeholder="请输入用户名/昵称" clearable />
+        <el-input v-model="filterForm.name" placeholder="请输入用户名/昵称" clearable style="width: 150px;"/>
       </el-form-item>
       <el-form-item label="账号类型">
         <el-select
@@ -25,6 +25,7 @@
           type="datetime"
           placeholder="请选择日期时间"
           value-format="x"
+          style="width: 170px;"
         />
       </el-form-item>
       <el-form-item label="日期时间范围">
@@ -36,6 +37,7 @@
           end-placeholder="结束时间"
           value-format="x"
           :default-time="[new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 59, 59)]"
+          style="width: 320px;"
         />
       </el-form-item>
       <el-form-item>

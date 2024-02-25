@@ -15,6 +15,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useSysStore } from '@/store/sys'
 
 /**
  * vue不建议将props绑定为v-model，但是此处修改的是 pagingParams 对象内部的属性，而不是直接替换整个 props 对象
@@ -36,8 +37,7 @@ const paginationLayout = ref('')
 
 JudgeDeviceType()
 function JudgeDeviceType() {
-  const windowWidth = uni.getSystemInfoSync().windowWidth
-  if (windowWidth > 600) {
+  if (useSysStore().platform == 'pc') {
     paginationLayout.value = 'total, sizes, prev, pager, next, jumper'
   } else {
     paginationLayout.value = 'prev, pager, next, total'

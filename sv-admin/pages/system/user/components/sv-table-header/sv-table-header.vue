@@ -2,10 +2,20 @@
   <view class="sv-table-header">
     <el-form class="sv-el-form" inline :model="filterForm" :size="size">
       <el-form-item label="UID">
-        <el-input v-model="filterForm._id" placeholder="请输入用户UID" clearable />
+        <el-input
+          v-model="filterForm._id"
+          placeholder="请输入用户UID"
+          clearable
+          style="width: 150px"
+        />
       </el-form-item>
       <el-form-item label="用户名/昵称">
-        <el-input v-model="filterForm.name" placeholder="请输入用户名/昵称" clearable />
+        <el-input
+          v-model="filterForm.name"
+          placeholder="请输入用户名/昵称"
+          clearable
+          style="width: 150px"
+        />
       </el-form-item>
       <el-form-item label="角色">
         <sv-dict-select
@@ -21,8 +31,8 @@
           v-model="filterForm.platform"
           placeholder="选择账号类型"
           dictType="uni_id_users_platform"
-          keyName="key"
-          valueName="value"
+          keyName="value"
+          valueName="key"
         ></sv-dict-select>
       </el-form-item>
       <el-form-item>

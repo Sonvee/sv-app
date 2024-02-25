@@ -8,7 +8,12 @@
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
       <view style="flex: 1"></view>
-      <el-button type="primary" link :icon="showHeader ? View : Hide" @click="showHeader = !showHeader"></el-button>
+      <el-button
+        type="primary"
+        link
+        :icon="showHeader ? View : Hide"
+        @click="showHeader = !showHeader"
+      ></el-button>
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
@@ -22,21 +27,35 @@
         fixed="left"
       >
         <template #default="scope">
-          <image class="avatar-image" v-if="scope.row.avatar_file" :src="scope.row.avatar_file?.url" />
+          <image
+            class="avatar-image"
+            v-if="scope.row.avatar_file"
+            :src="scope.row.avatar_file?.url"
+          />
         </template>
       </el-table-column>
       <el-table-column prop="username" label="用户名" :width="180" fixed="left" />
       <el-table-column prop="nickname" label="昵称" :width="180" />
       <el-table-column prop="gender" label="性别" align="center" :width="80">
         <template #default="scope">
-          <sv-dict-tag :data="scope.row.gender" type="uni_id_users_gender"></sv-dict-tag>
+          <sv-dict-tag
+            :key="scope.row"
+            :data="scope.row?.gender || 0"
+            type="uni_id_users_gender"
+          ></sv-dict-tag>
         </template>
       </el-table-column>
       <el-table-column prop="mobile" label="手机号码" align="center" :width="160" />
       <el-table-column prop="email" label="邮箱" align="center" :width="160" />
       <el-table-column prop="role" label="角色" align="center" :width="160" />
       <el-table-column prop="my_invite_code" label="邀请码" :width="100" />
-      <el-table-column prop="dcloud_appid" label="可用APP" align="center" :width="300" show-overflow-tooltip>
+      <el-table-column
+        prop="dcloud_appid"
+        label="可用APP"
+        align="center"
+        :width="300"
+        show-overflow-tooltip
+      >
         <template #default="scope">
           <el-tag
             v-for="(item, index) in scope.row?.dcloud_appid"
@@ -45,13 +64,22 @@
             type="success"
             effect="plain"
           >
-            {{ appMap[item] }}
+            {{ appMap[item] || item }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="register_env.uni_platform" label="账号类型" align="center" :width="100">
+      <el-table-column
+        prop="register_env.uni_platform"
+        label="账号类型"
+        align="center"
+        :width="100"
+      >
         <template #default="scope">
-          <sv-dict-tag :data="scope.row?.register_env?.uni_platform || 'web'" type="uni_id_users_platform" />
+          <sv-dict-tag
+            :key="scope.row"
+            :data="scope.row?.register_env?.uni_platform || 'web'"
+            type="uni_id_users_platform"
+          ></sv-dict-tag>
         </template>
       </el-table-column>
       <!-- 用户状态：0 正常 1 禁用 2 审核中 3 审核拒绝 -->
@@ -97,7 +125,12 @@
       @update:current-page="handleCurrentChange"
     />
     <!-- 表单抽屉弹窗 -->
-    <sv-form v-model="showForm" :form-init="formInit" :form-mode="formMode" @submit="submitForm"></sv-form>
+    <sv-form
+      v-model="showForm"
+      :form-init="formInit"
+      :form-mode="formMode"
+      @submit="submitForm"
+    ></sv-form>
   </view>
 </template>
 
@@ -112,7 +145,7 @@ import { timeFormat } from '@/utils/util'
 import { handleMap } from '@/utils/sys'
 import { useSysStore } from '@/store/sys'
 
-const showHeader = ref(uni.getSystemInfoSync().windowWidth > 600) // 头部筛选栏显示
+const showHeader = ref(useSysStore().platform == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const pagingParams = ref({ pagesize: 20, pagenum: 1 }) // 表格分页默认参数
@@ -125,8 +158,8 @@ const formMode = ref('') // 表单模式 add / edit
 const appMap = handleMap(useSysStore().getApps(), 'appid', 'name')
 // 用户状态
 const statusMap = {
-  undefined: { text: '正常', type: '' }, // undefined也为正常
-  0: { text: '正常', type: '' },
+  undefined: { text: '正常', type: 'primary' },
+  0: { text: '正常', type: 'primary' },
   1: { text: '禁用', type: 'danger' },
   2: { text: '审核中', type: 'success' },
   3: { text: '审核拒绝', type: 'warning' },

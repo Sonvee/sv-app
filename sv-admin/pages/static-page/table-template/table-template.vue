@@ -90,8 +90,9 @@ import { RefreshRight, View, Hide, Plus, EditPen, Delete } from '@element-plus/i
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
 import tempdata from '@/common/json/temp-tabledata.json'
+import { useSysStore } from '@/store/sys'
 
-const showHeader = ref(uni.getSystemInfoSync().windowWidth > 600) // 头部筛选栏显示
+const showHeader = ref(useSysStore().platform == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
 const pagingParams = ref({ pagesize: 10, pagenum: 1 }) // 表格分页默认参数
@@ -125,8 +126,8 @@ async function handleTable(params) {
 
 // 状态格式化 用户状态：0 正常 1 禁用 2 审核中 3 审核拒绝
 const statusMap = {
-  undefined: { text: '正常', type: '' }, // undefined也为正常
-  0: { text: '正常', type: '' },
+  undefined: { text: '正常', type: 'primary' }, // undefined也为正常
+  0: { text: '正常', type: 'primary' },
   1: { text: '禁用', type: 'danger' },
   2: { text: '审核中', type: 'info' },
   3: { text: '审核拒绝', type: 'warning' }

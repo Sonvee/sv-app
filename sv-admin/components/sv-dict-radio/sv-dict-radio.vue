@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { getDictById } from '@/utils/sys'
 
 const props = defineProps({
@@ -42,7 +42,10 @@ async function handleDict() {
     dictData.value = await getDictById(props.dictType)
   }
 }
-handleDict()
+
+watchEffect(() => {
+  handleDict()
+})
 </script>
 
 <style lang="scss"></style>

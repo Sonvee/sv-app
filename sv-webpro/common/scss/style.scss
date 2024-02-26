@@ -19,7 +19,7 @@
 }
 
 uni-page-body {
-  min-height: 100%;
+  height: 100%;
 
   @include useTheme {
     background-color: getTheme('sv-bg-color');

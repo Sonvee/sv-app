@@ -175,32 +175,9 @@
 }
 
 .sv-el-drawer {
+  --el-drawer-padding-primary: 0 !important;
   @include useTheme {
     --el-drawer-bg-color: #{getTheme('sv-bg-color')};
-  }
-}
-
-@media screen and (min-width: 1600px) {
-  .sv-el-drawer {
-    width: 40% !important;
-  }
-}
-
-@media screen and (max-width: 1600px) {
-  .sv-el-drawer {
-    width: 60% !important;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .sv-el-drawer {
-    width: 80% !important;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .sv-el-drawer {
-    width: 100% !important;
   }
 }
 

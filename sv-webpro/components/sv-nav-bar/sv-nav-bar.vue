@@ -1,13 +1,15 @@
 <template>
-  <view class="sv-nav-bar flex">
+  <view class="sv-nav-bar flex align-center padding">
+    <text class="sv-icons-portal margin-right" @click="toggleSideBar"></text>
     <view v-for="item in tabbar" :key="item.path" @click="onNav(item.path)">
       {{ item.name }}
     </view>
   </view>
-  <view class="navbar-placeholder" v-if="placeholder"></view>
+  <view class="header-placeholder" v-if="placeholder"></view>
 </template>
 
 <script setup>
+import { inject } from 'vue'
 import { useRouter } from 'vue-router'
 
 const props = defineProps({
@@ -23,14 +25,17 @@ const tabbar = router.options.routes.filter((item) => item.meta?.tab)
 function onNav(path) {
   router.push(path)
 }
+
+const isShowSideBar = inject('e-show-side-bar')
+function toggleSideBar() {
+  isShowSideBar.value = !isShowSideBar.value
+}
 </script>
 
 <style lang="scss">
-$nav-bar-height: 50px;
-
 .sv-nav-bar {
   width: 100%;
-  height: $nav-bar-height;
+  height: $sv-nav-bar-height;
   position: fixed;
   top: 0;
   z-index: 999;
@@ -43,7 +48,8 @@ $nav-bar-height: 50px;
   backdrop-filter: saturate(50%) blur(4px);
   -webkit-backdrop-filter: saturate(50%) blur(4px);
 }
-.navbar-placeholder {
-  height: $nav-bar-height;
+
+.header-placeholder {
+  height: $sv-nav-bar-height;
 }
 </style>

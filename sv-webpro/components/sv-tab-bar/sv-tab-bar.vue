@@ -36,7 +36,7 @@ $tab-bar-height: 50px;
   z-index: 999;
 
   @include useTheme {
-    border-bottom: 1px solid #{getTheme('sv-border-color')};
+    border-top: 1px solid #{getTheme('sv-border-color')};
     background-image: radial-gradient(transparent 1px, #{getTheme('sv-bg-color')} 1px);
   }
   background-size: 4px 4px;

@@ -16,7 +16,7 @@ export const useSvidStore = defineStore('svid', () => {
   function getRoles() {
     return roles.value
   }
-  
+
   function clearRoles() {
     roles.value = []
   }
@@ -31,7 +31,7 @@ export const useSvidStore = defineStore('svid', () => {
   function getPermissions() {
     return permissions.value
   }
-  
+
   function clearPermissions() {
     permissions.value = []
   }

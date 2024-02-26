@@ -119,14 +119,3 @@ export function permissionDelete(data) {
     data
   })
 }
-
-/**
- * 日志
- */
-export function logList(data) {
-  return request({
-    url: '/svid/logList',
-    method: 'POST',
-    data
-  })
-}

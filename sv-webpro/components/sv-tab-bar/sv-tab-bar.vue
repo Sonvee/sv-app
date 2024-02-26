@@ -1,10 +1,10 @@
 <template>
-  <view class="sv-nav-bar flex">
-    <view v-for="item in tabbar" :key="item.path" @click="onNav(item.path)">
+  <view class="sv-tab-bar flex">
+    <view v-for="item in tabbar" :key="item.path" @click="onTab(item.path)">
       {{ item.name }}
     </view>
   </view>
-  <view class="navbar-placeholder" v-if="placeholder"></view>
+  <view class="tabbar-placeholder" v-if="placeholder"></view>
 </template>
 
 <script setup>
@@ -20,19 +20,19 @@ const props = defineProps({
 const router = useRouter()
 const tabbar = router.options.routes.filter((item) => item.meta?.tab)
 
-function onNav(path) {
+function onTab(path) {
   router.push(path)
 }
 </script>
 
 <style lang="scss">
-$nav-bar-height: 50px;
+$tab-bar-height: 50px;
 
-.sv-nav-bar {
+.sv-tab-bar {
   width: 100%;
-  height: $nav-bar-height;
+  height: $tab-bar-height;
   position: fixed;
-  top: 0;
+  bottom: 0;
   z-index: 999;
 
   @include useTheme {
@@ -43,7 +43,7 @@ $nav-bar-height: 50px;
   backdrop-filter: saturate(50%) blur(4px);
   -webkit-backdrop-filter: saturate(50%) blur(4px);
 }
-.navbar-placeholder {
-  height: $nav-bar-height;
+.tabbar-placeholder {
+  height: $tab-bar-height;
 }
 </style>

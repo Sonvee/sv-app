@@ -289,7 +289,6 @@ export function changeTheme(theme) {
   sysStore.setThemes(theme)
 }
 
-
 /**
  * token失效失败等，401跳转重新登录 - 【废弃】uni-id中已自带跳转登录，无效手动处理
  * @param {object} data 接口返回的路由鉴权结果

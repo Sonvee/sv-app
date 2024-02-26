@@ -40,7 +40,7 @@ export const useSysStore = defineStore('sys', () => {
 
   return {
     platform,
-    
+
     themes,
     setThemes,
     getThemes,

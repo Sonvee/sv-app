@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@vue/reactivity": "^3.4.19",
-    "element-plus": "^2.5.6"
+    "@vueuse/core": "^10.8.0",
+    "element-plus": "^2.5.6",
+    "lodash-es": "^4.17.21"
   }
 }

@@ -1,16 +1,38 @@
 <template>
-  <view class="sv-nav-bar flex align-center padding">
-    <text class="sv-icons-portal margin-right" @click="toggleSideBar"></text>
-    <view v-for="item in tabbar" :key="item.path" @click="onNav(item.path)">
-      {{ item.name }}
+  <view class="sv-nav-bar">
+    <view v-if="sysStore.platform == 'mobile'" class="mobile-navbar">
+      <text
+        class="text-xl padding-sm"
+        :class="[isShowSideBar ? 'uni-icons-settings' : 'uni-icons-list']"
+        @click="toggleSideBar"
+      ></text>
+      <view class="sv-text-streamer text-xl text-bold">标题</view>
+      <text
+        class="text-xl padding-sm"
+        :class="[sysStore.themes == 'light' ? 'sv-icons-sun' : 'sv-icons-moon']"
+        @click="toggleTheme"
+      ></text>
+    </view>
+    <view v-else class="pc-navbar">
+      <view v-for="item in navbar" :key="item.path" @click="onNav(item)">
+        {{ item.name }}
+      </view>
     </view>
   </view>
+  <!-- 占位 -->
   <view class="header-placeholder" v-if="placeholder"></view>
 </template>
 
 <script setup>
-import { inject } from 'vue'
-import { useRouter } from 'vue-router'
+import { inject, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useSysStore } from '@/store/sys'
+import { changeTheme } from '@/utils/sys'
+
+const router = useRouter()
+const route = useRoute()
+const sysStore = useSysStore()
+const isShowSideBar = inject('e-show-side-bar')
 
 const props = defineProps({
   placeholder: {
@@ -19,16 +41,32 @@ const props = defineProps({
   }
 })
 
-const router = useRouter()
-const tabbar = router.options.routes.filter((item) => item.meta?.tab)
-
-function onNav(path) {
-  router.push(path)
-}
-
-const isShowSideBar = inject('e-show-side-bar')
 function toggleSideBar() {
   isShowSideBar.value = !isShowSideBar.value
+}
+
+function toggleTheme() {
+  const curTheme = sysStore.getThemes() == 'light' ? 'dark' : 'light'
+  changeTheme(curTheme)
+}
+
+const navbar = computed(() => {
+  const routes = router.options.routes
+  const navRoutes = routes
+    .filter((item) => item.meta?.nav)
+    .sort((a, b) => a.meta.nav.index - b.meta.nav.index)
+  const navs = navRoutes.map((item) => {
+    return {
+      name: item.name,
+      path: item.path,
+      ...item.meta.nav
+    }
+  })
+  return navs
+})
+
+function onNav(item) {
+  if (item.path) router.push(item.path)
 }
 </script>
 
@@ -42,11 +80,20 @@ function toggleSideBar() {
 
   @include useTheme {
     border-bottom: 1px solid #{getTheme('sv-border-color')};
-    background-image: radial-gradient(transparent 1px, #{getTheme('sv-bg-color')} 1px);
+    background-image: radial-gradient(transparent 1px, #{getTheme('sv-bg-color')} 4px);
+    background-color: #{getTheme('sv-bg-color') + '66'};
   }
   background-size: 4px 4px;
   backdrop-filter: saturate(50%) blur(4px);
   -webkit-backdrop-filter: saturate(50%) blur(4px);
+
+  .mobile-navbar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
+  }
 }
 
 .header-placeholder {

@@ -1,0 +1,53 @@
+// 流光炫彩文字
+.sv-text-streamer {
+  background: linear-gradient(
+    135deg,
+    #0eaf6d,
+    #ff6ac6 25%,
+    #147b96 50%,
+    #e6d205 55%,
+    #2cc4e0 60%,
+    #8b2ce0 75%,
+    #ff6384 90%,
+    #0eaf6d
+  );
+  /* 文字颜色填充设置为透明 */
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  /* 背景裁剪，即让文字使用背景色 */
+  background-clip: text;
+  -webkit-background-clip: text;
+  /* 背景图放大一下，看着柔和一些 */
+  background-size: 200% 100%;
+  -webkit-background-size: 200% 100%;
+  /* 应用动画flowCss 12秒速度 无限循环 线性匀速动画*/
+  animation: anim-text-streamer 12s infinite linear;
+  -webkit-animation: anim-text-streamer 12s infinite linear;
+}
+
+.text-streamer:hover {
+  animation: anim-text-streamer 4s infinite linear;
+  -webkit-animation: anim-text-streamer 4s infinite linear;
+}
+
+@keyframes anim-text-streamer {
+  0% {
+    /* 移动背景位置 */
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -400% 0;
+  }
+}
+
+@-webkit-keyframes anim-text-streamer {
+  0% {
+    /* 移动背景位置 */
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -400% 0;
+  }
+}

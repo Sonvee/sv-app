@@ -21,6 +21,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sv-icons-sun:before {
+  content: "\e62d";
+}
+
+.sv-icons-moon:before {
+  content: "\e67c";
+}
+
 .sv-icons-clear:before {
   content: "\e900";
 }

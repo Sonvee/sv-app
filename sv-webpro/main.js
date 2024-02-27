@@ -20,6 +20,7 @@ import router from '@/router/index.js'
 import * as Pinia from 'pinia';
 import { createUnistorage } from '@/uni_modules/pinia-plugin-unistorage'
 import * as svIdPagesStore from '@/uni_modules/sv-id-pages/common/store'
+import directives from '@/directives/index.js'
 
 export function createApp() {
   const app = createSSRApp(App)
@@ -33,6 +34,8 @@ export function createApp() {
 	app.use(store);
   
 	app.use(router);
+  
+	app.use(directives);
   
 	// 全局变量
 	app.config.globalProperties.$svIdPagesStore = svIdPagesStore

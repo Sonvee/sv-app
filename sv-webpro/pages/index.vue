@@ -13,9 +13,9 @@
       </router-view>
     </view>
     <!-- 底部导航栏 -->
-    <sv-tab-bar v-if="platform == 'mobile'"></sv-tab-bar>
+    <sv-tab-bar v-if="sysStore.platform == 'mobile'"></sv-tab-bar>
     <!-- 滑动侧边栏 -->
-    <sv-side-bar v-if="platform == 'mobile'" v-model="isShowSideBar"></sv-side-bar>
+    <sv-side-bar v-if="sysStore.platform == 'mobile'" v-model="isShowSideBar"></sv-side-bar>
   </view>
 </template>
 
@@ -25,8 +25,7 @@ import { useRouter } from 'vue-router'
 import { useSysStore } from '@/store/sys'
 
 const router = useRouter()
-
-const platform = ref(useSysStore().platform)
+const sysStore = useSysStore()
 
 const isShowSideBar = ref(false)
 provide('e-show-side-bar', isShowSideBar)

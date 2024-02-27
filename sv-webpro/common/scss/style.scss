@@ -1,8 +1,8 @@
-@import './layout.scss';
 @import './element-plus.scss';
 @import './uni-ui.scss';
 @import './sv-ui.scss';
-@import './animations.scss';
+@import './animista.scss';
+@import './sv-amination.scss';
 @import './sv-icons.scss';
 @import './uni-icons.scss';
 @import './admin-icons.scss';
@@ -21,6 +21,13 @@
 uni-page-body {
   height: 100%;
 
+  @include useTheme {
+    background-color: getTheme('sv-bg-color');
+    color: getTheme('sv-text-color');
+  }
+}
+
+.page {
   @include useTheme {
     background-color: getTheme('sv-bg-color');
     color: getTheme('sv-text-color');

@@ -1,7 +1,5 @@
 <template>
-  <view class="page-mine">
-    
-  </view>
+  <view class="mine page"></view>
 </template>
 
 <script>
@@ -12,13 +10,12 @@ export default {
       isShowDrawer: false
     }
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
 <style lang="scss">
-.page-mine {
+.mine {
   width: 100%;
   height: 100%;
 }

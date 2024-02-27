@@ -2893,6 +2893,10 @@ scroll-view.cu-steps .cu-item {
   justify-content: space-around;
 }
 
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
 /* grid布局 */
 
 .grid {
@@ -3024,6 +3028,10 @@ scroll-view.cu-steps .cu-item {
 
 .margin-xl {
   margin: 50upx;
+}
+
+.margin-top-xxs {
+  margin-top: 4upx;
 }
 
 .margin-top-xs {
@@ -3915,4 +3923,27 @@ scroll-view.cu-steps .cu-item {
 .line-white,
 .lines-white {
   color: #ffffff;
+}
+
+/**
+ * 自定义
+ */
+.width-full {
+  width: 100%;
+}
+
+.width-full-v {
+  width: 100vw;
+}
+
+.height-full {
+  height: 100%;
+}
+
+.height-full-v {
+  height: 100vh;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

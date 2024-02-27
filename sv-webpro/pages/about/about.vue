@@ -1,5 +1,5 @@
 <template>
-  <view class="page-about">关于</view>
+  <view class="about page">关于</view>
 </template>
 
 <script setup>
@@ -15,7 +15,7 @@ onDeactivated(() => {
 </script>
 
 <style lang="scss">
-.page-about {
+.about {
   width: 100%;
   height: 100%;
 }

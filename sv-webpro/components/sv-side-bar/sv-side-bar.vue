@@ -10,7 +10,7 @@
   >
     <view class="header-placeholder"></view>
     <view class="sv-side-bar">
-      <view v-for="item in 100">123123</view>
+      侧边栏内容
     </view>
     <view class="footer-placeholder"></view>
   </el-drawer>

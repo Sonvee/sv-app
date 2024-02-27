@@ -1,7 +1,8 @@
 <template>
   <view class="app-index">
     <!-- 头部导航栏 -->
-    <sv-nav-bar></sv-nav-bar>
+    <sv-nav-bar v-if="sysStore.platform == 'mobile'"></sv-nav-bar>
+    <sv-header v-else></sv-header>
     <!-- 主体内容 -->
     <view class="app-body" :class="{ 'show-side-bar': isShowSideBar }">
       <router-view v-slot="{ Component }">

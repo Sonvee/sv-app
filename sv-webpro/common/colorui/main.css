@@ -3944,6 +3944,16 @@ scroll-view.cu-steps .cu-item {
   height: 100vh;
 }
 
+.width-height-full {
+  width: 100%;
+  height: 100%;
+}
+
+.width-height-full-v {
+  width: 100vw;
+  height: 100vh;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

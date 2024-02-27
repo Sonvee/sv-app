@@ -2,7 +2,7 @@
   <el-drawer
     v-bind="$attrs"
     class="sv-el-drawer"
-    size="80%"
+    size="84%"
     direction="ltr"
     :show-close="false"
     :with-header="false"

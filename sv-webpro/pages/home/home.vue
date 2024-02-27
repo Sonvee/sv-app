@@ -1,10 +1,12 @@
 <template>
   <view class="home page">
-    <view class="header"></view>
-    主页{{ num }}
-    <button @click="add">+1</button>
-    <view class="footer">
-      <view v-for="item in 5">页脚页脚页脚页脚页脚页脚页脚页脚页脚页脚页脚页脚页脚</view>
+    <el-backtop :right="30" :bottom="80" />
+    <view class="header-image">
+      <image
+        class="width-height-full"
+        src="../../static/images/kesuen-room.gif"
+        mode="aspectFill"
+      ></image>
     </view>
   </view>
 </template>
@@ -49,19 +51,12 @@ onUnmounted(() => {
 <style lang="scss">
 .home {
   width: 100%;
-  height: 1000px;
+  height: 2000px;
   position: relative;
 
-  .header {
-    height: 100px;
-    background-color: #cccccc;
-  }
-
-  .footer {
+  .header-image {
     width: 100%;
-    background-color: #cccccc;
-    position: absolute;
-    bottom: 0;
+    height: 80vh;
   }
 }
 </style>

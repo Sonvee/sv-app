@@ -2,6 +2,7 @@ import {
   createRouter,
   createWebHashHistory
 } from 'vue-router'
+import svidConfig from '@/uni_modules/sv-id-pages/config.js'
 
 /**
  * 路由规则 - 约束规范：
@@ -91,7 +92,8 @@ const routes = [{
       keepAliveName: 'mine'
     },
     component: () => import('@/pages/mine/mine.vue'),
-  }
+  },
+  ...svidConfig.routes
 ]
 
 // 创建路由

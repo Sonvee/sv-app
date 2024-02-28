@@ -10,13 +10,17 @@
   >
     <view class="header-placeholder"></view>
     <view class="sv-side-bar">
-      侧边栏内容
+      <view @click="loginOut">退出登录</view>
     </view>
     <view class="footer-placeholder"></view>
   </el-drawer>
 </template>
 
-<script setup></script>
+<script setup>
+function loginOut() {
+  getApp().$svIdPagesStore.mutations.logout()
+}
+</script>
 
 <style lang="scss">
 .sv-side-bar {

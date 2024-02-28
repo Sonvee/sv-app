@@ -2,11 +2,11 @@
   <view class="home page">
     <el-backtop :right="30" :bottom="80" />
     <view class="header-image">
-      <image
+      <!-- <image
         class="width-height-full"
         src="../../static/images/kesuen-room.gif"
         mode="aspectFill"
-      ></image>
+      ></image> -->
     </view>
   </view>
 </template>
@@ -14,18 +14,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, onActivated, onDeactivated } from 'vue'
 import { testList } from '@/service/api/test'
-import { changeTheme } from '../../utils/sys'
-
-const num = ref(123)
-const theme = ref('light')
-function add() {
-  num.value++
-  theme.value = theme.value == 'light' ? 'dark' : 'light'
-  changeTheme(theme.value)
-  uni.showToast({
-    title: '加一'
-  })
-}
 
 onMounted(() => {
   console.log('==== onMounted home :')
@@ -57,6 +45,7 @@ onUnmounted(() => {
   .header-image {
     width: 100%;
     height: 80vh;
+    border: 1px solid #66ccff;
   }
 }
 </style>

@@ -2,15 +2,20 @@ import {
   defineStore
 } from 'pinia'
 import {
-  ref,
-  computed
+  ref
 } from 'vue'
 
 export const useSysStore = defineStore('sys', () => {
   // 平台
-  const platform = computed(() => {
-    return uni.getSystemInfoSync().windowWidth > 600 ? 'pc' : 'mobile'
-  })
+  const platform = ref('pc')
+
+  function setPlatform(plat) {
+    platform.value = plat
+  }
+
+  function getPlatform() {
+    return platform.value
+  }
 
   // 主题
   const themes = ref('light')
@@ -40,6 +45,8 @@ export const useSysStore = defineStore('sys', () => {
 
   return {
     platform,
+    setPlatform,
+    getPlatform,
 
     themes,
     setThemes,

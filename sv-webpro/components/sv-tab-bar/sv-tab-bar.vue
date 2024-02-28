@@ -47,16 +47,17 @@ const tabbar = computed(() => {
 })
 
 function onTab(item) {
+  // 若已是当前路由，则不再重复跳转
+  if (item.path == route.path) return
   if (item.path) router.push(item.path)
 }
 </script>
 
 <style lang="scss">
-$tab-bar-height: 50px;
 
 .sv-tab-bar {
   width: 100%;
-  height: $tab-bar-height;
+  height: $sv-tab-bar-height;
   position: fixed;
   bottom: 0;
   z-index: 999;
@@ -83,6 +84,6 @@ $tab-bar-height: 50px;
 }
 
 .tabbar-placeholder {
-  height: $tab-bar-height;
+  height: $sv-tab-bar-height;
 }
 </style>

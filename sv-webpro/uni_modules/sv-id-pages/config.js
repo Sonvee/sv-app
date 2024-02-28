@@ -63,60 +63,21 @@ export default {
    * }
    * */
   setPasswordAfterLogin: false,
+  routerMode: true, // 仅供纯web端vue-router使用时开启，其他情况禁止开启
   routes: [{
-      path: "/uni_modules/sv-id-pages/pages/login/login-admin",
-      name: "登录",
-      component: () => import('@/uni_modules/sv-id-pages/pages/login/login-admin.vue')
+      path: '/uni_modules/sv-id-pages/pages/login/login-web',
+      name: '登录',
+      component: () => import('@/uni_modules/sv-id-pages/pages/login/login-web.vue')
     },
     {
-      path: "/uni_modules/sv-id-pages/pages/agreements/privacy",
-      name: "隐私政策条款",
-      component: () => import('@/uni_modules/sv-id-pages/pages/agreements/privacy.vue')
-    },
-    {
-      path: "/uni_modules/sv-id-pages/pages/agreements/service",
-      name: "用户服务协议",
+      path: '/uni_modules/sv-id-pages/pages/agreements/service',
+      name: '用户服务协议',
       component: () => import('@/uni_modules/sv-id-pages/pages/agreements/service.vue')
     },
     {
-      path: "/uni_modules/sv-id-pages/pages/userinfo/userinfo",
-      name: "个人中心",
-      component: () => import('@/uni_modules/sv-id-pages/pages/userinfo/userinfo.vue')
-    },
-    {
-      path: "/uni_modules/sv-id-pages/pages/userinfo/bind-mobile/bind-mobile",
-      name: "绑定手机",
-      component: () => import('@/uni_modules/sv-id-pages/pages/userinfo/bind-mobile/bind-mobile.vue')
-    },
-    {
-      path: "/uni_modules/sv-id-pages/pages/userinfo/change-pwd/change-pwd",
-      name: "修改密码",
-      component: () => import('@/uni_modules/sv-id-pages/pages/userinfo/change-pwd/change-pwd.vue')
-    },
-    {
-      path: "/uni_modules/sv-id-pages/pages/userinfo/cropImage/cropImage",
-      name: "头像",
-      component: () => import('@/uni_modules/sv-id-pages/pages/userinfo/cropImage/cropImage.vue')
-    },
-    {
-      path: "/uni_modules/sv-id-pages/pages/userinfo/deactivate/deactivate",
-      name: "注销账号",
-      component: () => import('@/uni_modules/sv-id-pages/pages/userinfo/deactivate/deactivate.vue')
-    },
-    {
-      path: "/uni_modules/sv-id-pages/pages/userinfo/security/security",
-      name: "账号与安全",
-      component: () => import('@/uni_modules/sv-id-pages/pages/userinfo/security/security.vue')
-    },
-    {
-      path: "/uni_modules/sv-id-pages/pages/userinfo/set-pwd/set-pwd",
-      name: "设置密码",
-      component: () => import('@/uni_modules/sv-id-pages/pages/userinfo/set-pwd/set-pwd.vue')
-    },
-    {
-      path: "/uni_modules/sv-id-pages/pages/userinfo/unbind/unbind",
-      name: "解绑注销",
-      component: () => import('@/uni_modules/sv-id-pages/pages/userinfo/unbind/unbind.vue')
+      path: '/uni_modules/sv-id-pages/pages/agreements/privacy',
+      name: '隐私政策条款',
+      component: () => import('@/uni_modules/sv-id-pages/pages/agreements/privacy.vue')
     }
   ]
 }

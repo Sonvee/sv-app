@@ -55,12 +55,12 @@
           <el-dropdown trigger="click" placement="bottom-end" @command="handleCommand">
             <span class="flex-vc">
               <el-avatar
-                class="sv-el-avatar padding-right-sm"
+                class="sv-el-avatar"
                 v-if="authInfo?.avatar_file?.url"
                 :src="authInfo?.avatar_file?.url"
                 :size="36"
               />
-              <view class="authname">{{ authInfo?.nickname }}</view>
+              <view class="authname padding-left-sm">{{ authInfo?.nickname }}</view>
             </span>
             <template #dropdown>
               <el-dropdown-menu>

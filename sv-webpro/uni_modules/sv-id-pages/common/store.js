@@ -69,7 +69,7 @@ export const mutations = {
     uni.setStorageSync('uni-id-pages-userInfo', store.userInfo)
     return data
   },
-  async logout() {
+  async logout(callback) {
     // 1. 已经过期就不需要调用服务端的注销接口	2.即使调用注销接口失败，不能阻塞客户端
     if (uniCloud.getCurrentUserInfo().tokenExpired > Date.now()) {
       try {
@@ -80,9 +80,14 @@ export const mutations = {
     }
     uni.removeStorageSync('uni_id_token');
     uni.setStorageSync('uni_id_token_expired', 0)
-    uni.redirectTo({
-      url: `/${pagesJson.uniIdRouter && pagesJson.uniIdRouter.loginPage ? pagesJson.uniIdRouter.loginPage: 'uni_modules/sv-id-pages/pages/login/login'}`,
-    });
+    
+    if(config.routerMode) {
+      callback() // 此处无法访问vue-router，开放回调函数用于手动路由跳转
+    } else {
+      uni.redirectTo({
+        url: `/${pagesJson.uniIdRouter && pagesJson.uniIdRouter.loginPage ? pagesJson.uniIdRouter.loginPage: 'uni_modules/sv-id-pages/pages/login/login'}`,
+      });
+    }
     uni.$emit('uni-id-pages-logout')
     this.setUserInfo({}, { cover: true })
   },
@@ -129,7 +134,7 @@ export const mutations = {
       delta
     })
   },
-  loginSuccess(e = {}) {
+  loginSuccess(e = {}, callback) {
     const {
       showToast = true, toastText = '登录成功', autoBack = true, uniIdRedirectUrl = '', passwordConfirmed
     } = e
@@ -157,7 +162,11 @@ export const mutations = {
     }
 
     if (autoBack) {
-      this.loginBack({ uniIdRedirectUrl })
+      if(config.routerMode) {
+        callback() // 此处无法访问vue-router，开放回调函数用于手动路由跳转
+      } else {
+        this.loginBack({ uniIdRedirectUrl })
+      }
     }
   }
 

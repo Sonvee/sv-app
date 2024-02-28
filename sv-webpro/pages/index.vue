@@ -35,13 +35,11 @@ const sysStore = useSysStore()
 const { proxy } = getCurrentInstance()
 
 const noBar = computed(() => {
-  const nobarList = [webproConfig.login.url]
-  return nobarList.includes(route.path)
+  return webproConfig.noBar.includes(route.path)
 })
 
 const isShowSideBar = ref(false)
 provide('e-show-side-bar', isShowSideBar)
-
 
 const keepAlivePages = computed(() => {
   const routes = router.options.routes

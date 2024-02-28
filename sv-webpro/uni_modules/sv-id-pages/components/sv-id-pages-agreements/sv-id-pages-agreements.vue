@@ -82,7 +82,11 @@ export default {
       })
     },
     navigateTo({ url, title }) {
-      uni.navigateTo({ url })
+      if(config.routerMode) {
+        this.$router.push(url)
+      } else {
+        uni.navigateTo({ url })
+      }
     },
     hasAnd(agreements, index) {
       return agreements.length - 1 > index

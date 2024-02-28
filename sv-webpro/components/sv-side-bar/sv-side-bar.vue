@@ -17,8 +17,14 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 function loginOut() {
-  getApp().$svIdPagesStore.mutations.logout()
+  getApp().$svIdPagesStore.mutations.logout(() => {
+    router.push('/uni_modules/sv-id-pages/pages/login/login-web')
+  })
 }
 </script>
 

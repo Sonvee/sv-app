@@ -1,18 +1,25 @@
 <template>
-  <view class="sv-tab-bar">
+  <nav class="sv-tab-bar">
     <view
       v-for="item in tabbar"
       :key="item.path"
       :class="['tab-item', route.path == item.path ? 'jello-horizontal' : '']"
-      :style="{ color: route.path == item.path ? item.activeColor : item.color }"
+      :style="{
+        color: route.path == item.path ? item.meta.tabbar.activeColor : item.meta.tabbar.color
+      }"
       @click="onTab(item)"
     >
-      <view :class="['text-xxl', route.path == item.path ? item.activeIcon : item.icon]"></view>
+      <view
+        :class="[
+          'text-xxl',
+          route.path == item.path ? item.meta.tabbar.activeIcon : item.meta.tabbar.icon
+        ]"
+      ></view>
       <view class="text-sm" v-if="item.name">
         {{ item.name }}
       </view>
     </view>
-  </view>
+  </nav>
   <!-- 占位 -->
   <view class="tabbar-placeholder" v-if="placeholder"></view>
 </template>
@@ -20,9 +27,12 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useSysStore } from '../../store/sys'
+import { handleTabbar } from '../../utils/sys'
 
 const router = useRouter()
 const route = useRoute()
+const sysStore = useSysStore()
 
 const props = defineProps({
   placeholder: {
@@ -32,19 +42,11 @@ const props = defineProps({
 })
 
 const tabbar = computed(() => {
-  const routes = router.options.routes
-  const tabRoutes = routes
-    .filter((item) => item.meta?.tab)
-    .sort((a, b) => a.meta.tab.index - b.meta.tab.index)
-  const tabs = tabRoutes.map((item) => {
-    return {
-      name: item.name,
-      path: item.path,
-      ...item.meta.tab
-    }
-  })
+  const sysRoutes = sysStore.getSysRoutes()
+  const tabs = handleTabbar(sysRoutes)
   return tabs
 })
+console.log('==== tabbar :', tabbar.value)
 
 function onTab(item) {
   // 若已是当前路由，则不再重复跳转
@@ -54,7 +56,6 @@ function onTab(item) {
 </script>
 
 <style lang="scss">
-
 .sv-tab-bar {
   width: 100%;
   height: $sv-tab-bar-height;

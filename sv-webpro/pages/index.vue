@@ -3,7 +3,7 @@
     <!-- 头部导航栏 -->
     <sv-nav-bar v-if="!noBar"></sv-nav-bar>
     <!-- 主体内容 -->
-    <view class="app-body" :class="{ 'show-side-bar': isShowSideBar }">
+    <main class="app-body" :class="{ 'show-side-bar': isShowSideBar }">
       <router-view v-slot="{ Component }">
         <transition name="fade">
           <keep-alive :include="keepAlivePages">
@@ -11,7 +11,7 @@
           </keep-alive>
         </transition>
       </router-view>
-    </view>
+    </main>
     <!-- 底部导航栏 -->
     <sv-tab-bar v-if="sysStore.platform == 'mobile' && !noBar"></sv-tab-bar>
     <!-- 滑动侧边栏 -->
@@ -42,8 +42,10 @@ const isShowSideBar = ref(false)
 provide('e-show-side-bar', isShowSideBar)
 
 const keepAlivePages = computed(() => {
-  const routes = router.options.routes
-  return routes.filter((item) => item.meta?.keepAliveName).map((item) => item.meta.keepAliveName)
+  const routes = sysStore.getSysRoutes()
+  return routes
+    .filter((item) => item.meta?.keep_alive_name)
+    .map((item) => item.meta.keep_alive_name)
 })
 
 // 媒体查询监听窗口尺寸变化
@@ -59,7 +61,7 @@ onLoad(() => {
         maxWidth: 600 // 页面宽度最大 600px
       },
       (matches) => {
-        console.log('==== 媒体查询 matches :', matches)
+        // console.log('==== 媒体查询 matches :', matches)
         // 页面宽度在 0 ~ 600px 之间为 mobile，否则为 pc
         sysStore.setPlatform(matches ? 'mobile' : 'pc')
       }

@@ -6,6 +6,17 @@ import {
 } from 'vue'
 
 export const useSysStore = defineStore('sys', () => {
+  // 路由
+  const sysRoutes = ref([])
+
+  function setSysRoutes(routes) {
+    sysRoutes.value = routes
+  }
+
+  function getSysRoutes() {
+    return sysRoutes.value
+  }
+
   // 平台
   const platform = ref('pc')
 
@@ -44,6 +55,10 @@ export const useSysStore = defineStore('sys', () => {
   }
 
   return {
+    sysRoutes,
+    setSysRoutes,
+    getSysRoutes,
+
     platform,
     setPlatform,
     getPlatform,

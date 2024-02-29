@@ -1,5 +1,5 @@
 <template>
-  <view class="sv-nav-bar">
+  <header class="sv-nav-bar">
     <!-- 移动端 -->
     <template v-if="sysStore.platform == 'mobile'">
       <text
@@ -7,7 +7,7 @@
         :class="[isShowSideBar ? 'uni-icons-settings' : 'uni-icons-list']"
         @click="toggleSideBar"
       ></text>
-      <view class="sv-text-streamer text-xl text-bold">标题</view>
+      <view class="sv-text-streamer text-xl text-bold">标题标题标题标题</view>
       <text
         class="text-xl padding-sm cursor-pointer"
         :class="[sysStore.themes == 'light' ? 'sv-icons-sun' : 'sv-icons-moon']"
@@ -18,10 +18,14 @@
     <template v-else>
       <!-- 左侧标题栏 -->
       <view class="sv-text-streamer text-xl text-bold padding-sm cursor-pointer" @click="toHome">
-        标题
+        标题标题标题标题
       </view>
       <!-- 中心导航栏 -->
-      <view>123</view>
+      <view class="height-full flex align-center">
+        <view class="" v-for="item in navbar" @click="onNav(item)">
+          {{ item.name }}
+        </view>
+      </view>
       <!-- 右侧控制栏 -->
       <view class="flex align-center height-full">
         <view class="sv-menu-icon" @click="docUrl">
@@ -51,28 +55,44 @@
           </el-tooltip>
         </view>
         <!-- 个人中心 -->
-        <view class="sv-menu-item">
-          <el-dropdown trigger="click" placement="bottom-end" @command="handleCommand">
-            <span class="flex-vc">
+        <view class="sv-menu-item" v-if="authInfo?._id">
+          <el-popover placement="bottom-end" trigger="click" :width="100">
+            <template #reference>
               <el-avatar
                 class="sv-el-avatar"
                 v-if="authInfo?.avatar_file?.url"
                 :src="authInfo?.avatar_file?.url"
                 :size="36"
               />
-              <view class="authname padding-left-sm">{{ authInfo?.nickname }}</view>
-            </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command="mine">个人中心</el-dropdown-item>
-                <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
-              </el-dropdown-menu>
             </template>
-          </el-dropdown>
+            <template #default>
+              <!-- 昵称 -->
+              <view class="text-sm text-line-1">
+                <text class="text-green">{{ getNowTimeName(true) }}！</text>
+                <text class="text-bold sv-text-streamer">{{ authInfo?.nickname }}</text>
+              </view>
+              <view class="flex justify-between margin-top-sm">
+                <view class="sv-btn-particle" title="个人中心" @click="handleCommand('mine')">
+                  <text class="admin-icons-user"></text>
+                </view>
+                <view class="sv-btn-particle" title="VIP" @click="handleCommand('vip')">
+                  <text class="admin-icons-user"></text>
+                </view>
+                <view class="sv-btn-particle" title="VIP" @click="handleCommand('vip')">
+                  <text class="admin-icons-user"></text>
+                </view>
+                <view class="sv-btn-particle" title="退出登录" @click="handleCommand('logout')">
+                  <text class="admin-icons-yonghutongji"></text>
+                </view>
+              </view>
+            </template>
+          </el-popover>
         </view>
+        <!-- 请登录 -->
+        <view class="sv-menu-item" v-else @click="toLogin">登录</view>
       </view>
     </template>
-  </view>
+  </header>
   <!-- 占位 -->
   <view class="header-placeholder" v-if="placeholder"></view>
 </template>
@@ -81,10 +101,11 @@
 import { computed, inject } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useSysStore } from '@/store/sys'
-import { changeTheme } from '@/utils/sys'
+import { changeTheme, handleNavbar } from '@/utils/sys'
 import webproConfig from '@/webpro.config.js'
 import { useFullscreen } from '@vueuse/core'
 import { clearPiniaStorage } from '@/utils/pinia-storage'
+import { getNowTimeName } from '@/utils/util'
 
 const props = defineProps({
   placeholder: {
@@ -92,13 +113,11 @@ const props = defineProps({
     default: false
   }
 })
-
 const router = useRouter()
 const route = useRoute()
 const sysStore = useSysStore()
 const isShowSideBar = inject('e-show-side-bar')
 const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
-console.log('====  authInfo:', authInfo.value)
 
 function toggleSideBar() {
   isShowSideBar.value = !isShowSideBar.value
@@ -110,32 +129,29 @@ function toggleTheme() {
 }
 
 const navbar = computed(() => {
-  const routes = router.options.routes
-  const navRoutes = routes
-    .filter((item) => item.meta?.nav)
-    .sort((a, b) => a.meta.nav.index - b.meta.nav.index)
-  const navs = navRoutes.map((item) => {
-    return {
-      name: item.name,
-      path: item.path,
-      ...item.meta.nav
-    }
-  })
+  const sysRoutes = sysStore.getSysRoutes()
+  const navs = handleNavbar(sysRoutes)
   return navs
 })
+console.log('==== navbar :', navbar.value)
 
 function onNav(item) {
+  console.log('==== item :', item)
   // 若已是当前路由，则不再重复跳转
   if (item.path == route.path) return
   if (item.path) router.push(item.path)
 }
 
+function toLogin() {
+  router.push(webproConfig.login.url)
+}
+
 function toHome() {
-  router.push('/pages/home/home')
+  router.push(webproConfig.home.url)
 }
 
 function docUrl() {
-  window.open('https://gitee.com/Sonve/sv-app')
+  window.open(webproConfig.docUrl.url)
 }
 
 const { toggle } = useFullscreen()
@@ -149,10 +165,14 @@ function handleCommand(command) {
   switch (command) {
     case 'mine':
       break
+    case 'vip':
+      break
     case 'logout':
       // 清除缓存
       clearPiniaStorage()
-      getApp().$svIdPagesStore.mutations.logout()
+      getApp().$svIdPagesStore.mutations.logout(() => {
+        router.push(webproConfig.login.url)
+      })
       break
   }
 }
@@ -193,12 +213,6 @@ function handleCommand(command) {
     &:hover {
       @include useTheme {
         background-color: getTheme('sv-hover-color');
-      }
-    }
-    .authname {
-      max-width: 160px;
-      @include useTheme {
-        color: getTheme('sv-text-color');
       }
     }
   }

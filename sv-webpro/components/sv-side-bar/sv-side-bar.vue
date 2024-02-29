@@ -9,9 +9,10 @@
     :z-index="888"
   >
     <view class="header-placeholder"></view>
-    <view class="sv-side-bar">
+    <aside class="sv-side-bar">
       <view @click="loginOut">退出登录</view>
-    </view>
+      <view @click="toSetting">设置</view>
+    </aside>
     <view class="footer-placeholder"></view>
   </el-drawer>
 </template>
@@ -25,6 +26,10 @@ function loginOut() {
   getApp().$svIdPagesStore.mutations.logout(() => {
     router.push('/uni_modules/sv-id-pages/pages/login/login-web')
   })
+}
+
+function toSetting() {
+  router.push('/pages/mine/setting')
 }
 </script>
 

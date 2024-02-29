@@ -1,14 +1,11 @@
 <template>
-  <view class="mine page"></view>
+  <view class="mine page flex align-center justify-center">我的</view>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-      modalName: null,
-      isShowDrawer: false
-    }
+    return {}
   },
   methods: {}
 }
@@ -18,104 +15,5 @@ export default {
 .mine {
   width: 100%;
   height: 100%;
-}
-
-.DrawerPage {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  left: 0;
-  background-color: #66ccff;
-  transition: all 0.4s;
-}
-
-.DrawerPage.show {
-  transform: scale(0.9, 0.9);
-  left: 85vw;
-  box-shadow: 0 0 60upx rgba(0, 0, 0, 0.2);
-  transform-origin: 0;
-}
-
-.DrawerWindow {
-  position: absolute;
-  width: 85vw;
-  height: 100vh;
-  left: 0;
-  top: 0;
-  transform: scale(0.9, 0.9) translateX(-100%);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.4s;
-  padding: 100upx 0;
-}
-
-.DrawerWindow.show {
-  transform: scale(1, 1) translateX(0%);
-  opacity: 1;
-  pointer-events: all;
-}
-
-.DrawerClose {
-  position: absolute;
-  width: 40vw;
-  height: 100vh;
-  right: 0;
-  top: 0;
-  color: transparent;
-  padding-bottom: 30upx;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.6));
-  letter-spacing: 5px;
-  font-size: 50upx;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.4s;
-}
-
-.DrawerClose.show {
-  opacity: 1;
-  pointer-events: all;
-  width: 15vw;
-  color: #fff;
-}
-
-.DrawerPage .cu-bar.tabbar .action button.cuIcon {
-  width: 64upx;
-  height: 64upx;
-  line-height: 64upx;
-  margin: 0;
-  display: inline-block;
-}
-
-.DrawerPage .cu-bar.tabbar .action .cu-avatar {
-  margin: 0;
-}
-
-.DrawerPage .nav {
-  flex: 1;
-}
-
-.DrawerPage .nav .cu-item.cur {
-  border-bottom: 0;
-  position: relative;
-}
-
-.DrawerPage .nav .cu-item.cur::after {
-  content: '';
-  width: 10upx;
-  height: 10upx;
-  background-color: currentColor;
-  position: absolute;
-  bottom: 10upx;
-  border-radius: 10upx;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-.DrawerPage .cu-bar.tabbar .action {
-  flex: initial;
 }
 </style>

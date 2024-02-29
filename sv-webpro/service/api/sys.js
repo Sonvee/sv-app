@@ -1,6 +1,19 @@
 import request from '../request/index.js'
 
 /**
+ * 菜单
+ */
+
+export function menuList(data) {
+  return request({
+    url: '/sys/menuList',
+    method: 'POST',
+    data
+  })
+}
+
+
+/**
  * 字典
  */
 

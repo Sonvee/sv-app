@@ -51,8 +51,8 @@
       "title": "备注",
       "trim": "both",
       "permission": {
-        "read": "'READ_UNI_ID_USERS' in auth.permission",
-        "write": "'CREATE_UNI_ID_USERS' in auth.permission || 'UPDATE_UNI_ID_USERS' in auth.permission"
+        "read": true,
+        "write": "doc._id == auth.uid"
       }
     },
     "dcloud_appid": {

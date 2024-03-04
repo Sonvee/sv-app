@@ -1,5 +1,5 @@
 <template>
-  <view class="setting page flex align-center justify-center">设置</view>
+  <view class="setting page height-full flex align-center justify-center">设置</view>
 </template>
 
 <script>

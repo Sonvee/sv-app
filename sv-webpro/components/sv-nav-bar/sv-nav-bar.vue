@@ -22,8 +22,14 @@
       </view>
       <!-- 中心导航栏 -->
       <view class="height-full flex align-center">
-        <view class="" v-for="item in navbar" @click="onNav(item)">
-          {{ item.name }}
+        <view
+          class="sv-btn-particle"
+          :class="[item.path == route.path ? 'sv-neon-flash' : '']"
+          v-for="item in navbar"
+          @click="onNav(item)"
+        >
+          <text :class="item.meta.bar.icon"></text>
+          <text class="margin-left-xs">{{ item.name }}</text>
         </view>
       </view>
       <!-- 右侧控制栏 -->
@@ -101,7 +107,7 @@
 import { computed, inject } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useSysStore } from '@/store/sys'
-import { changeTheme, handleNavbar } from '@/utils/sys'
+import { changeTheme } from '@/utils/sys'
 import webproConfig from '@/webpro.config.js'
 import { useFullscreen } from '@vueuse/core'
 import { clearPiniaStorage } from '@/utils/pinia-storage'
@@ -129,14 +135,14 @@ function toggleTheme() {
 }
 
 const navbar = computed(() => {
-  const sysRoutes = sysStore.getSysRoutes()
-  const navs = handleNavbar(sysRoutes)
+  const routes = router.getRoutes()
+  const navs = routes
+    .filter((item) => item.meta.bar?.nav)
+    .sort((a, b) => a.meta.bar?.navIndex - b.meta.bar?.navIndex)
   return navs
 })
-console.log('==== navbar :', navbar.value)
 
 function onNav(item) {
-  console.log('==== item :', item)
   // 若已是当前路由，则不再重复跳转
   if (item.path == route.path) return
   if (item.path) router.push(item.path)

@@ -15,8 +15,6 @@ export async function preProcess() {
   // 监听登录成功
   listenLoginSuccess()
   changeTheme(useSysStore().getThemes())
-
-
 }
 
 function listenLoginSuccess() {

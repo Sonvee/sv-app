@@ -43,7 +43,7 @@ export const mutations = {
       try {
         let res = await usersTable.where("'_id' == $cloudEnv_uid")
           .field(
-            'avatar_file,username,nickname,gender,tags,my_invite_code,role,email,mobile,last_login_date,last_login_ip'
+            'avatar_file,username,nickname,gender,tags,my_invite_code,role,email,mobile,last_login_date,last_login_ip,comment'
           )
           .get()
 

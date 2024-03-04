@@ -31,7 +31,7 @@
 
 <script>
 import config from '@/uni_modules/sv-id-pages/config.js'
-let retryFun = () => console.log('为定义')
+let retryFun = () => console.log('未定义')
 /**
  * uni-id-pages-agreements
  * @description 用户服务协议和隐私政策条款组件
@@ -82,7 +82,11 @@ export default {
       })
     },
     navigateTo({ url, title }) {
-      uni.navigateTo({ url })
+      if(config.routerMode) {
+        this.$router.push(url)
+      } else {
+        uni.navigateTo({ url })
+      }
     },
     hasAnd(agreements, index) {
       return agreements.length - 1 > index

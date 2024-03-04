@@ -3815,6 +3815,10 @@ scroll-view.cu-steps .cu-item {
   font-weight: bold;
 }
 
+.text-italic {
+  font-style: italic;
+}
+
 .text-center {
   text-align: center;
 }
@@ -3997,6 +4001,14 @@ scroll-view.cu-steps .cu-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.flex-shrink-1 {
+  flex-shrink: 1;
 }
 
 .text-line-1 {

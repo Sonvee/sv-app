@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import config from '@/uni_modules/sv-id-pages/config.js'
 import manifest from '@/manifest.json'
 
 export default {
@@ -77,7 +78,11 @@ export default {
   },
   methods: {
     goBack() {
-      uni.navigateBack()
+      if(config.routerMode) {
+        this.$router.back()
+      } else {
+        uni.navigateBack()
+      }
     }
   }
 }

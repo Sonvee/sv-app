@@ -42,10 +42,8 @@ const isShowSideBar = ref(false)
 provide('e-show-side-bar', isShowSideBar)
 
 const keepAlivePages = computed(() => {
-  const routes = sysStore.getSysRoutes()
-  return routes
-    .filter((item) => item.meta?.keep_alive_name)
-    .map((item) => item.meta.keep_alive_name)
+  const routes = router.getRoutes()
+  return routes.filter((item) => item.meta?.keepAliveName).map((item) => item.meta.keepAliveName)
 })
 
 // 媒体查询监听窗口尺寸变化

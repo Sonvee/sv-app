@@ -5,14 +5,14 @@
       :key="item.path"
       :class="['tab-item', route.path == item.path ? 'jello-horizontal' : '']"
       :style="{
-        color: route.path == item.path ? item.meta.tabbar.activeColor : item.meta.tabbar.color
+        color: route.path == item.path ? item.meta.bar.activeColor : item.meta.bar.color
       }"
       @click="onTab(item)"
     >
       <view
         :class="[
           'text-xxl',
-          route.path == item.path ? item.meta.tabbar.activeIcon : item.meta.tabbar.icon
+          route.path == item.path ? item.meta.bar.activeIcon : item.meta.bar.icon
         ]"
       ></view>
       <view class="text-sm" v-if="item.name">
@@ -28,7 +28,6 @@
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useSysStore } from '../../store/sys'
-import { handleTabbar } from '../../utils/sys'
 
 const router = useRouter()
 const route = useRoute()
@@ -42,11 +41,12 @@ const props = defineProps({
 })
 
 const tabbar = computed(() => {
-  const sysRoutes = sysStore.getSysRoutes()
-  const tabs = handleTabbar(sysRoutes)
+  const routes = router.getRoutes()
+  const tabs = routes
+    .filter((item) => item.meta.bar?.tab)
+    .sort((a, b) => a.meta.bar.tabIndex - b.meta.bar.tabIndex)
   return tabs
 })
-console.log('==== tabbar :', tabbar.value)
 
 function onTab(item) {
   // 若已是当前路由，则不再重复跳转

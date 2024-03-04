@@ -7,7 +7,7 @@
     <view class="form">
       <sv-id-pages-mobile-sms
         :formExtra="formData"
-        :codeScene="codeScene"
+        :smsScene="smsScene"
         captchaScene="send-sms-code"
         @submit="submitSet"
       >
@@ -48,13 +48,13 @@ export default {
         password: '',
         password2: ''
       },
-      codeScene: 'set-pwd-by-sms',
+      smsScene: 'set-pwd-by-sms',
       loginType: ''
     }
   },
   onLoad(e) {
     this.loginType = e.loginType
-    this.codeScene = this.loginType == 'resetPwdBySms' ? 'reset-pwd-by-sms' : 'set-pwd-by-sms'
+    this.smsScene = this.loginType == 'resetPwdBySms' ? 'reset-pwd-by-sms' : 'set-pwd-by-sms'
   },
   methods: {
     submitSet(formRes) {
@@ -76,7 +76,7 @@ export default {
         return
       }
       if (this.loginType == 'resetPwdBySms') {
-        this.codeScene = 'reset-pwd-by-sms'
+        this.smsScene = 'reset-pwd-by-sms'
         this.resetPwdBySms({ mobile, password, code, captcha })
       } else {
         this.setPwd({ password, code, captcha })

@@ -83,11 +83,11 @@ const mixin = {
 		}
 	},
 	methods: {
-		loginSuccess(e) {
+		loginSuccess(e, callback) {
 			mutations.loginSuccess({
 				...e,
 				uniIdRedirectUrl: this.uniIdRedirectUrl
-			})
+			}, callback)
 		}
 	}
 }

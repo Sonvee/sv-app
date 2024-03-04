@@ -11,11 +11,6 @@
             maxlength="11"
           ></uni-easyinput>
         </uni-forms-item>
-        <uni-forms-item name="captcha">
-          <view class="sv-uni-captcha">
-            <uni-captcha ref="captcha" v-model="formData.captcha" :scene="captchaScene" />
-          </view>
-        </uni-forms-item>
         <uni-forms-item name="code">
           <uni-easyinput
             v-model="formData.code"
@@ -27,6 +22,11 @@
               <view class="smscode-text" @click="getSmsCode">{{ smsCodeText }}</view>
             </template>
           </uni-easyinput>
+        </uni-forms-item>
+        <uni-forms-item name="captcha" v-if="showCaptcha">
+          <view class="sv-uni-captcha">
+            <uni-captcha ref="captcha" v-model="formData.captcha" :scene="captchaScene" />
+          </view>
         </uni-forms-item>
         <!-- 其他表单内容自行添加 -->
         <slot></slot>
@@ -44,13 +44,17 @@ const uniIdCo = uniCloud.importObject('uni-id-co', { customUI: true })
 
 export default {
   props: {
-    codeScene: {
+    smsScene: {
       type: String,
-      default: 'login-by-sms' // [login-by-sms|reset-pwd-by-sms|bind-mobile-by-sms|set-pwd-by-sms]
+      default: 'login-by-sms' // 详见uni-id-co/common/constants.js中SMS_SCENE
     },
     captchaScene: {
       type: String,
-      default: 'send-sms-code' // [send-sms-code|bind-mobile-by-sms|set-pwd-by-sms]
+      default: 'send-sms-code' // 详见uni-id-co/common/constants.js中CAPTCHA_SCENE
+    },
+    showCaptcha: {
+      type: Boolean,
+      default: false
     },
     // 表单自定义扩展项
     formExtra: {
@@ -85,7 +89,7 @@ export default {
     },
     submitText() {
       let text = ''
-      switch (this.codeScene) {
+      switch (this.smsScene) {
         case 'login-by-sms':
           text = '登录'
           break
@@ -127,9 +131,9 @@ export default {
           icon: 'none'
         })
       }
-      if (this.formData.captcha.length != 4) {
+      if (this.showCaptcha && this.formData.captcha.length != 4) {
         return uni.showToast({
-          title: '请先输入图形验证码',
+          title: '请输入图形验证码',
           icon: 'none'
         })
       }
@@ -137,13 +141,16 @@ export default {
         title: '发送中',
         mask: true
       })
+      const param = {
+        mobile: this.formData.mobile,
+        scene: this.smsScene
+      }
+      if (this.showCaptcha) {
+        param.captcha = this.formData.captcha
+      }
       // 请求验证码
       uniIdCo
-        .sendSmsCode({
-          mobile: this.formData.mobile,
-          captcha: this.formData.captcha,
-          scene: this.codeScene // [login-by-sms|reset-pwd-by-sms|bind-mobile]
-        })
+        .sendSmsCode(param)
         .then(() => {
           uni.hideLoading()
           uni.showToast({

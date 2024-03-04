@@ -53,6 +53,10 @@ module.exports = {
     })
   },
   async menuAdd() {
+    const {
+      dbname = 'opendb-admin-menus'
+    } = this.params
+
     // 菜单添加
     const menuRes = await db.collection(dbname).add(this.params)
     return handler.result({
@@ -63,7 +67,8 @@ module.exports = {
   async menuDelete() {
     // 菜单删除
     const {
-      menu_id
+      menu_id,
+      dbname = 'opendb-admin-menus'
     } = this.params
 
     const menuRes = await db.collection(dbname).where({
@@ -78,7 +83,8 @@ module.exports = {
   async menuUpdate() {
     // 菜单更新，需要根据_id字段更新，而不是menu_id
     const {
-      _id
+      _id,
+      dbname = 'opendb-admin-menus'
     } = this.params
 
     delete this.params._id // 移除_id字段，_id不加入更新

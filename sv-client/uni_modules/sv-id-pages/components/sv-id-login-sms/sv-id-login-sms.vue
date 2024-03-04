@@ -5,8 +5,9 @@
       <!-- 登录 -->
       <sv-id-pages-mobile-sms
         style="height: 100%"
-        codeScene="login-by-sms"
-        captchaScene="send-sms-code"
+        smsScene="login-by-sms"
+        captchaScene="login-by-sms"
+        :showCaptcha="showCaptcha"
         @submit="submitLogin"
       ></sv-id-pages-mobile-sms>
     </view>
@@ -29,7 +30,8 @@ export default {
   mixins: [mixin],
   data() {
     return {
-      form: {}
+      form: {},
+      showCaptcha: false,
     }
   },
   methods: {
@@ -53,10 +55,9 @@ export default {
         })
         .catch((err) => {
           uni.hideLoading()
-          uni.showModal({
-            content: err.message,
-            showCancel: false
-          })
+          if (err.code === 'uni-id-captcha-required') {
+            this.showCaptcha = true
+          }
         })
     }
   }

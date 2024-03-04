@@ -63,7 +63,7 @@ export default {
    * }
    * */
   setPasswordAfterLogin: false,
-  routerMode: true, // 仅供纯web端vue-router使用时开启，其他情况禁止开启
+  routerMode: false, // 仅供纯web端vue-router使用时开启，其他情况禁止开启
   routes: [{
       path: '/uni_modules/sv-id-pages/pages/login/login-web',
       name: '登录',

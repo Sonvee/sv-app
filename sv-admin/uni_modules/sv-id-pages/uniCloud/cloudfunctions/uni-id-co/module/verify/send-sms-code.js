@@ -23,7 +23,7 @@ const {
 module.exports = async function (params = {}) {
   const schema = {
     mobile: 'mobile',
-    captcha: 'string',
+    // captcha: 'string',
     scene: 'string'
   }
   this.middleware.validate(params, schema)
@@ -37,10 +37,10 @@ module.exports = async function (params = {}) {
       errCode: ERROR.INVALID_PARAM
     }
   }
-  await verifyCaptcha.call(this, {
-    scene: 'send-sms-code',
-    captcha
-  })
+  // await verifyCaptcha.call(this, {
+  //   scene: 'send-sms-code',
+  //   captcha
+  // })
 
   // -- 测试代码
   const {

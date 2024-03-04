@@ -39,16 +39,6 @@
     }
   ],
   "subPackages": [{
-      "root": "pages/web",
-      "pages": [{
-        "path": "home/home",
-        "style": {
-          "navigationBarTitleText": "主页",
-          "topWindow": false,
-          "leftWindow": false
-        }
-      }]
-    }, {
       "root": "pages/business",
       "pages": [{
         "path": "business1/business1",

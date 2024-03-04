@@ -6,7 +6,7 @@
     </view>
     <view class="form">
       <sv-id-pages-mobile-sms
-        codeScene="bind-mobile-by-sms"
+        smsScene="bind-mobile-by-sms"
         captchaScene="send-sms-code"
         @submit="submitBind"
       ></sv-id-pages-mobile-sms>

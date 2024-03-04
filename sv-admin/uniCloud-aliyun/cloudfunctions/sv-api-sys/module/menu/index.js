@@ -8,7 +8,8 @@ module.exports = {
     const {
       role,
       permission,
-      tree = true
+      tree = true,
+      dbname = 'opendb-admin-menus' // 可选参数，用于切换不同的数据库表，默认sv-admin菜单表，旨为日后方便开发多菜单项目
     } = this.params
     /**
      * 获取JQL database引用，此处需要传入云对象的clientInfo
@@ -21,7 +22,7 @@ module.exports = {
     let menuRes
 
     if (role && role.indexOf('admin') > -1) {
-      menuRes = await dbJQL.collection('opendb-admin-menus')
+      menuRes = await dbJQL.collection(dbname)
         .orderBy('sort', 'asc')
         .get({
           getTree: tree
@@ -29,7 +30,7 @@ module.exports = {
     } else {
       // 菜单列表，默认按sort升序排序，菜单不做分页处理
       // where条件会对所有查询的节点生效
-      menuRes = await dbJQL.collection('opendb-admin-menus')
+      menuRes = await dbJQL.collection(dbname)
         .where({
           "$or": [{
               "permission": []
@@ -53,7 +54,7 @@ module.exports = {
   },
   async menuAdd() {
     // 菜单添加
-    const menuRes = await db.collection('opendb-admin-menus').add(this.params)
+    const menuRes = await db.collection(dbname).add(this.params)
     return handler.result({
       data: menuRes,
       message: '添加成功'
@@ -65,7 +66,7 @@ module.exports = {
       menu_id
     } = this.params
 
-    const menuRes = await db.collection('opendb-admin-menus').where({
+    const menuRes = await db.collection(dbname).where({
       menu_id: dbCmd.eq(menu_id)
     }).remove()
 
@@ -82,7 +83,7 @@ module.exports = {
 
     delete this.params._id // 移除_id字段，_id不加入更新
 
-    const menuRes = await db.collection('opendb-admin-menus').doc(_id).update(this.params)
+    const menuRes = await db.collection(dbname).doc(_id).update(this.params)
 
     return handler.result({
       data: menuRes,

@@ -9,7 +9,7 @@ module.exports = {
       role,
       permission,
       tree = true,
-      dbname = 'opendb-admin-menus' // 可选参数，用于切换不同的数据库表，默认sv-admin菜单表
+      dbname = 'opendb-admin-menus' // 可选参数，用于切换不同的数据库表，默认sv-admin菜单表，旨为日后方便开发多菜单项目
     } = this.params
     /**
      * 获取JQL database引用，此处需要传入云对象的clientInfo

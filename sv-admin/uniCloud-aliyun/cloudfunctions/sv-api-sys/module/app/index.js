@@ -51,6 +51,46 @@ module.exports = {
       data: appRes.data,
     })
   },
+  // 批量添加应用
+  async appAddList() {
+    let {
+      data,
+      cover
+    } = this.params
+
+    if (!data || data.length <= 0) {
+      throw handler.result({
+        code: 40001
+      })
+    }
+
+    // 缺少必填参数appid、name的项不进行添加
+    data = data.filter(item => item.appid && item.name)
+
+    if (cover) {
+      // 确认覆盖 先删后添加
+      const appidList = data.map(item => item.appid)
+      await db.collection('opendb-app-list').where({ "appid": dbCmd.in(appidList) }).remove()
+    } else {
+      // 取消覆盖 先将data中已存在的移除
+      const listRes = await db.collection('opendb-app-list').get()
+      const appidList = listRes.data.map(item => item.appid)
+      data = data.filter(item => appidList.indexOf(item.appid) == -1)
+    }
+
+    if (data.length <= 0) {
+      return handler.result({
+        code: 200,
+        message: 'no valid value'
+      })
+    }
+
+    const appRes = await db.collection('opendb-app-list').add(data)
+
+    return handler.result({
+      data: appRes.data,
+    })
+  },
   // 删除应用
   async appDelete() {
     const {

@@ -58,7 +58,7 @@
                 :src="authInfo?.avatar_file?.url"
                 :size="36"
               />
-              <view class="authname">{{ authInfo?.nickname }}</view>
+              <view class="authname sv-text-streamer">{{ authInfo?.nickname }}</view>
             </span>
             <template #dropdown>
               <el-dropdown-menu>
@@ -182,6 +182,7 @@ function globalSearch() {
         .authname {
           padding-left: 10px;
           max-width: 160px;
+          font-weight: 700;
           @include useTheme {
             color: getTheme('sv-text-color');
           }

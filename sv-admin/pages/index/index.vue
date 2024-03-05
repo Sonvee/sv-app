@@ -13,8 +13,8 @@
             class="flex-col-vc"
             style="height: 100%; flex: 1; justify-content: space-evenly; padding-left: 10px"
           >
-            <view class="text-line-1 hello">
-              {{ authInfo?.username }} {{ getNowTimeName(true) }}! 欢迎回来 ~
+            <view class="text-line-1 hello sv-text-streamer">
+              {{ authInfo?.nickname }} {{ getNowTimeName(true) }}! 欢迎回来 ~
             </view>
             <view class="text-line-3 hello-sub">
               &emsp;&emsp;本框架自2023.10.22日开始新建文件夹到现在，依然还有很多需要完善的地方，也与sv-client客户端、sv-service管理端框架，在

@@ -11,10 +11,17 @@
     </script>
     <title></title>
     <!--preload-links-->
+    <link rel="stylesheet" href="/common/css/app-loader.css" />
     <!--app-context-->
   </head>
   <body>
-    <div id="app"><!--app-html--></div>
+    <div id="app">
+      <!--app-html-->
+      <div class="app-loader-container">
+        <div class="sv-index-loader"></div>
+        <div class="sv-text-streamer" style="margin-top: 20px;">正在努力往上爬</div>
+      </div>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

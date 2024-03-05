@@ -3,7 +3,9 @@
     <view class="home">
       <sv-paging :apiFunc="testList">
         <template #default="{ data }">
-          <view class="cell-item">index:{{ data.index }} - item:{{ data.item?.text }} ; {{ data.item?.value }}</view>
+          <view class="cell-item">
+            index:{{ data.index }} - item:{{ data.item?.text }} ; {{ data.item?.value }}
+          </view>
         </template>
       </sv-paging>
     </view>

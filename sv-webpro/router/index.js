@@ -2,7 +2,6 @@ import {
   createRouter,
   createWebHashHistory
 } from 'vue-router'
-import svidConfig from '@/uni_modules/sv-id-pages/config.js'
 
 /**
  * 路由规则 - 约束规范：
@@ -93,7 +92,21 @@ const routes = [{
       },
     ]
   },
-  ...svidConfig.routes
+  {
+    path: '/uni_modules/sv-id-pages/pages/login/login-web',
+    name: '登录',
+    component: () => import('@/uni_modules/sv-id-pages/pages/login/login-web.vue')
+  },
+  {
+    path: '/uni_modules/sv-id-pages/pages/agreements/service',
+    name: '用户服务协议',
+    component: () => import('@/uni_modules/sv-id-pages/pages/agreements/service.vue')
+  },
+  {
+    path: '/uni_modules/sv-id-pages/pages/agreements/privacy',
+    name: '隐私政策条款',
+    component: () => import('@/uni_modules/sv-id-pages/pages/agreements/privacy.vue')
+  }
 ]
 
 // 创建路由

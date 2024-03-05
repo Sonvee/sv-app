@@ -13,10 +13,12 @@ import { computed, ref } from 'vue'
 import { useSysStore } from '@/store/sys'
 
 const props = defineProps({
+  // 显示头部导航栏 默认显示
   showNavBar: {
     type: Boolean,
     default: true
   },
+  // 显示底部导航栏 默认隐藏 只建议tabbar页面显示
   showTabBar: {
     type: Boolean,
     default: false

@@ -63,21 +63,5 @@ export default {
    * }
    * */
   setPasswordAfterLogin: false,
-  routerMode: true, // 仅供纯web端vue-router使用时开启，其他情况禁止开启
-  routes: [{
-      path: '/uni_modules/sv-id-pages/pages/login/login-web',
-      name: '登录',
-      component: () => import('@/uni_modules/sv-id-pages/pages/login/login-web.vue')
-    },
-    {
-      path: '/uni_modules/sv-id-pages/pages/agreements/service',
-      name: '用户服务协议',
-      component: () => import('@/uni_modules/sv-id-pages/pages/agreements/service.vue')
-    },
-    {
-      path: '/uni_modules/sv-id-pages/pages/agreements/privacy',
-      name: '隐私政策条款',
-      component: () => import('@/uni_modules/sv-id-pages/pages/agreements/privacy.vue')
-    }
-  ]
+  routerMode: false, // 仅供纯web端vue-router使用时开启，其他情况禁止开启
 }

@@ -61,7 +61,7 @@
           </el-tooltip>
         </view>
         <!-- 个人中心 -->
-        <view class="sv-menu-item" v-if="authInfo?._id">
+        <view class="sv-menu-item" v-if="hasLogin">
           <el-popover placement="bottom-end" trigger="click" :width="100">
             <template #reference>
               <el-avatar
@@ -124,6 +124,7 @@ const route = useRoute()
 const sysStore = useSysStore()
 const isShowSideBar = inject('e-show-side-bar')
 const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
+const hasLogin = computed(() => getApp().$svIdPagesStore.store.hasLogin)
 
 function toggleSideBar() {
   isShowSideBar.value = !isShowSideBar.value

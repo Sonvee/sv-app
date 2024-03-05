@@ -1,20 +1,19 @@
 <template>
   <view class="mine page flex-col align-center justify-center">
     我的
-    <button @click="toSet">设置</button>
+    <button @click="toLogin">退出登录</button>
   </view>
 </template>
 
-<script>
-export default {
-  data() {
-    return {}
-  },
-  methods: {
-    toSet() {
-      this.$router.push('/pages/mine/setting')
-    }
-  }
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function toLogin() {
+  getApp().$svIdPagesStore.mutations.logout(() => {
+    router.push('/uni_modules/sv-id-pages/pages/login/login-web')
+  })
 }
 </script>
 

@@ -3,20 +3,8 @@
 @import './uni-ui.scss';
 
 /* #ifdef MP-WEIXIN */
-view,
-scroll-view,
-swiper,
-button,
-input,
-textarea,
-label,
-navigator,
-image {
-  box-sizing: border-box;
-}
 page {
   height: 100%;
-  font-size: 14px;
 }
 /* #endif */
 
@@ -24,17 +12,11 @@ page {
 * {
   box-sizing: border-box;
 }
-body {
-  font-size: 14px;
-}
+
 uni-page-body {
   height: 100%;
 }
 /* #endif */
-
-image {
-  display: inline-block;
-}
 
 .card {
   border-radius: 20rpx;

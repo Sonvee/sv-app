@@ -2,8 +2,8 @@
   <view class="index">
     首页
     <text class="sv-icons-github"></text>
-    <uv-button type="primary" text="月落"></uv-button>
     {{ now }}
+    <button class="cu-btn round bg-red shadow">按钮</button>
   </view>
 </template>
 

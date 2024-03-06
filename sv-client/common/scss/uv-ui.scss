@@ -2,9 +2,9 @@
   @include useTheme {
     :deep(.uv-navbar .uv-navbar--fixed) {
       background-image: radial-gradient(transparent 1px, #{getTheme('sv-bg-color')} 4px);
-      background-color: #{getTheme('sv-bg-color') + 'aa'};
       background-size: 4px 4px;
       backdrop-filter: saturate(50%) blur(4px);
+      // backdrop-filter: blur(12px) brightness(120%);
     }
   }
 }

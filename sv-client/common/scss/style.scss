@@ -13,7 +13,11 @@ page {
 /* #endif */
 
 /* #ifndef MP-WEIXIN */
+* {
+  box-sizing: border-box;
+}
 :root {
+  box-sizing: border-box;
 }
 
 uni-page-body {

@@ -17,7 +17,7 @@
         </template>
         <!-- 已选中图标 -->
         <template #active-icon>
-          <image class="tab-icon" :src="item.selectedIconPath"></image>
+          <image class="tab-icon jello-horizontal" :src="item.selectedIconPath"></image>
         </template>
       </uv-tabbar-item>
     </uv-tabbar>

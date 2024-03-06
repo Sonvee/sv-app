@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useSysStore } from '@/store/sys'
 
 const props = defineProps({
@@ -32,6 +32,19 @@ const statusBarHeight = uni.getSystemInfoSync().statusBarHeight + 'px'
 const theme = computed(() => {
   return useSysStore().getThemes()
 })
+
+watch(
+  theme,
+  (newTheme) => {
+    // 切换主题时需要设置状态栏颜色
+    uni.setNavigationBarColor({
+      frontColor: newTheme == 'light' ? '#000000' : '#ffffff',
+      backgroundColor: '#ffffff'
+    })
+  },
+  { immediate: true }
+)
+
 const themeBgColor = computed(() => {
   let color = ''
   if (theme.value == 'light') {
@@ -45,9 +58,13 @@ const themeBgColor = computed(() => {
 
 <style lang="scss">
 .sv-page {
+  // 页面视窗高度（顶部状态栏和底部安全距离除外）
   --page-height: calc(100vh - env(safe-area-inset-bottom) - #{v-bind(statusBarHeight)});
+  // 页面内容主高度（页面视窗高度 - navbar - tabbar）
   --page-main-height: calc(var(--page-height) - 44px - 50px);
+  // 页面内容无tabbar高度（页面视窗高度 - tabbar）
   --page-notab-height: calc(var(--page-height) - 44px);
+  // 页面内容无navbar高度（页面视窗高度 - navbar）
   --page-nonav-height: calc(var(--page-height) - 50px);
 
   min-height: 100vh;

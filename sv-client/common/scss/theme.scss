@@ -7,7 +7,9 @@ $themes: (
     sv-text-sub-color: rgba(51, 51, 51, 0.8),
     sv-border-color: #c8c7cc,
     sv-border-hl-color: #e2e2e2,
-    sv-mask-color: rgba(0, 0, 0, 0.4)
+    sv-mask-color: rgba(0, 0, 0, 0.4),
+    sv-card-color: #ffffff,
+    sv-shadow-color: #dedede
   ),
   dark: (
     sv-bg-color: #202020,
@@ -17,7 +19,9 @@ $themes: (
     sv-text-sub-color: rgba(248, 248, 248, 0.8),
     sv-border-color: #c8c7cc,
     sv-border-hl-color: #e2e2e2,
-    sv-mask-color: rgba(0, 0, 0, 0.4)
+    sv-mask-color: rgba(0, 0, 0, 0.4),
+    sv-card-color: #202020,
+    sv-shadow-color: #323232
   )
 );
 

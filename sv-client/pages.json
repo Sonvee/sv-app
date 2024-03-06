@@ -103,7 +103,7 @@
     }
   ],
   "subPackages": [{
-    "root": "pages/mine/setting",
+    "root": "pages/setting",
     "pages": [{
       "path": "setting",
       "style": {
@@ -113,10 +113,13 @@
   }],
   "globalStyle": {
     "navigationBarTitleText": "sv-client",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8",
-    "navigationBarTextStyle": "white",
-    "navigationStyle": "custom"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "backgroundColor": "#f8f8f8",
+    "app-plus": {
+      "titleNView": false
+    }
   },
   "uniIdRouter": {},
   "easycom": {

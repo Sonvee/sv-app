@@ -17,8 +17,8 @@ export default {
 </script>
 
 <style lang="scss">
-/*每个页面公共css */
+/* 每个页面公共css */
 @import 'common/scss/style.scss';
-// colorui
+/* colorui */
 @import 'common/colorui/main.css';
 </style>

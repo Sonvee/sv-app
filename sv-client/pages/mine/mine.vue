@@ -41,7 +41,7 @@
           </view>
         </view>
         <!-- 数据 -->
-        <view class="sv-grid grid-col-4">
+        <view class="sv-grid grid-col-4 padding-tb-xs">
           <view class="grid-item-lg flex-col-vhc" v-for="item in statisticsCard" :key="item.lable">
             <view class="text-xl text-bold text-green">{{ item.value }}</view>
             <view class="text-sm text-grey">{{ item.lable }}</view>
@@ -97,7 +97,7 @@
       <!-- 功能 2 -->
       <view class="cu-bar margin-top-sm">
         <view class="action sub-title">
-          <text class="text-x text-bold text-blue">功能面板</text>
+          <text class="text-bold text-blue">功能面板</text>
           <text class="text-sm text-ABC text-blue">feature</text>
         </view>
         <view class="text-gray margin-right">
@@ -118,7 +118,7 @@
       <!-- 其他服务 -->
       <view class="cu-bar margin-top-sm">
         <view class="action sub-title">
-          <text class="text-x text-bold text-blue">其他服务</text>
+          <text class="text-bold text-blue">其他服务</text>
           <text class="text-sm text-ABC text-blue">other</text>
         </view>
       </view>
@@ -141,6 +141,7 @@
 import { computed, ref } from 'vue'
 import { useSysStore } from '../../store/sys'
 import { mutations, store } from '../../uni_modules/sv-id-pages/common/store'
+import { onScan } from '@/utils/util'
 
 const sysStore = useSysStore()
 
@@ -152,7 +153,6 @@ const hasLogin = computed(() => {
 })
 const isVip = computed(() => {
   const { role } = uniCloud.getCurrentUserInfo()
-  console.log('==== role :', role)
   return role.includes('vip')
 })
 
@@ -201,26 +201,6 @@ const featureMenu = ref([
 function changeTheme() {
   const theme = sysStore.getThemes() == 'light' ? 'dark' : 'light'
   sysStore.setThemes(theme)
-}
-
-function onScan() {
-  // #ifndef H5
-  uni.scanCode({
-    onlyFromCamera: false,
-    success: (res) => {
-      console.log('==== res :', res)
-    },
-    fail: (err) => {
-      console.log('==== err :', err)
-    }
-  })
-  // #endif
-  // #ifdef H5
-  uni.showToast({
-    title: 'H5端不支持扫码',
-    icon: 'none'
-  })
-  // #endif
 }
 
 function toUser() {

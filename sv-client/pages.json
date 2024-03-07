@@ -110,6 +110,19 @@
         "navigationBarTitleText": "设置"
       }
     }]
+  }, {
+    "root": "pages/pay",
+    "pages": [{
+      "path": "pay",
+      "style": {
+        "navigationBarTitleText": "支付"
+      }
+    }, {
+      "path": "vip/vip",
+      "style": {
+        "navigationBarTitleText": "会员"
+      }
+    }]
   }],
   "globalStyle": {
     "navigationBarTitleText": "sv-client",

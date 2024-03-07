@@ -1,6 +1,21 @@
 <template>
   <sv-page showTabBar>
-    <view class="index">index</view>
+    <view class="index">
+      <view class="margin-tb">
+        <uv-swiper
+          :list="list"
+          autoplay
+          circular
+          showTitle
+          keyName="image"
+          :title-style="{ color: 'red', textAlign: 'center' }"
+          previousMargin="30"
+          nextMargin="30"
+          radius="5"
+          bgColor="transparent"
+        ></uv-swiper>
+      </view>
+    </view>
   </sv-page>
 </template>
 
@@ -9,22 +24,27 @@ import { onLoad } from '@dcloudio/uni-app'
 
 onLoad(() => {
   // #ifdef APP
-  /**
-   * 隐藏内置tabbar
-   * 官方bug：安卓真机上报错：hideTabBar:fail not TabBar page
-   * 解决方法：1. 将tabBar中height设置成1px（实测设置成0或0px无效）
-   *          2. 可加短暂的适当的延时器，但是大概率会存在留白闪烁问题
-   *          3. 在app首页的onLoad中进行hideTabBar，注意在onLaunch中无效（推荐）
-   */
   uni.hideTabBar()
   // #endif
 })
+
+const list = [
+  {
+    image: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
+    title: '丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由'
+  },
+  {
+    image: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
+    title: '明月几时有？把酒问青天'
+  },
+  {
+    image: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
+    title: '不知天上宫阙，今夕是何年'
+  }
+]
 </script>
 
 <style lang="scss">
 .index {
-  height: var(--page-height);
-  border: 10px solid #3a5afb;
-  box-sizing: border-box;
 }
 </style>

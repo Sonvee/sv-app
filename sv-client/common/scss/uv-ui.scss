@@ -5,6 +5,7 @@
       background-size: 4px 4px;
       backdrop-filter: saturate(50%) blur(4px);
       // backdrop-filter: blur(12px) brightness(120%);
+      box-shadow: 0 1px 1px #{getTheme('sv-shadow-color')};
     }
   }
 }

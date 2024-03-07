@@ -21,6 +21,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sv-icons-vip:before {
+  content: "\e76b";
+}
+
 .sv-icons-sun:before {
   content: "\e62d";
 }

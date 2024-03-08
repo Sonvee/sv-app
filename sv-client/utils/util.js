@@ -1,6 +1,10 @@
 import {
   dayjs
 } from "dayjs";
+import {
+  mutations,
+  store
+} from '@/uni_modules/sv-id-pages/common/store'
 
 /**
  * 时间日期格式化
@@ -27,4 +31,20 @@ export function onScan() {
     icon: 'none'
   })
   // #endif
+}
+
+export function judgeLogin() {
+  if (store.hasLogin) return true
+  uni.showModal({
+    title: '系统提示',
+    content: '好像还没有登录哦~',
+    showCancel: true,
+    cancelText: '就不!',
+    confirmText: '去登录',
+    success: (e) => {
+      if (e.confirm) {
+        mutations.logout()
+      }
+    }
+  })
 }

@@ -9,3 +9,32 @@
     }
   }
 }
+
+.sv-uv-search {
+  .uv-search__action {
+    color: unset !important;
+  }
+}
+
+.sv-uv-vtabs {
+  @include useTheme {
+    .uv-vtabs__bar {
+      background: getTheme('sv-card-color');
+
+      .uv-vtabs__bar-item-active {
+        background: getTheme('sv-bg-color');
+      }
+    }
+
+    .uv-vtabs__content {
+      background: getTheme('sv-bg-color');
+    }
+
+    .uv-vtabs__bar-item--value {
+      color: getTheme('sv-text-color');
+    }
+    .uv-vtabs__bar-item-active--value {
+      color: #66ccff;
+    }
+  }
+}

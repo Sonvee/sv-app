@@ -10,3 +10,10 @@ export function userInfo(data) {
     data
   })
 }
+
+export function vipList() {
+  return request({
+    url: '/svid/vipList',
+    method: 'POST',
+  })
+}

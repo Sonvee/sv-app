@@ -13,11 +13,23 @@
       <uv-tabbar-item v-for="(item, index) in tabBarList" :key="index" :text="item.text">
         <!-- 未选中图标 -->
         <template #inactive-icon>
-          <image class="tab-icon" :src="item.iconPath"></image>
+          <text
+            class="tab-icon"
+            v-if="item.iconfont"
+            :class="item.iconfont"
+            :style="{ color: inactiveColor }"
+          ></text>
+          <image v-else class="tab-icon" :src="item.iconPath"></image>
         </template>
         <!-- 已选中图标 -->
         <template #active-icon>
-          <image class="tab-icon jello-horizontal" :src="item.selectedIconPath"></image>
+          <text
+            class="tab-icon jello-horizontal"
+            v-if="item.selectedIconfont || item.iconfont"
+            :class="item.selectedIconfont || item.iconfont"
+            :style="{ color: activeColor }"
+          ></text>
+          <image v-else class="tab-icon jello-horizontal" :src="item.selectedIconPath"></image>
         </template>
       </uv-tabbar-item>
     </uv-tabbar>
@@ -53,25 +65,41 @@ const tabIndex = computed({
   }
 })
 
-// 导航栏数据 - 保持和官方tabbar数据结构一致
+/**
+ * 导航栏数据 - 尽量保持和官方tabbar数据结构一致
+ * {
+ *   pagePath: '/pages/index/index',
+ *   text: '首页',
+ *   iconfont: 'cuIcon-home', // 优先级高于iconPath
+ *   selectedIconfont: 'cuIcon-homefill'
+ *   iconPath: '', // 图片路径
+ *   selectedIconPath: '',
+ * }
+ */
 const tabBarList = [
   {
     pagePath: '/pages/index/index',
     text: '首页',
-    iconPath: '/static/icons/home.png',
-    selectedIconPath: '/static/icons/home-fill.png'
+    iconfont: 'cuIcon-home',
+    selectedIconfont: 'cuIcon-homefill'
+  },
+  {
+    pagePath: '/pages/hall/hall',
+    text: '大厅',
+    iconfont: 'cuIcon-shop',
+    selectedIconfont: 'cuIcon-shopfill'
   },
   {
     pagePath: '/pages/home/home',
     text: '主页',
-    iconPath: '/static/icons/home.png',
-    selectedIconPath: '/static/icons/home-fill.png'
+    iconfont: 'cuIcon-form',
+    selectedIconfont: 'cuIcon-formfill'
   },
   {
     pagePath: '/pages/mine/mine',
     text: '我的',
-    iconPath: '/static/icons/mine.png',
-    selectedIconPath: '/static/icons/mine-fill.png'
+    iconfont: 'cuIcon-my',
+    selectedIconfont: 'cuIcon-myfill'
   }
 ]
 
@@ -87,6 +115,7 @@ function changeTab(index) {
   .tab-icon {
     width: 40rpx;
     height: 40rpx;
+    font-size: 40rpx;
   }
 }
 </style>

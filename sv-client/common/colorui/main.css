@@ -903,11 +903,6 @@ button.cuIcon.lg {
   overflow: hidden;
 }
 
-.cu-avatar-image {
-  width: 100%;
-  height: 100%;
-}
-
 .cu-avatar.sm {
   width: 48rpx;
   height: 48rpx;
@@ -3940,30 +3935,34 @@ scroll-view.cu-steps .cu-item {
 /**
  * 自定义
  */
-.width-full {
+.w-full {
   width: 100%;
 }
 
-.width-full-v {
+.w-full-v {
   width: 100vw;
 }
 
-.height-full {
+.h-full {
   height: 100%;
 }
 
-.height-full-v {
+.h-full-v {
   height: 100vh;
 }
 
-.width-height-full {
+.w-h-full {
   width: 100%;
   height: 100%;
 }
 
-.width-height-full-v {
+.w-h-full-v {
   width: 100vw;
   height: 100vh;
+}
+
+.w-h-equal {
+  aspect-ratio: 1;
 }
 
 .cursor-pointer {

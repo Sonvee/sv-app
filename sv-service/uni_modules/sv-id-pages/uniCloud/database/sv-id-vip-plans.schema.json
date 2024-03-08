@@ -1,0 +1,53 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+  "bsonType": "object",
+  "required": ["name", "price", "validtime"],
+  "permission": {
+    "read": true,
+    "create": "'VIP_PLANS' in auth.permission",
+    "update": "'VIP_PLANS' in auth.permission",
+    "delete": "'VIP_PLANS' in auth.permission"
+  },
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "name": {
+      "bsonType": "string",
+      "description": "套餐名称"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "套餐描述"
+    },
+    "price": {
+      "bsonType": "double",
+      "description": "套餐价格"
+    },
+    "discount": {
+      "bsonType": "double",
+      "description": "套餐折扣"
+    },
+    "validtime": {
+      "bsonType": "int",
+      "description": "套餐有效期(月数)",
+      "defaultValue": 1
+    },
+    "benefits": {
+      "bsonType": "object",
+      "description": "套餐包含的权益列表",
+      "properties": {
+        "no_ad": {
+          "bsonType": "bool",
+          "description": "广告关闭",
+          "defaultValue": true
+        },
+        "free": {
+          "bsonType": "bool",
+          "description": "部分商品免费",
+          "defaultValue": true
+        }
+      }
+    }
+  }
+}

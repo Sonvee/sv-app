@@ -17,11 +17,17 @@
       </view>
       <!-- 搜索 -->
       <view class="padding">
-        <uv-input v-model="searchVal" prefixIcon="search" placeholder="搜点什么" clearable>
+        <uv-search
+          v-model="searchVal"
+          class="sv-uv-search"
+          placeholder="请输入搜索内容"
+          @search="onSearch"
+          @custom="onSearch"
+        >
           <template #suffix>
-            <text class="cuIcon-scan text-xl" @click="onScan"></text>
+            <text class="cuIcon-scan text-xl text-grey" @click="onScan"></text>
           </template>
-        </uv-input>
+        </uv-search>
       </view>
       <!-- 菜单 -->
       <view class="sv-grid grid-col-5 padding-sm">
@@ -57,14 +63,31 @@
           <text class="text-lg text-bold text-blue">推荐课程</text>
           <text class="text-df text-ABC text-blue">course</text>
         </view>
-        <view class="text-gray margin-right">
+        <view class="text-gray margin-right" @click="onMore">
           <text class="text-sm">更多</text>
           <text class="cuIcon-right"></text>
         </view>
       </view>
       <view class="card-list padding">
-        <view class="list-item sv-gradual-sunset shadow-warp padding">123</view>
+        <view
+          class="list-item sv-gradual-sunset shadow-warp padding margin-bottom flex"
+          v-for="item in 6"
+        >
+          <view class="h-full w-h-equal margin-right">
+            <image class="w-h-full" src="/static/logo.png"></image>
+          </view>
+          <view class="flex-sub flex-col justify-between">
+            <view class="text-lg text-bold">标题标题</view>
+            <view class="text-cyan">内容描述内容描述</view>
+            <view class="text-sm flex align-center">
+              <text class="flex-sub" style="opacity: 0.8">999人已学习</text>
+              <button class="cu-btn sm round bg-green">开始学习</button>
+            </view>
+          </view>
+        </view>
       </view>
+      <!-- 底部间隔栏 -->
+      <view style="height: 40rpx"></view>
     </view>
   </sv-page>
 </template>
@@ -73,6 +96,7 @@
 import { onLoad } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 import { onScan } from '@/utils/util'
+import { useSysStore } from '../../store/sys'
 
 onLoad(() => {
   // #ifdef APP
@@ -97,6 +121,10 @@ const list = [
 
 const searchVal = ref('')
 
+function onSearch() {
+  console.log('==== onSearch :', searchVal.value)
+}
+
 const menuCard = ref([
   {
     lable: '菜单甲',
@@ -119,6 +147,14 @@ const menuCard = ref([
     value: 'cuIcon-comment'
   }
 ])
+
+function onMore() {
+  uni.switchTab({
+    url: '/pages/hall/hall'
+  })
+  // 切换tab页还要同时切换仓库中状态
+  useSysStore().setConfig({ curTabIndex: 1 })
+}
 </script>
 
 <style lang="scss">

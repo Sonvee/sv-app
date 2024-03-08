@@ -12,6 +12,12 @@
       }
     },
     {
+      "path": "pages/hall/hall",
+      "style": {
+        "navigationBarTitleText": "大厅"
+      }
+    },
+    {
       "path": "pages/mine/mine",
       "style": {
         "navigationBarTitleText": "我的"
@@ -146,9 +152,11 @@
     "list": [{
       "pagePath": "pages/index/index"
     }, {
-      "pagePath": "pages/mine/mine"
+      "pagePath": "pages/hall/hall"
     }, {
       "pagePath": "pages/home/home"
+    }, {
+      "pagePath": "pages/mine/mine"
     }]
   }
 }

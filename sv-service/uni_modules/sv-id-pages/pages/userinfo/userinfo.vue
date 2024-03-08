@@ -18,6 +18,12 @@
         link
         @click="onNickname"
       ></uni-list-item>
+      <uni-list-item
+        title="个性签名"
+        :rightText="userInfo.comment"
+        link
+        @click="onComment"
+      ></uni-list-item>
     </uni-list>
     <view class="divider"></view>
     <uni-list>
@@ -54,6 +60,16 @@
         title="设置昵称"
         placeholder="请输入要设置的昵称"
         @confirm="setNickname"
+      ></uni-popup-dialog>
+    </uni-popup>
+    <uni-popup ref="commentDialog" type="dialog">
+      <uni-popup-dialog
+        mode="input"
+        :value="userInfo.comment"
+        title="设置个性签名"
+        placeholder="写点什么吧~ (20字以内)"
+        :maxlength="20"
+        @confirm="setComment"
       ></uni-popup-dialog>
     </uni-popup>
   </view>
@@ -106,6 +122,15 @@ export default {
         nickname: e
       })
       this.$refs.nicknameDialog.close()
+    },
+    onComment() {
+      this.$refs.commentDialog.open()
+    },
+    async setComment(e) {
+      await mutations.updateUserInfo({
+        comment: e
+      })
+      this.$refs.commentDialog.close()
     },
     onSecurity() {
       uni.navigateTo({

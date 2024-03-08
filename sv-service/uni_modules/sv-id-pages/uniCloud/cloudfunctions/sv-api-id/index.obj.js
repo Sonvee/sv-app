@@ -25,6 +25,12 @@ const {
   logList
 } = require('./module/log/index.js')
 
+const {
+  vipList,
+  vipUpdate,
+  vipAdd,
+  vipDelete,
+} = require('./module/vip/index.js')
 
 module.exports = {
   _before: async function() { // 通用预处理器
@@ -81,4 +87,12 @@ module.exports = {
    * 日志
    */
   logList,
+  
+  /**
+   * 会员套餐
+   */
+  vipList,
+  vipUpdate,
+  vipAdd,
+  vipDelete,
 }

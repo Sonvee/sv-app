@@ -16,7 +16,7 @@
         <view class="flex padding-lr" @click="toUser">
           <view class="cu-avatar round lg">
             <image
-              class="cu-avatar-image"
+              class="w-h-full"
               v-if="userInfo?.avatar_file?.url"
               :src="userInfo.avatar_file.url"
             ></image>
@@ -140,8 +140,8 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useSysStore } from '../../store/sys'
-import { mutations, store } from '../../uni_modules/sv-id-pages/common/store'
-import { onScan } from '@/utils/util'
+import { mutations, store } from '@/uni_modules/sv-id-pages/common/store'
+import { judgeLogin, onScan } from '@/utils/util'
 
 const sysStore = useSysStore()
 
@@ -214,6 +214,10 @@ function toUser() {
 }
 
 function onVip() {
+  // 判断登录
+  const isLogin = judgeLogin()
+  // 未登录不予操作
+  if (!isLogin) return
   uni.navigateTo({ url: '/pages/pay/vip/vip' })
 }
 </script>

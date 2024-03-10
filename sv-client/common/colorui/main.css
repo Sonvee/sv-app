@@ -1373,6 +1373,14 @@ button.cuIcon.lg {
   text-align: center
 }
 
+.cu-list.menu>.cu-item .content>text[class*=sv-icons] {
+  display: inline-block;
+  margin-right: 10rpx;
+  width: 1.6em;
+  text-align: center
+}
+
+
 .cu-list.menu>.cu-item .content>image {
   display: inline-block;
   margin-right: 10rpx;
@@ -3882,6 +3890,24 @@ scroll-view.cu-steps .cu-item {
   color: #0081ff;
 }
 
+.text-bili,
+.line-bili,
+.lines-bili {
+  color: #fb7299;
+}
+
+.text-tyblue,
+.line-tyblue,
+.lines-tyblue {
+  color: #66ccff;
+}
+
+.text-miku,
+.line-miku,
+.lines-miku {
+  color: #39c5bb;
+}
+
 .text-purple,
 .line-purple,
 .lines-purple {
@@ -3969,6 +3995,27 @@ scroll-view.cu-steps .cu-item {
   cursor: pointer;
 }
 
+.line-height-1 {
+  line-height: 1;
+}
+
+.line-height-2 {
+  line-height: 2;
+}
+
+.line-height-3 {
+  line-height: 3;
+}
+
+.line-height-4 {
+  line-height: 4;
+}
+
+
+.tabbar-placehoder {
+  height: calc(100rpx + env(safe-area-inset-bottom));
+}
+
 .flex-col {
   display: flex;
   flex-direction: column;
@@ -4048,6 +4095,10 @@ scroll-view.cu-steps .cu-item {
 
 .sv-grid .grid-item-lg {
   height: 120rpx;
+}
+
+.sv-grid .grid-item-xl {
+  height: 160rpx;
 }
 
 .sv-grid.grid-gap-sm {

@@ -122,7 +122,7 @@
           <text class="text-sm text-ABC text-blue">other</text>
         </view>
       </view>
-      <view class="cu-list menu sm-border card-menu">
+      <view class="cu-list menu sm-border">
         <!-- 图标 + 标题、arrow 带箭头 -->
         <view class="cu-item arrow" v-for="item in 5">
           <view class="content">

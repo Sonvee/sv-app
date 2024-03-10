@@ -21,6 +21,42 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sv-icons-unionpay:before {
+  content: "\e611";
+}
+
+.sv-icons-bankcard:before {
+  content: "\e653";
+}
+
+.sv-icons-alipay-fill:before {
+  content: "\e634";
+}
+
+.sv-icons-wxpay:before {
+  content: "\e639";
+}
+
+.sv-icons-qq:before {
+  content: "\e882";
+}
+
+.sv-icons-key:before {
+  content: "\e612";
+}
+
+.sv-icons-verification:before {
+  content: "\e660";
+}
+
+.sv-icons-wechat:before {
+  content: "\e8d5";
+}
+
+.sv-icons-alipay:before {
+  content: "\e8de";
+}
+
 .sv-icons-vip:before {
   content: "\e76b";
 }

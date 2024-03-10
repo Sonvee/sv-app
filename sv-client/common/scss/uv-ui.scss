@@ -38,3 +38,18 @@
     }
   }
 }
+
+.sv-uv-scroll-list {
+  padding-bottom: 0 !important;
+}
+
+.sv-uv-popup {
+  // & view[name='content'] {
+  //   background-color: unset !important;
+  // }
+  .uv-popup__content {
+    @include useTheme {
+      background-color: getTheme('sv-popup-color') !important;
+    }
+  }
+}

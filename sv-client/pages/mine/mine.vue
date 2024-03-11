@@ -218,7 +218,7 @@ function onVip() {
   const isLogin = judgeLogin()
   // 未登录不予操作
   if (!isLogin) return
-  uni.navigateTo({ url: '/pages/pay/vip/vip' })
+  uni.navigateTo({ url: '/uni_modules/sv-id-vip/pages/vip/vip' })
 }
 </script>
 

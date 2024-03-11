@@ -100,17 +100,17 @@
               <text>支付宝</text>
             </view>
           </uv-radio>
-          <uv-radio name="unionpay" label="银联">
+          <!-- <uv-radio name="unionpay" label="银联">
             <view class="padding-tb-sm text-red">
               <text class="sv-icons-unionpay margin-right-xs text-lg" style="width: 1.6em"></text>
               <text>银联</text>
             </view>
-          </uv-radio>
+          </uv-radio> -->
         </uv-radio-group>
       </view>
       <view class="padding-lr" v-else>
         <uni-easyinput v-model.trim="cdkey" placeholder="请输入CDKEY"></uni-easyinput>
-        <button class="margin-top w-full cu-btn bg-gradual-pink" @click="confirmCdkey">
+        <button class="margin-top w-full cu-btn bg-gradual-pink" @click="confirmCDKey">
           确定激活
         </button>
       </view>
@@ -181,8 +181,9 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { store } from '@/uni_modules/sv-id-pages/common/store'
-import { vipList } from '@/service/api/svid'
+import { vipList } from '@/service/api/vip'
 import { isEmpty } from 'lodash-es'
+import { createCDKey, validCDKey } from '../../utils';
 
 const userInfo = computed(() => {
   return store.userInfo
@@ -307,7 +308,7 @@ function onPay() {
 
 const cdkey = ref('')
 
-function confirmCdkey() {
+function confirmCDKey() {
   // CDKEY校验
   if (!cdkey.value) {
     uni.showToast({
@@ -317,6 +318,8 @@ function confirmCdkey() {
   }
   console.log('==== cdkey :', cdkey.value)
 }
+
+console.log('==== cdkey :', createCDKey());
 </script>
 
 <style lang="scss">

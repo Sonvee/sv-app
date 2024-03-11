@@ -106,6 +106,12 @@
         "navigationStyle": "default",
         "navigationBarTextStyle": "black"
       }
+    },
+    {
+      "path": "uni_modules/sv-id-vip/pages/vip/vip",
+      "style": {
+        "navigationBarTitleText": "会员"
+      }
     }
   ],
   "subPackages": [{
@@ -122,11 +128,6 @@
       "path": "pay",
       "style": {
         "navigationBarTitleText": "支付"
-      }
-    }, {
-      "path": "vip/vip",
-      "style": {
-        "navigationBarTitleText": "会员"
       }
     }]
   }],

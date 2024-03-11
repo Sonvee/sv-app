@@ -49,10 +49,16 @@ const request = (options) => {
         switch (res.statusCode) {
           case 200:
             // 成功数据
-            resolve(res.data);
             if (res.data.code == 401) {
               // 无需手动处理token重新登录，uni-id中已自带此功能
             }
+            if (!res.data.success) {
+              uni.showToast({
+                title: res.data?.error?.message || res.data?.message,
+                icon: 'none',
+              })
+            }
+            resolve(res.data);
             break
           case 401:
             // 无需手动处理token重新登录，uni-id中已自带此功能

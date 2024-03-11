@@ -1,12 +1,8 @@
 import request from '../request/index.js'
 
-/**
- * 用户
- */
-export function userInfo(data) {
+export function vipList() {
   return request({
-    url: '/svid/userInfo',
+    url: '/vip/vipList',
     method: 'POST',
-    data
   })
 }

@@ -1,0 +1,67 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+  "bsonType": "object",
+  "required": ["cdkey", "plan_id", "valid_date"],
+  "permission": {
+    "read": "'VIP_CDKEYS' in auth.permission",
+    "create": "'VIP_CDKEYS' in auth.permission",
+    "update": "doc._id == auth.uid",
+    "delete": "'VIP_CDKEYS' in auth.permission"
+  },
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "cdkey": {
+      "bsonType": "string",
+      "description": "cdkey",
+      "permission": {
+        "read": "'VIP_CDKEYS' in auth.permission",
+        "write": "'VIP_CDKEYS' in auth.permission"
+      }
+    },
+    "plan_id": {
+      "bsonType": "string",
+      "foreignKey": "sv-id-vip-plans._id",
+      "description": "订阅的套餐id，参考sv-id-vip-plans表"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "cdkey描述"
+    },
+    "create_date": {
+      "bsonType": "timestamp",
+      "description": "创建日期",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    },
+    "valid_date": {
+      "bsonType": "timestamp",
+      "description": "有效期至",
+      "permission": {
+        "read": "'VIP_CDKEYS' in auth.permission",
+        "write": "'VIP_CDKEYS' in auth.permission"
+      }
+    },
+    "status": {
+      "bsonType": "int",
+      "description": "状态，0-待使用，1-已使用，2-已失效",
+      "defaultValue": 0,
+      "enum": [{
+        "text": "待使用",
+        "value": 0
+      }, {
+        "text": "已使用",
+        "value": 1
+      }, {
+        "text": "已失效",
+        "value": 2
+      }],
+      "permission": {
+        "read": "'VIP_CDKEYS' in auth.permission",
+        "write": "doc._id == auth.uid"
+      }
+    }
+  }
+}

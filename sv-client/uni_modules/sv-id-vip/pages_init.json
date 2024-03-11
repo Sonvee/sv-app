@@ -1,0 +1,9 @@
+{
+  "pages": [{
+    "path": "uni_modules/sv-id-vip/pages/vip/vip",
+    "style": {
+      "navigationBarTitleText": "会员",
+      "navigationStyle": "custom"
+    }
+  }]
+}

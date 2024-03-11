@@ -1,38 +1,29 @@
 const handler = require('sv-handler')
 
 const {
-  userInfo,
-  userList,
-  userUpdate,
-  userDelete
-} = require('./module/user/index.js')
+  vipList,
+  vipUpdate,
+  vipAdd,
+  vipDelete,
+} = require('./module/vip/index.js')
 
 const {
-  roleList,
-  roleUpdate,
-  roleAdd,
-  roleDelete,
-} = require('./module/role/index.js')
-
-const {
-  permissionList,
-  permissionUpdate,
-  permissionAdd,
-  permissionDelete,
-} = require('./module/permission/index.js')
-
-const {
-  logList
-} = require('./module/log/index.js')
+  cdkeyList,
+  cdkeyUpdate,
+  cdkeyAdd,
+  cdkeyDelete,
+  cdkeyActive,
+} = require('./module/cdkey/index.js')
 
 module.exports = {
   _before: async function() { // 通用预处理器
     // token身份安全校验
+    const WHITE_LIST = ['/vipList'] // 校验白名单
     const apiPath = this.getHttpInfo().path
     const cToken = await handler.checkToken({
       clientInfo: this.getClientInfo(),
       token: this.getHttpInfo().headers.authorization,
-      mode: apiPath.includes('List') ? 'open' : 'strict' // 所有List接口均开放
+      mode: WHITE_LIST.includes(apiPath) ? 'easy' : 'strict'
     })
     if (cToken.code !== 200) {
       throw cToken
@@ -53,31 +44,19 @@ module.exports = {
   },
 
   /**
-   * 用户信息
+   * 会员套餐
    */
-  userInfo,
-  userList,
-  userUpdate,
-  userDelete,
+  vipList,
+  vipUpdate,
+  vipAdd,
+  vipDelete,
 
   /**
-   * 角色
+   * cdkey
    */
-  roleList,
-  roleUpdate,
-  roleAdd,
-  roleDelete,
-
-  /**
-   * 权限
-   */
-  permissionList,
-  permissionUpdate,
-  permissionAdd,
-  permissionDelete,
-
-  /**
-   * 日志
-   */
-  logList,
+  cdkeyList,
+  cdkeyUpdate,
+  cdkeyAdd,
+  cdkeyDelete,
+  cdkeyActive,
 }

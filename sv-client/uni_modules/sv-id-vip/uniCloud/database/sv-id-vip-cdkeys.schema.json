@@ -3,10 +3,10 @@
   "bsonType": "object",
   "required": ["cdkey", "plan_id", "valid_date"],
   "permission": {
-    "read": "'VIP_CDKEYS' in auth.permission",
+    "read": true,
     "create": "'VIP_CDKEYS' in auth.permission",
     "update": "doc._id == auth.uid",
-    "delete": "'VIP_CDKEYS' in auth.permission"
+    "delete": false
   },
   "properties": {
     "_id": {
@@ -15,10 +15,6 @@
     "cdkey": {
       "bsonType": "string",
       "description": "cdkey",
-      "permission": {
-        "read": "'VIP_CDKEYS' in auth.permission",
-        "write": "'VIP_CDKEYS' in auth.permission"
-      }
     },
     "plan_id": {
       "bsonType": "string",
@@ -39,10 +35,6 @@
     "valid_date": {
       "bsonType": "timestamp",
       "description": "有效期至",
-      "permission": {
-        "read": "'VIP_CDKEYS' in auth.permission",
-        "write": "'VIP_CDKEYS' in auth.permission"
-      }
     },
     "status": {
       "bsonType": "int",
@@ -58,10 +50,6 @@
         "text": "已失效",
         "value": 2
       }],
-      "permission": {
-        "read": "'VIP_CDKEYS' in auth.permission",
-        "write": "doc._id == auth.uid"
-      }
     }
   }
 }

@@ -117,8 +117,15 @@ module.exports = {
   // cdkey激活
   async cdkeyActive() {
     const {
+      user_id,
       cdkey
     } = this.params
+    
+    if (!user_id || !cdkey) {
+      throw handler.result({
+        code: 40001
+      })
+    }
 
     const dbJQL = uniCloud.databaseForJQL({
       clientInfo: this.getClientInfo()
@@ -165,6 +172,7 @@ module.exports = {
 
     // 激活cdkey
     // 1. 兑换相应的套餐并修改用户订阅状态
+    
 
     // 2. 修改cdkey状态为已使用 status: 1
     await db.collection('sv-id-vip-cdkeys').where({

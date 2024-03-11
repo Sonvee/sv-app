@@ -15,10 +15,16 @@ const {
   cdkeyActive,
 } = require('./module/cdkey/index.js')
 
+const {
+  subscriptionList,
+  subscriptionCreate,
+  subscriptionUpdatePlans,
+} = require('./module/subscription/index.js')
+
 module.exports = {
   _before: async function() { // 通用预处理器
     // token身份安全校验
-    const WHITE_LIST = ['/vipList'] // 校验白名单
+    const WHITE_LIST = ['/cdkeyActive'] // 校验白名单
     const apiPath = this.getHttpInfo().path
     const cToken = await handler.checkToken({
       clientInfo: this.getClientInfo(),
@@ -59,4 +65,11 @@ module.exports = {
   cdkeyAdd,
   cdkeyDelete,
   cdkeyActive,
+  
+  /**
+   * 订阅
+   */
+  subscriptionList,
+  subscriptionCreate,
+  subscriptionUpdatePlans,
 }

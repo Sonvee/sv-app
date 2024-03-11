@@ -2,10 +2,18 @@
   <view class="index-page">
     <uni-easyinput v-model="url" placeholder="请输入api路径">
       <template #right>
-        <button size="mini" type="primary" style="margin-right: 4px" @click="toRequest">请求</button>
+        <button size="mini" type="primary" style="margin-right: 4px" @click="toRequest">
+          请求
+        </button>
       </template>
     </uni-easyinput>
-    <uni-easyinput class="top-gap" type="textarea" v-model="params" placeholder="请输入参数"></uni-easyinput>
+    <uni-easyinput
+      class="top-gap"
+      type="textarea"
+      v-model="params"
+      maxlength="-1"
+      placeholder="请输入参数"
+    ></uni-easyinput>
     <view class="title">请求结果</view>
     <view class="result">
       <sv-json-view :obj="result" :key="jsonviewKey"></sv-json-view>

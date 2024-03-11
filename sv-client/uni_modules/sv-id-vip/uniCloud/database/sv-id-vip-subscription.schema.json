@@ -1,12 +1,12 @@
 // 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
 {
   "bsonType": "object",
-  "required": [],
+  "required": ["user_id", "plans_id", "end_date"],
   "permission": {
-    "read": "doc._id == auth.uid",
-    "create": "doc._id == auth.uid",
-    "update": "doc._id == auth.uid",
-    "delete": "doc._id == auth.uid"
+    "read": true,
+    "create": true,
+    "update": true,
+    "delete": false
   },
   "properties": {
     "_id": {
@@ -17,45 +17,17 @@
       "foreignKey": "uni-id-users._id",
       "description": "用户id，参考uni-id-users表"
     },
-    "plan_id": {
-      "bsonType": "string",
-      "foreignKey": "sv-id-vip-plans._id",
-      "description": "订阅的套餐id，参考sv-id-vip-plans表"
-    },
-    "start_date": {
-      "bsonType": "timestamp",
-      "description": "订阅开始日期"
+    "plans_id": {
+      "bsonType": "array",
+      "description": "当前所生效的所有订阅的套餐id，参考sv-id-vip-plans表，{start_date, plan}"
     },
     "end_date": {
       "bsonType": "timestamp",
-      "description": "订阅结束日期"
+      "description": "订阅累计结束日期"
     },
-    "status": {
-      "bsonType": "int",
-      "description": "状态，0-已失效，1-生效中，2-已取消",
-      "defaultValue": 0,
-      "enum": [{
-        "text": "已失效",
-        "value": 0
-      }, {
-        "text": "生效中",
-        "value": 1
-      }, {
-        "text": "已取消",
-        "value": 2
-      }]
-    },
-    "renewal_mode": {
-      "bsonType": "int",
-      "description": "状态，0-手动续费，1-自动续费",
-      "defaultValue": 0,
-      "enum": [{
-        "text": "手动续费",
-        "value": 0
-      }, {
-        "text": "自动续费",
-        "value": 1
-      }]
+    "record": {
+      "bsonType": "array",
+      "description": "订阅记录，用户所订阅的所有套餐记录，{start_date, plan}"
     }
   }
 }

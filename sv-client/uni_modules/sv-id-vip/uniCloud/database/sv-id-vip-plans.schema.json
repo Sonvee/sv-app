@@ -34,8 +34,28 @@
       "defaultValue": 1
     },
     "benefits": {
-      "bsonType": "array",
-      "description": "套餐包含的权益列表"
+      "bsonType": "object",
+      "description": "套餐包含的权益",
+      "properties": {
+        "no_ad": {
+          "bsonType": "bool",
+          "description": "关闭广告"
+        },
+        "coupon": {
+          "bsonType": "object",
+          "description": "优惠券",
+          "properties": {
+            "free": {
+              "bsonType": "int",
+              "description": "免费券(0.01元购买商品)数量"
+            },
+            "half": {
+              "bsonType": "int",
+              "description": "半价券(5折购买商品)数量"
+            }
+          }
+        }
+      }
     }
   }
 }

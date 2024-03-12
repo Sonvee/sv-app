@@ -14,99 +14,80 @@ module.exports = {
     pagesize = +pagesize
     pagenum = +pagenum
 
+    const dbJQL = uniCloud.databaseForJQL({
+      clientInfo: this.getClientInfo()
+    })
+
+    // 判断cdkey是否存在
+    const tempPlanDB = dbJQL.collection('sv-id-vip-plans').getTemp()
+
     let subscriptionRes
     if (pagesize > 1) {
-      subscriptionRes = await db.collection('sv-id-vip-subscription')
+      subscriptionRes = await dbJQL.collection('sv-id-vip-subscription', tempPlanDB)
         .orderBy('create_date', 'desc')
         .skip(pagesize * (pagenum - 1)).limit(pagesize).get()
     } else {
-      subscriptionRes = await db.collection('sv-id-vip-subscription')
+      subscriptionRes = await dbJQL.collection('sv-id-vip-subscription', tempPlanDB)
         .orderBy('create_date', 'desc').get()
     }
 
+    // 总数统计
+    const count = await db.collection('sv-id-vip-subscription').count()
+    // 页数统计
+    const pages = Math.ceil(count.total / pagesize)
+
     return handler.result({
       data: subscriptionRes.data,
+      total: count.total,
+      pagesize,
+      pagenum,
+      pages,
+      params: this.params
     })
   },
   // 创建订阅
-  async subscriptionCreate() {
-    let {
-      user_id
-    } = this.params
+  async subscriptionAdd({
+    user_id,
+    plan_id,
+    start_date,
+    duration_time,
+    status = 0,
+    mode = 0
+  }) {
 
-    if (!user_id) {
+    if (!user_id || !plan_id || !start_date || !duration_time) {
       throw handler.result({
         code: 40001
-      })
-    }
-
-    const findExist = await db.collection('sv-id-vip-subscription').where({
-      'user_id': user_id
-    }).get()
-    const isExist = findExist.affectedDocs
-    if (isExist) {
-      throw handler.result({
-        code: 40003
       })
     }
 
     const subscriptionRes = await db.collection('sv-id-vip-subscription').add({
-      'user_id': user_id,
-      'plans_id': [],
-      'end_date': 0
+      user_id,
+      plan_id,
+      start_date,
+      duration_time,
+      status,
+      mode
+    })
+
+    // 创建订阅后立即激活订阅，并累加会员时长，最后将该订阅状态修改为已激活status:1
+    // await db.collection('uni-id-users').doc(user_id).update({
+    //   'vip_validity': dbCmd.inc(duration_time)
+    // })
+    // 1. 先判断用户是否已是vip
+    
+    // 2. 若不是vip，则 vip_validity = 当前时间戳 + 订阅套餐时长
+    
+    // 3. 若已是vip，则 vip_validity = vip_validity + 订阅套餐时长
+
+    await db.collection('sv-id-vip-subscription').where({
+      'user_id': user_id
+    }).update({
+      'status': 1
     })
 
     return handler.result({
       data: subscriptionRes.data,
     })
   },
-  // 更新订阅
-  async subscriptionUpdatePlans() {
-    const {
-      user_id,
-      plan_id
-    } = this.params
-
-    if (!user_id || !plan_id) {
-      throw handler.result({
-        code: 40001
-      })
-    }
-
-    const findExist = await db.collection('sv-id-vip-subscription').where({
-      'user_id': user_id
-    }).get()
-    const isExist = findExist.affectedDocs
-    if (!isExist) {
-      throw handler.result({
-        code: 40002
-      })
-    }
-
-    const planRes = await db.collection('sv-id-vip-plans').doc(plan_id).get()
-
-    if (!planRes.affectedDocs) {
-      throw handler.result({
-        code: 40001,
-        message: '未查询到plan_id匹配的套餐'
-      })
-    }
-
-    const subscriptionRes = await db.collection('sv-id-vip-subscription').where({
-      'user_id': user_id
-    }).update({
-      plans_id: dbCmd.push({
-        'start_date': Date.now(),
-        'plan': planRes.data[0]
-      }),
-      record: dbCmd.push({
-        'start_date': Date.now(),
-        'plan': planRes.data[0]
-      })
-    })
-
-    return handler.result({
-      data: subscriptionRes.data,
-    })
-  }
 }

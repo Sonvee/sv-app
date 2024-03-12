@@ -83,4 +83,28 @@ module.exports = {
       data: roleRes.data,
     })
   },
+  
+  // 指定用户添加角色 - 云对象之间调用
+  async userRoleAdd({user_id, role_name}) {
+    // 先删除后添加，确保只会存在同一种角色
+    // 一个云对象导出的不同方法之间不能互相调用
+    await db.collection('uni-id-users').doc(user_id).update({
+      'role': dbCmd.pull(role_name)
+    })
+    const roleRes = await db.collection('uni-id-users').doc(user_id).update({
+      'role': dbCmd.push(role_name)
+    })
+    return handler.result({
+      data: roleRes.data,
+    })
+  },
+  // 指定用户删除角色 - 云对象之间调用
+  async userRoleDelete({user_id, role_name}) {
+    const roleRes = await db.collection('uni-id-users').doc(user_id).update({
+      'role': dbCmd.pull(role_name)
+    })
+    return handler.result({
+      data: roleRes.data,
+    })
+  }
 }

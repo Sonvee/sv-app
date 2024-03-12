@@ -10,3 +10,11 @@ export function userInfo(data) {
     data
   })
 }
+
+export function userUpdate(data) {
+  return request({
+    url: '/svid/userUpdate',
+    method: 'POST',
+    data
+  })
+}

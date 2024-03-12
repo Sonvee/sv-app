@@ -117,11 +117,11 @@ module.exports = {
   // cdkey激活
   async cdkeyActive() {
     const {
-      user_id,
-      cdkey
+      cdkey,
+      user_id
     } = this.params
-    
-    if (!user_id || !cdkey) {
+
+    if (!cdkey || !user_id) {
       throw handler.result({
         code: 40001
       })
@@ -130,7 +130,7 @@ module.exports = {
     const dbJQL = uniCloud.databaseForJQL({
       clientInfo: this.getClientInfo()
     })
-    
+
     // 判断cdkey是否存在
     const tempPlanDB = dbJQL.collection('sv-id-vip-plans').getTemp()
     const findExist = await dbJQL.collection('sv-id-vip-cdkeys', tempPlanDB).where({
@@ -148,7 +148,7 @@ module.exports = {
 
     // 判断cdkey是否有效
     const findExistData = findExist.data
-    
+
     if (findExistData.status) {
       throw handler.result({
         code: 40004,
@@ -171,18 +171,33 @@ module.exports = {
     }
 
     // 激活cdkey
-    // 1. 兑换相应的套餐并修改用户订阅状态
-    
-
-    // 2. 修改cdkey状态为已使用 status: 1
+    // 1. 修改cdkey状态为已使用 status: 1
     await db.collection('sv-id-vip-cdkeys').where({
       'cdkey': cdkey
     }).update({
       status: 1
     })
 
+    // 2. 兑换相应的套餐并修改用户订阅状态
+    const plan = findExistData.plan_id[0]
+    const duration_time = plan.valid_day * 24 * 60 * 60
+
+    await uniCloud.importObject('sv-api-vip').subscriptionAdd({
+      'user_id': user_id,
+      'plan_id': plan._id,
+      'start_date': Date.now(),
+      'duration_time': duration_time,
+      'mode': 1
+    })
+
+    // 3. 修改用户角色
+    await uniCloud.importObject('sv-api-id').userRoleAdd({
+      'user_id': user_id,
+      'role_name': 'vip'
+    })
+
     return handler.result({
-      data: findExistData
+      data: findExistData,
     })
   }
 }

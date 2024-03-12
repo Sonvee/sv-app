@@ -70,16 +70,13 @@ module.exports = {
       mode
     })
 
-    // 创建订阅后立即激活订阅，并累加会员时长，最后将该订阅状态修改为已激活status:1
-    // await db.collection('uni-id-users').doc(user_id).update({
-    //   'vip_validity': dbCmd.inc(duration_time)
-    // })
-    // 1. 先判断用户是否已是vip
-    
-    // 2. 若不是vip，则 vip_validity = 当前时间戳 + 订阅套餐时长
-    
-    // 3. 若已是vip，则 vip_validity = vip_validity + 订阅套餐时长
+    // 创建订阅后累加会员时长 
+    await uniCloud.importObject('sv-api-vip').vipValidUpdate({
+      'user_id': user_id,
+      'duration_time': duration_time,
+    })
 
+    // 然后将该订阅状态修改为已激活status:1
     await db.collection('sv-id-vip-subscription').where({
       'user_id': user_id
     }).update({

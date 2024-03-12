@@ -28,7 +28,7 @@
     },
     "duration_time": {
       "bsonType": "int",
-      "description": "订阅持续时长(秒)"
+      "description": "订阅持续时长(毫秒)"
     },
     "status": {
       "bsonType": "int",

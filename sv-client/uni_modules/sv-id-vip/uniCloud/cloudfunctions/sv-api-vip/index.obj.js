@@ -5,6 +5,9 @@ const {
   vipUpdate,
   vipAdd,
   vipDelete,
+  vipValidUpdate,
+  vipVerify,
+  vipVerifyAuto,
 } = require('./module/vip/index.js')
 
 const {
@@ -58,6 +61,9 @@ module.exports = {
   vipUpdate,
   vipAdd,
   vipDelete,
+  vipValidUpdate,
+  vipVerify,
+  vipVerifyAuto,
 
   /**
    * cdkey

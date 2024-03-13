@@ -22,7 +22,10 @@
           label-position="left"
         >
           <el-form-item v-if="formMode !== 'add'" prop="avatar_file" label="头像">
-            <sv-file-avatar v-model:file="formData.avatar_file" ref="fileAvatarRef"></sv-file-avatar>
+            <sv-file-avatar
+              v-model:file="formData.avatar_file"
+              ref="fileAvatarRef"
+            ></sv-file-avatar>
           </el-form-item>
           <el-form-item prop="username" label="用户名" required>
             <el-input v-model="formData.username" placeholder="请输入用户名" clearable />
@@ -31,7 +34,13 @@
             <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
           </el-form-item>
           <el-form-item v-if="formMode == 'add'" prop="password" label="密码" required>
-            <el-input v-model="formData.password" type="password" show-password placeholder="请输入密码" clearable />
+            <el-input
+              v-model="formData.password"
+              type="password"
+              show-password
+              placeholder="请输入密码"
+              clearable
+            />
           </el-form-item>
           <el-form-item v-if="formMode !== 'add'" prop="gender" label="性别">
             <sv-dict-radio
@@ -85,7 +94,10 @@
     </template>
     <template #footer>
       <!-- 密码修改 -->
-      <sv-change-password v-if="formMode == 'edit' && isAdmin" :userForm="formData"></sv-change-password>
+      <sv-change-password
+        v-if="formMode == 'edit' && isAdmin"
+        :userForm="formData"
+      ></sv-change-password>
 
       <el-button @click="cancel">取消</el-button>
       <el-button type="primary" @click="confirm">确认</el-button>
@@ -155,7 +167,7 @@ function confirm() {
   formRef.value.validate(async (valid, fields) => {
     if (valid) {
       // 手动上传图片
-      if (props.formInit.avatar_file.url !== formData.value.avatar_file.url) {
+      if (props.formMode == 'edit' && props.formInit.avatar_file?.url !== formData.value.avatar_file?.url) {
         await fileAvatarRef.value.uploadAvatar()
       }
       emits('submit', { data: formData.value, mode: props.formMode })

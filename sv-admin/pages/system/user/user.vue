@@ -239,7 +239,7 @@ async function submitForm(e) {
 // 删除
 function del(item) {
   const { _id, avatar_file } = item
-  ElMessageBox.confirm(`确认删除${item.username}吗？`, '系统提示', {
+  ElMessageBox.confirm(`确认删除${item.username || item.nickname || item.mobile}吗？`, '系统提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'

@@ -52,11 +52,12 @@
             />
           </el-form-item>
           <el-form-item prop="gender" label="性别">
-            <el-radio-group v-model="formData.gender">
-              <el-radio :label="0">保密</el-radio>
-              <el-radio :label="1">男</el-radio>
-              <el-radio :label="2">女</el-radio>
-            </el-radio-group>
+            <sv-dict-radio
+              v-model="formData.gender"
+              dictType="uni_id_users_gender"
+              keyName="key"
+              valueName="value"
+            ></sv-dict-radio>
           </el-form-item>
           <el-form-item prop="my_invite_code" label="邀请码">
             <el-input
@@ -68,11 +69,12 @@
             />
           </el-form-item>
           <el-form-item prop="dcloud_appid" label="可用APP">
-            <el-checkbox-group v-model="formData.dcloud_appid">
-              <el-checkbox v-for="item in appList" :key="item" :label="item.appid">
-                {{ item.name }}
-              </el-checkbox>
-            </el-checkbox-group>
+            <sv-dict-checkbox
+              v-model="formData.dcloud_appid"
+              :dictList="appList"
+              keyName="appid"
+              valueName="name"
+            ></sv-dict-checkbox>
           </el-form-item>
           <el-form-item prop="status" label="状态">
             <el-select v-model="formData.status" placeholder="状态">
@@ -123,7 +125,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect, computed } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { WarnTriangleFilled, Minus } from '@element-plus/icons-vue'
 
 const props = defineProps({

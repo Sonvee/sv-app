@@ -3,7 +3,12 @@
     <!-- 将node_modules中的@wangeditor/editor/dist/css/style.css复制到项目根目录static/css文件夹中，并改名为wangeditor-style.css -->
     <!-- 因为uniapp在编译时会将h5原生button等标签转换为uni-button从而导致样式失效，故将样式文件放置static中，并通过link引入才能规避uniapp这一bug -->
     <link href="static/css/wangeditor-style.css" rel="stylesheet" />
-    <Toolbar class="editor-toolbar" :editor="editorIns" :defaultConfig="toolbarConfig" :mode="mode" />
+    <Toolbar
+      class="editor-toolbar"
+      :editor="editorIns"
+      :defaultConfig="toolbarConfig"
+      :mode="mode"
+    />
     <Editor
       class="editor-wrapper"
       v-model="htmlValue"
@@ -15,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, shallowRef, onBeforeUnmount, watch } from 'vue'
+import { ref, shallowRef, onBeforeUnmount, watch, computed } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 
 const props = defineProps({
@@ -38,8 +43,23 @@ const emits = defineEmits(['update:html', 'change', 'save'])
 
 // 编辑器实例，必须用 shallowRef
 const editorIns = shallowRef()
+
 // 富文本内容
-const htmlValue = ref(props.html)
+const htmlValue = computed({
+  set(newHtml) {
+    // 双向绑定
+    emits('update:html', newHtml)
+  },
+  get() {
+    return props.html
+  }
+})
+
+watch(htmlValue, (newHtml) => {
+  // 纯文本内容
+  const newText = editorIns.value.getText()
+  emits('change', { html: newHtml, text: newText })
+})
 
 const insertedFileList = ref([]) // 编辑过程中插入的图片列表
 const savedFileList = ref([]) // 编辑完成后保存的图片列表
@@ -57,7 +77,7 @@ const editorConfig = {
         // 获取临时文件路径
         const fileURL = window.URL.createObjectURL(file)
 
-        // 文件上传
+        // 文件上传 - 此处可以修改为自定义的图片上传逻辑，需要获取到相关参数后使用如下insertFn方法
         let cloundFile = await uniCloud.uploadFile({
           filePath: fileURL,
           // 同名会导致报错 policy_does_not_allow_file_overwrite
@@ -66,7 +86,7 @@ const editorConfig = {
           cloudPathAsRealPath: true
         })
 
-        // 插入操作 url 图片url, alt 图片alt, href 图片href
+        // 插入操作 参数: url 图片url, alt 图片alt, href 图片href
         insertFn(cloundFile.fileID, file.name, '')
 
         // 释放临时文件
@@ -77,18 +97,16 @@ const editorConfig = {
       onInsertedImage(imageNode) {
         if (imageNode == null) return
         insertedFileList.value.push(imageNode.src)
-        console.log('onInsertedImage', insertedFileList.value)
+        // console.log('onInsertedImage', insertedFileList.value)
       }
     },
     // 自定义上传视频，同图片
     uploadVideo: {
       async customUpload(file, insertFn) {
-        console.log('==== file :', file)
-
         // 获取临时文件路径
         const fileURL = window.URL.createObjectURL(file)
 
-        // 文件上传
+        // 文件上传 - 此处可以修改为自定义的视频上传逻辑，需要获取到相关参数后使用如下insertFn方法
         let cloundFile = await uniCloud.uploadFile({
           filePath: fileURL,
           // 同名会导致报错 policy_does_not_allow_file_overwrite
@@ -97,6 +115,7 @@ const editorConfig = {
           cloudPathAsRealPath: true
         })
 
+        // 插入操作 参数: url 视频url
         insertFn(cloundFile.fileID)
 
         // 释放临时文件
@@ -107,19 +126,11 @@ const editorConfig = {
       onInsertedVideo(videoNode) {
         if (videoNode == null) return
         insertedFileList.value.push(videoNode.src)
-        console.log('onInsertedVideo', insertedFileList.value)
+        // console.log('onInsertedVideo', insertedFileList.value)
       }
     }
   }
 }
-
-watch(htmlValue, (newHtml) => {
-  // 纯文本内容
-  const newText = editorIns.value.getText()
-  // 双向绑定
-  emits('update:html', newHtml)
-  emits('change', { html: newHtml, text: newText })
-})
 
 function handleCreated(editor) {
   editorIns.value = editor // 记录 editor 实例，重要！
@@ -143,7 +154,10 @@ function save() {
      */
     uniCloud.importObject('sv-utils').deleteCloudFile(needDelFiles)
   }
-  emits('save')
+
+  // 纯文本内容
+  const newText = editorIns.value.getText()
+  emits('save', { html: htmlValue.value, text: newText })
 }
 
 // 组件销毁时，也及时销毁编辑器

@@ -27,11 +27,6 @@
     </uni-list>
     <view class="divider"></view>
     <uni-list>
-      <uni-list-item v-if="userInfo.role" title="用户角色" link>
-        <template #footer>
-          <uni-tag v-for="item in userInfo.role" :key="item" :text="item" type="primary" />
-        </template>
-      </uni-list-item>
       <uni-list-item
         v-if="userInfo.my_invite_code"
         title="邀请码"

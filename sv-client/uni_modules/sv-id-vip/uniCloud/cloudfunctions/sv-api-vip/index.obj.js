@@ -29,7 +29,7 @@ module.exports = {
     if (!httpInfo) return // 云对象之间调用时无httpInfo处理
 
     // token身份安全校验
-    const WHITE_LIST = ['/cdkeyActive'] // 校验白名单
+    const WHITE_LIST = ['/vipList', '/cdkeyActive', '/vipVerify', '/subscriptionList'] // 校验白名单
     const apiPath = httpInfo.path
     const cToken = await handler.checkToken({
       clientInfo: this.getClientInfo(),

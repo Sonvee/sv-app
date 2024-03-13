@@ -48,3 +48,23 @@ export function judgeLogin() {
     }
   })
 }
+
+/**
+ * 节流 - 需要使用闭包来进行隔离
+ * @param {Object} time 节流时长（毫秒）默认2000
+ */
+let throttleMoment = null
+export function useThrottle(time = 2000) {
+  return function() {
+    const now = Date.now()
+    if (throttleMoment === null || now - throttleMoment >= time) {
+      throttleMoment = Date.now()
+      return true
+    }
+    uni.showToast({
+      title: '点击太快了',
+      icon: 'none',
+    })
+    return false
+  }
+}

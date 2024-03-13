@@ -13,10 +13,13 @@
             <text v-else class="cuIcon-my"></text>
           </view>
           <view class="flex-sub margin-left flex-col justify-around">
-            <view class="text-bold text-lg">
+            <view class="text-bold text-lg" :class="{ 'sv-text-streamer': isVip }">
               {{ userInfo.nickname }}
+              <text class="sv-icons-vip" v-if="isVip"></text>
             </view>
-            <view class="text-sm text-cyan">VIP已于2024-03-01过期</view>
+            <view class="text-sm text-cyan">
+              {{ validityDate }}
+            </view>
           </view>
         </view>
       </view>
@@ -180,14 +183,45 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
 import { store } from '@/uni_modules/sv-id-pages/common/store'
-import { vipList } from '@/service/api/vip'
+import { cdkeyActive, vipList, vipVerify } from '@/service/api/vip'
 import { isEmpty } from 'lodash-es'
-import { createCDKey, validCDKey } from '../../utils';
+import { createCDKey, validCDKey } from '../../utils'
+import dayjs from 'dayjs'
 
 const userInfo = computed(() => {
   return store.userInfo
 })
+
+const vipInfo = ref()
+const isVip = computed(() => {
+  return vipInfo.value?.vip
+})
+const validityDate = computed(() => {
+  let text = ''
+  const validDate = dayjs(vipInfo.value?.vip_validity).format('YYYY-MM-DD')
+  if (vipInfo.value?.vip) {
+    text = `VIP会员有效期至${validDate}`
+  } else {
+    if (vipInfo.value?.vip_validity) {
+      text = `VIP会员已于${validDate}过期`
+    } else {
+      text = '还未开通过VIP会员哦'
+    }
+  }
+  return text
+})
+
+onLoad(() => {
+  // 会员验证
+  getVipVerify()
+})
+
+async function getVipVerify() {
+  const verifyRes = await vipVerify({ user_id: userInfo.value._id })
+  vipInfo.value = verifyRes.data
+}
 
 const loading = ref(true)
 const planList = ref([])
@@ -308,18 +342,33 @@ function onPay() {
 
 const cdkey = ref('')
 
-function confirmCDKey() {
+async function confirmCDKey() {
   // CDKEY校验
-  if (!cdkey.value) {
+  if (!validCDKey(cdkey.value)) {
     uni.showToast({
       title: '请输入正确的CDKEY',
       icon: 'none'
     })
+    return
   }
-  console.log('==== cdkey :', cdkey.value)
+  uni.showLoading({
+    mask: true,
+    title: '激活中...'
+  })
+  const activeRes = await cdkeyActive({
+    user_id: userInfo.value._id,
+    cdkey: cdkey.value
+  })
+  // 无需再手动hideLoading，因为无论成功与否都会showToast自动关闭loding
+  if (activeRes.success) {
+    uni.showToast({
+      title: activeRes.message,
+      icon: 'none'
+    })
+    // 激活成功后需要刷新vip验证
+    await getVipVerify()
+  }
 }
-
-console.log('==== cdkey :', createCDKey());
 </script>
 
 <style lang="scss">

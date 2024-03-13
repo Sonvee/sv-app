@@ -11,6 +11,10 @@
             :class="[sysStore.themes == 'light' ? 'sv-icons-sun' : 'sv-icons-moon']"
             @click="changeTheme"
           ></text>
+          <text
+            class="cuIcon-refresh text-xxl padding-xs sv-turn-around-active"
+            @click="onRefresh"
+          ></text>
         </view>
         <!-- 账号 -->
         <view class="flex padding-lr" @click="toUser">
@@ -139,9 +143,11 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
 import { useSysStore } from '../../store/sys'
 import { mutations, store } from '@/uni_modules/sv-id-pages/common/store'
-import { judgeLogin, onScan } from '@/utils/util'
+import { judgeLogin, onScan, useThrottle } from '@/utils/util'
+import { vipVerify } from '../../service/api/vip'
 
 const sysStore = useSysStore()
 
@@ -151,10 +157,39 @@ const userInfo = computed(() => {
 const hasLogin = computed(() => {
   return store.hasLogin
 })
+
+const vipInfo = ref()
 const isVip = computed(() => {
-  const { role } = uniCloud.getCurrentUserInfo()
-  return role.includes('vip')
+  return vipInfo.value?.vip
 })
+
+onLoad(() => {
+  // tabbar页面会缓存，onLoad不会频繁触发
+
+  /**
+   * 会员验证
+   * 如若需要自动刷新验证，需要放在onShow生命周期中
+   * 此处旨在为减少频繁刷新
+   */
+  getVipVerify()
+})
+
+// 手动刷新页面
+async function onRefresh() {
+  // 节流操作
+  if (!useThrottle(2000)()) return
+
+  uni.showLoading({
+    title: '正在刷新'
+  })
+  await getVipVerify()
+  uni.hideLoading()
+}
+
+async function getVipVerify() {
+  const verifyRes = await vipVerify({ user_id: userInfo.value._id })
+  vipInfo.value = verifyRes.data
+}
 
 const statisticsCard = ref([
   {
@@ -218,6 +253,7 @@ function onVip() {
   const isLogin = judgeLogin()
   // 未登录不予操作
   if (!isLogin) return
+
   uni.navigateTo({ url: '/uni_modules/sv-id-vip/pages/vip/vip' })
 }
 </script>

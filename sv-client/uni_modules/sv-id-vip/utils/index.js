@@ -1,11 +1,16 @@
+import config from '../config.js'
+
 /**
  * 创建cdkey
- * @param {number} segments 分段数 默认5
- * @param {number} segmentLength 段字长 默认5
- * @return {string} xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+ * @return {String} cdkey
  */
-export function createCDKey(segments = 5, segmentLength = 5) {
+export function createCDKey() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const {
+    segments,
+    segmentLength
+  } = config.cdkey
+
   const cdKey = Array(segments)
     .fill(null)
     .flatMap(() => [
@@ -19,11 +24,14 @@ export function createCDKey(segments = 5, segmentLength = 5) {
 /**
  * cdkey校验
  * @param {string} cdKey 要校验的cdkey
- * @param {number} segments 分段数 默认5 和createCDKey保持一致
- * @param {number} segmentLength 段字长 默认5 和createCDKey保持一致
- * @return {boolean}
+ * @return {boolean} 是否校验成功
  */
-export function validCDKey(cdKey, segments = 5, segmentLength = 5) {
+export function validCDKey(cdKey) {
+  const {
+    segments,
+    segmentLength
+  } = config.cdkey
+
   const regexPattern = new RegExp(`^(?:[A-Za-z0-9]{${segmentLength}}-){${segments-1}}[A-Za-z0-9]{${segmentLength}}$`);
   return regexPattern.test(cdKey);
 }

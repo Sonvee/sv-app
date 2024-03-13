@@ -1,3 +1,13 @@
+// 转圈
+.sv-turn-around-active {
+  transform: rotate(360deg);
+  transition: 0.6s;
+}
+.sv-turn-around-active:active {
+  transform: rotate(0);
+  transition: 0s;
+}
+
 // 流光炫彩文字
 .sv-text-streamer {
   background: linear-gradient(

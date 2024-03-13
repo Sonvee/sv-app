@@ -169,17 +169,17 @@ module.exports = {
         })
       }
     }
-    
+
     // 可能存在套餐id变更导致激活码失效的情况
     const plan = findExistData.plan_id[0]
-    
+
     if (!plan) {
       await db.collection('sv-id-vip-cdkeys').where({
         'cdkey': cdkey
       }).update({
         status: 2
       })
-    
+
       throw handler.result({
         code: 400,
         message: 'cdkey已失效'
@@ -193,7 +193,7 @@ module.exports = {
     }).update({
       status: 1
     })
-    
+
     // 2. 计算激活码对应套餐生效时长，并添加订阅
     const duration_time = plan.valid_day * 24 * 60 * 60 * 1000
 
@@ -208,11 +208,12 @@ module.exports = {
     // 3. 向用户角色列表中添加vip
     await uniCloud.importObject('sv-api-id').userRoleAdd({
       'user_id': user_id,
-      'role_name': 'vip'
+      'role_name': 'vip',
     })
 
     return handler.result({
       data: findExistData,
+      message: '激活成功',
     })
   }
 }

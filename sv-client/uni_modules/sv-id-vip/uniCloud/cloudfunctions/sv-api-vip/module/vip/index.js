@@ -109,6 +109,12 @@ module.exports = {
       user_id
     } = this.params
 
+    if (!user_id) {
+      throw handler.result({
+        code: 40001
+      })
+    }
+
     // 判断vip_validity是否已过期
     const userRes = await db.collection('uni-id-users').doc(user_id).get()
     let {
@@ -118,20 +124,24 @@ module.exports = {
     if (Date.now() > vip_validity) {
       await uniCloud.importObject('sv-api-id').userRoleDelete({
         'user_id': user_id,
-        'role_name': 'vip'
+        'role_name': 'vip',
       })
 
       throw handler.result({
+        data: {
+          vip: false,
+          vip_validity
+        },
         message: 'VIP已过期',
-        vip: false,
-        vip_validity
       })
     }
 
     return handler.result({
+      data: {
+        vip: true,
+        vip_validity
+      },
       message: '尊敬的VIP会员，欢迎~',
-      vip: true,
-      vip_validity
     })
   },
 
@@ -149,9 +159,10 @@ module.exports = {
     // 遍历userData 判断vip_validity是否已过期
     userData.forEach(item => {
       if (Date.now() > item.vip_validity) {
+        // 自动验证不主动刷新token
         uniCloud.importObject('sv-api-id').userRoleDelete({
           'user_id': item._id,
-          'role_name': 'vip'
+          'role_name': 'vip',
         })
       }
     })

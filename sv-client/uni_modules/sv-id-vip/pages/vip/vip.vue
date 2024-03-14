@@ -219,8 +219,10 @@ onLoad(() => {
 })
 
 async function getVipVerify() {
-  const verifyRes = await vipVerify({ user_id: userInfo.value._id })
-  vipInfo.value = verifyRes.data
+  if (userInfo.value._id) {
+    const verifyRes = await vipVerify({ user_id: userInfo.value._id })
+    vipInfo.value = verifyRes.data
+  }
 }
 
 const loading = ref(true)

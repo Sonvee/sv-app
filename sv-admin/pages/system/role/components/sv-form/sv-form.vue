@@ -28,11 +28,12 @@
             <el-input v-model="formData.role_name" placeholder="请输入角色名称" clearable />
           </el-form-item>
           <el-form-item prop="permission" label="角色权限">
-            <el-checkbox-group v-model="formData.permission">
-              <el-checkbox v-for="item in permissionList" :key="item" :label="item.permission_id">
-                {{ item.permission_name }}
-              </el-checkbox>
-            </el-checkbox-group>
+            <sv-dict-checkbox
+              v-model="formData.permission"
+              :dictList="permissionList"
+              keyName="permission_id"
+              valueName="permission_name"
+            ></sv-dict-checkbox>
           </el-form-item>
           <el-form-item prop="comment" label="备注">
             <el-input

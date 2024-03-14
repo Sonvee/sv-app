@@ -14,12 +14,12 @@
     },
     "cdkey": {
       "bsonType": "string",
-      "description": "cdkey",
+      "description": "cdkey"
     },
-    "plan_id": {
+    "bind_plan": {
       "bsonType": "string",
-      "foreignKey": "sv-id-vip-plans._id",
-      "description": "订阅的套餐id，参考sv-id-vip-plans表"
+      "foreignKey": "sv-id-vip-plans.plan_id",
+      "description": "绑定的套餐id，参考sv-id-vip-plans表"
     },
     "description": {
       "bsonType": "string",
@@ -34,7 +34,7 @@
     },
     "valid_date": {
       "bsonType": "timestamp",
-      "description": "有效期至",
+      "description": "有效期至"
     },
     "status": {
       "bsonType": "int",
@@ -49,7 +49,7 @@
       }, {
         "text": "已失效",
         "value": 2
-      }],
+      }]
     }
   }
 }

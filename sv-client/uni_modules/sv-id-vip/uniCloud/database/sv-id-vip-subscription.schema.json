@@ -17,9 +17,9 @@
       "foreignKey": "uni-id-users._id",
       "description": "隶属于用户id，参考uni-id-users表"
     },
-    "plan_id": {
+    "subscription_plan": {
       "bsonType": "string",
-      "foreignKey": "sv-id-vip-plans._id",
+      "foreignKey": "sv-id-vip-plans.plan_id",
       "description": "当前所生效的订阅套餐id，参考sv-id-vip-plans表"
     },
     "start_date": {

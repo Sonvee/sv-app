@@ -53,6 +53,20 @@ module.exports = {
     result.timeCost = Date.now() - this.startTime
     return result
   },
+  _timing: function(param) {
+    /**
+     * 阿里云入参param
+     * {
+     *  "triggerName": "TIMER_LATEST", //触发云函数的定时器配置内容，注意阿里云不会使用package.json内配置的触发器名称
+     *  "triggerTime": "2020-04-08T10:22:31Z", //触发云函数时的时间戳，可能略晚于cron表达式时间
+     *  "Time":"2020-04-08T10:22:31Z", //调用的云函数的时间
+     *  "TriggerName":"TIMER_LATEST", //触发器名
+     *  "Type":"Timer" //触发器类型，目前只有Timer
+     *  }
+     */
+    // 定时刷新库中所有vip角色是否过期，需在云对象中配置cron: ["0 15 4 * * ?"] 每日上午4:15分定时执行
+    vipVerifyAuto()
+  },
 
   /**
    * 会员套餐

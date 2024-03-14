@@ -68,11 +68,11 @@ module.exports = {
   async cdkeyAdd() {
     const {
       cdkey,
-      plan_id,
+      bind_plan,
       valid_date
     } = this.params
 
-    if (!cdkey || !plan_id || !valid_date) {
+    if (!cdkey || !bind_plan || !valid_date) {
       throw handler.result({
         code: 40001
       })
@@ -171,7 +171,7 @@ module.exports = {
     }
 
     // 可能存在套餐id变更导致激活码失效的情况
-    const plan = findExistData.plan_id[0]
+    const plan = findExistData.bind_plan[0]
 
     if (!plan) {
       await db.collection('sv-id-vip-cdkeys').where({
@@ -199,7 +199,7 @@ module.exports = {
 
     await uniCloud.importObject('sv-api-vip').subscriptionAdd({
       'user_id': user_id,
-      'plan_id': plan._id,
+      'subscription_plan': plan.plan_id,
       'start_date': Date.now(),
       'duration_time': duration_time,
       'mode': 1

@@ -5,7 +5,16 @@ const dbCmd = db.command
 module.exports = {
   // 会员套餐列表
   async vipList() {
-    const planRes = await db.collection('sv-id-vip-plans').get()
+
+    // 数据量较小，不做分页
+
+    const dbJQL = uniCloud.databaseForJQL({
+      clientInfo: this.getClientInfo()
+    })
+
+    const tempBenefitDB = dbJQL.collection('sv-id-vip-benefits').getTemp()
+
+    const planRes = await dbJQL.collection('sv-id-vip-plans', tempBenefitDB).orderBy('sort', 'asc').get()
 
     return handler.result({
       data: planRes.data,
@@ -154,19 +163,34 @@ module.exports = {
       'role': dbCmd.in(['vip'])
     }).get()
 
-    const userData = userRes.data
+    const vipUsers = userRes.data
 
-    // 遍历userData 判断vip_validity是否已过期
-    userData.forEach(item => {
-      if (Date.now() > item.vip_validity) {
-        // 自动验证不主动刷新token
-        uniCloud.importObject('sv-api-id').userRoleDelete({
-          'user_id': item._id,
-          'role_name': 'vip',
-        })
+    // 将需要执行的异步操作放入一个数组
+    const promises = vipUsers.map(async (item) => {
+      if (!item.vip_validity || Date.now() > item.vip_validity) {
+        // 将删除角色的操作包装在一个Promise中
+        return new Promise((resolve, reject) => {
+          uniCloud.importObject('sv-api-id').userRoleDelete({
+            'user_id': item._id,
+            'role_name': 'vip',
+          }).then(() => {
+            resolve();
+          }).catch((error) => {
+            reject(error);
+          });
+        });
+      } else {
+        // 如果当前用户vip_validity未过期，则直接返回一个Resolved状态的Promise
+        return Promise.resolve();
       }
-    })
+    });
 
-    return handler.result()
+    // 使用Promise.all并发执行所有异步操作
+    const promisesAll = await Promise.all(promises);
+
+    return handler.result({
+      vipUsers,
+      promisesAll
+    })
   },
 }

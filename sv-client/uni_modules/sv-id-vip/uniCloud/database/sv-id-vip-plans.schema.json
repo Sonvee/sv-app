@@ -12,6 +12,10 @@
     "_id": {
       "description": "ID，系统自动生成"
     },
+    "plan_id": {
+      "bsonType": "string",
+      "description": "套餐id"
+    },
     "plan_name": {
       "bsonType": "string",
       "description": "套餐名称"
@@ -34,28 +38,14 @@
       "defaultValue": 1
     },
     "benefits": {
-      "bsonType": "object",
-      "description": "套餐包含的权益",
-      "properties": {
-        "no_ad": {
-          "bsonType": "bool",
-          "description": "关闭广告"
-        },
-        "coupon": {
-          "bsonType": "object",
-          "description": "优惠券",
-          "properties": {
-            "free": {
-              "bsonType": "int",
-              "description": "免费券(0.01元购买商品)数量"
-            },
-            "half": {
-              "bsonType": "int",
-              "description": "半价券(5折购买商品)数量"
-            }
-          }
-        }
-      }
+      "bsonType": "string",
+      "foreignKey": "sv-id-vip-benefits.benefit_id",
+      "description": "vip权益列表，参考sv-id-vip-benefits表"
+    },
+    "sort": {
+      "bsonType": "int",
+      "description": "排序",
+      "defaultValue": 0
     }
   }
 }

@@ -48,14 +48,14 @@ module.exports = {
   // 创建订阅
   async subscriptionAdd({
     user_id,
-    plan_id,
+    subscription_plan,
     start_date,
     duration_time,
     status = 0,
     mode = 0
   }) {
 
-    if (!user_id || !plan_id || !start_date || !duration_time) {
+    if (!user_id || !subscription_plan || !start_date || !duration_time) {
       throw handler.result({
         code: 40001
       })
@@ -63,7 +63,7 @@ module.exports = {
 
     const subscriptionRes = await db.collection('sv-id-vip-subscription').add({
       user_id,
-      plan_id,
+      subscription_plan,
       start_date,
       duration_time,
       status,

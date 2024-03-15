@@ -11,6 +11,13 @@ const {
 } = require('./module/vip/index.js')
 
 const {
+  benefitList,
+  benefitUpdate,
+  benefitAdd,
+  benefitDelete,
+} = require('./module/benefit/index.js')
+
+const {
   cdkeyList,
   cdkeyUpdate,
   cdkeyAdd,
@@ -29,7 +36,7 @@ module.exports = {
     if (!httpInfo) return // 云对象之间调用时无httpInfo处理
 
     // token身份安全校验
-    const WHITE_LIST = ['/vipList', '/cdkeyActive', '/vipVerify', '/subscriptionList'] // 校验白名单
+    const WHITE_LIST = ['/vipList', '/benefitList', '/cdkeyActive', '/vipVerify', '/subscriptionList'] // 校验白名单
     const apiPath = httpInfo.path
     const cToken = await handler.checkToken({
       clientInfo: this.getClientInfo(),
@@ -65,7 +72,11 @@ module.exports = {
      *  }
      */
     // 定时刷新库中所有vip角色是否过期，需在云对象中配置cron: ["0 15 4 * * ?"] 每日上午4:15分定时执行
-    vipVerifyAuto()
+    try {
+      vipVerifyAuto()
+    } catch (err) {
+      console.log('自动验证VIP角色错误:', err);
+    }
   },
 
   /**
@@ -78,6 +89,14 @@ module.exports = {
   vipValidUpdate,
   vipVerify,
   vipVerifyAuto,
+
+  /**
+   * 会员权益
+   */
+  benefitList,
+  benefitUpdate,
+  benefitAdd,
+  benefitDelete,
 
   /**
    * cdkey

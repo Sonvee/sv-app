@@ -30,36 +30,53 @@
           <text class="text-sm text-ABC text-bili">VIPPLAN</text>
         </view>
       </view>
-      <uv-skeletons class="padding-lr" :loading="loading" :skeleton="skeleton">
+      <uv-skeletons class="padding-lr" :loading="skeletonPlanLoading" :skeleton="skeletonPlan">
         <uv-scroll-list class="sv-uv-scroll-list" :indicator="false">
-          <view v-for="item in planList" :key="item.name">
+          <view v-for="item in planList" :key="item.plan_name">
             <view
-              class="plan-item margin radius-lg"
-              :class="[curPlan?.name == item.name ? 'selected-plan' : '']"
+              class="plan-item margin radius-lg flex-col justify-evenly align-center"
+              :class="[curPlan?.plan_name == item.plan_name ? 'selected-plan' : '']"
               @click="selectPlan(item)"
             >
-              {{ item.name }}
+              <view class="text-bold text-bili">
+                {{ item.plan_name }}
+              </view>
+              <view class="text-price text-bold text-tyblue text-xxl">
+                {{ item?.price - item?.discount }}
+              </view>
+              <view class="text-price text-miku text-delete-line">
+                {{ item?.price }}
+              </view>
+              <view class="text-sm text-red">
+                {{ item?.description }}
+              </view>
             </view>
           </view>
         </uv-scroll-list>
       </uv-skeletons>
       <!-- 特权 -->
-      <view class="cu-bar">
+      <view class="cu-bar margin-bottom-xs">
         <view class="action sub-title">
           <text class="text-lg text-bold text-tyblue">会员特权</text>
-          <text class="text-sm text-ABC text-tyblue">privilege</text>
+          <text class="text-sm text-ABC text-tyblue">benefits</text>
         </view>
       </view>
-      <view class="sv-grid grid-col-5 padding-lr-sm">
-        <view
-          class="grid-item-xl flex-col align-center justify-evenly"
-          v-for="item in privilegeList"
-          :key="item.lable"
-        >
-          <text class="text-sl" :class="item.value"></text>
-          <text class="text-sm">{{ item.lable }}</text>
+      <uv-skeletons
+        class="padding-lr"
+        :loading="skeletonBenefitLoading"
+        :skeleton="skeletonBenefit"
+      >
+        <view class="sv-grid grid-col-5 padding-lr-sm">
+          <view
+            class="grid-item-xl flex-col align-center justify-evenly text-tyblue"
+            v-for="item in benefits"
+            :key="item.lable"
+          >
+            <text class="text-sl" :class="item?.icon"></text>
+            <text class="text-sm">{{ item.benefit_name }}</text>
+          </view>
         </view>
-      </view>
+      </uv-skeletons>
       <!-- 开通方式 -->
       <view class="cu-bar margin-top">
         <view class="action sub-title">
@@ -121,7 +138,7 @@
       <view v-if="payWay == 'wallet'" class="pay-footer cu-bar tabbar border foot">
         <view class="h-full padding-lr-sm flex-col justify-evenly">
           <view class="text-bold text-red" @click="onFold">
-            <text class="text-xxl text-price">{{ money }}</text>
+            <text class="text-xxl text-price">{{ curPlan?.price - curPlan?.discount || 0 }}</text>
             <text class="text-sm margin-left-xs">
               已优惠
               <text class="text-price">{{ curPlan?.discount || 0 }}</text>
@@ -161,7 +178,7 @@
           <view class="text-lg text-bold text-center margin-bottom-sm">支付明细</view>
           <view class="text-bold text-lg">商品</view>
           <view class="flex justify-between line-height-3">
-            <text>{{ curPlan?.name }} VIP</text>
+            <text>{{ curPlan?.plan_name }}</text>
             <text class="text-red text-bold text-lg text-price">{{ curPlan?.price }}</text>
           </view>
           <view class="text-bold text-lg">优惠</view>
@@ -172,7 +189,9 @@
           <view class="text-bold text-lg">结算</view>
           <view class="flex justify-between line-height-3">
             <text>支付金额</text>
-            <text class="text-green text-bold text-lg text-price">{{ money }}</text>
+            <text class="text-green text-bold text-lg text-price">
+              {{ curPlan?.price - curPlan?.discount || 0 }}
+            </text>
           </view>
         </view>
         <view class="tabbar-placehoder"></view>
@@ -185,8 +204,8 @@
 import { computed, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { store } from '@/uni_modules/sv-id-pages/common/store'
-import { cdkeyActive, vipList, vipVerify } from '@/service/api/vip'
-import { isEmpty } from 'lodash-es'
+import { benefitList, cdkeyActive, vipList, vipVerify } from '@/service/api/vip'
+import { get, isEmpty } from 'lodash-es'
 import { createCDKey, validCDKey } from '../../utils'
 import dayjs from 'dayjs'
 
@@ -200,12 +219,12 @@ const isVip = computed(() => {
 })
 const validityDate = computed(() => {
   let text = ''
-  const validDate = dayjs(vipInfo.value?.vip_validity).format('YYYY-MM-DD')
+  const validDate = dayjs(vipInfo.value?.vip_validity).format('YYYY-MM-DD HH:mm:ss')
   if (vipInfo.value?.vip) {
-    text = `VIP会员有效期至${validDate}`
+    text = `VIP会员有效期至 ${validDate}`
   } else {
     if (vipInfo.value?.vip_validity) {
-      text = `VIP会员已于${validDate}过期`
+      text = `VIP会员已于 ${validDate}过期`
     } else {
       text = '还未开通过VIP会员哦'
     }
@@ -216,6 +235,10 @@ const validityDate = computed(() => {
 onLoad(() => {
   // 会员验证
   getVipVerify()
+  // 会员套餐
+  getVipList()
+  // 会员权益
+  getVipBenefit()
 })
 
 async function getVipVerify() {
@@ -225,13 +248,9 @@ async function getVipVerify() {
   }
 }
 
-const loading = ref(true)
+const skeletonPlanLoading = ref(true)
 const planList = ref([])
 const curPlan = ref()
-
-const money = computed(() => {
-  return curPlan.value?.price - curPlan.value?.discount || 0
-})
 
 const readed = ref([''])
 
@@ -252,14 +271,11 @@ function onFold() {
   }
 }
 
-const skeleton = [
+const skeletonPlan = [
   {
     type: 'flex',
+    style: 'margin-bottom:4px',
     children: [
-      {
-        type: 'custom',
-        style: 'width:200rpx;height:240rpx;margin:30rpx;'
-      },
       {
         type: 'custom',
         style: 'width:200rpx;height:240rpx;margin:30rpx;'
@@ -276,13 +292,35 @@ const skeleton = [
   }
 ]
 
-getVipList()
+const skeletonBenefit = [
+  {
+    type: 'flex',
+    style: 'justify-content:space-around',
+    children: [
+      {
+        type: 'custom',
+        style: 'width:120rpx;height:160rpx;'
+      },
+      {
+        type: 'custom',
+        style: 'width:120rpx;height:160rpx;'
+      },
+      {
+        type: 'custom',
+        style: 'width:120rpx;height:160rpx;'
+      },
+      {
+        type: 'custom',
+        style: 'width:120rpx;height:160rpx;'
+      }
+    ]
+  }
+]
 
 function getVipList() {
   vipList().then((res) => {
     planList.value = res.data || []
-    loading.value = false
-    console.log('==== planList.value :', planList.value)
+    skeletonPlanLoading.value = false
   })
 }
 
@@ -290,28 +328,15 @@ function selectPlan(e) {
   curPlan.value = e
 }
 
-const privilegeList = ref([
-  {
-    lable: '特权甲',
-    value: 'cuIcon-comment'
-  },
-  {
-    lable: '特权乙',
-    value: 'cuIcon-comment'
-  },
-  {
-    lable: '特权丙',
-    value: 'cuIcon-comment'
-  },
-  {
-    lable: '特权丁',
-    value: 'cuIcon-comment'
-  },
-  {
-    lable: '特权戊',
-    value: 'cuIcon-comment'
-  }
-])
+const benefits = ref([])
+const skeletonBenefitLoading = ref(true)
+
+function getVipBenefit() {
+  benefitList().then((res) => {
+    benefits.value = res.data || []
+    skeletonBenefitLoading.value = false
+  })
+}
 
 const payWay = ref('wallet') // wallet cdkey
 
@@ -387,11 +412,20 @@ async function confirmCDKey() {
   .plan-item {
     width: 200rpx;
     height: 240rpx;
-    border: 1px solid #ccc;
+    border: 1px solid transparent;
+    @include useTheme {
+      background: linear-gradient(#{getTheme('sv-bg-color')}, #{getTheme('sv-card-color')})
+          padding-box,
+        linear-gradient(135deg, #fb7299, #66ccff, #39c5bb) border-box;
+    }
   }
 
   .selected-plan {
-    box-shadow: 2px 2px 8px #fb7299aa, -2px -2px 8px #fb7299aa;
+    box-shadow: 2px 2px 8px #fb729966, -2px -2px 8px #fb729966;
+    @include useTheme {
+      background-image: linear-gradient(#{getTheme('sv-bg-color')}, #{getTheme('sv-card-color')}),
+        linear-gradient(135deg, #ff75c3, #ffa647, #ffe83f, #9fff5b, #70e2ff, #cd93ff);
+    }
   }
 
   .selected-way {

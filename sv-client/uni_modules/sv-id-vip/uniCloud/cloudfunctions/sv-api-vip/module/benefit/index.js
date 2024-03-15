@@ -3,88 +3,80 @@ const db = uniCloud.database()
 const dbCmd = db.command
 
 module.exports = {
-  // 会员套餐列表
-  async vipList() {
-    // 数据量较小，不做分页
-    const dbJQL = uniCloud.databaseForJQL({
-      clientInfo: this.getClientInfo()
-    })
-
-    const tempBenefitDB = dbJQL.collection('sv-id-vip-benefits').getTemp()
-    const planRes = await dbJQL.collection('sv-id-vip-plans', tempBenefitDB).orderBy('sort', 'asc').get()
+  // 会员权益列表
+  async benefitList() {
+    const benefitRes = await db.collection('sv-id-vip-benefits').orderBy('sort', 'asc').get()
 
     return handler.result({
-      data: planRes.data,
+      data: benefitRes.data,
     })
   },
-  // 更新会员套餐
-  async vipUpdate() {
+  // 更新会员权益
+  async benefitUpdate() {
     const {
-      plan_id,
+      benefit_id,
     } = this.params
 
-    if (!plan_id) {
+    if (!benefit_id) {
       throw handler.result({
         code: 40001
       })
     }
 
     delete this.params._id // 移除_id字段，_id不参与更新
-    delete this.params.plan_id // 移除plan_id字段，不参与更新
+    delete this.params.benefit_id // 移除benefit_id字段，不参与更新
 
-    const planRes = await db.collection('sv-id-vip-plans').where({
-      plan_id
+    const benefitRes = await db.collection('sv-id-vip-benefits').where({
+      benefit_id
     }).update(this.params)
 
     return handler.result({
-      data: planRes.data,
+      data: benefitRes.data,
     })
   },
-  // 添加会员套餐
-  async vipAdd() {
+  // 添加会员权益
+  async benefitAdd() {
     const {
-      plan_id,
-      plan_name,
-      price,
-      validtime
+      benefit_id,
+      benefit_name
     } = this.params
 
-    if (!plan_id || !plan_name || !price || !validtime) {
+    if (!benefit_id || !benefit_name) {
       throw handler.result({
         code: 40001
       })
     }
 
-    const planRes = await db.collection('sv-id-vip-plans').add(this.params)
+    const benefitRes = await db.collection('sv-id-vip-benefits').add(this.params)
 
     return handler.result({
-      data: planRes.data,
+      data: benefitRes.data,
     })
   },
-  // 删除会员套餐
-  async vipDelete() {
+  // 删除会员权益
+  async benefitDelete() {
     const {
-      plan_id
+      benefit_id
     } = this.params
 
-    if (!plan_id) {
+    if (!benefit_id) {
       throw handler.result({
         code: 40001
       })
     }
 
-    const planRes = await db.collection('sv-id-vip-plans').where({
-      plan_id
+    const benefitRes = await db.collection('sv-id-vip-benefits').where({
+      benefit_id
     }).remove()
 
     return handler.result({
-      data: planRes.data,
+      data: benefitRes.data,
     })
   },
 
   /**
    * 更新用户会员有效期 - 一般在订阅成功时累加会员有效期用
-   * @param {object} param {user_id:用户id, duration_time:套餐续时(秒)}  
+   * @param {object} param {user_id:用户id, duration_time:权益续时(秒)}  
    */
   async vipValidUpdate({
     user_id,
@@ -97,10 +89,10 @@ module.exports = {
     } = userRes.data[0]
 
     if (Date.now() > vip_validity) {
-      // 2. 若vip_validity过期，则 validity_time = 当前时间戳 + 订阅套餐时长
+      // 2. 若vip_validity过期，则 validity_time = 当前时间戳 + 订阅权益时长
       vip_validity = Date.now() + duration_time
     } else {
-      // 3. 若vip_validity未过期，则 vip_validity = vip_validity + 订阅套餐时长
+      // 3. 若vip_validity未过期，则 vip_validity = vip_validity + 订阅权益时长
       vip_validity = vip_validity + duration_time
     }
 

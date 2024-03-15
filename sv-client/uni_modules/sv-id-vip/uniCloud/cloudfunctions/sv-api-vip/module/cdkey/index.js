@@ -47,7 +47,6 @@ module.exports = {
   // 更新cdkey
   async cdkeyUpdate() {
     const {
-      _id,
       cdkey
     } = this.params
 
@@ -58,7 +57,11 @@ module.exports = {
     }
 
     delete this.params._id // 移除_id字段，_id不参与更新
-    const cdkeyRes = await db.collection('sv-id-vip-cdkeys').doc(_id).update(this.params)
+    delete this.params.cdkey // 移除cdkey字段，不参与更新
+    
+    const cdkeyRes = await db.collection('sv-id-vip-cdkeys').where({
+      cdkey
+    }).update(this.params)
 
     return handler.result({
       data: cdkeyRes.data,
@@ -107,7 +110,7 @@ module.exports = {
     }
 
     const cdkeyRes = await db.collection('sv-id-vip-cdkeys').where({
-      "cdkey": cdkey
+      cdkey
     }).remove()
 
     return handler.result({
@@ -134,7 +137,7 @@ module.exports = {
     // 判断cdkey是否存在
     const tempPlanDB = dbJQL.collection('sv-id-vip-plans').getTemp()
     const findExist = await dbJQL.collection('sv-id-vip-cdkeys', tempPlanDB).where({
-      'cdkey': cdkey
+      cdkey
     }).get({
       getOne: true
     })
@@ -158,7 +161,7 @@ module.exports = {
       if (Date.now() > findExistData.valid_date) {
         // 修改状态为过期失效 status: 2
         await db.collection('sv-id-vip-cdkeys').where({
-          'cdkey': cdkey
+          cdkey
         }).update({
           status: 2
         })
@@ -175,7 +178,7 @@ module.exports = {
 
     if (!plan) {
       await db.collection('sv-id-vip-cdkeys').where({
-        'cdkey': cdkey
+        cdkey
       }).update({
         status: 2
       })

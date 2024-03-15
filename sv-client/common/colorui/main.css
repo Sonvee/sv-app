@@ -4011,6 +4011,9 @@ scroll-view.cu-steps .cu-item {
   line-height: 4;
 }
 
+.text-delete-line {
+  text-decoration: line-through;
+}
 
 .tabbar-placehoder {
   height: calc(100rpx + env(safe-area-inset-bottom));

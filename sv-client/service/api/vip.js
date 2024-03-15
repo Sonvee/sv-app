@@ -7,6 +7,13 @@ export function vipList() {
   })
 }
 
+export function benefitList() {
+  return request({
+    url: '/vip/benefitList',
+    method: 'POST',
+  })
+}
+
 /**
  * 用户会员验证 实时事件驱动：建议在用户访问特定接口、页面、登录时等情况触发检查
  * @param {Object} data {user_id}

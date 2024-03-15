@@ -1,12 +1,12 @@
 // 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
 {
   "bsonType": "object",
-  "required": ["plan_name", "price", "validtime"],
+  "required": ["plan_id", "plan_name", "price", "validtime"],
   "permission": {
     "read": true,
-    "create": "'VIP_PLANS' in auth.permission",
-    "update": "'VIP_PLANS' in auth.permission",
-    "delete": "'VIP_PLANS' in auth.permission"
+    "create": "'VIP_MANAGE' in auth.permission",
+    "update": "'VIP_MANAGE' in auth.permission",
+    "delete": "'VIP_MANAGE' in auth.permission"
   },
   "properties": {
     "_id": {
@@ -38,7 +38,7 @@
       "defaultValue": 1
     },
     "benefits": {
-      "bsonType": "string",
+      "bsonType": "array",
       "foreignKey": "sv-id-vip-benefits.benefit_id",
       "description": "vip权益列表，参考sv-id-vip-benefits表"
     },

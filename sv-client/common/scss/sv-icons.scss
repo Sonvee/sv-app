@@ -21,6 +21,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sv-icons-no-ad:before {
+  content: "\e6e5";
+}
+
 .sv-icons-unionpay:before {
   content: "\e611";
 }

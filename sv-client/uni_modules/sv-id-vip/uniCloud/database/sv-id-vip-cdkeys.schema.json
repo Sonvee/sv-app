@@ -4,7 +4,7 @@
   "required": ["cdkey", "plan_id", "valid_date"],
   "permission": {
     "read": true,
-    "create": "'VIP_CDKEYS' in auth.permission",
+    "create": "'VIP_MANAGE' in auth.permission",
     "update": "doc._id == auth.uid",
     "delete": false
   },

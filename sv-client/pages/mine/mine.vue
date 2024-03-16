@@ -4,7 +4,7 @@
       <!-- 头部 -->
       <view class="header">
         <!-- 小功能 -->
-        <view class="flex justify-end align-center padding-right" style="height: 40px">
+        <view class="flex justify-end align-center padding-right-sm" style="height: 40px">
           <text class="cuIcon-scan text-xxl padding-xs" @click="onScan"></text>
           <text
             class="text-xxl padding-xs"
@@ -88,7 +88,7 @@
         </template>
       </view>
       <!-- 功能 1 -->
-      <view class="sv-grid grid-col-5">
+      <view class="sv-grid grid-col-4">
         <view
           class="grid-item flex-col align-center justify-evenly"
           v-for="item in featureMenu"
@@ -227,10 +227,6 @@ const featureMenu = ref([
   },
   {
     lable: '菜单丁',
-    value: 'cuIcon-comment'
-  },
-  {
-    lable: '菜单戊',
     value: 'cuIcon-comment'
   }
 ])

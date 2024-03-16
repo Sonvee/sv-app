@@ -25,12 +25,12 @@
       "description": "套餐描述"
     },
     "price": {
-      "bsonType": "double",
-      "description": "套餐价格"
+      "bsonType": "int",
+      "description": "套餐价格 (分)"
     },
     "discount": {
-      "bsonType": "double",
-      "description": "套餐折扣"
+      "bsonType": "int",
+      "description": "套餐折扣 (分)"
     },
     "valid_day": {
       "bsonType": "int",

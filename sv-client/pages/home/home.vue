@@ -1,6 +1,6 @@
 <template>
   <sv-page showTabBar>
-    <view class="home">
+    <view class="home flex-col-vhc">
       主页
     </view>
   </sv-page>

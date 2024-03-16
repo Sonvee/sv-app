@@ -1,10 +1,11 @@
 {
   "id": "sv-id-vip",
-  "displayName": "sv-id-vip",
+  "displayName": "用户会员制功能模组",
   "version": "1.0.0",
-  "description": "sv-id-vip",
+  "description": "基于sv-clinet、sv-id-pages的用户VIP会员制功能模组，开箱即用",
   "keywords": [
-    "sv-id-vip"
+    "vip",
+    "会员"
 ],
   "repository": "",
   "engines": {
@@ -14,56 +15,62 @@
     "type": "unicloud-template-page",
     "sale": {
       "regular": {
-        "price": "0.00"
+        "price": "69.00"
       },
       "sourcecode": {
-        "price": "0.00"
+        "price": "99.00"
       }
     },
     "contact": {
-      "qq": ""
+      "qq": "1051399604"
     },
     "declaration": {
-      "ads": "",
-      "data": "",
-      "permissions": ""
+      "ads": "无",
+      "data": "插件不采集任何数据",
+      "permissions": "无"
     },
     "npmurl": ""
   },
   "uni_modules": {
     "dependencies": [],
-    "encrypt": [],
+    "encrypt": [
+      "uniCloud/cloudfunctions/sv-api-vip/module/vip/index.js",
+      "uniCloud/cloudfunctions/sv-api-vip/module/benefit/index.js",
+      "uniCloud/cloudfunctions/sv-api-vip/module/cdkey/index.js",
+      "uniCloud/cloudfunctions/sv-api-vip/module/subscription/index.js",
+      "uniCloud/cloudfunctions/sv-api-vip/index.obj.js",
+    ],
     "platforms": {
       "cloud": {
-        "tcb": "u",
-        "aliyun": "u",
-        "alipay": "u"
+        "tcb": "n",
+        "aliyun": "y",
+        "alipay": "n"
       },
       "client": {
         "Vue": {
-          "vue2": "u",
-          "vue3": "u"
+          "vue2": "n",
+          "vue3": "y"
         },
         "App": {
-          "app-vue": "u",
+          "app-vue": "y",
           "app-nvue": "u",
           "app-uvue": "u"
         },
         "H5-mobile": {
-          "Safari": "u",
-          "Android Browser": "u",
-          "微信浏览器(Android)": "u",
-          "QQ浏览器(Android)": "u"
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
         },
         "H5-pc": {
-          "Chrome": "u",
-          "IE": "u",
-          "Edge": "u",
-          "Firefox": "u",
-          "Safari": "u"
+          "Chrome": "y",
+          "IE": "y",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
         },
         "小程序": {
-          "微信": "u",
+          "微信": "y",
           "阿里": "u",
           "百度": "u",
           "字节跳动": "u",

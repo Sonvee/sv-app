@@ -35,3 +35,19 @@ export function validCDKey(cdKey) {
   const regexPattern = new RegExp(`^(?:[A-Za-z0-9]{${segmentLength}}-){${segments-1}}[A-Za-z0-9]{${segmentLength}}$`);
   return regexPattern.test(cdKey);
 }
+
+/**
+ * 精确将分转为元
+ * @param {Object} fen 金额(分) 100分=1元
+ */
+export function convertFenToYuan(fen) {
+  if (!fen) return 0
+  // 将分转换为元，过程中放大100倍
+  let yuan = fen / 100;
+  // 创建一个足够大的基数（这里是100）的幂次，用于去除不需要的小数位
+  const base = 10;
+  const precision = 2;
+  const multiplier = base ** precision;
+  // 四舍五入并转为整数，然后再除以基数的幂次，得到精确到小数点后两位的结果
+  return (Math.round(yuan * multiplier) / multiplier);
+}

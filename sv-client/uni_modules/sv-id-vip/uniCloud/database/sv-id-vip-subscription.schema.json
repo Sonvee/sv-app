@@ -53,6 +53,11 @@
         "text": "激活码",
         "value": 1
       }]
+    },
+    "pay_fee": {
+      "bsonType": "int",
+      "description": "支付的金额 (分) mode为激活码时默认为空或0，mode为普通支付时需要记录核对金额",
+      "defaultValue": 0
     }
   }
 }

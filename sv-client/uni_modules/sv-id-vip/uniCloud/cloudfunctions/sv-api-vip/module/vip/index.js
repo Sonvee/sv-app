@@ -83,6 +83,67 @@ module.exports = {
   },
 
   /**
+   * 会员购买激活
+   */
+  async vipPayActive() {
+    const {
+      plan_id,
+      user_id,
+      pay_fee,
+    } = this.params
+
+    if (!plan_id || !user_id) {
+      throw handler.result({
+        code: 40001
+      })
+    }
+
+    const findPlan = await db.collection('sv-id-vip-plans').where({
+      plan_id
+    }).get()
+
+    if (!findPlan.affectedDocs) {
+      throw handler.result({
+        code: 40001,
+        message: '未查询到有效套餐'
+      })
+    }
+
+    const planData = findPlan.data[0]
+
+    // pay_fee: int 支付金额（分）100分 = 1元
+    if (Number(pay_fee) !== Number(planData.price - planData.discount)) {
+      throw handler.result({
+        code: 400,
+        message: '支付金额有误，交易存在风险，请联系管理员'
+      })
+    }
+
+    // 支付成功，订阅套餐
+    const duration_time = planData.valid_day * 24 * 60 * 60 * 1000
+
+    await uniCloud.importObject('sv-api-vip').subscriptionAdd({
+      'user_id': user_id,
+      'subscription_plan': plan_id,
+      'start_date': Date.now(),
+      'duration_time': duration_time,
+      'mode': 0
+    })
+
+    // 向用户角色列表中添加vip
+    await uniCloud.importObject('sv-api-id').userRoleAdd({
+      'user_id': user_id,
+      'role_name': 'vip',
+    })
+
+    return handler.result({
+      data: planData,
+      message: '支付订阅成功',
+      pay_fee: Number(pay_fee)
+    })
+  },
+
+  /**
    * 更新用户会员有效期 - 一般在订阅成功时累加会员有效期用
    * @param {object} param {user_id:用户id, duration_time:套餐续时(秒)}  
    */

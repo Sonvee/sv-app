@@ -37,3 +37,15 @@ export function cdkeyActive(data) {
     data,
   })
 }
+
+/**
+ * vip支付订阅
+ * @param {Object} data {user_id, plan_id, pay_fee}
+ */
+export function vipPayActive(data) {
+  return request({
+    url: '/vip/vipPayActive',
+    method: 'POST',
+    data,
+  })
+}

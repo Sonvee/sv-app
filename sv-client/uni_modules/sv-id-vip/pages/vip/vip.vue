@@ -42,10 +42,10 @@
                 {{ item.plan_name }}
               </view>
               <view class="text-price text-bold text-tyblue text-xxl">
-                {{ item?.price - item?.discount }}
+                {{ convertFenToYuan(item?.price - item?.discount) }}
               </view>
               <view class="text-price text-miku text-delete-line">
-                {{ item?.price }}
+                {{ convertFenToYuan(item?.price) }}
               </view>
               <view class="text-sm text-red">
                 {{ item?.description }}
@@ -138,10 +138,12 @@
       <view v-if="payWay == 'wallet'" class="pay-footer cu-bar tabbar border foot">
         <view class="h-full padding-lr-sm flex-col justify-evenly">
           <view class="text-bold text-red" @click="onFold">
-            <text class="text-xxl text-price">{{ curPlan?.price - curPlan?.discount || 0 }}</text>
+            <text class="text-xxl text-price">
+              {{ convertFenToYuan(curPlan?.price - curPlan?.discount) }}
+            </text>
             <text class="text-sm margin-left-xs">
               已优惠
-              <text class="text-price">{{ curPlan?.discount || 0 }}</text>
+              <text class="text-price">{{ convertFenToYuan(curPlan?.discount) }}</text>
             </text>
             <text class="margin-left-xs" :class="[isFold ? 'cuIcon-fold' : 'cuIcon-unfold']"></text>
           </view>
@@ -156,7 +158,7 @@
             </uv-checkbox-group>
             <text class="margin-left-xs" @click="onProtocol('vip-protocol')">会员协议</text>
             <text>丨</text>
-            <text @click="onProtocol('auto-pay')">自动续费</text>
+            <text @click="onProtocol('pay-protocol')">支付条款</text>
           </view>
         </view>
         <view class="padding-lr-sm">
@@ -179,18 +181,22 @@
           <view class="text-bold text-lg">商品</view>
           <view class="flex justify-between line-height-3">
             <text>{{ curPlan?.plan_name }}</text>
-            <text class="text-red text-bold text-lg text-price">{{ curPlan?.price }}</text>
+            <text class="text-red text-bold text-lg text-price">
+              {{ convertFenToYuan(curPlan?.price) }}
+            </text>
           </view>
           <view class="text-bold text-lg">优惠</view>
           <view class="flex justify-between line-height-3">
             <text>促销折扣</text>
-            <text class="text-orange text-bold text-lg text-price">{{ curPlan?.discount }}</text>
+            <text class="text-orange text-bold text-lg text-price">
+              {{ convertFenToYuan(curPlan?.discount) }}
+            </text>
           </view>
           <view class="text-bold text-lg">结算</view>
           <view class="flex justify-between line-height-3">
             <text>支付金额</text>
             <text class="text-green text-bold text-lg text-price">
-              {{ curPlan?.price - curPlan?.discount || 0 }}
+              {{ convertFenToYuan(curPlan?.price - curPlan?.discount) }}
             </text>
           </view>
         </view>
@@ -204,9 +210,9 @@
 import { computed, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { store } from '@/uni_modules/sv-id-pages/common/store'
-import { benefitList, cdkeyActive, vipList, vipVerify } from '@/service/api/vip'
-import { get, isEmpty } from 'lodash-es'
-import { createCDKey, validCDKey } from '../../utils'
+import { benefitList, cdkeyActive, vipList, vipPayActive, vipVerify } from '@/service/api/vip'
+import { isEmpty } from 'lodash-es'
+import { createCDKey, validCDKey, convertFenToYuan } from '../../utils'
 import dayjs from 'dayjs'
 
 const userInfo = computed(() => {
@@ -346,7 +352,7 @@ function toggleWay(e) {
 
 const paySelect = ref('wxpay') // wxpay alipay
 
-function onPay() {
+async function onPay() {
   // 判断是否已选择套餐
   if (isEmpty(curPlan.value)) {
     uni.showToast({
@@ -363,8 +369,27 @@ function onPay() {
     })
     return
   }
-  console.log('==== 支付方式 :', paySelect.value)
-  console.log('==== 选择套餐 :', curPlan.value)
+  
+  // 支付操作
+  
+  uni.showLoading({
+    mask: true,
+    title: '订阅中...'
+  })
+  
+  const payActiveRes = await vipPayActive({
+    user_id: userInfo.value._id,
+    plan_id: curPlan.value.plan_id,
+    pay_fee: curPlan.value.price - curPlan.value.discount // 实际支付金额
+  })
+  if (payActiveRes.success) {
+    uni.showToast({
+      title: payActiveRes.message,
+      icon: 'none'
+    })
+    // 支付订阅成功后需要刷新vip验证
+    await getVipVerify()
+  }
 }
 
 const cdkey = ref('')

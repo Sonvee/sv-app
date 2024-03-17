@@ -12,6 +12,8 @@ const {
   roleUpdate,
   roleAdd,
   roleDelete,
+  userRoleAdd,
+  userRoleDelete,
 } = require('./module/role/index.js')
 
 const {
@@ -25,20 +27,16 @@ const {
   logList
 } = require('./module/log/index.js')
 
-const {
-  vipList,
-  vipUpdate,
-  vipAdd,
-  vipDelete,
-} = require('./module/vip/index.js')
-
 module.exports = {
   _before: async function() { // 通用预处理器
+    const httpInfo = this.getHttpInfo()
+    if(!httpInfo) return // 云对象之间调用时无httpInfo处理
+    
     // token身份安全校验
-    const apiPath = this.getHttpInfo().path
+    const apiPath = httpInfo.path
     const cToken = await handler.checkToken({
       clientInfo: this.getClientInfo(),
-      token: this.getHttpInfo().headers.authorization,
+      token: httpInfo.headers.authorization,
       mode: apiPath.includes('List') ? 'open' : 'strict' // 所有List接口均开放
     })
     if (cToken.code !== 200) {
@@ -48,7 +46,7 @@ module.exports = {
     this.params = {} // 初始化参数
     this.startTime = Date.now() // 在before内记录开始时间并在this上挂载，以供后续流程使用
     // 使用 content-type: application/json 的请求头，参数在body中
-    const body = this.getHttpInfo().body
+    const body = httpInfo.body
     this.params = JSON.parse(body)
   },
   _after(error, result) {
@@ -74,6 +72,8 @@ module.exports = {
   roleUpdate,
   roleAdd,
   roleDelete,
+  userRoleAdd,
+  userRoleDelete,
 
   /**
    * 权限
@@ -87,12 +87,4 @@ module.exports = {
    * 日志
    */
   logList,
-  
-  /**
-   * 会员套餐
-   */
-  vipList,
-  vipUpdate,
-  vipAdd,
-  vipDelete,
 }

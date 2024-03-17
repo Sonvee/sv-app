@@ -456,6 +456,11 @@
         "read": "'READ_UNI_ID_USERS' in auth.permission",
         "write": "'CREATE_UNI_ID_USERS' in auth.permission || 'UPDATE_UNI_ID_USERS' in auth.permission"
       }
+    },
+    "vip_validity": {
+      "bsonType": "timestamp",
+      "description": "会员有效期至",
+      "defaultValue": 0
     }
   },
   "required": []

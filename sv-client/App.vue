@@ -18,7 +18,5 @@ export default {
 
 <style lang="scss">
 /* 每个页面公共css */
-@import 'common/scss/style.scss';
-/* colorui */
-@import 'common/colorui/main.css';
+@import '@/uni_modules/sv-style/scss/style.scss';
 </style>

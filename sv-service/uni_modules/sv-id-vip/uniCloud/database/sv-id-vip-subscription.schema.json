@@ -1,0 +1,63 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+  "bsonType": "object",
+  "required": ["user_id", "plan_id", "start_date", "duration_time"],
+  "permission": {
+    "read": true,
+    "create": true,
+    "update": true,
+    "delete": false
+  },
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "user_id": {
+      "bsonType": "string",
+      "foreignKey": "uni-id-users._id",
+      "description": "隶属于用户id，参考uni-id-users表"
+    },
+    "subscription_plan": {
+      "bsonType": "string",
+      "foreignKey": "sv-id-vip-plans.plan_id",
+      "description": "当前所生效的订阅套餐id，参考sv-id-vip-plans表"
+    },
+    "start_date": {
+      "bsonType": "timestamp",
+      "description": "订阅开始日期"
+    },
+    "duration_time": {
+      "bsonType": "int",
+      "description": "订阅持续时长(毫秒)"
+    },
+    "status": {
+      "bsonType": "int",
+      "description": "状态，0-待激活，1-已激活",
+      "defaultValue": 0,
+      "enum": [{
+        "text": "待激活",
+        "value": 0
+      }, {
+        "text": "已激活",
+        "value": 1
+      }]
+    },
+    "mode": {
+      "bsonType": "int",
+      "description": "订阅方式，0-普通支付，1-激活码",
+      "defaultValue": 0,
+      "enum": [{
+        "text": "付款",
+        "value": 0
+      }, {
+        "text": "激活码",
+        "value": 1
+      }]
+    },
+    "pay_fee": {
+      "bsonType": "int",
+      "description": "支付的金额 (分) mode为激活码时默认为空或0，mode为普通支付时需要记录核对金额",
+      "defaultValue": 0
+    }
+  }
+}

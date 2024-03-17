@@ -4015,6 +4015,10 @@ scroll-view.cu-steps .cu-item {
   text-decoration: line-through;
 }
 
+.text-under-line {
+  text-decoration: underline;
+}
+
 .tabbar-placehoder {
   height: calc(100rpx + env(safe-area-inset-bottom));
 }

@@ -1,5 +1,5 @@
 const chunk = require('lodash.chunk')
-const uniIdCo = require('uni-id-common')
+const uniID = require('uni-id-common')
 
 /**
  * 客户端分页处理 - 较多数据请使用服务端分页代替
@@ -126,7 +126,7 @@ async function checkToken(options) {
     }
   }
 
-  const uniIdCommon = uniIdCo.createInstance({
+  const uniIdCommon = uniID.createInstance({
     clientInfo
   })
   const result = await uniIdCommon.checkToken(token)

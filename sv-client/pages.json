@@ -95,7 +95,6 @@
       "path": "uni_modules/sv-id-pages/pages/agreements/service",
       "style": {
         "navigationBarTitleText": "用户服务协议",
-        "navigationStyle": "default",
         "navigationBarTextStyle": "black"
       }
     },
@@ -103,14 +102,7 @@
       "path": "uni_modules/sv-id-pages/pages/agreements/privacy",
       "style": {
         "navigationBarTitleText": "隐私政策条款",
-        "navigationStyle": "default",
         "navigationBarTextStyle": "black"
-      }
-    },
-    {
-      "path": "uni_modules/sv-id-vip/pages/vip/vip",
-      "style": {
-        "navigationBarTitleText": "会员"
       }
     }
   ],
@@ -130,6 +122,33 @@
         "navigationBarTitleText": "支付"
       }
     }]
+  }, {
+    "root": "uni_modules/sv-id-vip/pages",
+    "pages": [{
+        "path": "vip/vip",
+        "style": {
+          "navigationBarTitleText": "会员"
+        }
+      },
+      {
+        "path": "getcdkey/getcdkey",
+        "style": {
+          "navigationBarTitleText": "获取CDKEY"
+        }
+      },
+      {
+        "path": "protocol/vip-protocol",
+        "style": {
+          "navigationBarTitleText": "会员协议"
+        }
+      },
+      {
+        "path": "protocol/pay-protocol",
+        "style": {
+          "navigationBarTitleText": "支付条款"
+        }
+      }
+    ]
   }],
   "globalStyle": {
     "navigationBarTitleText": "sv-client",

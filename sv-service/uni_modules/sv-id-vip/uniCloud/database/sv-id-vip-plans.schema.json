@@ -1,0 +1,51 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+  "bsonType": "object",
+  "required": ["plan_id", "plan_name", "price", "validtime"],
+  "permission": {
+    "read": true,
+    "create": "'VIP_MANAGE' in auth.permission",
+    "update": "'VIP_MANAGE' in auth.permission",
+    "delete": "'VIP_MANAGE' in auth.permission"
+  },
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "plan_id": {
+      "bsonType": "string",
+      "description": "套餐id"
+    },
+    "plan_name": {
+      "bsonType": "string",
+      "description": "套餐名称"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "套餐描述"
+    },
+    "price": {
+      "bsonType": "int",
+      "description": "套餐价格 (分)"
+    },
+    "discount": {
+      "bsonType": "int",
+      "description": "套餐折扣 (分)"
+    },
+    "valid_day": {
+      "bsonType": "int",
+      "description": "套餐有效期(天)",
+      "defaultValue": 1
+    },
+    "benefits": {
+      "bsonType": "array",
+      "foreignKey": "sv-id-vip-benefits.benefit_id",
+      "description": "vip权益列表，参考sv-id-vip-benefits表"
+    },
+    "sort": {
+      "bsonType": "int",
+      "description": "排序",
+      "defaultValue": 0
+    }
+  }
+}

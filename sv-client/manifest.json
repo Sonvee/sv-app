@@ -49,7 +49,9 @@
                 "minSdkVersion" : 21
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+                "dSYMs" : false
+            },
             /* SDK配置 */
             "sdkConfigs" : {
                 "oauth" : {
@@ -58,6 +60,16 @@
                         "UniversalLinks" : ""
                     },
                     "univerify" : {}
+                },
+                "ad" : {
+                    "360" : {},
+                    "gm" : {},
+                    "gdt" : {},
+                    "ks" : {},
+                    "ks-content" : {},
+                    "sigmob" : {},
+                    "hw" : {},
+                    "bd" : {}
                 }
             }
         }

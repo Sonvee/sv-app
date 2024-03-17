@@ -9,6 +9,7 @@ const config = {
   description: manifest.description,
   version: manifest.versionName,
   base_url: base_url,
+  base_cdn: base_cdn,
   api_url: `${base_url}/api`,
   logo_url: '/static/logo.png' // logo图标路径
 }

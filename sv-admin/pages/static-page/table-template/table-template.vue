@@ -89,7 +89,7 @@ import SvForm from './components/sv-form/sv-form.vue'
 import { RefreshRight, View, Hide, Plus, EditPen, Delete } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
-import tempdata from '@/common/json/temp-tabledata.json'
+import tempdata from './temp-tabledata.json'
 import { useSysStore } from '@/store/sys'
 
 const showHeader = ref(useSysStore().platform == 'pc') // 头部筛选栏显示

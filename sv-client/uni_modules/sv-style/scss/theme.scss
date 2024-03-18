@@ -1,5 +1,6 @@
 $themes: (
   light: (
+    // 通用主题色
     sv-bg-color: #f8f8f8,
     sv-bg-hl-color: #ffffff,
     sv-text-color: #333333,
@@ -10,9 +11,26 @@ $themes: (
     sv-mask-color: rgba(0, 0, 0, 0.4),
     sv-card-color: #ffffff,
     sv-shadow-color: #dedede,
-    sv-popup-color: #f2f2f2
+    sv-popup-color: #f2f2f2,
+    // sv-admin专用
+    sv-admin-bg-color: #ffffff,
+    sv-admin-text-color: #212121,
+    sv-admin-text-hl-color: #000000,
+    sv-admin-text-sub-color: #616161,
+    sv-admin-border-color: #dcdfe6,
+    sv-admin-border-hl-color: #dadce2,
+    sv-admin-grey-color: #cccccc,
+    sv-admin-grey-hl-color: #b2b2b2,
+    sv-admin-mask-color: #f6f6f6,
+    sv-admin-mask-hl-color: #f2f2f2,
+    sv-admin-card-color: #fafafa,
+    sv-admin-hover-color: #ecf5ff,
+    sv-admin-hover-hl-color: #e6eef4,
+    sv-admin-popper-bg-color: #fbfbfb,
+    sv-admin-dialog-bg-color: #fafafa
   ),
   dark: (
+    // 通用主题色
     sv-bg-color: #202020,
     sv-bg-hl-color: #000000,
     sv-text-color: #f8f8f8,
@@ -23,18 +41,54 @@ $themes: (
     sv-mask-color: rgba(0, 0, 0, 0.4),
     sv-card-color: #2f2f2f,
     sv-shadow-color: #323232,
-    sv-popup-color: #262626
+    sv-popup-color: #262626,
+    // sv-admin专用
+    sv-admin-bg-color: #161616,
+    sv-admin-text-color: #e1e1e1,
+    sv-admin-text-hl-color: #ffffff,
+    sv-admin-text-sub-color: #ababab,
+    sv-admin-border-color: #4c4d4f,
+    sv-admin-border-hl-color: #4e4f51,
+    sv-admin-grey-color: #434343,
+    sv-admin-grey-hl-color: #727272,
+    sv-admin-mask-color: #262626,
+    sv-admin-mask-hl-color: #242424,
+    sv-admin-card-color: #141414,
+    sv-admin-hover-color: #18222c,
+    sv-admin-hover-hl-color: #1b2836,
+    sv-admin-popper-bg-color: #2d2d2d,
+    sv-admin-dialog-bg-color: #141414
   )
 );
 
+/* uni.scss补充变量 */
+// 行为相关颜色
+$uni-color-danger: #f56c6c;
+$uni-color-info: #909399;
+// sv-admin导航侧边栏
+$sv-nav-bar-height: 50px;
+$sv-side-bar-width: 200px;
+
+:root {
+  // 跟随系统配色normal，考虑到后续可能不止light和dark两种主题，故不做light和dark之间切换
+  color-scheme: normal; // https://developer.mozilla.org/zh-CN/docs/Web/CSS/color-scheme
+}
+
 // 默认light主题
 $curTheme: light;
+
+/* #ifdef H5 */
+$platform: html; 
+/* #endif */
+/* #ifndef H5 */
+$platform: '.sv-page'; 
+/* #endif */
 
 // 动态切换所有主题
 @mixin useTheme() {
   @each $key, $value in $themes {
     $curTheme: $key !global;
-    .sv-page[data-theme='#{$key}'] & {
+    #{'#{$platform}'}[data-theme='#{$key}'] & {
       @content;
     }
   }
@@ -43,7 +97,7 @@ $curTheme: light;
 // 只在light主题下的样式
 @mixin useLightTheme() {
   $curTheme: light !global;
-  .sv-page[data-theme='light'] & {
+  #{'#{$platform}'}[data-theme='light'] & {
     @content;
   }
 }
@@ -51,7 +105,7 @@ $curTheme: light;
 // 只在dark主题下的样式
 @mixin useDarkTheme() {
   $curTheme: dark !global;
-  .sv-page[data-theme='dark'] & {
+  #{'#{$platform}'}[data-theme='dark'] & {
     @content;
   }
 }

@@ -59,3 +59,18 @@ function handleMap(arr) {
   // }, {})
   return Object.fromEntries(arr.map((obj) => [obj.key, obj.value]))
 }
+
+/**
+ * 主题皮肤切换
+ * 1. 给html根标签标记自定义属性 data-theme = light / dark 等
+ * 2. 使用scss变量切换对应的整套主题
+ * @param {Object} theme 主题名 light / dark
+ */
+export function changeTheme(theme) {
+  // #ifdef H5
+  document.documentElement.setAttribute('data-theme', theme)
+  // #endif
+  // 将主题缓存
+  const sysStore = useSysStore()
+  sysStore.setThemes(theme)
+}

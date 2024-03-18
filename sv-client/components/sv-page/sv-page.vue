@@ -1,6 +1,6 @@
 <template>
   <view class="sv-page" :data-theme="theme">
-    <view class="page-container">
+    <view class="sv-page-main">
       <sv-nav-bar v-if="showNavBar"></sv-nav-bar>
       <slot></slot>
       <sv-tab-bar v-if="showTabBar"></sv-tab-bar>
@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useSysStore } from '@/store/sys'
 
 const props = defineProps({
@@ -33,6 +33,7 @@ const theme = computed(() => {
   return useSysStore().getThemes()
 })
 
+// #ifndef H5
 watch(
   theme,
   (newTheme) => {
@@ -54,6 +55,8 @@ const themeBgColor = computed(() => {
   }
   return color
 })
+// #endif
+
 </script>
 
 <style lang="scss">
@@ -68,10 +71,12 @@ const themeBgColor = computed(() => {
   --page-nonav-height: calc(var(--page-height) - 50px);
 
   min-height: 100vh;
+  /* #ifndef H5 */
   background-color: v-bind(themeBgColor);
+  /* #endif */
 }
 
-.page-container {
+.sv-page-main {
   @include useTheme {
     background-color: getTheme(sv-bg-color);
     color: getTheme(sv-text-color);

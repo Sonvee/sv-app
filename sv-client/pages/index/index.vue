@@ -71,7 +71,7 @@
       <view class="card-list padding">
         <view
           class="list-item sv-gradual-sunset shadow-warp padding margin-bottom flex"
-          v-for="item in 6"
+          v-for="item in 6" :key="item"
         >
           <view class="h-full w-h-equal margin-right">
             <image class="w-h-full" src="/static/logo.png"></image>

@@ -210,6 +210,17 @@
         </view>
         <view class="tabbar-placehoder"></view>
       </uv-popup>
+      <!-- 同意协议 -->
+      <uni-popup ref="protocolPopup" type="center">
+        <uni-popup-dialog confirmText="同意" @confirm="protocolConfirm">
+          <view class="text-blue">
+            <text class="text-black">请先阅读并同意</text>
+            <text class="margin-left-xs" @click="onProtocol('vip-protocol')">会员协议</text>
+            <text>丨</text>
+            <text @click="onProtocol('pay-protocol')">支付条款</text>
+          </view>
+        </uni-popup-dialog>
+      </uni-popup>
     </view>
   </sv-page>
 </template>
@@ -284,6 +295,13 @@ function onProtocol(e) {
   uni.navigateTo({
     url: `/uni_modules/sv-id-vip/pages/protocol/${e}`
   })
+}
+
+const protocolPopup = ref()
+function protocolConfirm() {
+  readed.value = ['read']
+  // 同意之后继续付费订阅
+  onPay()
 }
 
 const payPopup = ref()
@@ -389,10 +407,8 @@ async function onPay() {
   }
   // 判断是否阅读协议
   if (!readed.value.includes('read')) {
-    uni.showToast({
-      title: '请阅读并同意相关协议',
-      icon: 'none'
-    })
+    // 未同意协议时弹出对话框
+    protocolPopup.value.open()
     return
   }
 

@@ -1,13 +1,12 @@
 <template>
   <sv-page showTabBar>
-    <view class="hall">
+    <view class="hall sv-uv-vtabs">
       <uv-vtabs
-        class="sv-uv-vtabs"
         :list="list"
-        keyName="name"
-        hdHeight="88rpx"
-        :height="vtabsHeight"
+        :hdHeight="vtabHeight.hdHeight"
+        :height="vtabHeight.height"
         chain
+        keyName="name"
         @change="change"
       >
         <uv-vtabs-item v-for="(item, index) in list" :key="index" :index="index">
@@ -26,23 +25,34 @@
 <script setup>
 import { computed, ref } from 'vue'
 
-const vtabsHeight = computed(() => {
-  const { statusBarHeight, windowHeight } = uni.getSystemInfoSync()
-  return windowHeight - statusBarHeight - 44 - 50
+const vtabHeight = computed(() => {
+  const { statusBarHeight, screenHeight, safeAreaInsets } = uni.getSystemInfoSync()
+  return {
+    height: screenHeight - statusBarHeight - safeAreaInsets.bottom - 44 - 50,
+    hdHeight: statusBarHeight + 44
+  }
 })
 
 const list = ref([
   {
-    name: 'uv-ui简介',
-    content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    name: '简介',
+    content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
   },
   {
-    name: 'uv-ui特点',
-    content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    name: '特点',
+    content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
   },
   {
     name: '更新日志',
-    content: [1, 2, 3, 4, 5, 6, 7]
+    content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+  },
+  {
+    name: '注意事项',
+    content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+  },
+  {
+    name: '补充说明',
+    content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
   }
 ])
 
@@ -54,10 +64,5 @@ function change(index) {
 <style lang="scss">
 .hall {
   height: var(--page-main-height);
-
-  .header {
-    height: 100rpx;
-    border: 1px solid #cccccc;
-  }
 }
 </style>

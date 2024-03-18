@@ -9,7 +9,7 @@
           <text
             class="text-xxl padding-xs"
             :class="[sysStore.themes == 'light' ? 'sv-icons-sun' : 'sv-icons-moon']"
-            @click="changeTheme"
+            @click="toggleTheme"
           ></text>
           <text
             class="cuIcon-refresh text-xxl padding-xs sv-turn-around-active"
@@ -37,8 +37,8 @@
             </view>
           </view>
           <view class="flex-sub margin-left flex-col justify-evenly" v-else>
-            <view class="text-bold text-green">立即登录</view>
-            <view class="text-gray">登录即可体验完整功能</view>
+            <view class="text-bold text-df text-green">立即登录</view>
+            <view class="text-gray text-xs">登录即可体验完整功能</view>
           </view>
           <view class="flex align-center">
             <text class="cuIcon-right text-gray"></text>
@@ -128,7 +128,7 @@
       </view>
       <view class="cu-list menu sm-border">
         <!-- 图标 + 标题、arrow 带箭头 -->
-        <view class="cu-item arrow" v-for="item in 5">
+        <view class="cu-item arrow" v-for="item in 5" :key="item">
           <view class="content">
             <text class="cuIcon-circlefill text-grey"></text>
             <text class="text-grey">图标 + 标题</text>
@@ -148,6 +148,7 @@ import { useSysStore } from '../../store/sys'
 import { mutations, store } from '@/uni_modules/sv-id-pages/common/store'
 import { judgeLogin, onScan, useThrottle } from '@/utils/util'
 import { vipVerify } from '../../service/api/vip'
+import { changeTheme } from '@/utils/sys'
 
 const sysStore = useSysStore()
 
@@ -231,9 +232,9 @@ const featureMenu = ref([
   }
 ])
 
-function changeTheme() {
+function toggleTheme() {
   const theme = sysStore.getThemes() == 'light' ? 'dark' : 'light'
-  sysStore.setThemes(theme)
+  changeTheme(theme)
 }
 
 function toUser() {
@@ -268,7 +269,7 @@ function onVip() {
 
   .vip {
     @include useTheme {
-      background-color: #{getTheme('sv-card-color')};
+      background-color: getTheme('sv-card-color');
     }
   }
 }

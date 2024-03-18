@@ -6,6 +6,12 @@
 @import './uni-ui.scss';
 @import './sv-amination.scss';
 @import './animista.scss';
+@import './loding-animation.scss';
+
+/* #ifdef H5 */
+@import './layout.scss';
+@import './element-plus.scss';
+/* #endif */
 
 /* #ifdef MP-WEIXIN */
 page {
@@ -15,6 +21,9 @@ page {
 
 /* #ifndef MP-WEIXIN */
 * {
+  padding: 0;
+  margin: 0;
+  outline: none; // 移除element-plus中的默认聚焦黑框
   box-sizing: border-box;
 }
 :root {
@@ -23,15 +32,65 @@ page {
 
 uni-page-body {
   height: 100%;
+  
+  @include useTheme {
+    background-color: getTheme('sv-bg-color');
+    color: getTheme('sv-text-color');
+  }
 }
 /* #endif */
 
+
+/* #ifdef H5 */
+a {
+  text-decoration: none;
+}
+
+.page-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: auto;
+}
+
+.table-page-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: auto;
+}
+
+.web-page {
+  height: 100%;
+  overflow: auto;
+}
+
+/* #endif */
+
 .card {
-  border-radius: 20rpx;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  border-top: 1rpx solid rgba(255, 255, 255, 0.4);
-  border-left: 1rpx solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px) brightness(110%);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px) brightness(110%);
+  overflow: hidden;
+
+  @include useTheme {
+    background-color: getTheme('sv-admin-card-color');
+    border-top: 1px solid #{getTheme('sv-admin-border-color')};
+    border-left: 1px solid #{getTheme('sv-admin-border-color')};
+  }
+
+  &:hover {
+    backdrop-filter: blur(4px) brightness(120%);
+    @include useTheme {
+      box-shadow: 0px 0px 10px 0px #{getTheme('sv-admin-border-color')};
+    }
+  }
 }
 
 /* 
@@ -60,8 +119,8 @@ uni-page-body {
 /* 全局滚动条样式 */
 /* 宽度 */
 ::-webkit-scrollbar {
-  width: 12rpx;
-  height: 12rpx;
+  width: 6px;
+  height: 6px;
 }
 /* 轨道 */
 ::-webkit-scrollbar-track {
@@ -69,5 +128,14 @@ uni-page-body {
 }
 /* 滑块 */
 ::-webkit-scrollbar-thumb {
-  border-radius: 6rpx; /* 圆角 */
+  border-radius: 3px; /* 圆角 */
+
+  /* #ifdef H5 */
+  @include useTheme {
+    background-color: getTheme('sv-admin-grey-color');
+    &:hover {
+      background-color: getTheme('sv-admin-grey-hl-color');
+    }
+  }
+  /* #endif */
 }

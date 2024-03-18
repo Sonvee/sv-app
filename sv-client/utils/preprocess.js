@@ -1,5 +1,6 @@
 import { useSysStore } from '@/store/sys.js';
 import { storageDicts } from './pinia-storage.js';
+import { changeTheme } from './sys.js';
 
 // 预处理
 export async function preProcess() {
@@ -28,7 +29,9 @@ function listenLoginSuccess() {
 }
 
 function initSysConfig() {
-  useSysStore().setConfig({
+  const sysStore = useSysStore()
+  sysStore.setConfig({
     curTabIndex: 0
   })
+  changeTheme(sysStore.getThemes())
 }

@@ -7,9 +7,12 @@
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
-      <el-button type="primary" plain size="small" :icon="Plus" @click="add">一键新增</el-button>
-      <el-button type="primary" plain size="small" :icon="Refresh" @click="cdkeyVerify">
+      <el-button type="primary" plain size="small" :icon="Plus" @click="onekey">一键新增</el-button>
+      <el-button type="success" plain size="small" :icon="Refresh" @click="cdkeyVerify">
         刷新状态
+      </el-button>
+      <el-button type="danger" plain size="small" :icon="Delete" @click="invalidRemove">
+        清空失效
       </el-button>
       <view style="flex: 1"></view>
       <el-button
@@ -95,14 +98,21 @@ import {
   DocumentCopy
 } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
-import { cdkeyAdd, cdkeyDelete, cdkeyList, cdkeyVerifyAuto } from '@/service/api/vip'
+import {
+  cdkeyAdd,
+  cdkeyDelete,
+  cdkeyInvalidRemove,
+  cdkeyList,
+  cdkeyVerifyAuto
+} from '@/service/api/vip'
 import { useSysStore } from '@/store/sys'
 import { timeFormat, setClipboard } from '@/utils/util'
+import { createCDKey } from '@/uni_modules/sv-id-vip/utils'
 
 const showHeader = ref(useSysStore().platform == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
-const pagingParams = ref({ pagesize: 10, pagenum: 1 }) // 表格分页默认参数
+const pagingParams = ref({ pagesize: 20, pagenum: 1 }) // 表格分页默认参数
 const filterParams = ref({}) // 筛选参数
 const total = ref(0) // 表格总数
 const showForm = ref(false) // 显示表单
@@ -125,7 +135,7 @@ async function handleTable(params) {
   const dataRes = await cdkeyList(params)
   tableData.value = dataRes.data
 
-  total.value = dataRes.total
+  total.value = dataRes.total || 0
 
   if (!dataRes.success) {
     ElMessage({
@@ -150,6 +160,13 @@ function add() {
   showForm.value = true
 }
 
+//
+function onekey() {
+  formInit.value = {} // 置空参数
+  formMode.value = 'onekey'
+  showForm.value = true
+}
+
 // 提交表单
 async function submitForm(e) {
   let result = {}
@@ -157,6 +174,26 @@ async function submitForm(e) {
     case 'add':
       // 新增添加
       result = await cdkeyAdd(e.data)
+      break
+    case 'onekey':
+      // 一键添加
+      uni.showLoading({
+        title: '一键生成中...'
+      })
+      for (let i = 0; i < e.data.num; i++) {
+        await cdkeyAdd({
+          cdkey: createCDKey(),
+          bind_plan: e.data.bind_plan,
+          valid_date: e.data.valid_date,
+          status: 0
+        })
+      }
+      uni.hideLoading()
+
+      result = {
+        success: true,
+        message: '一键添加成功'
+      }
       break
   }
 
@@ -221,10 +258,34 @@ function handleCurrentChange(e) {
 /**
  * cdkey状态手动校验
  */
-function cdkeyVerify() {
-  cdkeyVerifyAuto().then(() => {
-    refresh()
+async function cdkeyVerify() {
+  uni.showLoading({
+    title: '校验中...'
   })
+  await cdkeyVerifyAuto()
+  uni.hideLoading()
+
+  refresh()
+}
+
+function invalidRemove() {
+  ElMessageBox.confirm(`确认一键清空失效的CDKEY吗？`, '系统提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(async () => {
+      // 确认删除操作
+      const removeRes = await cdkeyInvalidRemove()
+
+      ElMessage({
+        type: 'success',
+        message: removeRes?.message || removeRes?.error?.message
+      })
+
+      refresh()
+    })
+    .catch(() => {})
 }
 </script>
 

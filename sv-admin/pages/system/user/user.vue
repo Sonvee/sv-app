@@ -185,7 +185,7 @@ async function handleTable(params) {
 
   const userData = await userList(params)
   tableData.value = userData.data
-  total.value = userData.total
+  total.value = userData.total || 0
 
   if (!userData.success) {
     ElMessage({

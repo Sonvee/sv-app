@@ -71,7 +71,7 @@ async function handleTable(params) {
 
   const dataRes = await logList(params)
   tableData.value = dataRes.data
-  total.value = dataRes.total
+  total.value = dataRes.total || 0
 
   if (!dataRes.success) {
     ElMessage({

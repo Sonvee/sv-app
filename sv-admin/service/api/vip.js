@@ -100,6 +100,17 @@ export function cdkeyVerifyAuto(data) {
 }
 
 /**
+ * cdkey一键失效移除
+ */
+export function cdkeyInvalidRemove(data) {
+  return request({
+    url: '/vip/cdkeyInvalidRemove',
+    method: 'POST',
+    data,
+  })
+}
+
+/**
  * vip支付订阅
  * @param {Object} data {user_id, plan_id, pay_fee}
  */

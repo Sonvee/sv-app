@@ -24,7 +24,8 @@ const {
   cdkeyAdd,
   cdkeyDelete,
   cdkeyActive,
-  cdkeyVerifyAuto
+  cdkeyVerifyAuto,
+  cdkeyInvalidRemove
 } = require('./module/cdkey/index.js')
 
 const {
@@ -124,6 +125,7 @@ module.exports = {
   cdkeyDelete,
   cdkeyActive,
   cdkeyVerifyAuto,
+  cdkeyInvalidRemove,
 
   /**
    * 订阅

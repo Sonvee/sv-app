@@ -7,6 +7,10 @@ import config from '@/configs/index.js'
  *    url: 请求路径
  *    method: 请求方式,
  *    data: 请求参数,
+ *    header,
+ *    responseType,
+ *    timeout,
+ * 
  * }
  */
 const request = (options) => {
@@ -40,19 +44,38 @@ const request = (options) => {
         // 添加token
         "Authorization": uni.getStorageSync('uni_id_token') || '',
         "Content-type": "application/json;charset=UTF-8",
+        ...options.header
       },
       responseType: options.responseType || "",
       // 超时配置
-      timeout: 16000,
+      timeout: options.timeout || 16000,
       success(res) {
         // statusCode拦截
         switch (res.statusCode) {
           case 200:
             // 成功数据
-            resolve(res.data);
             if (res.data.code == 401) {
               // 无需手动处理token重新登录，uni-id中已自带此功能
             }
+            if (!res.data.success) {
+              if (options.notip) {
+                // 关闭任何提示
+              } else if (options.modal) {
+                // 使用modal提示错误信息
+                uni.showModal({
+                  title: '系统提示',
+                  content: res.data?.error?.message || res.data?.message,
+                  showCancel: false,
+                })
+              } else {
+                // 默认使用toast提示错误信息
+                uni.showToast({
+                  title: res.data?.error?.message || res.data?.message,
+                  icon: 'none',
+                })
+              }
+            }
+            resolve(res.data);
             break
           case 401:
             // 无需手动处理token重新登录，uni-id中已自带此功能

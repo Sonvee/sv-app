@@ -61,7 +61,7 @@ module.exports = {
     }
 
     const findExist = await db.collection('sv-id-vip-cdkeys').where({
-      'cdkey': cdkey
+      cdkey
     }).get()
     const isExist = findExist.affectedDocs
     if (isExist) {
@@ -70,7 +70,10 @@ module.exports = {
       })
     }
 
-    const cdkeyRes = await db.collection('sv-id-vip-cdkeys').add(this.params)
+    const cdkeyRes = await db.collection('sv-id-vip-cdkeys').add({
+      ...this.params,
+      create_date: Date.now()
+    })
 
     return handler.result({
       data: cdkeyRes.data,
@@ -235,8 +238,19 @@ module.exports = {
     const promisesAll = await Promise.all(promises);
 
     return handler.result({
-      cdkeyData,
-      promisesAll
+      data: cdkeyData,
+      handle: promisesAll
     })
   },
+
+  async cdkeyInvalidRemove() {
+    // 筛选出所有失效的激活码
+    const cdkeyRes = await db.collection('sv-id-vip-cdkeys').where({
+      status: dbCmd.in([1, 2])
+    }).remove()
+    
+    return handler.result({
+      data: cdkeyRes,
+    })
+  }
 }

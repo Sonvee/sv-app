@@ -9,7 +9,7 @@
     :close-on-click-modal="false"
   >
     <template #header>
-      <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
+      <h3>{{ formMode == 'add' ? '新增' : '一键新增' }}</h3>
     </template>
     <template #default>
       <view class="sv-add">
@@ -21,7 +21,7 @@
           label-width="80px"
           label-position="left"
         >
-          <el-form-item prop="cdkey" label="激活码" required>
+          <el-form-item v-if="formMode == 'add'" prop="cdkey" label="激活码" required>
             <el-input
               class="sv-el-input"
               v-model="formData.cdkey"
@@ -51,13 +51,16 @@
               disabled
             ></sv-dict-select>
           </el-form-item>
-          <el-form-item prop="valid_date" label="有效期至">
+          <el-form-item prop="valid_date" label="有效期至" required>
             <el-date-picker
               v-model="formData.valid_date"
               type="datetime"
               placeholder="请选择有效期"
               value-format="x"
             />
+          </el-form-item>
+          <el-form-item v-if="formMode == 'onekey'" prop="num" label="生成条数" required>
+            <el-input-number class="sv-el-input-number" v-model="formData.num" :min="1" />
           </el-form-item>
         </el-form>
       </view>
@@ -81,7 +84,7 @@ const props = defineProps({
   },
   formMode: {
     type: String,
-    default: 'add' // cdkey只提供add模式
+    default: 'add' // add | onekey
   }
 })
 
@@ -94,7 +97,8 @@ const formBase = {
   cdkey: '',
   bind_plan: '',
   valid_date: '',
-  status: 0
+  status: 0,
+  num: 1 // 批量生成条数
 }
 
 watchEffect(() => {
@@ -106,7 +110,8 @@ watchEffect(() => {
 const rules = ref({
   cdkey: [{ required: true, message: '请生成激活码', trigger: 'blur' }],
   bind_plan: [{ required: true, message: '请选择绑定套餐', trigger: 'blur' }],
-  valid_date: [{ required: true, message: '请选择有效期', trigger: 'blur' }]
+  valid_date: [{ required: true, message: '请选择有效期', trigger: 'blur' }],
+  num: [{ required: true, message: '请选择生成条数', trigger: 'blur' }]
 })
 
 const drawerRef = ref() // 抽屉

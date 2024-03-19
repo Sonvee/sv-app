@@ -1,0 +1,56 @@
+.sv-nav-bar {
+  @include useTheme {
+    :deep(.uv-navbar .uv-navbar--fixed) {
+      background-image: radial-gradient(transparent 1px, #{getTheme('sv-bg-color')} 4px);
+      background-size: 4px 4px;
+      backdrop-filter: saturate(50%) blur(4px);
+      // backdrop-filter: blur(12px) brightness(120%);
+      box-shadow: 0 1px 1px #{getTheme('sv-shadow-color')};
+    }
+  }
+}
+
+.sv-uv-search {
+  .uv-search__action {
+    color: unset !important;
+  }
+}
+
+.sv-uv-vtabs {
+  @include useTheme {
+    .uv-vtabs__bar {
+      background: getTheme('sv-card-color');
+
+      .uv-vtabs__bar-item-active {
+        background: getTheme('sv-bg-color');
+      }
+    }
+
+    .uv-vtabs__content {
+      background: getTheme('sv-bg-color');
+    }
+
+    .uv-vtabs__bar-item--value {
+      color: getTheme('sv-text-color');
+    }
+    .uv-vtabs__bar-item-active--value {
+      color: #66ccff;
+    }
+  }
+}
+
+.sv-uv-scroll-list {
+  padding-bottom: 0 !important;
+}
+
+.sv-uv-popup {
+  // & view[name='content'] {
+  //   background-color: unset !important;
+  // }
+  .uv-popup__content {
+    @include useTheme {
+      background-color: getTheme('sv-popup-color') !important;
+    }
+  }
+}
+

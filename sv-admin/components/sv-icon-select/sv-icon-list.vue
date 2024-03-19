@@ -80,7 +80,7 @@ function filterIcons() {
       vertical-align: top;
 
       @include useTheme {
-        color: getTheme('sv-text-color');
+        color: getTheme('sv-admin-text-color');
       }
 
       .icon-font {
@@ -97,7 +97,7 @@ function filterIcons() {
     }
     .icon:hover {
       @include useTheme {
-        background-color: getTheme('sv-hover-color');
+        background-color: getTheme('sv-admin-hover-color');
         color: $uni-color-primary;
       }
     }

@@ -1,9 +1,0 @@
-{
-  "name": "sv-api-sys",
-  "dependencies": {
-    "sv-handler": "file:../../../uni_modules/sv-id-pages/uniCloud/cloudfunctions/common/sv-handler"
-  },
-  "extensions": {
-    "uni-cloud-jql": {}
-  }
-}

@@ -60,7 +60,6 @@
       ></el-table-column>
       <el-table-column label="配置" align="center" :width="160" fixed="right">
         <template #default="scope">
-          <!-- 静态菜单不显示配置项 -->
           <el-button-group>
             <el-button text size="small" :icon="EditPen" @click="edit(scope.row)">编辑</el-button>
             <el-button text size="small" :icon="Delete" @click="del(scope.row)">删除</el-button>

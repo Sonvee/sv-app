@@ -59,12 +59,12 @@ export default {
   .login-bg {
     width: 100%;
     height: 100%;
-    z-index: -999;
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
+    z-index: 0;
     display: flex;
 
     .bg-image {
@@ -102,6 +102,7 @@ export default {
       width: 70%;
       height: 120rpx;
       margin-top: 24rpx;
+      z-index: 9;
     }
   }
 }

@@ -143,11 +143,11 @@ function globalSearch() {
 
 <style lang="scss">
 .layout-nav-bar {
-  height: $sv-nav-bar-height;
+  height: $sv-admin-nav-bar-height;
   width: 100%;
   box-sizing: border-box;
   @include useTheme {
-    background-color: getTheme('sv-bg-color');
+    background-color: getTheme('sv-admin-bg-color');
   }
 
   .sv-nav {
@@ -175,7 +175,7 @@ function globalSearch() {
       .sv-menu-icon {
         &:hover {
           @include useTheme {
-            background-color: getTheme('sv-hover-color');
+            background-color: getTheme('sv-admin-hover-color');
           }
         }
 
@@ -184,7 +184,7 @@ function globalSearch() {
           max-width: 160px;
           font-weight: 700;
           @include useTheme {
-            color: getTheme('sv-text-color');
+            color: getTheme('sv-admin-text-color');
           }
         }
       }
@@ -203,7 +203,7 @@ function globalSearch() {
           font-size: 20px;
           @include useTheme {
             // 拼接上些许透明效果
-            color: #{getTheme('sv-text-color') + 'dd'};
+            color: #{getTheme('sv-admin-text-color') + 'dd'};
           }
         }
 
@@ -212,7 +212,7 @@ function globalSearch() {
             transition: transform 0.3s;
             transform: scale(1.2);
             @include useTheme {
-              color: getTheme('sv-text-color');
+              color: getTheme('sv-admin-text-color');
             }
           }
         }

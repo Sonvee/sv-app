@@ -27,6 +27,6 @@ export default {
 </script>
 
 <style lang="scss">
-/*每个页面公共css */
-@import '@/common/scss/style.scss';
+/* 每个页面公共css */
+@import '@/uni_modules/sv-style/scss/style.scss';
 </style>

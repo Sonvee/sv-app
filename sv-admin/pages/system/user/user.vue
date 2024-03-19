@@ -47,7 +47,18 @@
       </el-table-column>
       <el-table-column prop="mobile" label="手机号码" align="center" :width="160" />
       <el-table-column prop="email" label="邮箱" align="center" :width="160" />
-      <el-table-column prop="role" label="角色" align="center" :width="160" />
+      <el-table-column prop="role" label="角色" align="center" :width="160">
+        <template #default="scope">
+          <el-tag
+            v-for="(item, index) in scope.row?.role"
+            :key="item"
+            :class="'sv-ml-gap-' + index"
+            effect="plain"
+          >
+            {{ item }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="my_invite_code" label="邀请码" :width="100" />
       <el-table-column
         prop="dcloud_appid"

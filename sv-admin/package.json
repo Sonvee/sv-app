@@ -11,11 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
-    "@vue/reactivity": "^3.3.8",
+    "@vue/reactivity": "^3.4.21",
     "@vueuse/core": "^10.6.1",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-vue": "^5.1.12",
-    "element-plus": "^2.5.1",
+    "element-plus": "^2.6.1",
     "lodash-es": "^4.17.21"
   }
 }

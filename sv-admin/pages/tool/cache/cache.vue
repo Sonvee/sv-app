@@ -23,7 +23,7 @@
               circle
               size="small"
               text
-              @click="copyCacheKey(scope.row.key)"
+              @click="setClipboard(scope.row.key)"
             />
           </el-tooltip>
         </template>
@@ -58,6 +58,7 @@ import { ref, computed } from 'vue'
 import { RefreshRight, Refresh, Delete, DocumentCopy } from '@element-plus/icons-vue'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import { refreshSvidStorage, refreshSysStorage } from '@/utils/pinia-storage'
+import { setClipboard } from '@/utils/util'
 
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
@@ -85,12 +86,6 @@ function onKeyDetail(key) {
   curCache.value = { key, value }
   jsonviewKey.value++ // 手动刷新json-view组件
   dialogVisible.value = true
-}
-
-function copyCacheKey(key) {
-  uni.setClipboardData({
-    data: key
-  })
 }
 
 // 刷新

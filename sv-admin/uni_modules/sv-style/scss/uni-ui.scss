@@ -1,0 +1,43 @@
+/* #ifdef H5 */
+// uni-media-library媒体库插件配色
+.sv-media-lib {
+  @include useTheme {
+    background-color: #{getTheme('sv-bg-color')};
+    .media-info-wrap {
+      background-color: #{getTheme('sv-bg-color')};
+      border-left: 1px solid #{getTheme('sv-border-color')};
+
+      .title {
+        color: #{getTheme('sv-text-sub-color')};
+      }
+
+      .info-item {
+        .label {
+          color: #{getTheme('sv-text-sub-color')};
+        }
+        .content {
+          color: #{getTheme('sv-text-color')};
+        }
+      }
+    }
+    .tabs {
+      border-bottom: 1px solid #{getTheme('sv-border-color')};
+      .tabs-nav {
+        background-color: #{getTheme('sv-bg-color')};
+
+        .tab-label {
+          color: #{getTheme('sv-text-sub-color')};
+        }
+        .active {
+          color: $uni-color-primary;
+        }
+      }
+    }
+  }
+}
+/* #endif */
+
+// 将模态框层级调整最高，以防止第三方组件遮挡
+uni-modal {
+  z-index: 999999999 !important;
+}

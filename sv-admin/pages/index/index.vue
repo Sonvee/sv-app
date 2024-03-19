@@ -145,7 +145,7 @@ const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
 .hello-sub {
   font-size: 14px;
   @include useTheme {
-    color: getTheme('sv-text-sub-color');
+    color: getTheme('sv-admin-text-sub-color');
   }
 }
 
@@ -159,7 +159,7 @@ const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
   color: #999999;
   font-size: 14px;
   @include useTheme {
-    border-bottom: 1px solid #{getTheme('sv-border-color')};
+    border-bottom: 1px solid #{getTheme('sv-admin-border-color')};
   }
 }
 .pay-image {
@@ -171,9 +171,9 @@ const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
   width: 200px;
   height: 200px;
   @include useTheme {
-    background: getTheme('sv-bg-color');
-    color: getTheme('sv-text-color');
-    border: 1px solid #{getTheme('sv-border-color')};
+    background: getTheme('sv-admin-bg-color');
+    color: getTheme('sv-admin-text-color');
+    border: 1px solid #{getTheme('sv-admin-border-color')};
   }
 }
 </style>

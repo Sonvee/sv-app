@@ -27,7 +27,7 @@
               circle
               size="small"
               text
-              @click="copyDictId(scope.row.dict_id)"
+              @click="setClipboard(scope.row.dict_id)"
             />
           </el-tooltip>
         </template>
@@ -97,7 +97,7 @@ import {
 } from '@element-plus/icons-vue'
 import SvTableHeader from './components/sv-table-header/sv-table-header.vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
-import { timeFormat } from '@/utils/util'
+import { setClipboard, timeFormat } from '@/utils/util'
 import { dictAdd, dictDelete, dictList, dictUpdate } from '@/service/api/sys'
 import { storageDicts } from '@/utils/pinia-storage'
 import { useSysStore } from '@/store/sys'
@@ -209,11 +209,6 @@ async function submitFilter(e) {
   handleTable({ name: e.name })
 }
 
-function copyDictId(dict_id) {
-  uni.setClipboardData({
-    data: dict_id
-  })
-}
 </script>
 
 <style lang="scss">

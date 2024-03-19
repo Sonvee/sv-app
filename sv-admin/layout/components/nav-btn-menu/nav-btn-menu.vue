@@ -49,10 +49,10 @@ function onHide() {
   cursor: pointer;
 
   @include useTheme {
-    color: getTheme('sv-text-color');
+    color: getTheme('sv-admin-text-color');
 
     &:hover {
-      background-color: getTheme('sv-hover-color');
+      background-color: getTheme('sv-admin-hover-color');
     }
   }
 }

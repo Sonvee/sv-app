@@ -66,7 +66,7 @@ defineExpose({
     :deep(.el-select__wrapper) {
       transition: padding 0.8s;
       background-color: unset !important;
-      --el-select-multiple-input-color: #{getTheme('sv-text-color')} !important;
+      --el-select-multiple-input-color: #{getTheme('sv-admin-text-color')} !important;
     }
   }
 }

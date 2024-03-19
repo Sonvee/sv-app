@@ -1,0 +1,37 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+  "bsonType": "object",
+  "required": ["benefit_id", "benefit_name"],
+  "permission": {
+    "read": true,
+    "create": "'VIP_MANAGE' in auth.permission",
+    "update": "'VIP_MANAGE' in auth.permission",
+    "delete": "'VIP_MANAGE' in auth.permission"
+  },
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "benefit_id": {
+      "bsonType": "string",
+      "description": "权益id 唯一"
+    },
+    "benefit_name": {
+      "bsonType": "string",
+      "description": "权益名称"
+    },
+    "icon": {
+      "bsonType": "string",
+      "description": "权益图标"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "权益描述"
+    },
+    "sort": {
+      "bsonType": "int",
+      "description": "排序",
+      "defaultValue": 0
+    }
+  }
+}

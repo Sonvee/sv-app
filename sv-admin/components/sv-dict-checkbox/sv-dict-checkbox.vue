@@ -1,6 +1,6 @@
 <template>
   <el-checkbox-group v-bind="$attrs">
-    <el-checkbox v-for="item in dictData" :key="item[keyName]" :value="item[keyName]" :min="1">
+    <el-checkbox v-for="item in dictData" :key="item[keyName]" :label="item[keyName]" :min="1">
       {{ item[valueName] }}
     </el-checkbox>
   </el-checkbox-group>

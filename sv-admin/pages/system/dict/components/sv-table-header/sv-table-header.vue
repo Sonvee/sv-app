@@ -49,7 +49,7 @@ function reset() {
   box-sizing: border-box;
 
   @include useTheme {
-    border-bottom: 1px solid #{getTheme('sv-border-color')};
+    border-bottom: 1px solid #{getTheme('sv-admin-border-color')};
   }
 
   :deep(.el-form-item) {

@@ -3,7 +3,7 @@
     <el-radio
       v-for="item in dictData"
       :key="item[keyName]"
-      :value ="isNaN(Number(item[keyName])) ? item[keyName] : +item[keyName]"
+      :label ="isNaN(Number(item[keyName])) ? item[keyName] : +item[keyName]"
     >
       {{ item[valueName] }}
     </el-radio>

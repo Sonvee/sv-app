@@ -1,4 +1,6 @@
-import { dayjs } from "element-plus";
+import {
+  dayjs
+} from "element-plus";
 
 /**
  * 时间日期格式化
@@ -94,4 +96,14 @@ export function parseStringToObject(str) {
   // 转换为对象
   var obj = JSON.parse(fixedString)
   return obj
+}
+
+/**
+ * 剪切板
+ * @param {Object} text 剪切板内容
+ */
+export function setClipboard(text) {
+  uni.setClipboardData({
+    data: text
+  })
 }

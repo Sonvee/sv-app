@@ -1,0 +1,41 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+  "bsonType": "object",
+  "required": ["dict_id", "dict_name", "dict"],
+  "permission": {
+    "read": true,
+    "create": true,
+    "update": true,
+    "delete": true
+  },
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "dict_id": {
+      "bsonType": "string",
+      "description": "字典id"
+    },
+    "dict_name": {
+      "bsonType": "string",
+      "description": "字典名称"
+    },
+    "dict": {
+      "bsonType": "array",
+      "description": "字典"
+    },
+    "comment": {
+      "title": "备注",
+      "bsonType": "string",
+      "description": "备注",
+      "trim": "both"
+    },
+    "create_date": {
+      "bsonType": "timestamp",
+      "description": "菜单创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

@@ -70,12 +70,12 @@ watch(
 <style lang="scss">
 .layout-side-bar {
   position: fixed;
-  width: $sv-side-bar-width;
+  width: $sv-admin-side-bar-width;
   height: calc(100vh - (var(--top-window-height)));
 
   @include useTheme {
-    border-right: 1px solid #{getTheme('sv-border-color')};
-    background-color: getTheme('sv-bg-color');
+    border-right: 1px solid #{getTheme('sv-admin-border-color')};
+    background-color: getTheme('sv-admin-bg-color');
   }
 }
 </style>

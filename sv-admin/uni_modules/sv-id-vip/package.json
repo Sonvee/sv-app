@@ -1,0 +1,90 @@
+{
+  "id": "sv-id-vip",
+  "displayName": "用户会员制功能模组",
+  "version": "1.0.6",
+  "description": "基于sv-clinet、sv-id-pages的用户VIP会员制功能模组，开箱即用",
+  "keywords": [
+    "vip",
+    "会员"
+],
+  "repository": "",
+  "engines": {
+    "HBuilderX": "^3.1.0"
+  },
+  "dcloudext": {
+    "type": "unicloud-template-page",
+    "sale": {
+      "regular": {
+        "price": "19.00"
+      },
+      "sourcecode": {
+        "price": "29.00"
+      }
+    },
+    "contact": {
+      "qq": "1051399604"
+    },
+    "declaration": {
+      "ads": "无",
+      "data": "插件不采集任何数据",
+      "permissions": "无"
+    },
+    "npmurl": ""
+  },
+  "uni_modules": {
+    "dependencies": [],
+    "encrypt": [
+      "uniCloud/cloudfunctions/sv-api-vip/module/vip/index.js",
+      "uniCloud/cloudfunctions/sv-api-vip/module/benefit/index.js",
+      "uniCloud/cloudfunctions/sv-api-vip/module/cdkey/index.js",
+      "uniCloud/cloudfunctions/sv-api-vip/module/subscription/index.js",
+      "uniCloud/cloudfunctions/sv-api-vip/index.obj.js",
+    ],
+    "platforms": {
+      "cloud": {
+        "tcb": "n",
+        "aliyun": "y",
+        "alipay": "n"
+      },
+      "client": {
+        "Vue": {
+          "vue2": "n",
+          "vue3": "y"
+        },
+        "App": {
+          "app-vue": "y",
+          "app-nvue": "u",
+          "app-uvue": "u"
+        },
+        "H5-mobile": {
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
+        },
+        "H5-pc": {
+          "Chrome": "y",
+          "IE": "y",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
+        },
+        "小程序": {
+          "微信": "y",
+          "阿里": "u",
+          "百度": "u",
+          "字节跳动": "u",
+          "QQ": "u",
+          "钉钉": "u",
+          "快手": "u",
+          "飞书": "u",
+          "京东": "u"
+        },
+        "快应用": {
+          "华为": "u",
+          "联盟": "u"
+        }
+      }
+    }
+  }
+}

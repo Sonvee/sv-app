@@ -1,0 +1,7 @@
+{
+  "name": "sv-api-test",
+  "dependencies": {
+    "sv-handler": "file:../../../../sv-id-pages/uniCloud/cloudfunctions/common/sv-handler"
+  },
+  "extensions": {}
+}

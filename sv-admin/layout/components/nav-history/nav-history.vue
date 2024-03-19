@@ -133,7 +133,7 @@ defineExpose({
 
 <style lang="scss">
 .sv-nav-history {
-  width: calc(100vw - #{$sv-side-bar-width} - 480px);
+  width: calc(100vw - #{$sv-admin-side-bar-width} - 480px);
   padding: 0 6px;
   cursor: e-resize;
 
@@ -157,7 +157,7 @@ defineExpose({
     cursor: pointer;
 
     @include useTheme {
-      background-color: getTheme('sv-bg-color');
+      background-color: getTheme('sv-admin-bg-color');
     }
 
     &:active {

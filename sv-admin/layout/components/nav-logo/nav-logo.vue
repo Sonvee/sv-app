@@ -17,9 +17,9 @@ function onLogo() {
 
 <style lang="scss">
 .logo {
-  // width: $sv-side-bar-width;
+  // width: $sv-admin-side-bar-width;
   width: var(--window-left);
-  height: $sv-nav-bar-height;
+  height: $sv-admin-nav-bar-height;
   padding: 0 calc(var(--window-left) / 10);
   box-sizing: border-box;
   display: flex;
@@ -28,13 +28,13 @@ function onLogo() {
   flex-shrink: 0;
 
   @include useTheme {
-    color: getTheme('sv-text-color');
-    border-bottom: 1px solid #{getTheme('sv-border-color')};
+    color: getTheme('sv-admin-text-color');
+    border-bottom: 1px solid #{getTheme('sv-admin-border-color')};
   }
 
   &:hover {
     @include useTheme {
-      background-color: getTheme('sv-mask-hl-color');
+      background-color: getTheme('sv-admin-mask-hl-color');
     }
   }
 

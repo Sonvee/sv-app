@@ -1,0 +1,444 @@
+// 转圈
+.sv-turn-around-active {
+  transform: rotate(360deg);
+  transition: transform 0.6s;
+}
+.sv-turn-around-active:active {
+  transform: rotate(0);
+  transition: 0s;
+}
+
+// 流光炫彩文字
+.sv-text-streamer {
+  background: linear-gradient(
+    135deg,
+    #0eaf6d,
+    #ff6ac6 25%,
+    #147b96 50%,
+    #e6d205 55%,
+    #2cc4e0 60%,
+    #8b2ce0 75%,
+    #ff6384 90%,
+    #0eaf6d
+  );
+  /* 文字颜色填充设置为透明 */
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  /* 背景裁剪，即让文字使用背景色 */
+  background-clip: text;
+  -webkit-background-clip: text;
+  /* 背景图放大一下，看着柔和一些 */
+  background-size: 200% 100%;
+  -webkit-background-size: 200% 100%;
+  /* 应用动画flowCss 12秒速度 无限循环 线性匀速动画*/
+  animation: anim-text-streamer 12s infinite linear;
+  -webkit-animation: anim-text-streamer 12s infinite linear;
+}
+
+.sv-text-streamer:hover {
+  animation: anim-text-streamer 4s infinite linear;
+  -webkit-animation: anim-text-streamer 4s infinite linear;
+}
+
+@keyframes anim-text-streamer {
+  0% {
+    /* 移动背景位置 */
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -400% 0;
+  }
+}
+
+@-webkit-keyframes anim-text-streamer {
+  0% {
+    /* 移动背景位置 */
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -400% 0;
+  }
+}
+
+// 文字霓虹闪烁
+.sv-neon-flash {
+  animation: anim-neon-flash 4s linear infinite;
+}
+
+.sv-neon-flash-hover:hover {
+  animation: anim-neon-flash 4s linear infinite;
+}
+
+@keyframes anim-neon-flash {
+  0% {
+    text-shadow: 0 0 4px #66ccff, 0 0 8px #66ccff;
+  }
+  25% {
+    text-shadow: 0 0 4px #66ccff, 0 0 8px #66ccff, 0 0 12px #66ccff;
+  }
+  50% {
+    text-shadow: 0 0 4px #66ccff, 0 0 8px #66ccff, 0 0 12px #66ccff, 0 0 16px #66ccff,
+      0 0 20px #66ccff;
+  }
+  75% {
+    text-shadow: 0 0 4px #66ccff, 0 0 8px #66ccff, 0 0 12px #66ccff;
+  }
+  100% {
+    text-shadow: 0 0 4px #66ccff, 0 0 8px #66ccff;
+  }
+}
+
+// 故障文字动效
+.sv-glitch-text {
+  position: relative;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  letter-spacing: 5px;
+  z-index: 1;
+  animation: anim-glitch-text-shift 1s ease-in-out infinite alternate;
+}
+
+.sv-glitch-text:before,
+.sv-glitch-text:after {
+  display: block;
+  content: attr(data-glitch);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+.sv-glitch-text:before {
+  animation: anim-glitch-text 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  color: #8b00ff;
+  z-index: -1;
+}
+
+.sv-glitch-text:after {
+  animation: anim-glitch-text 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+  color: #00e571;
+  z-index: -2;
+}
+
+@keyframes anim-glitch-text {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-4px, 4px);
+  }
+
+  40% {
+    transform: translate(-4px, -4px);
+  }
+
+  60% {
+    transform: translate(4px, 4px);
+  }
+
+  80% {
+    transform: translate(4px, -4px);
+  }
+
+  to {
+    transform: translate(0);
+  }
+}
+
+@keyframes anim-glitch-text-shift {
+  0%,
+  40%,
+  44%,
+  58%,
+  61%,
+  65%,
+  69%,
+  73%,
+  100% {
+    transform: skewX(0deg);
+  }
+
+  41% {
+    transform: skewX(10deg);
+  }
+
+  42% {
+    transform: skewX(-10deg);
+  }
+
+  59% {
+    transform: skewX(40deg) skewY(10deg);
+  }
+
+  60% {
+    transform: skewX(-40deg) skewY(-10deg);
+  }
+
+  63% {
+    transform: skewX(10deg) skewY(-5deg);
+  }
+
+  70% {
+    transform: skewX(-50deg) skewY(-20deg);
+  }
+
+  71% {
+    transform: skewX(10deg) skewY(-10deg);
+  }
+}
+
+// 故障按钮
+.sv-glitch-btn,
+.sv-glitch-btn::after {
+  padding: 4px 8px;
+  font-size: 16px;
+  background: linear-gradient(45deg, transparent 5%, #ff013c 5%);
+  border: 0;
+  color: #fff;
+  box-shadow: 6px 0px 0px #00e6f6;
+  outline: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.sv-glitch-btn:active {
+  opacity: 0.6;
+  background: linear-gradient(45deg, transparent 5%, #c3002d 5%);
+  box-shadow: 6px 0px 0px #4386a7;
+}
+
+.sv-glitch-btn::after {
+  content: attr(data-glitch);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #00e6f6 3%, #00e6f6 5%, #ff013c 5%);
+  text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px #00e6f6;
+  clip-path: inset(50% 50% 50% 50%);
+}
+
+.sv-glitch-btn:hover::after {
+  animation: 1s anim-glitch-btn;
+  animation-timing-function: steps(2, end);
+}
+
+@keyframes anim-glitch-btn {
+  0% {
+    clip-path: inset(80% -6px 0 0);
+    transform: translate(-20px, -10px);
+  }
+
+  10% {
+    clip-path: inset(10% -6px 85% 0);
+    transform: translate(10px, 10px);
+  }
+
+  20% {
+    clip-path: inset(80% -6px 0 0);
+    transform: translate(-10px, 10px);
+  }
+
+  30% {
+    clip-path: inset(10% -6px 85% 0);
+    transform: translate(0px, 5px);
+  }
+
+  40% {
+    clip-path: inset(50% -6px 30% 0);
+    transform: translate(-5px, 0px);
+  }
+
+  50% {
+    clip-path: inset(10% -6px 85% 0);
+    transform: translate(5px, 0px);
+  }
+
+  60% {
+    clip-path: inset(40% -6px 43% 0);
+    transform: translate(5px, 10px);
+  }
+
+  70% {
+    clip-path: inset(50% -6px 30% 0);
+    transform: translate(-10px, 10px);
+  }
+
+  80% {
+    clip-path: inset(80% -6px 5% 0);
+    transform: translate(20px, -10px);
+  }
+
+  90% {
+    clip-path: inset(80% -6px 0 0);
+    transform: translate(-10px, 0px);
+  }
+
+  100% {
+    clip-path: inset(80% -6px 0 0);
+    transform: translate(0);
+  }
+}
+
+/* 首屏加载 */
+.sv-index-loader {
+  position: relative;
+  width: 120px;
+  height: 90px;
+  margin: 0 auto;
+}
+
+.sv-index-loader:before {
+  content: '';
+  position: absolute;
+  bottom: 30px;
+  left: 50px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: #fb7299;
+  animation: anim-loading-bounce 0.5s ease-in-out infinite alternate;
+}
+
+.sv-index-loader:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 7px;
+  width: 45px;
+  border-radius: 4px;
+  box-shadow: 0 5px 0 #f2f2f2, -35px 50px 0 #f2f2f2, -70px 95px 0 #f2f2f2;
+  animation: anim-loading-step 1s ease-in-out infinite;
+}
+
+@keyframes anim-loading-bounce {
+  0% {
+    transform: scale(1, 0.7);
+  }
+
+  40% {
+    transform: scale(0.8, 1.2);
+  }
+
+  60% {
+    transform: scale(1, 1);
+  }
+
+  100% {
+    bottom: 140px;
+  }
+}
+
+@keyframes anim-loading-step {
+  0% {
+    box-shadow: 0 10px 0 rgba(0, 0, 0, 0), 0 10px 0 #f2f2f2, -35px 50px 0 #f2f2f2,
+      -70px 90px 0 #f2f2f2;
+  }
+
+  100% {
+    box-shadow: 0 10px 0 #f2f2f2, -35px 50px 0 #f2f2f2, -70px 90px 0 #f2f2f2,
+      -70px 90px 0 rgba(0, 0, 0, 0);
+  }
+}
+
+// 粒子按钮
+.sv-btn-particle {
+  position: relative;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sv-btn-particle:hover {
+  transition: all 0.2s ease;
+  box-shadow: -1px -1px 6px #66ccff, 1px 1px 6px #fb7299;
+}
+
+.sv-btn-particle:active {
+  transform: scale(0.9);
+}
+
+.sv-btn-particle:before,
+.sv-btn-particle:after {
+  position: absolute;
+  content: '';
+  width: 180%;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1000;
+  background-repeat: no-repeat;
+}
+
+.sv-btn-particle:hover:before {
+  top: -70%;
+  background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, transparent 20%, #7d2ae8 20%, transparent 30%),
+    radial-gradient(circle, #535efc 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+    radial-gradient(circle, #0ec8ee 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #0ec8ee 20%, transparent 20%),
+    radial-gradient(circle, #0ec8ee 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+  background-position: 50% 120%;
+  animation: greentopBubbles 0.6s ease;
+}
+
+@keyframes greentopBubbles {
+  0% {
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%,
+      70% 90%;
+  }
+
+  50% {
+    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%,
+      90% 30%;
+  }
+
+  100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%,
+      90% 20%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+.sv-btn-particle:hover::after {
+  bottom: -70%;
+  background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #535efc 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+    radial-gradient(circle, #535efc 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #535efc 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+  background-position: 50% 0%;
+  animation: greenbottomBubbles 0.6s ease;
+}
+
+@keyframes greenbottomBubbles {
+  0% {
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+  }
+
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+  }
+
+  100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}

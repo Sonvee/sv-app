@@ -1,0 +1,141 @@
+@import '../colorui/main.css';
+@import './sv-icons.scss';
+@import './uni-icons.scss';
+@import './admin-icons.scss';
+@import './uv-ui.scss';
+@import './uni-ui.scss';
+@import './sv-amination.scss';
+@import './animista.scss';
+@import './loding-animation.scss';
+
+/* #ifdef H5 */
+@import './layout.scss';
+@import './element-plus.scss';
+/* #endif */
+
+/* #ifdef MP-WEIXIN */
+page {
+  height: 100%;
+}
+/* #endif */
+
+/* #ifndef MP-WEIXIN */
+* {
+  padding: 0;
+  margin: 0;
+  outline: none; // 移除element-plus中的默认聚焦黑框
+  box-sizing: border-box;
+}
+:root {
+  box-sizing: border-box;
+}
+
+uni-page-body {
+  height: 100%;
+  
+  @include useTheme {
+    background-color: getTheme('sv-bg-color');
+    color: getTheme('sv-text-color');
+  }
+}
+/* #endif */
+
+
+/* #ifdef H5 */
+a {
+  text-decoration: none;
+}
+
+.page-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: auto;
+}
+
+.table-page-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: auto;
+}
+
+.web-page {
+  height: 100%;
+  overflow: auto;
+}
+
+/* #endif */
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px) brightness(110%);
+  overflow: hidden;
+
+  @include useTheme {
+    background-color: getTheme('sv-admin-card-color');
+    border-top: 1px solid #{getTheme('sv-admin-border-color')};
+    border-left: 1px solid #{getTheme('sv-admin-border-color')};
+  }
+
+  &:hover {
+    backdrop-filter: blur(4px) brightness(120%);
+    @include useTheme {
+      box-shadow: 0px 0px 10px 0px #{getTheme('sv-admin-border-color')};
+    }
+  }
+}
+
+/* 
+ * css正则匹配类目规则
+ * [class^="test"]：头部匹配；
+ * [class$="test"]：尾部匹配；
+ * [class*="test"]：任意位置匹配。 
+ * 例如：p[class^="test"] 匹配所有以test开头类名的p标签
+ */
+
+// 间隔，首个无左边距，后面盒子依次给10px的左边距作为间隔
+[class*='sv-ml-gap-'] {
+  margin-left: 10px;
+}
+.sv-ml-gap-0 {
+  margin-left: 0;
+}
+
+[class*='sv-mt-gap-'] {
+  margin-top: 10px;
+}
+.sv-mt-gap-0 {
+  margin-top: 0;
+}
+
+/* 全局滚动条样式 */
+/* 宽度 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+/* 轨道 */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* 滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 3px; /* 圆角 */
+
+  /* #ifdef H5 */
+  @include useTheme {
+    background-color: getTheme('sv-admin-grey-color');
+    &:hover {
+      background-color: getTheme('sv-admin-grey-hl-color');
+    }
+  }
+  /* #endif */
+}

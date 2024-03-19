@@ -160,6 +160,31 @@
           }
         }
       ]
+    },
+    {
+      "root": "pages/vip",
+      "pages": [{
+          "path": "plan/plan",
+          "style": {
+            "navigationBarTitleText": "会员套餐",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "cdkey/cdkey",
+          "style": {
+            "navigationBarTitleText": "激活码管理",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "subscription/subscription",
+          "style": {
+            "navigationBarTitleText": "订阅记录",
+            "enablePullDownRefresh": false
+          }
+        }
+      ]
     }
   ],
   "globalStyle": {

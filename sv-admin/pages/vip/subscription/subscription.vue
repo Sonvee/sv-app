@@ -42,22 +42,17 @@
         </template>
       </el-table-column>
       <el-table-column
-        prop="subscription_plan"
-        label="订阅内容"
-        :min-width="300"
+        prop="subscription_plan[0].plan_id"
+        label="订阅套餐ID"
+        :min-width="200"
         show-overflow-tooltip
-      >
-        <template #default="scope">
-          {{ scope.row.subscription_plan[0].plan_id }}
-          『{{ scope.row.subscription_plan[0].plan_name }}』
-        </template>
-      </el-table-column>
-      <el-table-column prop="pay_fee" label="付款(分)" :width="300">
-        <template #default="scope">
-          {{ scope.row.pay_fee || 0 }}分
-          <text class="text-cyan">= {{ convertFenToYuan(scope.row.pay_fee) }}元</text>
-        </template>
-      </el-table-column>
+      ></el-table-column>
+      <el-table-column
+        prop="subscription_plan[0]plan_name"
+        label="订阅套餐名称"
+        :min-width="200"
+        show-overflow-tooltip
+      ></el-table-column>
       <el-table-column
         prop="duration_time"
         label="有效期(天)"
@@ -67,6 +62,12 @@
       >
         <template #default="scope">
           {{ Math.floor(scope.row.duration_time / (24 * 60 * 60 * 1000)) }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="pay_fee" label="付款金额(分)" :width="260">
+        <template #default="scope">
+          {{ scope.row.pay_fee || 0 }}分
+          <text class="text-cyan">= {{ convertFenToYuan(scope.row.pay_fee) }}元</text>
         </template>
       </el-table-column>
       <el-table-column prop="mode" label="订阅模式" align="center" :width="120">

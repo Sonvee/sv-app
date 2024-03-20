@@ -18,6 +18,18 @@
           valueName="value"
         ></sv-dict-select>
       </el-form-item>
+      <el-form-item label="订阅日期">
+        <el-date-picker
+          v-model="filterForm.start_date_range"
+          type="datetimerange"
+          range-separator="~"
+          start-placeholder="开始时间"
+          end-placeholder="结束时间"
+          value-format="x"
+          :default-time="[new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 59, 59)]"
+          style="width: 320px"
+        />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit">搜索</el-button>
         <el-button type="primary" @click="reset">重置</el-button>
@@ -42,7 +54,7 @@ const emits = defineEmits(['submit'])
 const filterForm = ref({
   user_id: '',
   mode: '',
-  start_date: ''
+  start_date_range: []
 })
 
 const modeList = [
@@ -66,7 +78,7 @@ function reset() {
   filterForm.value = {
     user_id: '',
     mode: '',
-    start_date: ''
+    start_date_range: []
   }
 }
 </script>

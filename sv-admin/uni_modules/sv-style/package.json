@@ -1,7 +1,7 @@
 {
   "id": "sv-style",
   "displayName": "基于colorui、iconfont、animista、自定义样式等模块化样式库",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "纯css/sass，内含colorui（扩充了部分原子类）阿里巴巴矢量图标、uni-icons、animista动画、自定义样式、主题色等",
   "keywords": [
     "style",

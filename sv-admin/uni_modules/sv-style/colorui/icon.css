@@ -1137,7 +1137,7 @@
 	content: "\e7d1";
 }
 
-.cuIcon-redpacket_fill:before {
+.cuIcon-redpacket-fill:before {
 	content: "\e7d3";
 }
 
@@ -1161,7 +1161,7 @@
 	content: "\e6ab";
 }
 
-.cuIcon-back_android:before {
+.cuIcon-back-android:before {
 	content: "\e7ed";
 }
 
@@ -1169,23 +1169,23 @@
 	content: "\e7ef";
 }
 
-.cuIcon-evaluate_fill:before {
+.cuIcon-evaluate-fill:before {
 	content: "\e7f0";
 }
 
-.cuIcon-group_fill:before {
+.cuIcon-group-fill:before {
 	content: "\e7f5";
 }
 
-.cuIcon-play_forward_fill:before {
+.cuIcon-play-forward-fill:before {
 	content: "\e7f6";
 }
 
-.cuIcon-deliver_fill:before {
+.cuIcon-deliver-fill:before {
 	content: "\e7f7";
 }
 
-.cuIcon-notice_forbid_fill:before {
+.cuIcon-notice-forbid-fill:before {
 	content: "\e7f8";
 }
 
@@ -1205,7 +1205,7 @@
 	content: "\e600";
 }
 
-.cuIcon-qr_code:before {
+.cuIcon-qr-code:before {
 	content: "\e61b";
 }
 

@@ -10,7 +10,7 @@ module.exports = {
         pagenum = 1,
         user_id,
         mode,
-        start_date
+        start_date_range
     } = this.params
 
     // 转换为Number类型
@@ -56,21 +56,28 @@ module.exports = {
     // 分页查询
     let query = dbJQL.collection('sv-id-vip-subscription', tempPlanDB)
 
-    // 构建筛选条件(对象形式)
-    const conditions = {}
+    // 构建筛选条件(JQL语法)
+    let conditions = ''
     if (user_id) {
-      conditions.user_id = dbCmd.eq(user_id)
+      conditions += `user_id == "${user_id}"`
     }
-    if (mode) {
-      conditions.mode = dbCmd.eq(Number(mode))
+    if (mode !== undefined && mode !== null && mode !== '') {
+      if (conditions) {
+        conditions += ' && '
+      }
+      conditions += `mode == ${+mode}`
     }
-    if (start_date) {
-      conditions.start_date = dbCmd.in(start_date)
+    if (start_date_range && start_date_range.length == 2) {
+      if (conditions) {
+        conditions += ' && '
+      }
+      conditions += `start_date >= ${start_date_range[0]} && start_date <= ${start_date_range[1]}`
     }
     // 将所有有效的筛选条件添加到查询对象中
     if (Object.keys(conditions).length > 0) {
       query = query.where(conditions)
     }
+    console.log('==== conditions :', conditions, start_date_range);
 
     subscriptionRes = await query.orderBy('start_date', 'desc')
       .skip(pagesize * (pagenum - 1)).limit(pagesize).get({

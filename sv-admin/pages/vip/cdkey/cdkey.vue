@@ -51,12 +51,24 @@
           </el-tooltip>
         </template>
       </el-table-column>
-      <el-table-column prop="bind_plan" label="绑定套餐" :min-width="300" show-overflow-tooltip>
-        <template #default="scope">
-          {{ scope.row.bind_plan[0].plan_id }}『{{ scope.row.bind_plan[0].plan_name }}』
-        </template>
-      </el-table-column>
-      <el-table-column prop="valid_date" align="center" label="有效期至" :width="200">
+      <el-table-column
+        prop="bind_plan[0].plan_id"
+        label="绑定套餐ID"
+        :min-width="200"
+        show-overflow-tooltip
+      ></el-table-column>
+      <el-table-column
+        prop="bind_plan[0].plan_name"
+        label="绑定套餐名称"
+        :min-width="200"
+        show-overflow-tooltip
+      ></el-table-column>
+      <el-table-column
+        prop="bind_plan[0].valid_day"
+        label="绑定套餐有效期(天)"
+        :width="200"
+      ></el-table-column>
+      <el-table-column prop="valid_date" align="center" label="激活码有效期至" :width="200">
         <template #default="scope">
           {{ timeFormat(scope.row.valid_date) }}
         </template>

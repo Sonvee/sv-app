@@ -31,6 +31,7 @@ const {
 const {
   subscriptionList,
   subscriptionAdd,
+  subscriptionDelete
 } = require('./module/subscription/index.js')
 
 module.exports = {
@@ -131,5 +132,6 @@ module.exports = {
    * 订阅
    */
   subscriptionList,
-  subscriptionAdd
+  subscriptionAdd,
+  subscriptionDelete
 }

@@ -3,7 +3,7 @@
     <el-radio
       v-for="item in dictData"
       :key="item[keyName]"
-      :label ="isNaN(Number(item[keyName])) ? item[keyName] : +item[keyName]"
+      :label="isNaN(Number(item[keyName])) ? item[keyName] : +item[keyName]"
     >
       {{ item[valueName] }}
     </el-radio>
@@ -40,6 +40,10 @@ const dictData = ref(props.dictList)
 async function handleDict() {
   if (props.dictType) {
     dictData.value = await getDictById(props.dictType)
+    return
+  }
+  if (props.dictList) {
+    dictData.value = props.dictList
   }
 }
 

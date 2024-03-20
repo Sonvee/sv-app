@@ -7,38 +7,82 @@ module.exports = {
   async subscriptionList() {
     let {
       pagesize = 20,
-        pagenum = 1
+        pagenum = 1,
+        user_id,
+        mode,
+        start_date
     } = this.params
 
     // 转换为Number类型
     pagesize = +pagesize
     pagenum = +pagenum
 
+    // 页码不可小于1
+    if (pagenum < 1) {
+      throw handler.result({
+        code: 40001,
+        message: 'pagenum不可小于1'
+      })
+    }
+
+    let subscriptionRes, pages, total
+
     const dbJQL = uniCloud.databaseForJQL({
       clientInfo: this.getClientInfo()
     })
 
-    // 判断cdkey是否存在
     const tempPlanDB = dbJQL.collection('sv-id-vip-plans').getTemp()
 
-    let subscriptionRes
-    if (pagesize > 1) {
+    // 全量查询
+    if (pagesize < 1) {
       subscriptionRes = await dbJQL.collection('sv-id-vip-subscription', tempPlanDB)
-        .orderBy('create_date', 'desc')
-        .skip(pagesize * (pagenum - 1)).limit(pagesize).get()
-    } else {
-      subscriptionRes = await dbJQL.collection('sv-id-vip-subscription', tempPlanDB)
-        .orderBy('create_date', 'desc').get()
+        .orderBy('start_date', 'desc').get({
+          getCount: true
+        })
+      total = subscriptionRes.count
+      // 页数统计
+      pages = Math.ceil(total / pagesize)
+
+      throw handler.result({
+        data: subscriptionRes.data,
+        total,
+        pagesize,
+        pagenum,
+        pages,
+        params: this.params
+      })
     }
 
-    // 总数统计
-    const count = await db.collection('sv-id-vip-subscription').count()
-    // 页数统计
-    const pages = Math.ceil(count.total / pagesize)
+    // 分页查询
+    let query = dbJQL.collection('sv-id-vip-subscription', tempPlanDB)
+
+    // 构建筛选条件(对象形式)
+    const conditions = {}
+    if (user_id) {
+      conditions.user_id = dbCmd.eq(user_id)
+    }
+    if (mode) {
+      conditions.mode = dbCmd.eq(Number(mode))
+    }
+    if (start_date) {
+      conditions.start_date = dbCmd.in(start_date)
+    }
+    // 将所有有效的筛选条件添加到查询对象中
+    if (Object.keys(conditions).length > 0) {
+      query = query.where(conditions)
+    }
+
+    subscriptionRes = await query.orderBy('start_date', 'desc')
+      .skip(pagesize * (pagenum - 1)).limit(pagesize).get({
+        getCount: true
+      })
+
+    total = subscriptionRes.count
+    pages = Math.ceil(total / pagesize)
 
     return handler.result({
       data: subscriptionRes.data,
-      total: count.total,
+      total,
       pagesize,
       pagenum,
       pages,
@@ -52,7 +96,8 @@ module.exports = {
     start_date,
     duration_time,
     status = 0,
-    mode = 0
+    mode = 0,
+    pay_fee = 0
   }) {
 
     if (!user_id || !subscription_plan || !start_date || !duration_time) {
@@ -67,7 +112,8 @@ module.exports = {
       start_date,
       duration_time,
       status,
-      mode
+      mode,
+      pay_fee
     })
 
     // 创建订阅后累加会员时长 
@@ -87,4 +133,28 @@ module.exports = {
       data: subscriptionRes.data,
     })
   },
+
+  /**
+   * 订阅删除 - 仅供测试用 一般禁止删除订阅记录
+   */
+  async subscriptionDelete() {
+    const {
+      _id
+    } = this.params
+
+    if (!_id) {
+      throw handler.result({
+        code: 40001
+      })
+    }
+
+    // 可单删可批量删
+    const subscriptionRes = await db.collection('sv-id-vip-subscription').where({
+      '_id': Array.isArray(_id) ? dbCmd.in(_id) : dbCmd.eq(_id)
+    }).remove()
+
+    return handler.result({
+      data: subscriptionRes,
+    })
+  }
 }

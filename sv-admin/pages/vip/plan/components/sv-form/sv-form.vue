@@ -46,11 +46,13 @@
           </el-form-item>
           <el-form-item prop="price" label="定价(分)" required>
             <el-input-number class="sv-el-input-number" v-model="formData.price" :min="0" />
-            <text class="margin-left">=&nbsp;{{ convertFenToYuan(formData.price) }}&nbsp;元</text>
+            <text class="margin-left text-cyan">
+              =&nbsp;{{ convertFenToYuan(formData.price) }}&nbsp;元
+            </text>
           </el-form-item>
           <el-form-item prop="discount" label="折扣(分)" required>
             <el-input-number class="sv-el-input-number" v-model="formData.discount" :min="0" />
-            <text class="margin-left">
+            <text class="margin-left text-cyan">
               =&nbsp;{{ convertFenToYuan(formData.discount) }}&nbsp;元
             </text>
           </el-form-item>

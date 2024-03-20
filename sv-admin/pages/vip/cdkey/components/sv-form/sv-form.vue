@@ -60,7 +60,15 @@
             />
           </el-form-item>
           <el-form-item v-if="formMode == 'onekey'" prop="num" label="生成条数" required>
-            <el-input-number class="sv-el-input-number" v-model="formData.num" :min="1" />
+            <el-input-number
+              class="sv-el-input-number"
+              v-model="formData.num"
+              :min="1"
+              :max="20"
+              :step="1"
+              step-strictly
+            />
+            <text class="margin-left text-cyan">1 ~ 20</text>
           </el-form-item>
         </el-form>
       </view>
@@ -98,7 +106,7 @@ const formBase = {
   bind_plan: '',
   valid_date: '',
   status: 0,
-  num: 1 // 批量生成条数
+  num: 1 // 批量生成条数，最小1，最多20
 }
 
 watchEffect(() => {
@@ -156,11 +164,11 @@ const statusList = [
   }
 ]
 const bindPlanList = ref([])
-async function handleList() {
+async function handleDictList() {
   const viplistRes = await vipList()
   bindPlanList.value = viplistRes.data || []
 }
-handleList()
+handleDictList()
 </script>
 
 <style lang="scss">

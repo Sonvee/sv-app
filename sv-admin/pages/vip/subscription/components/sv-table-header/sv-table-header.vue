@@ -1,21 +1,21 @@
 <template>
   <view class="sv-table-header">
     <el-form class="sv-el-form" inline :model="filterForm" :size="size">
-      <el-form-item label="CDKEY">
+      <el-form-item label="订阅用户UID">
         <el-input
-          v-model="filterForm.cdkey"
-          placeholder="请输入CDKEY"
+          v-model="filterForm.user_id"
+          placeholder="请输入订阅用户UID"
           clearable
           style="width: 150px"
         />
       </el-form-item>
-      <el-form-item label="绑定套餐">
+      <el-form-item label="订阅模式">
         <sv-dict-select
-          v-model="filterForm.bind_plan"
-          placeholder="请选择绑定套餐"
-          :dictList="bindPlanList"
-          keyName="plan_name"
-          valueName="plan_id"
+          v-model="filterForm.mode"
+          placeholder="请选择订阅模式"
+          :dictList="modeList"
+          keyName="text"
+          valueName="value"
         ></sv-dict-select>
       </el-form-item>
       <el-form-item>
@@ -28,7 +28,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import { vipList } from '@/service/api/vip'
 
 const props = defineProps({
   size: {
@@ -41,16 +40,21 @@ const emits = defineEmits(['submit'])
 
 // 过滤条件表单
 const filterForm = ref({
-  cdkey: '',
-  bind_plan: ''
+  user_id: '',
+  mode: '',
+  start_date: ''
 })
 
-const bindPlanList = ref([])
-async function handleDictList() {
-  const viplistRes = await vipList()
-  bindPlanList.value = viplistRes.data || []
-}
-handleDictList()
+const modeList = [
+  {
+    text: '普通支付',
+    value: 0
+  },
+  {
+    text: '激活码',
+    value: 1
+  }
+]
 
 // 提交
 function submit() {
@@ -60,8 +64,9 @@ function submit() {
 // 重置
 function reset() {
   filterForm.value = {
-    cdkey: '',
-    bind_plan: ''
+    user_id: '',
+    mode: '',
+    start_date: ''
   }
 }
 </script>

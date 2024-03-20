@@ -121,3 +121,23 @@ export function vipPayActive(data) {
     data,
   })
 }
+
+/**
+ * 订阅记录
+ * @param {Object} data {user_id, mode, start_date}
+ */
+export function subscriptionList(data) {
+  return request({
+    url: '/vip/subscriptionList',
+    method: 'POST',
+    data,
+  })
+}
+
+export function subscriptionDelete(data) {
+  return request({
+    url: '/vip/subscriptionDelete',
+    method: 'POST',
+    data,
+  })
+}

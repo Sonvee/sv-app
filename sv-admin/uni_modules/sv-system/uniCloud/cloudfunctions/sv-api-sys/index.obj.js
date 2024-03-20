@@ -77,6 +77,5 @@ module.exports = {
   dictList,
   dictAdd,
   dictUpdate,
-  dictDelete
-
+  dictDelete,
 }

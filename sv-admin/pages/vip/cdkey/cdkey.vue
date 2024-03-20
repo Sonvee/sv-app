@@ -7,11 +7,16 @@
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
-      <el-button type="primary" plain size="small" :icon="Plus" @click="onekey">一键新增</el-button>
+      <el-button type="primary" plain size="small" :icon="Pointer" @click="onekey">
+        一键新增
+      </el-button>
+      <el-button type="danger" plain size="small" :icon="Delete" @click="selectionRemove">
+        批量删除
+      </el-button>
       <el-button type="success" plain size="small" :icon="Refresh" @click="cdkeyVerify">
         刷新状态
       </el-button>
-      <el-button type="danger" plain size="small" :icon="Delete" @click="invalidRemove">
+      <el-button type="danger" plain size="small" :icon="Close" @click="invalidRemove">
         清空失效
       </el-button>
       <view style="flex: 1"></view>
@@ -24,7 +29,14 @@
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
-    <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
+    <el-table
+      class="sv-el-table"
+      v-loading="loading"
+      :data="tableData"
+      border
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column type="selection" align="center" width="50" fixed="left" />
       <el-table-column prop="cdkey" label="激活码" :min-width="300" show-overflow-tooltip>
         <template #default="scope">
           {{ scope.row.cdkey }}
@@ -92,7 +104,9 @@ import {
   RefreshRight,
   Refresh,
   Plus,
+  Pointer,
   Delete,
+  Close,
   View,
   Hide,
   DocumentCopy
@@ -108,6 +122,7 @@ import {
 import { useSysStore } from '@/store/sys'
 import { timeFormat, setClipboard } from '@/utils/util'
 import { createCDKey } from '@/uni_modules/sv-id-vip/utils'
+import { isEmpty } from 'lodash-es'
 
 const showHeader = ref(useSysStore().platform == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
@@ -160,7 +175,7 @@ function add() {
   showForm.value = true
 }
 
-//
+// 一键新增
 function onekey() {
   formInit.value = {} // 置空参数
   formMode.value = 'onekey'
@@ -235,13 +250,40 @@ function del(item) {
     .catch(() => {})
 }
 
+// 多选
+const batchSelection = ref([])
+function handleSelectionChange(e) {
+  batchSelection.value = e.map((item) => item.cdkey)
+}
+
+// 批量删除
+function selectionRemove() {
+  if (isEmpty(batchSelection.value)) return
+
+  ElMessageBox.confirm(`确认批量删除所选项吗？`, '系统提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(async () => {
+      // 确认批量删除操作
+      const deleteRes = await cdkeyDelete({
+        cdkey: batchSelection.value
+      })
+
+      ElMessage({
+        type: 'success',
+        message: deleteRes?.message || deleteRes?.error?.message
+      })
+
+      refresh()
+    })
+    .catch(() => {})
+}
+
 // 头部筛选栏筛选条件
 async function submitFilter(e) {
   filterParams.value = e
-  ElMessage({
-    type: 'success',
-    message: '搜索成功(仅展示)'
-  })
   handleTable({ ...pagingParams.value, ...e })
 }
 

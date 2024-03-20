@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 import { getDictById } from '@/utils/sys'
 
 const props = defineProps({
@@ -39,6 +39,10 @@ const dictData = ref(props.dictList)
 async function handleDict() {
   if (props.dictType) {
     dictData.value = await getDictById(props.dictType)
+    return
+  }
+  if (props.dictList) {
+    dictData.value = props.dictList
   }
 }
 

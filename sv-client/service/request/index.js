@@ -10,7 +10,8 @@ import config from '@/configs/index.js'
  *    header,
  *    responseType,
  *    timeout,
- * 
+ *    notip: 关闭任何提示,
+ *    modal: 使用modal提示错误信息
  * }
  */
 const request = (options) => {

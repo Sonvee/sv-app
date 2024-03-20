@@ -7,37 +7,78 @@ module.exports = {
   async cdkeyList() {
     let {
       pagesize = 20,
-        pagenum = 1
+        pagenum = 1,
+        cdkey,
+        bind_plan,
     } = this.params
 
     // 转换为Number类型
     pagesize = +pagesize
     pagenum = +pagenum
 
-    // user_id根据uni-id-users用户表联表查询
-    const dbJQL = uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+    // 页码不可小于1
+    if (pagenum < 1) {
+      throw handler.result({
+        code: 40001,
+        message: 'pagenum不可小于1'
+      })
+    }
+
+    let cdkeyRes, pages, total
+
+    const dbJQL = uniCloud.databaseForJQL({
       clientInfo: this.getClientInfo()
     })
 
-    // 使用getTemp先过滤处理获取临时表再联表查询，推荐用法
-    // 注意结尾的方法是getTemp，对表过滤得到临时表
     const tempPlanDB = dbJQL.collection('sv-id-vip-plans').getTemp()
-    let cdkeyRes
-    if (pagesize > 1) {
-      cdkeyRes = await dbJQL.collection('sv-id-vip-cdkeys', tempPlanDB).orderBy('create_date', 'desc')
-        .skip(pagesize * (pagenum - 1)).limit(pagesize).get()
-    } else {
-      cdkeyRes = await dbJQL.collection('sv-id-vip-cdkeys', tempPlanDB).orderBy('create_date', 'desc').get()
+
+    // 全量查询
+    if (pagesize < 1) {
+      cdkeyRes = await dbJQL.collection('sv-id-vip-cdkeys', tempPlanDB).orderBy('create_date', 'desc').get({
+        getCount: true
+      })
+      // 总数统计
+      total = cdkeyRes.count
+      // 页数统计
+      pages = Math.ceil(total / pagesize)
+
+      throw handler.result({
+        data: cdkeyRes.data,
+        total,
+        pagesize,
+        pagenum,
+        pages,
+        params: this.params
+      })
     }
 
-    // 总数统计
-    const count = await db.collection('sv-id-vip-cdkeys').count()
-    // 页数统计
-    const pages = Math.ceil(count.total / pagesize)
+    // 分页查询
+    let query = dbJQL.collection('sv-id-vip-cdkeys', tempPlanDB)
+
+    // 构建筛选条件(对象形式)
+    const conditions = {}
+    if (cdkey) {
+      conditions.cdkey = dbCmd.eq(cdkey)
+    }
+    if (bind_plan) {
+      conditions["bind_plan.0.plan_id"] = dbCmd.eq(bind_plan) // 联表查询需要查询联表对应项中字段
+    }
+    // 将所有有效的筛选条件添加到查询对象中
+    if (Object.keys(conditions).length > 0) {
+      query = query.where(conditions)
+    }
+
+    cdkeyRes = await query.orderBy('create_date', 'desc')
+      .skip(pagesize * (pagenum - 1)).limit(pagesize).get({
+        getCount: true
+      })
+
+    total = cdkeyRes.count
+    pages = Math.ceil(total / pagesize)
 
     return handler.result({
       data: cdkeyRes.data,
-      total: count.total,
+      total,
       pagesize,
       pagenum,
       pages,
@@ -91,12 +132,13 @@ module.exports = {
       })
     }
 
+    // 可单删可批量删
     const cdkeyRes = await db.collection('sv-id-vip-cdkeys').where({
-      cdkey
+      'cdkey': Array.isArray(cdkey) ? dbCmd.in(cdkey) : dbCmd.eq(cdkey)
     }).remove()
 
     return handler.result({
-      data: cdkeyRes.data,
+      data: cdkeyRes,
     })
   },
   // cdkey激活
@@ -248,7 +290,7 @@ module.exports = {
     const cdkeyRes = await db.collection('sv-id-vip-cdkeys').where({
       status: dbCmd.in([1, 2])
     }).remove()
-    
+
     return handler.result({
       data: cdkeyRes,
     })

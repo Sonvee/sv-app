@@ -15,18 +15,22 @@
       <el-table-column prop="valid_day" label="有效期(天)" :width="120" />
       <el-table-column prop="price" label="定价(分)" :width="200">
         <template #default="scope">
-          {{ scope.row.price }}分 = {{ convertFenToYuan(scope.row.price) }}元
+          {{ scope.row.price }}分
+          <text class="text-cyan">= {{ convertFenToYuan(scope.row.price) }}元</text>
         </template>
       </el-table-column>
       <el-table-column prop="discount" label="折扣(分)" :width="200">
         <template #default="scope">
-          {{ scope.row.discount }}分 = {{ convertFenToYuan(scope.row.discount) }}元
+          {{ scope.row.discount }}分
+          <text class="text-cyan">= {{ convertFenToYuan(scope.row.discount) }}元</text>
         </template>
       </el-table-column>
       <el-table-column label="售价(分)" :width="200">
         <template #default="scope">
-          {{ scope.row.price - scope.row.discount }}分 =
-          {{ convertFenToYuan(scope.row.price - scope.row.discount) }}元
+          {{ scope.row.price - scope.row.discount }}分
+          <text class="text-cyan">
+            = {{ convertFenToYuan(scope.row.price - scope.row.discount) }}元
+          </text>
         </template>
       </el-table-column>
       <el-table-column label="配置" align="center" :width="160" fixed="right">

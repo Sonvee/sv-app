@@ -15,6 +15,10 @@ import {
 import {
   cdkeyList
 } from '@/service/api/vip';
+import {
+  testAddList,
+  testList
+} from '@/service/api/test';
 
 
 
@@ -32,6 +36,9 @@ import {
  */
 export function fileTemplate(type) {
   switch (type) {
+    case 'test':
+      testTemplate()
+      break
     case 'app':
       appTemplate()
       break
@@ -46,6 +53,11 @@ export function fileTemplate(type) {
  */
 export function fileImport(type, cover = false, callback) {
   switch (type) {
+    case 'test':
+      testImport(cover, (res) => {
+        if (callback) callback(res)
+      })
+      break
     case 'app':
       appImport(cover, (res) => {
         if (callback) callback(res)
@@ -66,6 +78,9 @@ export function fileExport(type, all = false, params, callback) {
   }
   if (all) param.pagesize = -1
   switch (type) {
+    case 'test':
+      testExport(param)
+      break
     case 'logs':
       logExport(param)
       break
@@ -109,6 +124,58 @@ function replaceMapKey(data, keyMap) {
 
 
 // ================== 导出 ==================
+
+/**
+ * 测试用例导出
+ */
+const testMapping = {
+  test_id: '测试用例ID',
+  test_name: '测试用例名称',
+}
+
+async function testExport(params) {
+  const dataRes = await testList(params)
+  const handleData = dataRes.data?.map((item) => {
+    return {
+      test_id: {
+        v: item.test_id,
+        t: "s",
+        s: {
+          alignment: {
+            horizontal: "left", // 数字列会默认右对齐
+          }
+        }
+      },
+      test_name: {
+        v: item.test_name,
+        t: "s",
+        s: {
+          alignment: {
+            horizontal: "left",
+          },
+          font: {
+            color: {
+              rgb: "FF0000" // 文字标红
+            }
+          }
+        }
+      },
+    }
+  })
+  exportToExcel({
+    params: {
+      data: handleData,
+      title: 'logs',
+      mapping: testMapping,
+      type: 'file',
+      // merges: [{ start: [0, 1], end: [0, 4] }]
+    },
+    autoDownload: true,
+  }).then((res) => {
+    // console.log('onExport ===>', res)
+  })
+}
+
 
 /**
  * 日志导出
@@ -257,6 +324,34 @@ async function cdkeyExport(params) {
 // ================== 导入 ==================
 
 /**
+ * 测试用例导入
+ */
+async function testImport(cover, callback) {
+  let sheetList = [{
+    index: 0
+  }, {
+    index: 1
+  }]
+  const toJsonRes = await importToJson(sheetList)
+  const dataRes = toJsonRes.data.data || []
+  // 转换为接口原数据格式
+  const handleData = dataRes.map((item) => {
+    return {
+      test_id: item['测试用例ID'],
+      test_name: item['测试用例名称'],
+    }
+  })
+  console.table(toJsonRes.data);
+  console.table(handleData);
+  const importRes = await testAddList({
+    data: handleData,
+    cover
+  })
+  if (callback) callback(importRes)
+}
+
+
+/**
  * 应用导入
  */
 async function appImport(cover, callback) {
@@ -297,6 +392,26 @@ async function appImport(cover, callback) {
 
 
 // ================== 模版 ==================
+
+/**
+ * 测试用例模板
+ */
+async function testTemplate() {
+  exportToExcel({
+    params: {
+      data: [{
+        test_id: '测试id',
+        test_name: '测试名称',
+      }], // 若空数据数组，需要有个空对象
+      title: 'test',
+      mapping: testMapping,
+      type: 'file',
+    },
+    autoDownload: true,
+  }).then((res) => {
+    // console.log('onExport ===>', res)
+  })
+}
 
 /**
  * 应用模板

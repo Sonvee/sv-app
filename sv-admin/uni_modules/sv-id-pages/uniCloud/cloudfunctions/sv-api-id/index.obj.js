@@ -30,17 +30,41 @@ const {
 module.exports = {
   _before: async function() { // 通用预处理器
     const httpInfo = this.getHttpInfo()
-    if(!httpInfo) return // 云对象之间调用时无httpInfo处理
-    
+    if (!httpInfo) return // 云对象之间调用时无httpInfo处理
+
     // token身份安全校验
-    const apiPath = httpInfo.path
-    const cToken = await handler.checkToken({
-      clientInfo: this.getClientInfo(),
-      token: httpInfo.headers.authorization,
-      mode: apiPath.includes('List') ? 'open' : 'strict' // 所有List接口均开放
-    })
-    if (cToken.code !== 200) {
-      throw cToken
+    // 校验白名单
+    const WHITE_LIST = []
+    // 校验名单
+    const API_MODE = {
+      '/userInfo': 'easy',
+      '/userList': 'strict',
+      '/userUpdate': 'easy',
+      '/userDelete': 'strict',
+      '/roleList': 'easy',
+      '/roleUpdate': 'strict',
+      '/roleAdd': 'strict',
+      '/roleDelete': 'strict',
+      '/userRoleAdd': 'easy',
+      '/userRoleDelete': 'easy',
+      '/permissionList': 'easy',
+      '/permissionUpdate': 'strict',
+      '/permissionAdd': 'strict',
+      '/permissionDelete': 'strict',
+      '/logList': 'strict',
+    }
+
+    const apiPath = this.getHttpInfo().path
+    // 不是白名单的api需要进行校验
+    if (!WHITE_LIST.includes(apiPath)) {
+      const cToken = await handler.checkToken({
+        clientInfo: this.getClientInfo(),
+        token: this.getHttpInfo().headers.authorization,
+        mode: API_MODE[apiPath]
+      })
+      if (cToken.code !== 200) {
+        throw cToken
+      }
     }
 
     this.params = {} // 初始化参数

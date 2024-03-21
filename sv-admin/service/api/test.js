@@ -16,6 +16,14 @@ export function testAdd(data) {
 	})
 }
 
+export function testAddList(data) {
+	return request({
+		url: '/test/testAddList',
+		method: 'POST',
+		data
+	})
+}
+
 export function testUpdate(data) {
 	return request({
 		url: '/test/testUpdate',

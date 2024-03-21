@@ -41,22 +41,44 @@ module.exports = {
 
     // token身份安全校验
     // 校验白名单
-    const WHITE_LIST = [
-      '/vipList',
-      '/benefitList',
-      '/vipPayActive',
-      '/cdkeyActive',
-      '/vipVerify',
-      '/subscriptionList'
-    ]
-    const apiPath = httpInfo.path
-    const cToken = await handler.checkToken({
-      clientInfo: this.getClientInfo(),
-      token: httpInfo.headers.authorization,
-      mode: WHITE_LIST.includes(apiPath) ? 'easy' : 'strict'
-    })
-    if (cToken.code !== 200) {
-      throw cToken
+    const WHITE_LIST = []
+    // 校验名单
+    const API_MODE = {
+      '/vipList': 'open',
+      '/vipUpdate': 'strict',
+      '/vipAdd': 'strict',
+      '/vipDelete': 'strict',
+      '/vipPayActive': 'open',
+      '/vipValidUpdate': 'easy',
+      '/vipVerify': 'open',
+      '/vipVerifyAuto': 'easy',
+      '/benefitList': 'open',
+      '/benefitUpdate': 'strict',
+      '/benefitAdd': 'strict',
+      '/benefitDelete': 'strict',
+      '/cdkeyList': 'strict',
+      '/cdkeyUpdate': 'strict',
+      '/cdkeyAdd': 'strict',
+      '/cdkeyDelete': 'strict',
+      '/cdkeyActive': 'open',
+      '/cdkeyVerifyAuto': 'strict',
+      '/cdkeyInvalidRemove': 'strict',
+      '/subscriptionList': 'open',
+      '/subscriptionAdd': 'strict',
+      '/subscriptionDelete': 'strict',
+    }
+
+    const apiPath = this.getHttpInfo().path
+    // 不是白名单的api需要进行校验
+    if (!WHITE_LIST.includes(apiPath)) {
+      const cToken = await handler.checkToken({
+        clientInfo: this.getClientInfo(),
+        token: this.getHttpInfo().headers.authorization,
+        mode: API_MODE[apiPath]
+      })
+      if (cToken.code !== 200) {
+        throw cToken
+      }
     }
 
     this.params = {} // 初始化参数

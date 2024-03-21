@@ -30,71 +30,45 @@
       </el-col>
       <el-col :xs="24" :sm="24" :md="24" :lg="10" :xl="8">
         <view class="index-row-1 card flex" style="justify-content: space-evenly">
-          <a href="https://uniapp.dcloud.net.cn" target="_blank">
-            <image
-              class="title-image"
-              src="/static/logo.png"
-              mode="heightFix"
-              title="uniapp"
-            ></image>
+          <a class="flex-vhc" href="https://uniapp.dcloud.net.cn" target="_blank">
+            <text class="text-green text-xsl sv-icons-uni-app-square"></text>
           </a>
-          <a href="https://uniapp.dcloud.net.cn/uniCloud" target="_blank">
-            <image
-              class="title-image"
-              src="/static/logo.png"
-              mode="heightFix"
-              title="unicloud"
-            ></image>
+          <a class="flex-vhc" href="https://uniapp.dcloud.net.cn/uniCloud" target="_blank">
+            <text class="text-olive text-xsl sv-icons-cloud-code"></text>
           </a>
-          <a href="https://cn.vuejs.org" target="_blank">
-            <image class="title-image" src="/static/logo.png" mode="heightFix" title="vue3"></image>
+          <a class="flex-vhc" href="https://cn.vuejs.org" target="_blank">
+            <text class="text-brown text-xsl sv-icons-vue"></text>
           </a>
-          <a href="https://element-plus.gitee.io/zh-CN" target="_blank">
-            <image
-              class="title-image"
-              style="margin-right: 0"
-              src="/static/logo.png"
-              mode="heightFix"
-              title="element-plus"
-            ></image>
+          <a class="flex-vhc" href="https://element-plus.gitee.io/zh-CN" target="_blank">
+            <text class="text-blue text-xsl sv-icons-element-ui"></text>
           </a>
         </view>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="24">
-        <view class="index-row-2 card">
-          <el-carousel trigger="click" height="260px">
-            <el-carousel-item v-for="item in 4" :key="item">
-              <view class="flex-vhc" style="width: 100%; height: 100%">
-                {{ item }}
-              </view>
-            </el-carousel-item>
-          </el-carousel>
+        <view class="index-row-2 card flex-col">
+          <view class="card-title">柱状图</view>
+          <view class="flex-sub">
+            <qiun-data-charts type="column" :chartData="barChartData" />
+          </view>
         </view>
       </el-col>
     </el-row>
     <el-row :gutter="10">
       <el-col :xs="24" :sm="24" :md="24" :lg="10" :xl="14">
-        <view class="index-row-3 card">
-          <view class="theme-test flex-vhc">主题配色测试块</view>
+        <view class="index-row-3 card flex-col">
+          <view class="card-title">饼图</view>
+          <view class="flex-sub">
+            <qiun-data-charts type="pie" :chartData="pieChartData"></qiun-data-charts>
+          </view>
         </view>
       </el-col>
       <el-col :xs="24" :sm="24" :md="24" :lg="14" :xl="10">
-        <view class="index-row-3 card">
-          <view class="donate-title">捐赠支持</view>
-          <view class="flex" style="justify-content: space-evenly; padding: 10px 0">
-            <image
-              class="pay-image"
-              src="https://mp-74bfcbac-6ba6-4f39-8513-8831390ff75a.cdn.bspapp.com/pay/pay-ali.jpg"
-            ></image>
-            <image
-              class="pay-image"
-              src="https://mp-74bfcbac-6ba6-4f39-8513-8831390ff75a.cdn.bspapp.com/pay/pay-wx.jpg"
-            ></image>
-          </view>
-          <view class="flex-hc">
-            <view class="glitch-text" data-glitch="求求一杯咖啡吧 ~">求求一杯咖啡吧 ~</view>
+        <view class="index-row-3 card flex-col">
+          <view class="card-title">条状图</view>
+          <view class="flex-sub">
+            <qiun-data-charts type="bar" :opts="{ xAxis: { max: 40 } }" :chartData="barChartData" />
           </view>
         </view>
       </el-col>
@@ -104,9 +78,60 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
 import { getNowTimeName } from '@/utils/util'
 
 const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
+
+const barChartData = ref()
+const pieChartData = ref()
+
+onLoad(() => {
+  setTimeout(() => {
+    barChartData.value = {
+      categories: ['2016', '2017', '2018', '2019', '2020', '2021'],
+      series: [
+        {
+          name: '目标值',
+          data: [35, 36, 31, 33, 13, 34]
+        },
+        {
+          name: '完成量',
+          data: [18, 27, 21, 24, 6, 28]
+        }
+      ]
+    }
+
+    pieChartData.value = {
+      series: [
+        {
+          data: [
+            {
+              name: '一班',
+              value: 50
+            },
+            {
+              name: '二班',
+              value: 30
+            },
+            {
+              name: '三班',
+              value: 20
+            },
+            {
+              name: '四班',
+              value: 18
+            },
+            {
+              name: '五班',
+              value: 8
+            }
+          ]
+        }
+      ]
+    }
+  }, 2000)
+})
 </script>
 
 <style lang="scss">
@@ -117,7 +142,7 @@ const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
   }
 
   .index-row-2 {
-    height: 280px;
+    height: 300px;
     padding: 10px;
   }
 
@@ -153,7 +178,7 @@ const authInfo = computed(() => getApp().$svIdPagesStore.store.userInfo)
   color: $uni-color-primary;
 }
 
-.donate-title {
+.card-title {
   width: 100%;
   height: 30px;
   color: #999999;

@@ -11,7 +11,12 @@
         批量删除
       </el-button>
       <view style="flex: 1"></view>
-      <sv-excel-menu type="test" :exportParams="pagingParams"></sv-excel-menu>
+      <sv-excel-menu
+        type="test"
+        :exportParams="pagingParams"
+        @noCoverImport="importOver"
+        @coverImport="importOver"
+      ></sv-excel-menu>
       <el-button
         type="primary"
         link
@@ -211,6 +216,15 @@ function selectionRemove() {
       refresh()
     })
     .catch(() => {})
+}
+
+// 导入
+function importOver(res) {
+  ElMessage({
+    type: res.code == 200 ? 'success' : 'warning',
+    message: res.message
+  })
+  refresh()
 }
 
 // 头部筛选栏筛选条件

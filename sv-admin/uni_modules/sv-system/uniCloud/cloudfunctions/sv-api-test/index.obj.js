@@ -3,6 +3,7 @@ const handler = require('sv-handler')
 const {
   testList,
   testAdd,
+  testAddList,
   testUpdate,
   testDelete,
 } = require('./module/test/index.js')
@@ -16,13 +17,23 @@ module.exports = {
   _before: async function() { // 通用预处理器
     // token身份安全校验
     const WHITE_LIST = [] // 校验白名单，例如'/testList'
+    // 校验名单
+    const API_MODE = {
+      '/testList': 'open',
+      '/testAdd': 'open',
+      '/testAddList': 'open',
+      '/testUpdate': 'open',
+      '/testDelete': 'open',
+      '/statList': 'open',
+      '/statEmpty': 'open',
+    }
     const apiPath = this.getHttpInfo().path
     // 不是白名单的api需要进行校验
     if (!WHITE_LIST.includes(apiPath)) {
       const cToken = await handler.checkToken({
         clientInfo: this.getClientInfo(),
         token: this.getHttpInfo().headers.authorization,
-        mode: 'open'
+        mode: API_MODE[apiPath]
       })
       if (cToken.code !== 200) {
         throw cToken
@@ -48,6 +59,7 @@ module.exports = {
    */
   testList,
   testAdd,
+  testAddList,
   testUpdate,
   testDelete,
 

@@ -21,6 +21,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sv-icons-vue:before {
+  content: "\e69a";
+}
+
+.sv-icons-element-ui:before {
+  content: "\e601";
+}
+
+.sv-icons-cloud-code:before {
+  content: "\e918";
+}
+
+.sv-icons-app-square:before {
+  content: "\e6a6";
+}
+
+.sv-icons-uni-app:before {
+  content: "\e600";
+}
+
+.sv-icons-uni-app-square:before {
+  content: "\e6af";
+}
+
 .sv-icons-no-ad:before {
   content: "\e6e5";
 }

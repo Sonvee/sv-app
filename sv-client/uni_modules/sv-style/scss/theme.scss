@@ -66,8 +66,8 @@ $themes: (
 $uni-color-danger: #f56c6c;
 $uni-color-info: #909399;
 // sv-admin导航侧边栏
-$sv-nav-bar-height: 50px;
-$sv-side-bar-width: 200px;
+$sv-admin-nav-bar-height: 50px;
+$sv-admin-side-bar-width: 200px;
 
 :root {
   // 跟随系统配色normal，考虑到后续可能不止light和dark两种主题，故不做light和dark之间切换

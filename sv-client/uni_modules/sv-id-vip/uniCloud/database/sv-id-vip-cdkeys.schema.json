@@ -38,7 +38,7 @@
     },
     "status": {
       "bsonType": "int",
-      "description": "状态，0-待使用，1-已使用，2-已失效",
+      "description": "状态，0-待使用，1-已使用，2-已失效(过期或绑定的套餐不存在)",
       "defaultValue": 0,
       "enum": [{
         "text": "待使用",

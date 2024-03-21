@@ -47,7 +47,7 @@
       "description": "订阅方式，0-普通支付，1-激活码",
       "defaultValue": 0,
       "enum": [{
-        "text": "付款",
+        "text": "普通支付",
         "value": 0
       }, {
         "text": "激活码",

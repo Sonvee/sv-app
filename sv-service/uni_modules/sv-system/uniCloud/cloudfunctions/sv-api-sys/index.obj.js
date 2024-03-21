@@ -26,6 +26,22 @@ module.exports = {
   _before: async function() { // 通用预处理器
     // token身份安全校验
     const WHITE_LIST = [] // 校验白名单，例如'/menuList'
+    // 校验名单
+    const API_MODE = {
+      '/menuList': 'open',
+      '/menuAdd': 'strict',
+      '/menuDelete': 'strict',
+      '/menuUpdate': 'strict',
+      '/appList': 'open',
+      '/appAdd': 'strict',
+      '/appAddList': 'strict',
+      '/appDelete': 'strict',
+      '/appUpdate': 'strict',
+      '/dictList': 'open',
+      '/dictAdd': 'strict',
+      '/dictUpdate': 'strict',
+      '/dictDelete': 'strict',
+    }
     const apiPath = this.getHttpInfo().path
     // 不是白名单的api需要进行校验
     if (!WHITE_LIST.includes(apiPath)) {
@@ -33,7 +49,7 @@ module.exports = {
       const cToken = await handler.checkToken({
         clientInfo: this.getClientInfo(),
         token: this.getHttpInfo().headers.authorization,
-        mode: apiPath.includes('List') ? 'open' : 'strict'
+        mode: API_MODE[apiPath]
       })
       if (cToken.code !== 200) {
         throw cToken
@@ -77,6 +93,5 @@ module.exports = {
   dictList,
   dictAdd,
   dictUpdate,
-  dictDelete
-
+  dictDelete,
 }

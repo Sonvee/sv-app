@@ -1,7 +1,7 @@
 // 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
 {
   "bsonType": "object",
-  "required": ["benefit_id", "benefit_name"],
+  "required": ["benefit_id", "benefit_name", "icon"],
   "permission": {
     "read": true,
     "create": "'VIP_MANAGE' in auth.permission",

@@ -1,3 +1,7 @@
+/**
+ * admin布局样式方案
+ */
+
 .uni-app--showleftwindow uni-main {
   position: relative;
 }
@@ -22,7 +26,7 @@
   overflow-x: hidden;
 
   @include useTheme {
-    background-color: getTheme('sv-mask-color');
+    background-color: getTheme('sv-admin-mask-color');
   }
 }
 
@@ -34,4 +38,73 @@
   box-shadow: -1px -1px 4px 0 rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   // overflow-x: hidden;
+}
+
+
+/**
+ * 页面公共容器类
+ */
+
+.page-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: auto;
+}
+
+.sv-table-header {
+  width: 100%;
+  padding: 10px 10px 0 10px;
+  box-sizing: border-box;
+
+  @include useTheme {
+    border-bottom: 1px solid #{getTheme('sv-admin-border-color')};
+  }
+
+  :deep(.el-form-item) {
+    margin-bottom: 20px;
+  }
+}
+
+.table-page-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: auto;
+
+  .header,
+  .control {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .sv-pagination {
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  :deep(.nopadding-cell) {
+    // 取消该单元格内边距
+    padding: 0 !important;
+  }
+
+  .avatar-image {
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.web-page {
+  height: 100%;
+  overflow: auto;
 }

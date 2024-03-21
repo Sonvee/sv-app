@@ -2,37 +2,37 @@
 .el-loading-mask {
   @include useTheme {
     // hex拼接alpha形成半透明遮罩色
-    --el-mask-color: #{getTheme('sv-mask-color') + 'aa'};
+    --el-mask-color: #{getTheme('sv-admin-mask-color') + 'aa'};
   }
 }
 
 .el-popper {
   @include useTheme {
-    color: #{getTheme('sv-text-color')};
-    --el-text-color-regular: #{getTheme('sv-text-color')};
-    --el-bg-color-overlay: #{getTheme('sv-popper-bg-color')};
-    --el-fill-color-light: #{getTheme('sv-hover-color')};
-    --el-dropdown-menuItem-hover-fill: #{getTheme('sv-hover-color')};
+    color: #{getTheme('sv-admin-text-color')};
+    --el-text-color-regular: #{getTheme('sv-admin-text-color')};
+    --el-bg-color-overlay: #{getTheme('sv-admin-popper-bg-color')};
+    --el-fill-color-light: #{getTheme('sv-admin-hover-color')};
+    --el-dropdown-menuItem-hover-fill: #{getTheme('sv-admin-hover-color')};
     --el-dropdown-menuItem-hover-color: #{$uni-color-primary};
-    --el-fill-color-blank: #{getTheme('sv-popper-bg-color')};
-    --el-text-color-primary: #{getTheme('sv-border-hl-color')};
-    --el-border-color-light: #{getTheme('sv-border-color')};
-    --el-disabled-bg-color: #{getTheme('sv-popper-bg-color')};
-    --el-disabled-border-color: #{getTheme('sv-border-color')};
-    --el-border-color-extra-light: #{getTheme('sv-hover-hl-color')};
+    --el-fill-color-blank: #{getTheme('sv-admin-popper-bg-color')};
+    --el-text-color-primary: #{getTheme('sv-admin-border-hl-color')};
+    --el-border-color-light: #{getTheme('sv-admin-border-color')};
+    --el-disabled-bg-color: #{getTheme('sv-admin-popper-bg-color')};
+    --el-disabled-border-color: #{getTheme('sv-admin-border-color')};
+    --el-border-color-extra-light: #{getTheme('sv-admin-hover-hl-color')};
 
     :deep(.el-date-table) {
-      --el-datepicker-inrange-bg-color: #{getTheme('sv-hover-color')};
+      --el-datepicker-inrange-bg-color: #{getTheme('sv-admin-hover-color')};
     }
     :deep(.el-time-spinner__item.is-active) {
       --el-text-color-primary: #{$uni-color-primary};
     }
     :deep(.el-table) {
-      --el-bg-color: #{getTheme('sv-popper-bg-color')};
-      --el-border-color-lighter: #{getTheme('sv-border-color')};
+      --el-bg-color: #{getTheme('sv-admin-popper-bg-color')};
+      --el-border-color-lighter: #{getTheme('sv-admin-border-color')};
     }
     :deep(.el-dropdown-menu) {
-      --el-border-color-lighter: #{getTheme('sv-border-color')};
+      --el-border-color-lighter: #{getTheme('sv-admin-border-color')};
     }
 
     :deep(.el-table-filter__content) {
@@ -43,7 +43,7 @@
       }
     }
     :deep(.el-table-filter__bottom) {
-      --el-border-color-lighter: #{getTheme('sv-border-color')};
+      --el-border-color-lighter: #{getTheme('sv-admin-border-color')};
 
       & button {
         background: transparent;
@@ -59,72 +59,72 @@
 
 .el-message-box {
   @include useTheme {
-    --el-bg-color: #{getTheme('sv-popper-bg-color')};
-    --el-border-color-lighter: #{getTheme('sv-border-color')};
-    --el-messagebox-title-color: #{getTheme('sv-text-hl-color')};
-    --el-messagebox-content-color: #{getTheme('sv-text-color')};
+    --el-bg-color: #{getTheme('sv-admin-popper-bg-color')};
+    --el-border-color-lighter: #{getTheme('sv-admin-border-color')};
+    --el-messagebox-title-color: #{getTheme('sv-admin-text-hl-color')};
+    --el-messagebox-content-color: #{getTheme('sv-admin-text-color')};
   }
 }
 
-// 指定sv-element-plus全局样式
+// 指定sv-admin-element-plus全局样式
 .sv-el-menu {
-  --el-menu-horizontal-height: #{$sv-nav-bar-height};
+  --el-menu-horizontal-height: #{$sv-admin-nav-bar-height};
   --el-menu-active-color: #{$uni-color-primary};
   --el-menu-hover-text-color: #{$uni-color-primary};
   border-right: unset !important;
 
   @include useTheme {
-    --el-menu-border-color: #{getTheme('sv-border-color')};
-    --el-menu-bg-color: #{getTheme('sv-bg-color')};
-    --el-menu-text-color: #{getTheme('sv-text-color')};
-    --el-menu-hover-bg-color: #{getTheme('sv-hover-color')};
+    --el-menu-border-color: #{getTheme('sv-admin-border-color')};
+    --el-menu-bg-color: #{getTheme('sv-admin-bg-color')};
+    --el-menu-text-color: #{getTheme('sv-admin-text-color')};
+    --el-menu-hover-bg-color: #{getTheme('sv-admin-hover-color')};
   }
 }
 
 .sv-el-tag {
   @include useDarkTheme {
-    background-color: getTheme('sv-bg-color');
+    background-color: getTheme('sv-admin-bg-color');
   }
   &:active {
     @include useTheme {
-      background-color: getTheme('sv-mask-hl-color');
+      background-color: getTheme('sv-admin-mask-hl-color');
     }
   }
 }
 
 .sv-el-form {
   @include useTheme {
-    --el-fill-color-blank: #{getTheme('sv-bg-color')};
-    --el-text-color-regular: #{getTheme('sv-text-color')};
+    --el-fill-color-blank: #{getTheme('sv-admin-bg-color')};
+    --el-text-color-regular: #{getTheme('sv-admin-text-color')};
   }
 }
 
 .sv-el-table {
   @include useTheme {
-    --el-fill-color-blank: #{getTheme('sv-bg-color')};
-    --el-table-bg-color: #{getTheme('sv-bg-color')};
-    --el-table-tr-bg-color: #{getTheme('sv-bg-color')};
-    --el-table-border-color: #{getTheme('sv-border-color')};
-    --el-table-header-bg-color: #{getTheme('sv-mask-hl-color')};
-    --el-table-header-text-color: #{getTheme('sv-text-sub-color')};
-    --el-table-text-color: #{getTheme('sv-text-color')};
-    --el-table-row-hover-bg-color: #{getTheme('sv-hover-color')};
-    --el-table-expanded-cell-bg-color: #{getTheme('sv-bg-color')};
+    --el-fill-color-blank: #{getTheme('sv-admin-bg-color')};
+    --el-table-bg-color: #{getTheme('sv-admin-bg-color')};
+    --el-table-tr-bg-color: #{getTheme('sv-admin-bg-color')};
+    --el-table-border-color: #{getTheme('sv-admin-border-color')};
+    --el-table-header-bg-color: #{getTheme('sv-admin-mask-hl-color')};
+    --el-table-header-text-color: #{getTheme('sv-admin-text-sub-color')};
+    --el-table-text-color: #{getTheme('sv-admin-text-color')};
+    --el-table-row-hover-bg-color: #{getTheme('sv-admin-hover-color')};
+    --el-table-expanded-cell-bg-color: #{getTheme('sv-admin-bg-color')};
 
     :deep(.el-button) {
-      --el-fill-color-light: #{getTheme('sv-hover-color')};
+      --el-fill-color-light: #{getTheme('sv-admin-hover-color')};
       &:active {
         color: $uni-color-primary;
-        background-color: #{getTheme('sv-hover-color')};
+        background-color: #{getTheme('sv-admin-hover-color')};
       }
     }
     :deep(.el-button-group .el-button) {
-      --el-button-text-color: #{getTheme('sv-text-color')};
-      --el-button-hover-bg-color: #{getTheme('sv-hover-color')};
-      --el-button-hover-text-color: #{getTheme('sv-hover-color')};
-      --el-fill-color-light: #{getTheme('sv-mask-hl-color')};
+      --el-button-text-color: #{getTheme('sv-admin-text-color')};
+      --el-button-hover-bg-color: #{getTheme('sv-admin-hover-color')};
+      --el-button-hover-text-color: #{getTheme('sv-admin-hover-color')};
+      --el-fill-color-light: #{getTheme('sv-admin-mask-hl-color')};
       &:active {
-        background-color: #{getTheme('sv-hover-color')};
+        background-color: #{getTheme('sv-admin-hover-color')};
       }
     }
   }
@@ -134,7 +134,7 @@
     --el-table-fixed-right-column: inset -10px 0 10px -10px rgba(255, 255, 255, 0.15);
 
     :deep(.el-button) {
-      --el-button-text-color: #{getTheme('sv-text-color')};
+      --el-button-text-color: #{getTheme('sv-admin-text-color')};
     }
   }
 
@@ -152,8 +152,8 @@
 .sv-el-pagination {
   @include useTheme {
     --el-fill-color-blank: transparent;
-    --el-text-color-regular: #{getTheme('sv-text-color')};
-    --el-pagination-button-color: #{getTheme('sv-text-sub-color')};
+    --el-text-color-regular: #{getTheme('sv-admin-text-color')};
+    --el-pagination-button-color: #{getTheme('sv-admin-text-sub-color')};
 
     // 部分样式在uniapp中会丢失，需要手动覆盖样式
     .btn-prev,
@@ -161,14 +161,14 @@
       background: transparent;
       border: none;
       cursor: pointer;
-      color: getTheme('sv-text-sub-color');
+      color: getTheme('sv-admin-text-sub-color');
 
       &[aria-disabled='true'] {
         cursor: no-drop;
       }
 
       &:active {
-        background: #{getTheme('sv-hover-color')} !important;
+        background: #{getTheme('sv-admin-hover-color')} !important;
       }
     }
   }
@@ -176,7 +176,7 @@
 
 .sv-el-drawer {
   @include useTheme {
-    --el-drawer-bg-color: #{getTheme('sv-bg-color')};
+    --el-drawer-bg-color: #{getTheme('sv-admin-bg-color')};
   }
 }
 
@@ -199,22 +199,22 @@
 }
 
 @media screen and (max-width: 768px) {
-  .sv-el-drawer {
+  .sv-admin-el-drawer {
     width: 100% !important;
   }
 }
 
 .sv-el-input-number {
   @include useTheme {
-    --el-fill-color-light: #{getTheme('sv-bg-color')};
+    --el-fill-color-light: #{getTheme('sv-admin-bg-color')};
   }
 }
 
 .sv-el-input {
   @include useTheme {
-    --el-input-bg-color: #{getTheme('sv-bg-color')};
-    --el-disabled-bg-color: #{getTheme('sv-mask-color')};
-    --el-text-color-regular: #{getTheme('sv-text-color')};
+    --el-input-bg-color: #{getTheme('sv-admin-bg-color')};
+    --el-disabled-bg-color: #{getTheme('sv-admin-mask-color')};
+    --el-text-color-regular: #{getTheme('sv-admin-text-color')};
 
     :deep(.el-input-group__append) {
       background-color: transparent;
@@ -224,35 +224,42 @@
 
 .sv-el-select {
   min-width: 150px;
+
+  @include useTheme {
+    .el-select__wrapper.is-disabled {
+      background-color: #{getTheme('sv-admin-mask-color')};
+      color: #{getTheme('sv-admin-text-color')};
+    }
+  }
 }
 
 .sv-el-dialog {
   @include useTheme {
-    --el-dialog-bg-color: #{getTheme('sv-dialog-bg-color')};
-    --el-text-color-primary: #{getTheme('sv-text-color')};
-    border: 1px solid #{getTheme('sv-border-color')};
+    --el-dialog-bg-color: #{getTheme('sv-admin-dialog-bg-color')};
+    --el-text-color-primary: #{getTheme('sv-admin-text-color')};
+    border: 1px solid #{getTheme('sv-admin-border-color')};
   }
 }
 
 .sv-el-descriptions {
   @include useTheme {
-    --el-fill-color-blank: #{getTheme('sv-card-color')};
-    --el-text-color-primary: #{getTheme('sv-text-sub-color')};
-    --el-text-color-regular: #{getTheme('sv-text-color')};
+    --el-fill-color-blank: #{getTheme('sv-admin-card-color')};
+    --el-text-color-primary: #{getTheme('sv-admin-text-sub-color')};
+    --el-text-color-regular: #{getTheme('sv-admin-text-color')};
   }
 }
 
 .el-message-box {
   @include useTheme {
-    --el-bg-color: #{getTheme('sv-popper-bg-color')};
-    --el-border-color-lighter: #{getTheme('sv-border-color')};
-    --el-messagebox-title-color: #{getTheme('sv-text-hl-color')};
-    --el-messagebox-content-color: #{getTheme('sv-text-color')};
+    --el-bg-color: #{getTheme('sv-admin-popper-bg-color')};
+    --el-border-color-lighter: #{getTheme('sv-admin-border-color')};
+    --el-messagebox-title-color: #{getTheme('sv-admin-text-hl-color')};
+    --el-messagebox-content-color: #{getTheme('sv-admin-text-color')};
   }
 }
 
 .sv-el-avatar {
   @include useTheme {
-    --el-avatar-bg-color: #{getTheme('sv-bg-color')};
+    --el-avatar-bg-color: #{getTheme('sv-admin-bg-color')};
   }
 }

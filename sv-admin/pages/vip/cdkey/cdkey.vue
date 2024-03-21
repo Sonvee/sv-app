@@ -149,7 +149,7 @@ const filterParams = ref({}) // 筛选参数
 const total = ref(0) // 表格总数
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
-const formMode = ref('') // 表单模式 add / edit
+const formMode = ref('') // 表单模式 add / onekey
 
 const cdkeyStatusDict = {
   undefined: { text: '待使用', type: 'primary' },

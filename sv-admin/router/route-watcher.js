@@ -22,16 +22,18 @@ const WHILE_LIST = [
   '/pages/static-page/icons/icons',
 ];
 
-// 核心页面
+// 核心页面 - 只有超级管理员和访客可看 但是访客只读不写
 const CORE_LIST = [
   '/pages/system/user/user',
   '/pages/system/role/role',
   '/pages/system/permission/permission',
 ]
 
-// 只对管理员开放页面
+// 只对超级管理员开放页面
 const ADMIN_LIST = [
   '/pages/tool/apidoc/apidoc',
+  '/pages/vip/cdkey/cdkey',
+  '/pages/system/logs/logs'
 ]
 
 /**

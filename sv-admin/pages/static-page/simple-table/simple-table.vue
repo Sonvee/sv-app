@@ -7,7 +7,11 @@
     <!-- 表格头部控制栏 -->
     <view class="control">
       <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
+      <el-button type="danger" plain size="small" :icon="Delete" @click="selectionRemove">
+        批量删除
+      </el-button>
       <view style="flex: 1"></view>
+      <sv-excel-menu type="test" :exportParams="pagingParams"></sv-excel-menu>
       <el-button
         type="primary"
         link
@@ -17,62 +21,27 @@
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
     <!-- 表格主体 -->
-    <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
+    <el-table
+      class="sv-el-table"
+      v-loading="loading"
+      :data="tableData"
+      border
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column type="selection" align="center" width="50" fixed="left" />
       <el-table-column
-        prop="avatar_file"
-        label="头像"
-        align="center"
-        class-name="nopadding-cell"
-        :width="60"
-        fixed="left"
-      >
-        <template #default="scope">
-          <image
-            class="avatar-image"
-            v-if="scope.row.avatar_file"
-            :src="scope.row.avatar_file?.url"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column prop="username" label="用户名" :width="180" fixed="left" />
-      <el-table-column prop="nickname" label="昵称" :width="180" />
-      <el-table-column prop="my_invite_code" label="邀请码" :width="120" />
-      <el-table-column
-        prop="dcloud_appid"
-        label="可用APP"
+        prop="test_id"
+        label="测试用例ID"
         :min-width="300"
-        align="center"
-        show-overflow-tooltip
-      >
-        <template #default="scope">
-          <el-tag
-            v-for="(item, index) in scope.row.dcloud_appid"
-            :key="item"
-            :class="'sv-ml-gap-' + index"
-            type="success"
-            effect="plain"
-          >
-            {{ item }}
-          </el-tag>
-        </template>
-      </el-table-column>
-      <!-- 用户状态：0 正常 1 禁用 2 审核中 3 审核拒绝 -->
-      <el-table-column prop="status" label="状态" align="center" :width="100">
-        <template #default="scope">
-          <el-tag :type="statusMap[scope.row.status].type" effect="dark">
-            {{ statusMap[scope.row.status].text }}
-          </el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column
-        prop="register_date"
-        label="注册时间"
-        :formatter="(row) => timeFormat(row.register_date)"
-        align="center"
-        sortable
-        :min-width="120"
         show-overflow-tooltip
       ></el-table-column>
+      <el-table-column
+        prop="test_name"
+        label="测试用例名称"
+        :min-width="300"
+        show-overflow-tooltip
+      ></el-table-column>
+
       <el-table-column label="配置" align="center" :width="160" fixed="right">
         <template #default="scope">
           <el-button-group>
@@ -102,19 +71,19 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import SvTableHeader from './components/sv-table-header/sv-table-header.vue'
+import { ref } from 'vue'
 import SvForm from './components/sv-form/sv-form.vue'
-import { RefreshRight, View, Hide, Plus, EditPen, Delete } from '@element-plus/icons-vue'
+import SvTableHeader from './components/sv-table-header/sv-table-header.vue'
+import { RefreshRight, Plus, EditPen, Delete, View, Hide } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
-import { timeFormat } from '@/utils/util'
-import tempdata from './temp-tabledata.json'
+import { testList, testAdd, testDelete, testUpdate } from '@/service/api/test'
 import { useSysStore } from '@/store/sys'
+import { isEmpty } from 'lodash-es'
 
 const showHeader = ref(useSysStore().platform == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
-const pagingParams = ref({ pagesize: 10, pagenum: 1 }) // 表格分页默认参数
+const pagingParams = ref({ pagesize: 20, pagenum: 1 }) // 表格分页默认参数
 const filterParams = ref({}) // 筛选参数
 const total = ref(0) // 表格总数
 const showForm = ref(false) // 显示表单
@@ -127,29 +96,18 @@ handleTable(pagingParams.value)
 async function handleTable(params) {
   loading.value = true
 
-  setTimeout(() => {
-    // 替换成接口，注意携带参数
-    tableData.value = tempdata.data || []
-    total.value = tempdata.total || 0
+  const dataRes = await testList(params)
+  tableData.value = dataRes.data || []
+  total.value = dataRes.total || 0
 
-    if (!tempdata.success) {
-      ElMessage({
-        message: tempdata?.message || tempdata?.error?.message || 'Request Fail (仅展示)',
-        type: 'warning'
-      })
-    }
+  if (!dataRes.success) {
+    ElMessage({
+      message: dataRes?.message || dataRes?.error?.message,
+      type: 'warning'
+    })
+  }
 
-    loading.value = false
-  }, 1200)
-}
-
-// 状态格式化 用户状态：0 正常 1 禁用 2 审核中 3 审核拒绝
-const statusMap = {
-  undefined: { text: '正常', type: 'primary' }, // undefined也为正常
-  0: { text: '正常', type: 'primary' },
-  1: { text: '禁用', type: 'danger' },
-  2: { text: '审核中', type: 'info' },
-  3: { text: '审核拒绝', type: 'warning' }
+  loading.value = false
 }
 
 // 刷新
@@ -178,25 +136,26 @@ async function submitForm(e) {
   switch (e.mode) {
     case 'add':
       // 新增添加
-      console.log('==== 新增添加 :', e)
+      result = await testAdd(e.data)
       break
     case 'edit':
       // 编辑更新
-      console.log('==== 编辑更新 :', e)
+      result = await testUpdate(e.data)
       break
   }
 
   if (result.success) {
     ElNotification({
       title: 'Success',
-      message: result?.message || 'Request Success (仅展示)',
+      message: result?.message,
       type: 'success'
     })
+
     refresh()
   } else {
     ElNotification({
       title: 'Error',
-      message: result?.message || result?.error?.message || 'Request Fail (仅展示)',
+      message: result?.message || result?.error?.message,
       type: 'error'
     })
   }
@@ -204,23 +163,51 @@ async function submitForm(e) {
 
 // 删除
 function del(item) {
-  ElMessageBox.confirm(`确认删除${item.username}吗？`, '系统提示', {
+  const { test_name, test_id } = item
+  ElMessageBox.confirm(`确认删除${test_name}吗？`, '系统提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'
   })
     .then(async () => {
       // 确认删除操作
-
-      /**
-       * 如果涉及到图片等文件，需要删除云存储中原文件
-       * @param {string} fileurl 要删除的文件路径
-       */
-      // uniCloud.importObject('sv-utils').deleteCloudFile([fileurl])
+      const deleteRes = await testDelete({ test_id })
       ElMessage({
         type: 'success',
-        message: '删除成功(仅展示)'
+        message: deleteRes?.message || deleteRes?.error?.message
       })
+
+      refresh()
+    })
+    .catch(() => {})
+}
+
+// 多选
+const batchSelection = ref([])
+function handleSelectionChange(e) {
+  batchSelection.value = e.map((item) => item.test_id)
+}
+
+// 批量删除
+function selectionRemove() {
+  if (isEmpty(batchSelection.value)) return
+
+  ElMessageBox.confirm(`确认批量删除所选项吗？`, '系统提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(async () => {
+      // 确认批量删除操作
+      const deleteRes = await testDelete({
+        test_id: batchSelection.value
+      })
+
+      ElMessage({
+        type: 'success',
+        message: deleteRes?.message || deleteRes?.error?.message
+      })
+
       refresh()
     })
     .catch(() => {})
@@ -229,10 +216,6 @@ function del(item) {
 // 头部筛选栏筛选条件
 async function submitFilter(e) {
   filterParams.value = e
-  ElMessage({
-    type: 'success',
-    message: '搜索成功(仅展示)'
-  })
   handleTable({ ...pagingParams.value, ...e })
 }
 

@@ -12,67 +12,65 @@
       <h3>编辑</h3>
     </template>
     <template #default>
-      <view class="sv-add">
-        <el-form
-          class="sv-el-form"
-          ref="formRef"
-          :model="formData"
-          :rules="rules"
-          label-width="80px"
-          label-position="left"
-        >
-          <el-form-item prop="avatar_file" label="头像">
-            <sv-file-avatar v-model:file="formData.avatar_file" ref="fileAvatarRef"></sv-file-avatar>
-          </el-form-item>
-          <el-form-item prop="username" label="用户名" required>
-            <el-input
-              class="sv-el-input"
-              v-model="formData.username"
-              placeholder="请输入用户名"
-              clearable
-              :disabled="!isAdmin"
-            />
-          </el-form-item>
-          <el-form-item prop="nickname" label="昵称" required>
-            <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
-          </el-form-item>
-          <el-form-item prop="gender" label="性别">
-            <sv-dict-radio
-              v-model="formData.gender"
-              dictType="uni_id_users_gender"
-              keyName="key"
-              valueName="value"
-            ></sv-dict-radio>
-          </el-form-item>
-          <el-form-item prop="mobile" label="手机号码">
-            <el-input
-              class="sv-el-input"
-              v-model="formData.mobile"
-              placeholder="请输入手机号码"
-              clearable
-              :disabled="!isAdmin"
-            />
-          </el-form-item>
-          <el-form-item prop="email" label="邮箱">
-            <el-input
-              class="sv-el-input"
-              v-model="formData.email"
-              placeholder="请输入邮箱"
-              clearable
-              :disabled="!isAdmin"
-            />
-          </el-form-item>
-          <el-form-item prop="my_invite_code" label="邀请码">
-            <el-input
-              class="sv-el-input"
-              v-model="formData.my_invite_code"
-              disabled
-              placeholder="请输入邀请码"
-              clearable
-            />
-          </el-form-item>
-        </el-form>
-      </view>
+      <el-form
+        class="sv-el-form"
+        ref="formRef"
+        :model="formData"
+        :rules="rules"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item prop="avatar_file" label="头像">
+          <sv-file-avatar v-model:file="formData.avatar_file" ref="fileAvatarRef"></sv-file-avatar>
+        </el-form-item>
+        <el-form-item prop="username" label="用户名" required>
+          <el-input
+            class="sv-el-input"
+            v-model="formData.username"
+            placeholder="请输入用户名"
+            clearable
+            :disabled="!isAdmin"
+          />
+        </el-form-item>
+        <el-form-item prop="nickname" label="昵称" required>
+          <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
+        </el-form-item>
+        <el-form-item prop="gender" label="性别">
+          <sv-dict-radio
+            v-model="formData.gender"
+            dictType="uni_id_users_gender"
+            keyName="key"
+            valueName="value"
+          ></sv-dict-radio>
+        </el-form-item>
+        <el-form-item prop="mobile" label="手机号码">
+          <el-input
+            class="sv-el-input"
+            v-model="formData.mobile"
+            placeholder="请输入手机号码"
+            clearable
+            :disabled="!isAdmin"
+          />
+        </el-form-item>
+        <el-form-item prop="email" label="邮箱">
+          <el-input
+            class="sv-el-input"
+            v-model="formData.email"
+            placeholder="请输入邮箱"
+            clearable
+            :disabled="!isAdmin"
+          />
+        </el-form-item>
+        <el-form-item prop="my_invite_code" label="邀请码">
+          <el-input
+            class="sv-el-input"
+            v-model="formData.my_invite_code"
+            disabled
+            placeholder="请输入邀请码"
+            clearable
+          />
+        </el-form-item>
+      </el-form>
     </template>
     <template #footer>
       <!-- 密码修改 -->
@@ -153,9 +151,4 @@ watchEffect(() => {
 })
 </script>
 
-<style lang="scss">
-.sv-add {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="scss"></style>

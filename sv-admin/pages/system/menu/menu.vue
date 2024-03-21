@@ -231,13 +231,4 @@ function del(item) {
 }
 </script>
 
-<style lang="scss">
-.table-page-container {
-  .header,
-  .control {
-    margin-bottom: 10px;
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<style lang="scss"></style>

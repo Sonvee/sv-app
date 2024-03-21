@@ -14,30 +14,58 @@ module.exports = {
     pagesize = +pagesize
     pagenum = +pagenum
 
-    // user_id根据uni-id-users用户表联表查询
-    const dbJQL = uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+    // 页码不可小于1
+    if (pagenum < 1) {
+      throw handler.result({
+        code: 40001,
+        message: 'pagenum不可小于1'
+      })
+    }
+
+    let logRes, pages, total
+
+    const dbJQL = uniCloud.databaseForJQL({
       clientInfo: this.getClientInfo()
     })
 
-    // 使用getTemp先过滤处理获取临时表再联表查询，推荐用法
-    // 注意结尾的方法是getTemp，对表过滤得到临时表
     const tempIdDB = dbJQL.collection('uni-id-users').field('_id,nickname').getTemp()
-    let logRes
-    if (pagesize > 1) {
-      logRes = await dbJQL.collection('uni-id-log', tempIdDB).orderBy('create_date', 'desc')
-        .skip(pagesize * (pagenum - 1)).limit(pagesize).get()
-    } else {
-      logRes = await dbJQL.collection('uni-id-log', tempIdDB).orderBy('create_date', 'desc').get()
+
+    // 连接表实例
+    let query = dbJQL.collection('uni-id-log', tempIdDB)
+
+    // 全量查询
+    if (pagesize < 1) {
+      logRes = await query.get({
+        getCount: true
+      })
+      // 总数统计
+      total = logRes.count
+      // 页数统计
+      pages = Math.ceil(total / pagesize)
+
+      throw handler.result({
+        data: logRes.data,
+        total,
+        pagesize,
+        pagenum,
+        pages,
+        params: this.params
+      })
     }
 
-    // 总数统计
-    const count = await db.collection('uni-id-log').count()
-    // 页数统计
-    const pages = Math.ceil(count.total / pagesize)
+    // 条件查询
+
+    logRes = await query.orderBy('create_date', 'desc')
+      .skip(pagesize * (pagenum - 1)).limit(pagesize).get({
+        getCount: true
+      })
+
+    total = logRes.count
+    pages = Math.ceil(total / pagesize)
 
     return handler.result({
       data: logRes.data,
-      total: count.total,
+      total,
       pagesize,
       pagenum,
       pages,

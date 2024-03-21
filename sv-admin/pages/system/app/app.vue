@@ -14,7 +14,13 @@
     </view>
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
-      <el-table-column prop="icon_url" label="图标" align="center" class-name="nopadding-cell" :width="60">
+      <el-table-column
+        prop="icon_url"
+        label="图标"
+        align="center"
+        class-name="nopadding-cell"
+        :width="60"
+      >
         <template #default="scope">
           <image class="avatar-image" v-if="scope.row.icon_url" :src="scope.row.icon_url" />
         </template>
@@ -22,7 +28,12 @@
       <el-table-column prop="appid" label="应用ID" :width="160" />
       <el-table-column prop="name" label="应用名称" :width="160" />
       <el-table-column prop="description" label="应用描述" :min-width="240" show-overflow-tooltip />
-      <el-table-column prop="introduction" label="应用简介" :min-width="240" show-overflow-tooltip />
+      <el-table-column
+        prop="introduction"
+        label="应用简介"
+        :min-width="240"
+        show-overflow-tooltip
+      />
       <el-table-column
         prop="create_date"
         label="创建时间"
@@ -43,7 +54,12 @@
       </el-table-column>
     </el-table>
     <!-- 表单抽屉弹窗 -->
-    <sv-form v-model="showForm" :form-init="formInit" :form-mode="formMode" @submit="submitForm"></sv-form>
+    <sv-form
+      v-model="showForm"
+      :form-init="formInit"
+      :form-mode="formMode"
+      @submit="submitForm"
+    ></sv-form>
   </view>
 </template>
 
@@ -173,30 +189,4 @@ function importOver(res) {
 }
 </script>
 
-<style lang="scss">
-.table-page-container {
-  .header,
-  .control {
-    margin-bottom: 10px;
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .sv-pagination {
-    padding: 10px 0;
-    display: flex;
-    justify-content: flex-end;
-  }
-}
-
-:deep(.nopadding-cell) {
-  // 取消该单元格内边距
-  padding: 0 !important;
-}
-.avatar-image {
-  width: 30px;
-  height: 30px;
-  display: block;
-  margin: 0 auto;
-}
-</style>
+<style lang="scss"></style>

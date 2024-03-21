@@ -12,47 +12,45 @@
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
     <template #default>
-      <view class="sv-add">
-        <el-form
-          class="sv-el-form"
-          ref="formRef"
-          :model="formData"
-          :rules="rules"
-          label-width="80px"
-          label-position="left"
-        >
-          <el-form-item prop="role_id" label="角色ID" required>
-            <el-input v-model="formData.role_id" placeholder="请输入角色ID" clearable />
-          </el-form-item>
-          <el-form-item prop="role_name" label="角色名称" required>
-            <el-input v-model="formData.role_name" placeholder="请输入角色名称" clearable />
-          </el-form-item>
-          <el-form-item prop="permission" label="角色权限">
-            <sv-dict-checkbox
-              v-model="formData.permission"
-              :dictList="permissionList"
-              keyName="permission_id"
-              valueName="permission_name"
-            ></sv-dict-checkbox>
-          </el-form-item>
-          <el-form-item prop="comment" label="备注">
-            <el-input
-              v-model="formData.comment"
-              type="textarea"
-              :autosize="{ minRows: 4 }"
-              placeholder="请输入备注"
-            />
-          </el-form-item>
-          <el-form-item prop="create_date" label="创建时间">
-            <el-date-picker
-              v-model="formData.create_date"
-              type="datetime"
-              placeholder="请选择日期时间"
-              value-format="x"
-            />
-          </el-form-item>
-        </el-form>
-      </view>
+      <el-form
+        class="sv-el-form"
+        ref="formRef"
+        :model="formData"
+        :rules="rules"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item prop="role_id" label="角色ID" required>
+          <el-input v-model="formData.role_id" placeholder="请输入角色ID" clearable />
+        </el-form-item>
+        <el-form-item prop="role_name" label="角色名称" required>
+          <el-input v-model="formData.role_name" placeholder="请输入角色名称" clearable />
+        </el-form-item>
+        <el-form-item prop="permission" label="角色权限">
+          <sv-dict-checkbox
+            v-model="formData.permission"
+            :dictList="permissionList"
+            keyName="permission_id"
+            valueName="permission_name"
+          ></sv-dict-checkbox>
+        </el-form-item>
+        <el-form-item prop="comment" label="备注">
+          <el-input
+            v-model="formData.comment"
+            type="textarea"
+            :autosize="{ minRows: 4 }"
+            placeholder="请输入备注"
+          />
+        </el-form-item>
+        <el-form-item prop="create_date" label="创建时间">
+          <el-date-picker
+            v-model="formData.create_date"
+            type="datetime"
+            placeholder="请选择日期时间"
+            value-format="x"
+          />
+        </el-form-item>
+      </el-form>
     </template>
     <template #footer>
       <el-button @click="cancel">取消</el-button>
@@ -132,9 +130,4 @@ async function handleCache() {
 handleCache()
 </script>
 
-<style lang="scss">
-.sv-add {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="scss"></style>

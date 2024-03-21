@@ -138,6 +138,12 @@
             "navigationBarTitleText": "内置图标",
             "enablePullDownRefresh": false
           }
+        }, {
+          "path": "simple-table/simple-table",
+          "style": {
+            "navigationBarTitleText": "简单表格",
+            "enablePullDownRefresh": false
+          }
         }
       ]
     },
@@ -181,6 +187,13 @@
           "path": "subscription/subscription",
           "style": {
             "navigationBarTitleText": "订阅记录",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "benefit/benefit",
+          "style": {
+            "navigationBarTitleText": "权益管理",
             "enablePullDownRefresh": false
           }
         }

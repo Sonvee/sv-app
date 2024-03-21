@@ -12,63 +12,61 @@
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
     <template #default>
-      <view class="sv-add">
-        <el-form
-          class="sv-el-form"
-          ref="formRef"
-          :model="formData"
-          :rules="rules"
-          label-width="80px"
-          label-position="left"
-        >
-          <el-form-item prop="icon_url" label="图标">
-            <uni-file-picker
-              :image-styles="{
-                width: 100,
-                height: 100
-              }"
-              :auto-upload="false"
-              v-model="iconFile"
-              fileMediatype="image"
-              mode="grid"
-              limit="1"
-              @select="selectFile"
-              @success="uploadSuccess"
-              @fail="uploadFail"
-            />
-          </el-form-item>
-          <el-form-item prop="appid" label="应用ID" required>
-            <el-input v-model="formData.appid" placeholder="请输入应用ID" clearable />
-          </el-form-item>
-          <el-form-item prop="name" label="应用名称" required>
-            <el-input v-model="formData.name" placeholder="请输入应用名称" clearable />
-          </el-form-item>
-          <el-form-item prop="description" label="应用描述">
-            <el-input
-              v-model="formData.description"
-              type="textarea"
-              :autosize="{ minRows: 2 }"
-              placeholder="请输入应用描述"
-            />
-          </el-form-item>
-          <el-form-item prop="introduction" label="应用简介">
-            <el-input
-              v-model="formData.introduction"
-              type="textarea"
-              :autosize="{ minRows: 4 }"
-              placeholder="请输入应用简介"
-            />
-          </el-form-item>
-          <el-form-item prop="create_date" label="创建时间">
-            <el-date-picker
-              v-model="formData.create_date"
-              type="datetime"
-              placeholder="请选择日期时间"
-              value-format="x"
-            />
-          </el-form-item>
-        </el-form>
-      </view>
+      <el-form
+        class="sv-el-form"
+        ref="formRef"
+        :model="formData"
+        :rules="rules"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item prop="icon_url" label="图标">
+          <uni-file-picker
+            :image-styles="{
+              width: 100,
+              height: 100
+            }"
+            :auto-upload="false"
+            v-model="iconFile"
+            fileMediatype="image"
+            mode="grid"
+            limit="1"
+            @select="selectFile"
+            @success="uploadSuccess"
+            @fail="uploadFail"
+          />
+        </el-form-item>
+        <el-form-item prop="appid" label="应用ID" required>
+          <el-input v-model="formData.appid" placeholder="请输入应用ID" clearable />
+        </el-form-item>
+        <el-form-item prop="name" label="应用名称" required>
+          <el-input v-model="formData.name" placeholder="请输入应用名称" clearable />
+        </el-form-item>
+        <el-form-item prop="description" label="应用描述">
+          <el-input
+            v-model="formData.description"
+            type="textarea"
+            :autosize="{ minRows: 2 }"
+            placeholder="请输入应用描述"
+          />
+        </el-form-item>
+        <el-form-item prop="introduction" label="应用简介">
+          <el-input
+            v-model="formData.introduction"
+            type="textarea"
+            :autosize="{ minRows: 4 }"
+            placeholder="请输入应用简介"
+          />
+        </el-form-item>
+        <el-form-item prop="create_date" label="创建时间">
+          <el-date-picker
+            v-model="formData.create_date"
+            type="datetime"
+            placeholder="请选择日期时间"
+            value-format="x"
+          />
+        </el-form-item>
+      </el-form>
     </template>
     <template #footer>
       <el-button @click="cancel">取消</el-button>
@@ -198,9 +196,4 @@ function uploadFail(e) {
 }
 </script>
 
-<style lang="scss">
-.sv-add {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="scss"></style>

@@ -32,9 +32,12 @@ module.exports = {
 
     const tempPlanDB = dbJQL.collection('sv-id-vip-plans').getTemp()
 
+    // 连接表实例
+    let query = dbJQL.collection('sv-id-vip-cdkeys', tempPlanDB)
+
     // 全量查询
     if (pagesize < 1) {
-      cdkeyRes = await dbJQL.collection('sv-id-vip-cdkeys', tempPlanDB).orderBy('create_date', 'desc').get({
+      cdkeyRes = await query.orderBy('create_date', 'desc').get({
         getCount: true
       })
       // 总数统计
@@ -51,9 +54,6 @@ module.exports = {
         params: this.params
       })
     }
-
-    // 分页查询
-    let query = dbJQL.collection('sv-id-vip-cdkeys', tempPlanDB)
 
     // 构建筛选条件(对象形式)
     const conditions = {}

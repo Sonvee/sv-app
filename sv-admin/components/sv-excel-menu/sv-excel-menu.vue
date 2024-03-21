@@ -62,13 +62,13 @@ function onExcelMenuCommand(command) {
       })
       break
     case 'noCoverImport':
-      // 增量导入
+      // 增量导入 - 不覆盖，只添加新数据
       fileImport(props.type, false, (res) => {
         emits(command, res)
       })
       break
     case 'coverImport':
-      // 覆盖导入
+      // 覆盖导入 - 会覆盖相同已有的数据
       fileImport(props.type, true, (res) => {
         emits(command, res)
       })

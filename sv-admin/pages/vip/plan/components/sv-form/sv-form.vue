@@ -12,65 +12,63 @@
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
     <template #default>
-      <view class="sv-add">
-        <el-form
-          class="sv-el-form"
-          ref="formRef"
-          :model="formData"
-          :rules="rules"
-          label-width="100px"
-          label-position="left"
-        >
-          <el-form-item prop="plan_id" label="套餐ID" required>
-            <el-input
-              class="sv-el-input"
-              v-model="formData.plan_id"
-              placeholder="请输入套餐ID (唯一且不可更改)"
-              clearable
-              :disabled="formMode != 'add'"
-            />
-          </el-form-item>
-          <el-form-item prop="plan_name" label="套餐名称" required>
-            <el-input v-model="formData.plan_name" placeholder="请输入套餐名称" clearable />
-          </el-form-item>
-          <el-form-item prop="description" label="套餐描述">
-            <el-input
-              v-model="formData.description"
-              type="textarea"
-              :autosize="{ minRows: 4 }"
-              placeholder="请输入套餐描述"
-            />
-          </el-form-item>
-          <el-form-item prop="valid_day" label="有效期(天)" required>
-            <el-input-number class="sv-el-input-number" v-model="formData.valid_day" :min="1" />
-          </el-form-item>
-          <el-form-item prop="price" label="定价(分)" required>
-            <el-input-number
-              class="sv-el-input-number"
-              v-model="formData.price"
-              :min="0"
-              :step="100"
-            />
-            <text class="margin-left text-cyan">
-              =&nbsp;{{ convertFenToYuan(formData.price) }}&nbsp;元
-            </text>
-          </el-form-item>
-          <el-form-item prop="discount" label="折扣(分)" required>
-            <el-input-number
-              class="sv-el-input-number"
-              v-model="formData.discount"
-              :min="0"
-              :step="10"
-            />
-            <text class="margin-left text-cyan">
-              =&nbsp;{{ convertFenToYuan(formData.discount) }}&nbsp;元
-            </text>
-          </el-form-item>
-          <el-form-item prop="sort" label="排序">
-            <el-input-number class="sv-el-input-number" v-model="formData.sort" :min="0" />
-          </el-form-item>
-        </el-form>
-      </view>
+      <el-form
+        class="sv-el-form"
+        ref="formRef"
+        :model="formData"
+        :rules="rules"
+        label-width="100px"
+        label-position="left"
+      >
+        <el-form-item prop="plan_id" label="套餐ID" required>
+          <el-input
+            class="sv-el-input"
+            v-model="formData.plan_id"
+            placeholder="请输入套餐ID (唯一且不可更改)"
+            clearable
+            :disabled="formMode != 'add'"
+          />
+        </el-form-item>
+        <el-form-item prop="plan_name" label="套餐名称" required>
+          <el-input v-model="formData.plan_name" placeholder="请输入套餐名称" clearable />
+        </el-form-item>
+        <el-form-item prop="description" label="套餐描述">
+          <el-input
+            v-model="formData.description"
+            type="textarea"
+            :autosize="{ minRows: 4 }"
+            placeholder="请输入套餐描述"
+          />
+        </el-form-item>
+        <el-form-item prop="valid_day" label="有效期(天)" required>
+          <el-input-number class="sv-el-input-number" v-model="formData.valid_day" :min="1" />
+        </el-form-item>
+        <el-form-item prop="price" label="定价(分)" required>
+          <el-input-number
+            class="sv-el-input-number"
+            v-model="formData.price"
+            :min="0"
+            :step="100"
+          />
+          <text class="margin-left text-cyan">
+            =&nbsp;{{ convertFenToYuan(formData.price) }}&nbsp;元
+          </text>
+        </el-form-item>
+        <el-form-item prop="discount" label="折扣(分)" required>
+          <el-input-number
+            class="sv-el-input-number"
+            v-model="formData.discount"
+            :min="0"
+            :step="10"
+          />
+          <text class="margin-left text-cyan">
+            =&nbsp;{{ convertFenToYuan(formData.discount) }}&nbsp;元
+          </text>
+        </el-form-item>
+        <el-form-item prop="sort" label="排序">
+          <el-input-number class="sv-el-input-number" v-model="formData.sort" :min="0" />
+        </el-form-item>
+      </el-form>
     </template>
     <template #footer>
       <el-button @click="cancel">取消</el-button>
@@ -147,9 +145,4 @@ function confirm() {
 }
 </script>
 
-<style lang="scss">
-.sv-add {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="scss"></style>

@@ -1,5 +1,17 @@
 const handler = require('sv-handler')
 
+const {
+  testList,
+  testAdd,
+  testUpdate,
+  testDelete,
+} = require('./module/test/index.js')
+
+const {
+  statList,
+  statEmpty,
+} = require('./module/stat/index.js')
+
 module.exports = {
   _before: async function() { // 通用预处理器
     // token身份安全校验
@@ -30,34 +42,18 @@ module.exports = {
     result.timeCost = Date.now() - this.startTime
     return result
   },
-  /**
-   * 长列表测试
-   * pagesize: 每页显示数量，默认10，-1时返回所有数据
-   * pagenum: 页码，默认1
-   */
-  testList() {
-    let list = []
-    for (let i = 1; i <= 100; i++) {
-      list.push({
-        text: `第${i}个`,
-        value: i
-      })
-    }
 
-    return handler.paging({
-      data: list,
-      params: this.params
-    })
-  },
   /**
-   * 空数据测试
-   * pagesize: 每页显示数量，默认10，-1时返回所有数据
-   * pagenum: 页码，默认1
+   * 测试用例
    */
-  testEmpty() {
-    return handler.paging({
-      data: [],
-      params: this.params,
-    })
-  }
+  testList,
+  testAdd,
+  testUpdate,
+  testDelete,
+
+  /**
+   * 静态统计测试用例
+   */
+  statList,
+  statEmpty,
 }

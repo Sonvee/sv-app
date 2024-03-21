@@ -11,7 +11,4 @@ export default {
 }
 </script>
 
-<style>
-.page-container {
-}
-</style>
+<style></style>

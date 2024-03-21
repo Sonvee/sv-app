@@ -38,39 +38,10 @@ uni-page-body {
     color: getTheme('sv-text-color');
   }
 }
-/* #endif */
 
-
-/* #ifdef H5 */
 a {
   text-decoration: none;
 }
-
-.page-container {
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  position: relative;
-  overflow: auto;
-}
-
-.table-page-container {
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: auto;
-}
-
-.web-page {
-  height: 100%;
-  overflow: auto;
-}
-
 /* #endif */
 
 .card {

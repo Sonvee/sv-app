@@ -12,85 +12,80 @@
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
     <template #default>
-      <view class="sv-add">
-        <el-form
-          class="sv-el-form"
-          ref="formRef"
-          :model="formData"
-          :rules="rules"
-          label-width="80px"
-          label-position="left"
-        >
-          <el-form-item v-if="formMode !== 'add'" prop="avatar_file" label="头像">
-            <sv-file-avatar
-              v-model:file="formData.avatar_file"
-              ref="fileAvatarRef"
-            ></sv-file-avatar>
-          </el-form-item>
-          <el-form-item prop="username" label="用户名" required>
-            <el-input v-model="formData.username" placeholder="请输入用户名" clearable />
-          </el-form-item>
-          <el-form-item prop="nickname" label="昵称" required>
-            <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
-          </el-form-item>
-          <el-form-item v-if="formMode == 'add'" prop="password" label="密码" required>
-            <el-input
-              v-model="formData.password"
-              type="password"
-              show-password
-              placeholder="请输入密码"
-              clearable
-            />
-          </el-form-item>
-          <el-form-item v-if="formMode !== 'add'" prop="gender" label="性别">
-            <sv-dict-radio
-              v-model="formData.gender"
-              dictType="uni_id_users_gender"
-              keyName="key"
-              valueName="value"
-            ></sv-dict-radio>
-          </el-form-item>
-          <el-form-item prop="mobile" label="手机号码">
-            <el-input v-model="formData.mobile" placeholder="请输入手机号码" clearable />
-          </el-form-item>
-          <el-form-item prop="email" label="邮箱">
-            <el-input v-model="formData.email" placeholder="请输入邮箱" clearable />
-          </el-form-item>
-          <el-form-item prop="role" label="角色" required>
-            <sv-dict-checkbox
-              v-model="formData.role"
-              :dictList="useSvidStore().getRoles()"
-              keyName="role_id"
-              valueName="role_name"
-            ></sv-dict-checkbox>
-          </el-form-item>
-          <el-form-item v-if="formMode !== 'add'" prop="my_invite_code" label="邀请码">
-            <el-input
-              class="sv-el-input"
-              v-model="formData.my_invite_code"
-              disabled
-              placeholder="请输入邀请码"
-              clearable
-            />
-          </el-form-item>
-          <el-form-item prop="dcloud_appid" label="可用APP" required>
-            <sv-dict-checkbox
-              v-model="formData.dcloud_appid"
-              :dictList="useSysStore().getApps()"
-              keyName="appid"
-              valueName="name"
-            ></sv-dict-checkbox>
-          </el-form-item>
-          <el-form-item prop="status" label="状态">
-            <sv-dict-select
-              v-model="formData.status"
-              dictType="uni_id_users_status"
-              keyName="value"
-              valueName="key"
-            ></sv-dict-select>
-          </el-form-item>
-        </el-form>
-      </view>
+      <el-form
+        class="sv-el-form"
+        ref="formRef"
+        :model="formData"
+        :rules="rules"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item v-if="formMode !== 'add'" prop="avatar_file" label="头像">
+          <sv-file-avatar v-model:file="formData.avatar_file" ref="fileAvatarRef"></sv-file-avatar>
+        </el-form-item>
+        <el-form-item prop="username" label="用户名" required>
+          <el-input v-model="formData.username" placeholder="请输入用户名" clearable />
+        </el-form-item>
+        <el-form-item prop="nickname" label="昵称" required>
+          <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
+        </el-form-item>
+        <el-form-item v-if="formMode == 'add'" prop="password" label="密码" required>
+          <el-input
+            v-model="formData.password"
+            type="password"
+            show-password
+            placeholder="请输入密码"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item v-if="formMode !== 'add'" prop="gender" label="性别">
+          <sv-dict-radio
+            v-model="formData.gender"
+            dictType="uni_id_users_gender"
+            keyName="key"
+            valueName="value"
+          ></sv-dict-radio>
+        </el-form-item>
+        <el-form-item prop="mobile" label="手机号码">
+          <el-input v-model="formData.mobile" placeholder="请输入手机号码" clearable />
+        </el-form-item>
+        <el-form-item prop="email" label="邮箱">
+          <el-input v-model="formData.email" placeholder="请输入邮箱" clearable />
+        </el-form-item>
+        <el-form-item prop="role" label="角色" required>
+          <sv-dict-checkbox
+            v-model="formData.role"
+            :dictList="useSvidStore().getRoles()"
+            keyName="role_id"
+            valueName="role_name"
+          ></sv-dict-checkbox>
+        </el-form-item>
+        <el-form-item v-if="formMode !== 'add'" prop="my_invite_code" label="邀请码">
+          <el-input
+            class="sv-el-input"
+            v-model="formData.my_invite_code"
+            disabled
+            placeholder="请输入邀请码"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item prop="dcloud_appid" label="可用APP" required>
+          <sv-dict-checkbox
+            v-model="formData.dcloud_appid"
+            :dictList="useSysStore().getApps()"
+            keyName="appid"
+            valueName="name"
+          ></sv-dict-checkbox>
+        </el-form-item>
+        <el-form-item prop="status" label="状态">
+          <sv-dict-select
+            v-model="formData.status"
+            dictType="uni_id_users_status"
+            keyName="value"
+            valueName="key"
+          ></sv-dict-select>
+        </el-form-item>
+      </el-form>
     </template>
     <template #footer>
       <!-- 密码修改 -->
@@ -167,7 +162,10 @@ function confirm() {
   formRef.value.validate(async (valid, fields) => {
     if (valid) {
       // 手动上传图片
-      if (props.formMode == 'edit' && props.formInit.avatar_file?.url !== formData.value.avatar_file?.url) {
+      if (
+        props.formMode == 'edit' &&
+        props.formInit.avatar_file?.url !== formData.value.avatar_file?.url
+      ) {
         await fileAvatarRef.value.uploadAvatar()
       }
       emits('submit', { data: formData.value, mode: props.formMode })
@@ -194,9 +192,4 @@ watchEffect(() => {
 })
 </script>
 
-<style lang="scss">
-.sv-add {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="scss"></style>

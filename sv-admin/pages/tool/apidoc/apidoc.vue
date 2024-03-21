@@ -11,6 +11,4 @@ const apidocLink = 'https://console-docs.apipost.cn/preview/2a25d55c121db329/c42
 </script>
 
 <style lang="scss">
-.page-container {
-}
 </style>

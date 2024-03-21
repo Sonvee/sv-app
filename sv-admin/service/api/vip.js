@@ -1,5 +1,9 @@
 import request from '../request/index.js'
 
+/**
+ * VIP套餐
+ * @param {Object} data
+ */
 export function vipList(data) {
   return request({
     url: '/vip/vipList',
@@ -32,6 +36,35 @@ export function vipUpdate(data) {
   })
 }
 
+/**
+ * 用户会员验证 实时事件驱动：建议在用户访问特定接口、页面、登录时等情况触发检查
+ * @param {Object} data {user_id}
+ */
+export function vipVerify(data) {
+  return request({
+    url: '/vip/vipVerify',
+    method: 'POST',
+    data
+  })
+}
+
+
+/**
+ * vip支付订阅
+ * @param {Object} data {user_id, plan_id, pay_fee}
+ */
+export function vipPayActive(data) {
+  return request({
+    url: '/vip/vipPayActive',
+    method: 'POST',
+    data,
+  })
+}
+
+/**
+ * 激活码
+ * @param {Object} data
+ */
 export function cdkeyList(data) {
   return request({
     url: '/vip/cdkeyList',
@@ -51,26 +84,6 @@ export function cdkeyAdd(data) {
 export function cdkeyDelete(data) {
   return request({
     url: '/vip/cdkeyDelete',
-    method: 'POST',
-    data
-  })
-}
-
-export function benefitList(data) {
-  return request({
-    url: '/vip/benefitList',
-    method: 'POST',
-    data
-  })
-}
-
-/**
- * 用户会员验证 实时事件驱动：建议在用户访问特定接口、页面、登录时等情况触发检查
- * @param {Object} data {user_id}
- */
-export function vipVerify(data) {
-  return request({
-    url: '/vip/vipVerify',
     method: 'POST',
     data
   })
@@ -111,14 +124,38 @@ export function cdkeyInvalidRemove(data) {
 }
 
 /**
- * vip支付订阅
- * @param {Object} data {user_id, plan_id, pay_fee}
+ * 会员权益
+ * @param {Object} data
  */
-export function vipPayActive(data) {
+export function benefitList(data) {
   return request({
-    url: '/vip/vipPayActive',
+    url: '/vip/benefitList',
     method: 'POST',
-    data,
+    data
+  })
+}
+
+export function benefitAdd(data) {
+  return request({
+    url: '/vip/benefitAdd',
+    method: 'POST',
+    data
+  })
+}
+
+export function benefitUpdate(data) {
+  return request({
+    url: '/vip/benefitUpdate',
+    method: 'POST',
+    data
+  })
+}
+
+export function benefitDelete(data) {
+  return request({
+    url: '/vip/benefitDelete',
+    method: 'POST',
+    data
   })
 }
 

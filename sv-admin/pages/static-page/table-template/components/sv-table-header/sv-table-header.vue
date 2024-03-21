@@ -2,7 +2,12 @@
   <view class="sv-table-header">
     <el-form class="sv-el-form" inline :model="filterForm" :size="size">
       <el-form-item label="用户名/昵称">
-        <el-input v-model="filterForm.name" placeholder="请输入用户名/昵称" clearable style="width: 150px;"/>
+        <el-input
+          v-model="filterForm.name"
+          placeholder="请输入用户名/昵称"
+          clearable
+          style="width: 150px"
+        />
       </el-form-item>
       <el-form-item label="账号类型">
         <el-select
@@ -25,7 +30,7 @@
           type="datetime"
           placeholder="请选择日期时间"
           value-format="x"
-          style="width: 170px;"
+          style="width: 170px"
         />
       </el-form-item>
       <el-form-item label="日期时间范围">
@@ -37,7 +42,7 @@
           end-placeholder="结束时间"
           value-format="x"
           :default-time="[new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 59, 59)]"
-          style="width: 320px;"
+          style="width: 320px"
         />
       </el-form-item>
       <el-form-item>
@@ -94,18 +99,4 @@ function reset() {
 }
 </script>
 
-<style lang="scss">
-.sv-table-header {
-  width: 100%;
-  padding: 10px 10px 0 10px;
-  box-sizing: border-box;
-
-  @include useTheme {
-    border-bottom: 1px solid #{getTheme('sv-admin-border-color')};
-  }
-
-  :deep(.el-form-item) {
-    margin-bottom: 20px;
-  }
-}
-</style>
+<style lang="scss"></style>

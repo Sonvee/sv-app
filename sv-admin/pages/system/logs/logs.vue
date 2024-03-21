@@ -13,7 +13,12 @@
     <!-- 表格主体 -->
     <el-table class="sv-el-table" v-loading="loading" :data="tableData" border>
       <el-table-column prop="user_id[0]._id" label="用户ID" :width="240" show-overflow-tooltip />
-      <el-table-column prop="user_id[0].nickname" label="用户昵称" :width="160" show-overflow-tooltip />
+      <el-table-column
+        prop="user_id[0].nickname"
+        label="用户昵称"
+        :width="160"
+        show-overflow-tooltip
+      />
       <el-table-column prop="ip" label="IP地址" :width="150" />
       <el-table-column prop="appid" label="登录客户端" :width="150" align="center" />
       <el-table-column prop="type" label="操作类型" :width="120" />
@@ -30,7 +35,13 @@
         :filter-method="(value, row) => row.state == value"
       />
       <el-table-column prop="device_id" label="唯一设备标识" :width="200" show-overflow-tooltip />
-      <el-table-column prop="ua" label="userAgent" :min-width="200" align="center" show-overflow-tooltip />
+      <el-table-column
+        prop="ua"
+        label="userAgent"
+        :min-width="200"
+        align="center"
+        show-overflow-tooltip
+      />
       <el-table-column
         prop="create_date"
         label="操作时间"
@@ -100,24 +111,4 @@ function handleCurrentChange(e) {
 }
 </script>
 
-<style lang="scss">
-.table-page-container {
-  .header,
-  .control {
-    margin-bottom: 10px;
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
-
-:deep(.nopadding-cell) {
-  // 取消该单元格内边距
-  padding: 0 !important;
-}
-.avatar-image {
-  width: 30px;
-  height: 30px;
-  display: block;
-  margin: 0 auto;
-}
-</style>
+<style lang="scss"></style>

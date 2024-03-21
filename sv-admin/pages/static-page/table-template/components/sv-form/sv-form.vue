@@ -12,110 +12,103 @@
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
     <template #default>
-      <view class="sv-add">
-        <el-form
-          class="sv-el-form"
-          ref="formRef"
-          :model="formData"
-          :rules="rules"
-          label-width="80px"
-          label-position="left"
-        >
-          <el-form-item prop="avatar_file" label="头像">
-            <uni-file-picker
-              :image-styles="{
-                width: 100,
-                height: 100
-              }"
-              :auto-upload="false"
-              v-model="formData.avatar_file"
-              fileMediatype="image"
-              mode="grid"
-              limit="1"
-              @select="selectFile"
-              @success="uploadSuccess"
-              @fail="uploadFail"
+      <el-form
+        class="sv-el-form"
+        ref="formRef"
+        :model="formData"
+        :rules="rules"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item prop="avatar_file" label="头像">
+          <uni-file-picker
+            :image-styles="{
+              width: 100,
+              height: 100
+            }"
+            :auto-upload="false"
+            v-model="formData.avatar_file"
+            fileMediatype="image"
+            mode="grid"
+            limit="1"
+            @select="selectFile"
+            @success="uploadSuccess"
+            @fail="uploadFail"
+          />
+        </el-form-item>
+        <el-form-item prop="username" label="用户名" required>
+          <el-input v-model="formData.username" placeholder="请输入用户名" clearable />
+        </el-form-item>
+        <el-form-item prop="nickname" label="昵称" required>
+          <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
+        </el-form-item>
+        <el-form-item prop="age" label="年龄">
+          <el-input-number class="sv-el-input-number" v-model="formData.age" :min="0" :max="100" />
+        </el-form-item>
+        <el-form-item prop="gender" label="性别">
+          <sv-dict-radio
+            v-model="formData.gender"
+            dictType="uni_id_users_gender"
+            keyName="key"
+            valueName="value"
+          ></sv-dict-radio>
+        </el-form-item>
+        <el-form-item prop="my_invite_code" label="邀请码">
+          <el-input
+            class="sv-el-input"
+            v-model="formData.my_invite_code"
+            disabled
+            placeholder="请输入邀请码"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item prop="dcloud_appid" label="可用APP">
+          <sv-dict-checkbox
+            v-model="formData.dcloud_appid"
+            :dictList="appList"
+            keyName="appid"
+            valueName="name"
+          ></sv-dict-checkbox>
+        </el-form-item>
+        <el-form-item prop="status" label="状态">
+          <el-select v-model="formData.status" placeholder="状态">
+            <el-option
+              v-for="item in statusList"
+              :key="item.value"
+              :label="item.text"
+              :value="item.value"
             />
-          </el-form-item>
-          <el-form-item prop="username" label="用户名" required>
-            <el-input v-model="formData.username" placeholder="请输入用户名" clearable />
-          </el-form-item>
-          <el-form-item prop="nickname" label="昵称" required>
-            <el-input v-model="formData.nickname" placeholder="请输入昵称" clearable />
-          </el-form-item>
-          <el-form-item prop="age" label="年龄">
-            <el-input-number
-              class="sv-el-input-number"
-              v-model="formData.age"
-              :min="0"
-              :max="100"
-            />
-          </el-form-item>
-          <el-form-item prop="gender" label="性别">
-            <sv-dict-radio
-              v-model="formData.gender"
-              dictType="uni_id_users_gender"
-              keyName="key"
-              valueName="value"
-            ></sv-dict-radio>
-          </el-form-item>
-          <el-form-item prop="my_invite_code" label="邀请码">
-            <el-input
-              class="sv-el-input"
-              v-model="formData.my_invite_code"
-              disabled
-              placeholder="请输入邀请码"
-              clearable
-            />
-          </el-form-item>
-          <el-form-item prop="dcloud_appid" label="可用APP">
-            <sv-dict-checkbox
-              v-model="formData.dcloud_appid"
-              :dictList="appList"
-              keyName="appid"
-              valueName="name"
-            ></sv-dict-checkbox>
-          </el-form-item>
-          <el-form-item prop="status" label="状态">
-            <el-select v-model="formData.status" placeholder="状态">
-              <el-option
-                v-for="item in statusList"
-                :key="item.value"
-                :label="item.text"
-                :value="item.value"
-              />
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="forbidden" label="封禁">
-            <el-switch
-              v-model="formData.forbidden"
-              inline-prompt
-              style="--el-switch-on-color: #dd524d; --el-switch-off-color: #007aff"
-              :active-icon="WarnTriangleFilled"
-              :inactive-icon="Minus"
-            />
-          </el-form-item>
-          <!-- 内置图标选择栏 -->
-          <el-form-item prop="icon" label="图标">
-            <sv-icon-select
-              v-model="formData.icon"
-              clearable
-              :pop-width="400"
-              @selected="selectedIcon"
-            ></sv-icon-select>
-          </el-form-item>
-          <el-form-item prop="rich-text" label="富文本">
-            <view style="height: 500px; width: 100%">
-              <sv-wangeditor
-                v-if="showEditor"
-                v-model:html="formData.comment"
-                ref="editorRef"
-                @change="changeEditor"
-              ></sv-wangeditor>
-            </view>
-          </el-form-item>
-        </el-form>
-      </view>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="forbidden" label="封禁">
+          <el-switch
+            v-model="formData.forbidden"
+            inline-prompt
+            style="--el-switch-on-color: #dd524d; --el-switch-off-color: #007aff"
+            :active-icon="WarnTriangleFilled"
+            :inactive-icon="Minus"
+          />
+        </el-form-item>
+        <!-- 内置图标选择栏 -->
+        <el-form-item prop="icon" label="图标">
+          <sv-icon-select
+            v-model="formData.icon"
+            clearable
+            :pop-width="400"
+            @selected="selectedIcon"
+          ></sv-icon-select>
+        </el-form-item>
+        <el-form-item prop="rich-text" label="富文本">
+          <view style="height: 500px; width: 100%">
+            <sv-wangeditor
+              v-if="showEditor"
+              v-model:html="formData.comment"
+              ref="editorRef"
+              @change="changeEditor"
+            ></sv-wangeditor>
+          </view>
+        </el-form-item>
+      </el-form>
     </template>
     <template #footer>
       <el-button @click="cancel">取消</el-button>
@@ -275,9 +268,4 @@ function changeEditor(e) {
 }
 </script>
 
-<style lang="scss">
-.sv-add {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="scss"></style>

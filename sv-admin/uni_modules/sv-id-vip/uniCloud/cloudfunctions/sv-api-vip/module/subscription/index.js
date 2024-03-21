@@ -33,12 +33,14 @@ module.exports = {
 
     const tempPlanDB = dbJQL.collection('sv-id-vip-plans').getTemp()
 
+    // 连接表实例
+    let query = dbJQL.collection('sv-id-vip-subscription', tempPlanDB)
+
     // 全量查询
     if (pagesize < 1) {
-      subscriptionRes = await dbJQL.collection('sv-id-vip-subscription', tempPlanDB)
-        .orderBy('start_date', 'desc').get({
-          getCount: true
-        })
+      subscriptionRes = await query.orderBy('start_date', 'desc').get({
+        getCount: true
+      })
       total = subscriptionRes.count
       // 页数统计
       pages = Math.ceil(total / pagesize)
@@ -52,9 +54,6 @@ module.exports = {
         params: this.params
       })
     }
-
-    // 分页查询
-    let query = dbJQL.collection('sv-id-vip-subscription', tempPlanDB)
 
     // 构建筛选条件(JQL语法)
     let conditions = ''
@@ -73,11 +72,10 @@ module.exports = {
       }
       conditions += `start_date >= ${start_date_range[0]} && start_date <= ${start_date_range[1]}`
     }
-    // 将所有有效的筛选条件添加到查询对象中
-    if (Object.keys(conditions).length > 0) {
+    // 使用JQL进行条件查询
+    if (conditions) {
       query = query.where(conditions)
     }
-    console.log('==== conditions :', conditions, start_date_range);
 
     subscriptionRes = await query.orderBy('start_date', 'desc')
       .skip(pagesize * (pagenum - 1)).limit(pagesize).get({

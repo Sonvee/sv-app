@@ -20,27 +20,27 @@
         label-width="80px"
         label-position="left"
       >
-        <el-form-item prop="permission_id" label="权限ID" required>
-          <el-input v-model="formData.permission_id" placeholder="请输入权限ID" clearable />
-        </el-form-item>
-        <el-form-item prop="permission_name" label="权限名称" required>
-          <el-input v-model="formData.permission_name" placeholder="请输入权限名称" clearable />
-        </el-form-item>
-        <el-form-item prop="comment" label="备注">
+        <el-form-item prop="benefit_id" label="权益ID" required>
           <el-input
-            v-model="formData.comment"
-            type="textarea"
-            :autosize="{ minRows: 4 }"
-            placeholder="请输入备注"
+            class="sv-el-input"
+            v-model="formData.benefit_id"
+            placeholder="请输入权益ID (唯一且不可更改)"
+            clearable
+            :disabled="formMode != 'add'"
           />
         </el-form-item>
-        <el-form-item prop="create_date" label="创建时间">
-          <el-date-picker
-            v-model="formData.create_date"
-            type="datetime"
-            placeholder="请选择日期时间"
-            value-format="x"
-          />
+        <el-form-item prop="benefit_name" label="权益名称" required>
+          <el-input v-model="formData.benefit_name" placeholder="请输入权益名称" clearable />
+        </el-form-item>
+        <el-form-item prop="icon" label="权益图标">
+          <sv-icon-select
+            v-model="formData.icon"
+            clearable
+            @selected="selectedIcon"
+          ></sv-icon-select>
+        </el-form-item>
+        <el-form-item prop="sort" label="排序">
+          <el-input-number class="sv-el-input-number" v-model="formData.sort" :min="0" />
         </el-form-item>
       </el-form>
     </template>
@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect, computed } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 const props = defineProps({
   formInit: {
@@ -71,10 +71,10 @@ const emits = defineEmits(['submit'])
 const formData = ref({})
 // 初始数据
 const formBase = {
-  permission_id: '',
-  permission_name: '',
-  comment: '',
-  create_date: Date.now()
+  benefit_id: '',
+  benefit_name: '',
+  icon: '',
+  sort: 0
 }
 
 watchEffect(() => {
@@ -84,8 +84,9 @@ watchEffect(() => {
 
 // 校验规则
 const rules = ref({
-  permission_id: [{ required: true, message: '请输入权限ID', trigger: 'blur' }],
-  permission_name: [{ required: true, message: '请输入权限名称', trigger: 'blur' }]
+  benefit_id: [{ required: true, message: '请输入权益ID', trigger: 'blur' }],
+  benefit_name: [{ required: true, message: '请输入权益名称', trigger: 'blur' }],
+  icon: [{ required: true, message: '请选择权益图标', trigger: 'blur' }]
 })
 
 const drawerRef = ref() // 抽屉
@@ -109,6 +110,11 @@ function confirm() {
       console.log('==== 校验失败 :', fields)
     }
   })
+}
+
+// 选中图标
+function selectedIcon(icon) {
+  formData.value.icon = icon
 }
 </script>
 

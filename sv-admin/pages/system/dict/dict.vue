@@ -208,33 +208,6 @@ function del(item) {
 async function submitFilter(e) {
   handleTable({ name: e.name })
 }
-
 </script>
 
-<style lang="scss">
-.table-page-container {
-  .header,
-  .control {
-    margin-bottom: 10px;
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .sv-pagination {
-    padding: 10px 0;
-    display: flex;
-    justify-content: flex-end;
-  }
-}
-
-:deep(.nopadding-cell) {
-  // 取消该单元格内边距
-  padding: 0 !important;
-}
-.avatar-image {
-  width: 30px;
-  height: 30px;
-  display: block;
-  margin: 0 auto;
-}
-</style>
+<style lang="scss"></style>

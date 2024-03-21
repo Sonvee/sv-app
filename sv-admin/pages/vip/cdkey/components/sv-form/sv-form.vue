@@ -12,66 +12,59 @@
       <h3>{{ formMode == 'add' ? '新增' : '一键新增' }}</h3>
     </template>
     <template #default>
-      <view class="sv-add">
-        <el-form
-          class="sv-el-form"
-          ref="formRef"
-          :model="formData"
-          :rules="rules"
-          label-width="80px"
-          label-position="left"
-        >
-          <el-form-item v-if="formMode == 'add'" prop="cdkey" label="激活码" required>
-            <el-input
-              class="sv-el-input"
-              v-model="formData.cdkey"
-              placeholder="请生成CDKEY"
-              disabled
-            >
-              <template #append>
-                <view class="create-cdkey-btn" @click="generateCDKey">生成CDKEY</view>
-              </template>
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="bind_plan" label="绑定套餐" required>
-            <sv-dict-select
-              v-model="formData.bind_plan"
-              placeholder="请绑定套餐"
-              :dictList="bindPlanList"
-              keyName="plan_name"
-              valueName="plan_id"
-            ></sv-dict-select>
-          </el-form-item>
-          <el-form-item prop="status" label="状态" required>
-            <sv-dict-select
-              v-model="formData.status"
-              :dictList="statusList"
-              keyName="text"
-              valueName="value"
-              disabled
-            ></sv-dict-select>
-          </el-form-item>
-          <el-form-item prop="valid_date" label="有效期至" required>
-            <el-date-picker
-              v-model="formData.valid_date"
-              type="datetime"
-              placeholder="请选择有效期"
-              value-format="x"
-            />
-          </el-form-item>
-          <el-form-item v-if="formMode == 'onekey'" prop="num" label="生成条数" required>
-            <el-input-number
-              class="sv-el-input-number"
-              v-model="formData.num"
-              :min="1"
-              :max="20"
-              :step="1"
-              step-strictly
-            />
-            <text class="margin-left text-cyan">1 ~ 20</text>
-          </el-form-item>
-        </el-form>
-      </view>
+      <el-form
+        class="sv-el-form"
+        ref="formRef"
+        :model="formData"
+        :rules="rules"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item v-if="formMode == 'add'" prop="cdkey" label="激活码" required>
+          <el-input class="sv-el-input" v-model="formData.cdkey" placeholder="请生成CDKEY" disabled>
+            <template #append>
+              <view class="create-cdkey-btn" @click="generateCDKey">生成CDKEY</view>
+            </template>
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="bind_plan" label="绑定套餐" required>
+          <sv-dict-select
+            v-model="formData.bind_plan"
+            placeholder="请绑定套餐"
+            :dictList="bindPlanList"
+            keyName="plan_name"
+            valueName="plan_id"
+          ></sv-dict-select>
+        </el-form-item>
+        <el-form-item prop="status" label="状态" required>
+          <sv-dict-select
+            v-model="formData.status"
+            :dictList="statusList"
+            keyName="text"
+            valueName="value"
+            disabled
+          ></sv-dict-select>
+        </el-form-item>
+        <el-form-item prop="valid_date" label="有效期至" required>
+          <el-date-picker
+            v-model="formData.valid_date"
+            type="datetime"
+            placeholder="请选择有效期"
+            value-format="x"
+          />
+        </el-form-item>
+        <el-form-item v-if="formMode == 'onekey'" prop="num" label="生成条数" required>
+          <el-input-number
+            class="sv-el-input-number"
+            v-model="formData.num"
+            :min="1"
+            :max="20"
+            :step="1"
+            step-strictly
+          />
+          <text class="margin-left text-cyan">1 ~ 20</text>
+        </el-form-item>
+      </el-form>
     </template>
     <template #footer>
       <el-button @click="cancel">取消</el-button>
@@ -172,16 +165,11 @@ handleDictList()
 </script>
 
 <style lang="scss">
-.sv-add {
-  width: 100%;
-  height: 100%;
-
-  .create-cdkey-btn {
-    cursor: pointer;
-    color: $uni-color-success;
-    &:active {
-      opacity: 0.8;
-    }
+.create-cdkey-btn {
+  cursor: pointer;
+  color: $uni-color-success;
+  &:active {
+    opacity: 0.8;
   }
 }
 </style>

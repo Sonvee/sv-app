@@ -12,6 +12,19 @@ import {
 import {
   logList
 } from '@/service/api/svid';
+import {
+  cdkeyList
+} from '@/service/api/vip';
+
+
+
+
+
+
+
+
+
+// ================== 前置工具方法 ==================
 
 /**
  * Excel模板下载
@@ -48,7 +61,9 @@ export function fileImport(type, cover = false, callback) {
  * @param {Object} params 导出接口参数，用于请求数据
  */
 export function fileExport(type, all = false, params, callback) {
-  let param = { ...params }
+  let param = {
+    ...params
+  }
   if (all) param.pagesize = -1
   switch (type) {
     case 'logs':
@@ -56,6 +71,9 @@ export function fileExport(type, all = false, params, callback) {
       break
     case 'app':
       appExport(param)
+      break
+    case 'cdkey':
+      cdkeyExport(param)
       break
   }
   if (callback) callback()
@@ -82,6 +100,15 @@ function replaceMapKey(data, keyMap) {
 }
 
 
+
+
+
+
+
+
+
+
+// ================== 导出 ==================
 
 /**
  * 日志导出
@@ -166,6 +193,69 @@ async function appExport(params) {
   })
 }
 
+
+/**
+ * 激活码导出
+ */
+const cdkeyMapping = {
+  cdkey: '激活码(CDKEY)',
+  bind_plan_name: '绑定套餐名称',
+  valid_day: '绑定套餐有效期(天)',
+  valid_date: '激活码有效期至',
+}
+
+async function cdkeyExport(params) {
+  const dataRes = await cdkeyList(params)
+  const handleData = dataRes.data?.map((item) => {
+    return {
+      cdkey: item.cdkey,
+      bind_plan_name: item.bind_plan[0].plan_name,
+      valid_day: {
+        v: item.bind_plan[0].valid_day,
+        t: "s",
+        s: {
+          alignment: {
+            horizontal: "left", // 数字列会默认右对齐
+          }
+        }
+      },
+      valid_date: {
+        v: dayjs(item.valid_date).format('YYYY-MM-DD HH:mm:ss'),
+        t: "s",
+        s: {
+          font: {
+            color: {
+              rgb: "FF0000" // 有效期列文字标红
+            }
+          }
+        }
+      },
+    }
+  })
+  exportToExcel({
+    params: {
+      data: handleData,
+      title: 'cdkey',
+      mapping: cdkeyMapping,
+      type: 'file',
+    },
+    autoDownload: true,
+  }).then((res) => {
+    // console.log('onExport ===>', res)
+  })
+}
+
+
+
+
+
+
+
+
+
+
+// ================== 导入 ==================
+
 /**
  * 应用导入
  */
@@ -196,6 +286,17 @@ async function appImport(cover, callback) {
   })
   if (callback) callback(importRes)
 }
+
+
+
+
+
+
+
+
+
+
+// ================== 模版 ==================
 
 /**
  * 应用模板

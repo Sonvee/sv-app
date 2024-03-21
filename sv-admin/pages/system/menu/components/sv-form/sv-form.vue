@@ -12,67 +12,65 @@
       <h3>{{ formMode == 'add' ? '新增' : '编辑' }}</h3>
     </template>
     <template #default>
-      <view class="sv-add">
-        <el-form
-          class="sv-el-form"
-          ref="formRef"
-          :model="formData"
-          :rules="rules"
-          label-width="80px"
-          label-position="left"
-        >
-          <el-form-item prop="menu_id" label="菜单ID" required>
-            <el-input v-model="formData.menu_id" placeholder="请输入菜单ID" clearable />
-          </el-form-item>
-          <el-form-item prop="name" label="菜单名称" required>
-            <el-input v-model="formData.name" placeholder="请输入菜单名称" clearable />
-          </el-form-item>
-          <el-form-item prop="url" label="路径">
-            <el-input v-model.trim="formData.url" placeholder="请输入菜单路径" clearable />
-          </el-form-item>
-          <el-form-item prop="parent_id" label="父级ID">
-            <el-input
-              class="sv-el-input"
-              v-model="formData.parent_id"
-              disabled
-              placeholder="请输入父级ID"
-              clearable
-            />
-          </el-form-item>
-          <el-form-item prop="icon" label="图标">
-            <sv-icon-select
-              v-model="formData.icon"
-              clearable
-              @selected="selectedIcon"
-            ></sv-icon-select>
-            <view class="tips" @click="toUniIcons">如何使用自定义图标？</view>
-          </el-form-item>
-          <el-form-item prop="sort" label="序号">
-            <el-input-number
-              class="sv-el-input-number"
-              v-model="formData.sort"
-              :min="0"
-              @change="changeSort"
-            />
-          </el-form-item>
-          <el-form-item prop="permission" label="权限">
-            <sv-dict-checkbox
-              v-model="formData.permission"
-              :dictList="permissionList"
-              keyName="permission_id"
-              valueName="permission_name"
-            ></sv-dict-checkbox>
-          </el-form-item>
-          <el-form-item prop="enable" label="状态">
-            <el-switch
-              v-model="formData.enable"
-              inline-prompt
-              :active-icon="Check"
-              :inactive-icon="Close"
-            />
-          </el-form-item>
-        </el-form>
-      </view>
+      <el-form
+        class="sv-el-form"
+        ref="formRef"
+        :model="formData"
+        :rules="rules"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item prop="menu_id" label="菜单ID" required>
+          <el-input v-model="formData.menu_id" placeholder="请输入菜单ID" clearable />
+        </el-form-item>
+        <el-form-item prop="name" label="菜单名称" required>
+          <el-input v-model="formData.name" placeholder="请输入菜单名称" clearable />
+        </el-form-item>
+        <el-form-item prop="url" label="路径">
+          <el-input v-model.trim="formData.url" placeholder="请输入菜单路径" clearable />
+        </el-form-item>
+        <el-form-item prop="parent_id" label="父级ID">
+          <el-input
+            class="sv-el-input"
+            v-model="formData.parent_id"
+            disabled
+            placeholder="请输入父级ID"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item prop="icon" label="图标">
+          <sv-icon-select
+            v-model="formData.icon"
+            clearable
+            @selected="selectedIcon"
+          ></sv-icon-select>
+          <view class="tips" @click="toUniIcons">如何使用自定义图标？</view>
+        </el-form-item>
+        <el-form-item prop="sort" label="序号">
+          <el-input-number
+            class="sv-el-input-number"
+            v-model="formData.sort"
+            :min="0"
+            @change="changeSort"
+          />
+        </el-form-item>
+        <el-form-item prop="permission" label="权限">
+          <sv-dict-checkbox
+            v-model="formData.permission"
+            :dictList="permissionList"
+            keyName="permission_id"
+            valueName="permission_name"
+          ></sv-dict-checkbox>
+        </el-form-item>
+        <el-form-item prop="enable" label="状态">
+          <el-switch
+            v-model="formData.enable"
+            inline-prompt
+            :active-icon="Check"
+            :inactive-icon="Close"
+          />
+        </el-form-item>
+      </el-form>
     </template>
     <template #footer>
       <el-button @click="cancel">取消</el-button>
@@ -171,11 +169,6 @@ handleCache()
 </script>
 
 <style lang="scss">
-.sv-add {
-  width: 100%;
-  height: 100%;
-}
-
 .tips {
   text-decoration: underline;
   cursor: pointer;

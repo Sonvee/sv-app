@@ -20,6 +20,11 @@
         清空失效
       </el-button>
       <view style="flex: 1"></view>
+      <sv-excel-menu
+        type="cdkey"
+        :menu="['curPageExport', 'allPageExport']"
+        :exportParams="pagingParams"
+      ></sv-excel-menu>
       <el-button
         type="primary"
         link
@@ -37,7 +42,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" align="center" width="50" fixed="left" />
-      <el-table-column prop="cdkey" label="激活码" :min-width="300" show-overflow-tooltip>
+      <el-table-column prop="cdkey" label="激活码" :min-width="320" show-overflow-tooltip>
         <template #default="scope">
           {{ scope.row.cdkey }}
           <el-tooltip effect="light" placement="right" content="复制">
@@ -343,30 +348,4 @@ function invalidRemove() {
 }
 </script>
 
-<style lang="scss">
-.table-page-container {
-  .header,
-  .control {
-    margin-bottom: 10px;
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .sv-pagination {
-    padding: 10px 0;
-    display: flex;
-    justify-content: flex-end;
-  }
-}
-
-:deep(.nopadding-cell) {
-  // 取消该单元格内边距
-  padding: 0 !important;
-}
-.avatar-image {
-  width: 30px;
-  height: 30px;
-  display: block;
-  margin: 0 auto;
-}
-</style>
+<style lang="scss"></style>

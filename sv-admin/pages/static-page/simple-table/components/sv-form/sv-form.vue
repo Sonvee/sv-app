@@ -17,30 +17,14 @@
         ref="formRef"
         :model="formData"
         :rules="rules"
-        label-width="80px"
+        label-width="120px"
         label-position="left"
       >
-        <el-form-item prop="permission_id" label="权限ID" required>
-          <el-input v-model="formData.permission_id" placeholder="请输入权限ID" clearable />
+        <el-form-item prop="test_id" label="测试用例ID" required>
+          <el-input v-model="formData.test_id" placeholder="请输入测试用例ID" clearable />
         </el-form-item>
-        <el-form-item prop="permission_name" label="权限名称" required>
-          <el-input v-model="formData.permission_name" placeholder="请输入权限名称" clearable />
-        </el-form-item>
-        <el-form-item prop="comment" label="备注">
-          <el-input
-            v-model="formData.comment"
-            type="textarea"
-            :autosize="{ minRows: 4 }"
-            placeholder="请输入备注"
-          />
-        </el-form-item>
-        <el-form-item prop="create_date" label="创建时间">
-          <el-date-picker
-            v-model="formData.create_date"
-            type="datetime"
-            placeholder="请选择日期时间"
-            value-format="x"
-          />
+        <el-form-item prop="test_name" label="测试用例名称" required>
+          <el-input v-model="formData.test_name" placeholder="请输入测试用例名称" clearable />
         </el-form-item>
       </el-form>
     </template>
@@ -52,7 +36,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect, computed } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 const props = defineProps({
   formInit: {
@@ -71,10 +55,8 @@ const emits = defineEmits(['submit'])
 const formData = ref({})
 // 初始数据
 const formBase = {
-  permission_id: '',
-  permission_name: '',
-  comment: '',
-  create_date: Date.now()
+  test_id: '',
+  test_name: ''
 }
 
 watchEffect(() => {
@@ -84,8 +66,8 @@ watchEffect(() => {
 
 // 校验规则
 const rules = ref({
-  permission_id: [{ required: true, message: '请输入权限ID', trigger: 'blur' }],
-  permission_name: [{ required: true, message: '请输入权限名称', trigger: 'blur' }]
+  test_id: [{ required: true, message: '请输入测试用例ID', trigger: 'blur' }],
+  test_name: [{ required: true, message: '请输入测试用例名称', trigger: 'blur' }]
 })
 
 const drawerRef = ref() // 抽屉

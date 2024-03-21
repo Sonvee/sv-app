@@ -80,18 +80,4 @@ function reset() {
 }
 </script>
 
-<style lang="scss">
-.sv-table-header {
-  width: 100%;
-  padding: 10px 10px 0 10px;
-  box-sizing: border-box;
-
-  @include useTheme {
-    border-bottom: 1px solid #{getTheme('sv-admin-border-color')};
-  }
-
-  :deep(.el-form-item) {
-    margin-bottom: 20px;
-  }
-}
-</style>
+<style lang="scss"></style>

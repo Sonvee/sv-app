@@ -41,12 +41,15 @@ module.exports = {
     }
     
     let userRes, total, pages
+    
+    // 连接表实例
+    let query = db.collection('uni-id-users')
 
     // 全量查询
     if (pagesize < 1) {
-      userRes = await db.collection('uni-id-users').get()
+      userRes = await query.get()
       // 总数统计 已获取userRes.data，可避免再用count与服务器交互
-      // const count = await db.collection('uni-id-users').count()
+      // const count = await query.count()
       // total = count.total
       total = userRes.data.length || 0
       // 页数统计
@@ -61,9 +64,6 @@ module.exports = {
         params: this.params
       })
     }
-
-    // 分页查询
-    let query = db.collection('uni-id-users')
 
     // 构建筛选条件(对象形式) - 写法一
     /* const conditions = {}

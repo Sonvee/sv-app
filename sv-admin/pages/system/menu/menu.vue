@@ -102,10 +102,8 @@ import { Sort, RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-v
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 
 const refreshTable = ref(true) // 重新渲染表格状态
-const loading = ref(false)
-
 const tableData = ref([]) // 菜单表格
-
+const loading = ref(false)
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
 const formMode = ref('') // 表单模式 add / edit

@@ -337,8 +337,8 @@ async function testImport(cover, callback) {
   // 转换为接口原数据格式
   const handleData = dataRes.map((item) => {
     return {
-      test_id: item['测试用例ID'],
-      test_name: item['测试用例名称'],
+      test_id: item['测试用例ID'] + '', // 导入时转换为字符串类型
+      test_name: item['测试用例名称'] + '',
     }
   })
   console.table(toJsonRes.data);
@@ -366,8 +366,8 @@ async function appImport(cover, callback) {
   const handleData = dataRes.map((item) => {
     return {
       icon_url: item['图标'],
-      appid: item['应用ID'],
-      name: item['应用名称'],
+      appid: item['应用ID'] + '', // 导入时转换为字符串类型
+      name: item['应用名称'] + '',
       description: item['应用描述'],
       introduction: item['应用简介'],
       create_date: dayjs(item['创建时间']).valueOf(),

@@ -105,12 +105,13 @@ import { useSysStore } from '@/store/sys'
 const showHeader = ref(useSysStore().platform == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
+const dataParams = ref({}) // 筛选参数
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
 const formMode = ref('') // 表单模式 add / edit
 
 // 初始获取表格数据
-handleTable()
+handleTable(dataParams.value)
 
 async function handleTable(params) {
   loading.value = true
@@ -131,7 +132,7 @@ async function handleTable(params) {
 // 刷新
 function refresh() {
   tableData.value = [] // 置空数据
-  handleTable()
+  handleTable(dataParams.value)
 }
 
 // 新增
@@ -206,7 +207,8 @@ function del(item) {
 
 // 头部筛选栏筛选条件
 async function submitFilter(e) {
-  handleTable({ name: e.name })
+  Object.assign(dataParams.value, e)
+  handleTable(dataParams.value)
 }
 </script>
 

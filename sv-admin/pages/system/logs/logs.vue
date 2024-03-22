@@ -6,7 +6,7 @@
       <sv-excel-menu
         type="logs"
         :menu="['curPageExport', 'allPageExport']"
-        :exportParams="pagingParams"
+        :exportParams="dataParams"
       ></sv-excel-menu>
       <el-button type="primary" link :icon="RefreshRight" @click="refresh"></el-button>
     </view>
@@ -54,7 +54,7 @@
     </el-table>
     <!-- 分页 -->
     <sv-pagination
-      :pagingParams="pagingParams"
+      :pagingParams="dataParams"
       :total="total"
       @update:page-size="handleSizeChange"
       @update:current-page="handleCurrentChange"
@@ -71,11 +71,11 @@ import { logList } from '@/service/api/svid'
 
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading
-const pagingParams = ref({ pagesize: 20, pagenum: 1 }) // 表格分页默认参数
+const dataParams = ref({ pagesize: 20, pagenum: 1 }) // 表格分页默认参数
 const total = ref(0) // 表格总数
 
 // 初始获取表格数据
-handleTable(pagingParams.value)
+handleTable(dataParams.value)
 
 async function handleTable(params) {
   loading.value = true
@@ -97,17 +97,17 @@ async function handleTable(params) {
 // 刷新
 function refresh() {
   tableData.value = [] // 置空数据
-  handleTable(pagingParams.value)
+  handleTable(dataParams.value)
 }
 
 // 分页
 function handleSizeChange(e) {
-  pagingParams.value.pagesize = e
-  handleTable(pagingParams.value)
+  dataParams.value.pagesize = e
+  handleTable(dataParams.value)
 }
 function handleCurrentChange(e) {
-  pagingParams.value.pagenum = e
-  handleTable(pagingParams.value)
+  dataParams.value.pagenum = e
+  handleTable(dataParams.value)
 }
 </script>
 

@@ -37,7 +37,7 @@ export default {
         icon: 'admin-icons-page-ent',
         url: '/pages/static-page',
         enable: true,
-        sort: 90,
+        sort: 1000,
         permission: [],
         type: 'static',
         children: [{
@@ -47,7 +47,7 @@ export default {
           icon: 'admin-icons-table',
           url: '/pages/static-page/table-template/table-template',
           enable: true,
-          sort: 901,
+          sort: 1001,
           permission: [],
           type: 'static',
         }, {
@@ -57,7 +57,7 @@ export default {
           icon: 'admin-icons-table',
           url: '/pages/static-page/simple-table/simple-table',
           enable: true,
-          sort: 902,
+          sort: 1002,
           permission: [],
           type: 'static',
         }, {
@@ -67,7 +67,7 @@ export default {
           icon: 'admin-icons-icon',
           url: '/pages/static-page/icons/icons',
           enable: true,
-          sort: 903,
+          sort: 1003,
           permission: [],
           type: 'static',
         }]
@@ -79,7 +79,7 @@ export default {
         icon: 'sv-icons-agreements',
         url: '/uni_modules/sv-id-pages/pages/agreements',
         enable: true,
-        sort: 100,
+        sort: 1100,
         permission: [],
         type: 'static',
         children: [{
@@ -89,7 +89,7 @@ export default {
           icon: 'sv-icons-agreements-privacy',
           url: '/uni_modules/sv-id-pages/pages/agreements/privacy',
           enable: true,
-          sort: 1001,
+          sort: 1101,
           permission: [],
           type: 'static',
         }, {
@@ -99,7 +99,7 @@ export default {
           icon: 'sv-icons-agreements-service',
           url: '/uni_modules/sv-id-pages/pages/agreements/service',
           enable: true,
-          sort: 1002,
+          sort: 1102,
           permission: [],
           type: 'static',
         }]
@@ -111,7 +111,7 @@ export default {
         icon: 'uni-icons-paperplane',
         url: '/pages/link',
         enable: true,
-        sort: 110,
+        sort: 1200,
         permission: [],
         type: 'static',
         children: [{
@@ -121,7 +121,7 @@ export default {
           icon: 'sv-icons-uniapp',
           url: 'https://uniapp.dcloud.net.cn',
           enable: true,
-          sort: 1101,
+          sort: 1201,
           permission: [],
           type: 'static',
         }, {
@@ -131,7 +131,7 @@ export default {
           icon: 'uni-icons-weixin',
           url: 'https://mp.weixin.qq.com',
           enable: true,
-          sort: 1102,
+          sort: 1202,
           permission: [],
           type: 'static',
         }]

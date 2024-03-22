@@ -33,11 +33,7 @@
           <el-input v-model="formData.benefit_name" placeholder="请输入权益名称" clearable />
         </el-form-item>
         <el-form-item prop="icon" label="权益图标">
-          <sv-icon-select
-            v-model="formData.icon"
-            clearable
-            @selected="selectedIcon"
-          ></sv-icon-select>
+          <sv-icon-select v-model:icon="formData.icon"></sv-icon-select>
         </el-form-item>
         <el-form-item prop="sort" label="排序">
           <el-input-number class="sv-el-input-number" v-model="formData.sort" :min="0" />
@@ -110,11 +106,6 @@ function confirm() {
       console.log('==== 校验失败 :', fields)
     }
   })
-}
-
-// 选中图标
-function selectedIcon(icon) {
-  formData.value.icon = icon
 }
 </script>
 

@@ -91,12 +91,7 @@
         </el-form-item>
         <!-- 内置图标选择栏 -->
         <el-form-item prop="icon" label="图标">
-          <sv-icon-select
-            v-model="formData.icon"
-            clearable
-            :pop-width="400"
-            @selected="selectedIcon"
-          ></sv-icon-select>
+          <sv-icon-select v-model:icon="formData.icon"></sv-icon-select>
         </el-form-item>
         <el-form-item prop="rich-text" label="富文本">
           <view style="height: 500px; width: 100%">
@@ -252,11 +247,6 @@ function uploadFail(e) {
     title: '图片上传失败' + e,
     icon: 'none'
   })
-}
-
-// 选中图标
-function selectedIcon(icon) {
-  formData.value.icon = icon
 }
 
 /**

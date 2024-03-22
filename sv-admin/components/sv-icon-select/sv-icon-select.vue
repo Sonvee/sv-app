@@ -1,6 +1,12 @@
 <template>
   <view class="sv-icon-select">
-    <el-input v-bind="$attrs" class="sv-el-input">
+    <el-input
+      v-bind="$attrs"
+      v-model="iconVal"
+      class="sv-el-input"
+      placeholder="请选择图标"
+      clearable
+    >
       <template #append>
         <el-popover placement="bottom-start" :width="popWidth" trigger="click">
           <template #reference>
@@ -17,11 +23,27 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useSysStore } from '@/store/sys'
 import SvIconList from './sv-icon-list.vue'
 
-const emits = defineEmits(['selected'])
+const props = defineProps({
+  icon: {
+    type: String,
+    default: ''
+  }
+})
+
+const emits = defineEmits(['selected', 'update:icon'])
+
+const iconVal = computed({
+  set(newVal) {
+    emits('update:icon', newVal)
+  },
+  get() {
+    return props.icon
+  }
+})
 
 const popWidth = ref(300)
 const popHeight = ref(200)
@@ -41,7 +63,7 @@ function JudgeDeviceType() {
 }
 
 function selected(e) {
-  emits('selected', e)
+  emits('update:icon', e)
 }
 </script>
 

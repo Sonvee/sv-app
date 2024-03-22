@@ -39,20 +39,11 @@
           />
         </el-form-item>
         <el-form-item prop="icon" label="图标">
-          <sv-icon-select
-            v-model="formData.icon"
-            clearable
-            @selected="selectedIcon"
-          ></sv-icon-select>
+          <sv-icon-select v-model:icon="formData.icon"></sv-icon-select>
           <view class="tips" @click="toUniIcons">如何使用自定义图标？</view>
         </el-form-item>
         <el-form-item prop="sort" label="序号">
-          <el-input-number
-            class="sv-el-input-number"
-            v-model="formData.sort"
-            :min="0"
-            @change="changeSort"
-          />
+          <el-input-number class="sv-el-input-number" v-model="formData.sort" :min="0" />
         </el-form-item>
         <el-form-item prop="permission" label="权限">
           <sv-dict-checkbox
@@ -149,14 +140,6 @@ function confirm() {
 function toUniIcons() {
   // window.open('https://uniapp.dcloud.net.cn/uniCloud/admin.html#icon-图标')
   window.open(adminConfig.iconHelp.url)
-}
-// 选中图标
-function selectedIcon(icon) {
-  formData.value.icon = icon
-}
-// 改变序号
-function changeSort(value) {
-  formData.value.sort = value
 }
 
 // 权限列表

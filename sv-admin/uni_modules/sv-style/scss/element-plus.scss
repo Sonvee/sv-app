@@ -111,6 +111,10 @@
     --el-table-row-hover-bg-color: #{getTheme('sv-admin-hover-color')};
     --el-table-expanded-cell-bg-color: #{getTheme('sv-admin-bg-color')};
 
+    :deep(.cell) {
+      line-height: unset;
+    }
+
     :deep(.el-button) {
       --el-fill-color-light: #{getTheme('sv-admin-hover-color')};
       &:active {

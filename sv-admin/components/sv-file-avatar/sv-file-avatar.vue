@@ -2,14 +2,11 @@
   <uni-file-picker
     v-bind="$attrs"
     v-model="files"
-    :image-styles="{
-      width: 100,
-      height: 100
-    }"
-    :auto-upload="false"
-    fileMediatype="image"
     mode="grid"
-    limit="1"
+    fileMediatype="image"
+    :image-styles="imageStyles"
+    :limit="limit"
+    :auto-upload="false"
     @select="selectFile"
   />
 </template>
@@ -21,6 +18,19 @@ import { uploadFile } from '@/utils/util'
 const props = defineProps({
   file: {
     type: [Object, String]
+  },
+  limit: {
+    type: Number,
+    default: 1
+  },
+  imageStyles: {
+    type: Object,
+    default: () => {
+      return {
+        width: 100,
+        height: 100
+      }
+    }
   }
 })
 

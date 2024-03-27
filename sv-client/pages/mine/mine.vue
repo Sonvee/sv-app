@@ -178,7 +178,7 @@ onLoad(() => {
 // 手动刷新页面
 async function onRefresh() {
   // 节流操作
-  if (!useThrottle(2000)()) return
+  if (!useThrottle()()) return
 
   uni.showLoading({
     title: '正在刷新'

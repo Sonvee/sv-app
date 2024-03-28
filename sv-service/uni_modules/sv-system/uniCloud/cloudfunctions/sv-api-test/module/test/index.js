@@ -163,7 +163,7 @@ module.exports = {
     const addRes = await db.collection(mainDB).add(filterData)
 
     return handler.result({
-      data: addRes.data,
+      data: addRes,
     })
   },
   // 删除

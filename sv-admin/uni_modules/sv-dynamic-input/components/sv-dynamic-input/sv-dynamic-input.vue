@@ -1,15 +1,31 @@
 <template>
   <view class="sv-dynamic-input" :style="{ '--dynamic-input-size': svSize }">
-    <view class="row-item" v-for="(item, index) in dynamicList" :key="index">
-      <view :style="{ minWidth: labelWidth, textAlign }">{{ lableText }}</view>
-      <input type="text" class="input" v-model="item[lableKey]" :placeholder="keyPlaceholder" />
-      <view class="divider"></view>
-      <view :style="{ minWidth: labelWidth, textAlign }">{{ valueText }}</view>
-      <input type="text" class="input" v-model="item[valueKey]" :placeholder="valuePlaceholder" />
-      <view class="divider"></view>
-      <view class="control">
-        <view class="control-add" :class="{ disable: bandAdd }" @click="addRow(index)">＋</view>
-        <view class="control-delete" :class="{ disable: bandDelete }" @click="deleteRow(index)">
+    <view class="dynamic-row-item" v-for="(item, index) in dynamicList" :key="index">
+      <view class="dynamic-row-item-box">
+        <view class="dynamic-row-item-input">
+          <view :style="{ minWidth: labelWidth, textAlign }">{{ lableText }}</view>
+          <input type="text" class="input" v-model="item[lableKey]" :placeholder="keyPlaceholder" />
+          <view class="dynamic-divider"></view>
+          <view :style="{ minWidth: labelWidth, textAlign }">{{ valueText }}</view>
+          <input
+            type="text"
+            class="input"
+            v-model="item[valueKey]"
+            :placeholder="valuePlaceholder"
+          />
+        </view>
+        <slot :data="item"></slot>
+      </view>
+      <view class="dynamic-divider"></view>
+      <view class="dynamic-control">
+        <view class="dynamic-control-add" :class="{ disable: bandAdd }" @click="addRow(index)">
+          ＋
+        </view>
+        <view
+          class="dynamic-control-delete"
+          :class="{ disable: bandDelete }"
+          @click="deleteRow(index)"
+        >
           －
         </view>
       </view>
@@ -174,25 +190,35 @@ export default {
   font-size: var(--dynamic-input-size);
 }
 
-.row-item {
+.dynamic-row-item {
   display: flex;
   align-items: center;
   margin-bottom: calc(var(--dynamic-input-size) / 2);
 }
 
-.divider {
+.dynamic-row-item-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.dynamic-row-item-input {
+  display: flex;
+  align-items: center;
+}
+
+.dynamic-divider {
   min-width: 4%;
 }
 
-.control {
+.dynamic-control {
   height: calc(var(--dynamic-input-size) * 2);
   display: flex;
   border: 1px solid #cccccc;
   border-radius: 4px;
 }
 
-.control-add,
-.control-delete {
+.dynamic-control-add,
+.dynamic-control-delete {
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -203,12 +229,12 @@ export default {
   user-select: none;
 }
 
-.control-add:active,
-.control-delete:active {
+.dynamic-control-add:active,
+.dynamic-control-delete:active {
   opacity: 0.8;
 }
 
-.control-add {
+.dynamic-control-add {
   border-right: 1px solid #cccccc;
 }
 

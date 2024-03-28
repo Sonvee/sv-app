@@ -41,3 +41,19 @@
 uni-modal {
   z-index: 999999999 !important;
 }
+
+.sv-uni-file-picker {
+  @include useTheme {
+    .files__name {
+      color: getTheme('sv-text-color');
+    }
+    .icon-del-box {
+      .icon-del {
+        background-color: getTheme('sv-text-color');
+      }
+    }
+    .files-border {
+      border-color: getTheme('sv-shadow-color') !important;
+    }
+  }
+}

@@ -203,7 +203,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .sv-admin-el-drawer {
+  .sv-el-drawer {
     width: 100% !important;
   }
 }
@@ -211,6 +211,7 @@
 .sv-el-input-number {
   @include useTheme {
     --el-fill-color-light: #{getTheme('sv-admin-bg-color')};
+    --el-disabled-bg-color: #{getTheme('sv-admin-mask-color')};
   }
 }
 
@@ -265,5 +266,15 @@
 .sv-el-avatar {
   @include useTheme {
     --el-avatar-bg-color: #{getTheme('sv-admin-bg-color')};
+  }
+}
+
+.sv-el-tree {
+  background: unset !important;
+  color: unset !important;
+
+  @include useTheme {
+    --el-color-primary-light-9: #{getTheme('sv-admin-hover-hl-color')};
+    --el-tree-node-hover-bg-color: #{getTheme('sv-admin-hover-hl-color')};
   }
 }

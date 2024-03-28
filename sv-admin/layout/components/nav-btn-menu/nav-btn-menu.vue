@@ -6,7 +6,7 @@
       </view>
     </template>
     <view class="menu-tree">
-      <el-tree :data="menuData" node-key="menu_id" :props="nodeProps" @node-click="onMenu" />
+      <el-tree :data="menuData" node-key="menu_id" accordion :props="nodeProps" @node-click="onMenu" />
     </view>
   </el-popover>
 </template>

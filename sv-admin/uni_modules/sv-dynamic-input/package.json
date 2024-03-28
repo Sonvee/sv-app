@@ -1,7 +1,7 @@
 {
   "id": "sv-dynamic-input",
   "displayName": "动态录入键值对（动态添加字典字段）",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "动态录入键值对（适用于表单动态添加字典字段）",
   "keywords": [
     "动态",

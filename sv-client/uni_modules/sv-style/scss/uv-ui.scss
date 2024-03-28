@@ -54,3 +54,16 @@
   }
 }
 
+.sv-uv-collapse {
+  @include useTheme {
+    .uv-cell--clickable {
+      background-color: getTheme('sv-popup-color') !important;
+    }
+    .uv-cell__title-text {
+      color: getTheme('sv-text-color') !important;
+    }
+    .uv-collapse-item__content__text {
+      color: getTheme('sv-text-sub-color');
+    }
+  }
+}

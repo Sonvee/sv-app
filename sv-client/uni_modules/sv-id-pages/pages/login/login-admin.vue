@@ -55,7 +55,7 @@
           <button class="login-btn" type="primary" @click="submitLogin">登录</button>
         </view>
         <!-- 注册 -->
-        <view class="register-form">
+        <view class="register-form" v-if="!existAdmin">
           <view class="form-title neon-flash">{{ adminName }} 欢迎您！</view>
           <uni-forms ref="registerform" :model="registerFormData" :rules="rules" label-width="0">
             <uni-forms-item name="username">

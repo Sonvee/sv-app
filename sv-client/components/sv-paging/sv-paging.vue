@@ -14,6 +14,7 @@
     :back-to-top-bottom="options.backToTopBottom"
     @query="queryList"
     @innerCellClick="innerCellClick"
+    @onRefresh="onRefresh"
   >
     <!-- 虚拟列表写法 -->
     <template v-if="options.useVirtualList" #cell="{ item, index }">
@@ -63,15 +64,7 @@ export default {
         fixed: false,
         pageSize: 20,
         preloadPage: 1, // 预加载的列表可视范围(列表高度)页数，即预加载当前页及上下各几页
-        // #ifdef MP-WEIXIN
-        // 微信小程序的虚拟列表必须开启兼容模式
-        // 但是鉴于兼容模式写法及处理相对不友好，暂时不启用兼容模式
-        useVirtualList: false, // 关闭虚拟列表
-        // #endif
-        // #ifndef MP-WEIXIN
-        // 非微信小程序端统一开启兼容模式
-        useVirtualList: true, // 开启虚拟列表
-        // #endif
+        useVirtualList: false, // 默认关闭虚拟列表
         useCompatibilityMode: false, // 开启虚拟列表兼容模式
         cellHeightMode: 'fixed', // 高度模式 fixed / dynamic
         autoShowBackToTop: true,
@@ -98,6 +91,7 @@ export default {
           ...this.apiParams
         })
         this.$refs.paging.complete(apiRes.data)
+        this.$emit('apiQuery', apiRes)
       } catch (e) {
         this.$refs.paging.complete(false)
       }
@@ -109,6 +103,9 @@ export default {
     // 列表重载 - 需要重新筛选请求列表时调用
     reload() {
       this.$refs.paging.reload()
+    },
+    onRefresh() {
+      this.$emit('refreshOK')
     }
   }
 }

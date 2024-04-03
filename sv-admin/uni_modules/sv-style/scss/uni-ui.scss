@@ -57,3 +57,43 @@ uni-modal {
     }
   }
 }
+
+.sv-uni-easyinput {
+  @include useTheme {
+    .uni-easyinput {
+      color: getTheme('sv-text-color') !important;
+      .uni-easyinput__content {
+        background-color: getTheme('sv-bg-hl-color') !important;
+        border: 1px solid #{getTheme('sv-border-color')} !important;
+      }
+    }
+  }
+}
+
+.sv-uni-data-select {
+  @include useTheme {
+    color: getTheme('sv-text-color');
+    background-color: getTheme('sv-bg-hl-color') !important;
+
+    .uni-select {
+      border: 1px solid #{getTheme('sv-border-color')} !important;
+    }
+
+    .uni-select__input-text {
+      color: inherit;
+    }
+
+    .uni-select--disabled {
+      color: getTheme('sv-text-sub-color') !important;
+      background-color: getTheme('sv-bg-hl-color') !important;
+    }
+
+    .uni-select__selector {
+      background-color: getTheme('sv-bg-hl-color') !important;
+
+      .uni-select__selector-item:hover {
+        background-color: getTheme('sv-bg-color') !important;
+      }
+    }
+  }
+}

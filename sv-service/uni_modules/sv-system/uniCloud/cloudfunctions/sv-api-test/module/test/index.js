@@ -6,10 +6,10 @@ module.exports = {
   // 测试列表
   async testList() {
     let {
+      test_id,
+      test_name,
       pagesize = 20,
-        pagenum = 1,
-        test_id,
-        test_name,
+      pagenum = 1,
     } = this.params
 
     // 转换为Number类型
@@ -33,26 +33,6 @@ module.exports = {
     // 连接表实例
     let query = dbJQL.collection('sv-sys-test')
 
-    // 全量查询
-    if (pagesize < 1) {
-      testRes = await query.get({
-        getCount: true
-      })
-      // 总数统计
-      total = testRes.count
-      // 页数统计
-      pages = Math.ceil(total / pagesize)
-
-      throw handler.result({
-        data: testRes.data,
-        total,
-        pagesize,
-        pagenum,
-        pages,
-        params: this.params
-      })
-    }
-
     // 构建筛选条件(对象形式)
     const conditions = {}
     if (test_id) {
@@ -66,12 +46,21 @@ module.exports = {
       query = query.where(conditions)
     }
 
-    testRes = await query.skip(pagesize * (pagenum - 1)).limit(pagesize).get({
-      getCount: true
-    })
-
-    total = testRes.count
-    pages = Math.ceil(total / pagesize)
+    if (pagesize < 1) {
+      // 全量查询
+      testRes = await query.get({
+        getCount: true
+      })
+      total = testRes.count
+      pages = 1
+    } else {
+      // 分页查询
+      testRes = await query.skip(pagesize * (pagenum - 1)).limit(pagesize).get({
+        getCount: true
+      })
+      total = testRes.count
+      pages = Math.ceil(total / pagesize)
+    }
 
     return handler.result({
       data: testRes.data,

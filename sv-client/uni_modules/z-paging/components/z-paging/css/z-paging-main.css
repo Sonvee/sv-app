@@ -2,13 +2,18 @@
 
 .z-paging-content {
 	position: relative;
+	flex-direction: column;
+	/* #ifndef APP-NVUE */
+	overflow: hidden;
+	/* #endif */
+}
+
+.z-paging-content-full {
 	/* #ifndef APP-NVUE */
 	display: flex;
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
 	/* #endif */
-	flex-direction: column;
 }
 
 .z-paging-content-fixed, .zp-loading-fixed {
@@ -23,6 +28,14 @@
 	right: 0;
 }
 
+.zp-f2-content {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: white;
+}
+
 .zp-page-top, .zp-page-bottom {
 	/* #ifndef APP-NVUE */
 	width: auto;
@@ -33,7 +46,7 @@
 	z-index: 999;
 }
 
-.zp-page-left,.zp-page-right {
+.zp-page-left, .zp-page-right {
 	/* #ifndef APP-NVUE */
 	height: 100%;
 	/* #endif */

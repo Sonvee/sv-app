@@ -1380,6 +1380,20 @@ button.cuIcon.lg {
   text-align: center
 }
 
+.cu-list.menu>.cu-item .content>text[class*=uni-icons] {
+  display: inline-block;
+  margin-right: 10rpx;
+  width: 1.6em;
+  text-align: center
+}
+
+.cu-list.menu>.cu-item .content>text[class*=admin-icons] {
+  display: inline-block;
+  margin-right: 10rpx;
+  width: 1.6em;
+  text-align: center
+}
+
 
 .cu-list.menu>.cu-item .content>image {
   display: inline-block;
@@ -4210,4 +4224,11 @@ scroll-view.cu-steps .cu-item {
 
 .sv-gradual-sunset {
   background-image: linear-gradient(135deg, rgba(176, 174, 229, 0.2), rgba(237, 245, 163, 0.1));
+}
+
+/**
+ * 其他
+ */
+.inline-block {
+  display: inline-block;
 }

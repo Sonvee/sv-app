@@ -36,8 +36,8 @@ $themes: (
     sv-text-color: #f8f8f8,
     sv-text-hl-color: #ffffff,
     sv-text-sub-color: rgba(248, 248, 248, 0.8),
-    sv-border-color: #c8c7cc,
-    sv-border-hl-color: #e2e2e2,
+    sv-border-color: #363636,
+    sv-border-hl-color: #2f2f2f,
     sv-mask-color: rgba(0, 0, 0, 0.4),
     sv-card-color: #2f2f2f,
     sv-shadow-color: #323232,
@@ -78,10 +78,10 @@ $sv-admin-side-bar-width: 200px;
 $curTheme: light;
 
 /* #ifdef H5 */
-$platform: html; 
+$platform: html;
 /* #endif */
 /* #ifndef H5 */
-$platform: '.sv-page'; 
+$platform: '.sv-page';
 /* #endif */
 
 // 动态切换所有主题

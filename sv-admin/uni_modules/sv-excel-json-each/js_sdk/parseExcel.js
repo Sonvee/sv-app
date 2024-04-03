@@ -1,6 +1,7 @@
 import pickFile from './plusFilePicker.js'
 
 async function urlToBase64(url) {
+  // #ifndef MP-WEIXIN
   // 注意url必须为http或者https协议路径，本地file路径不行
   let res = await uni.request({
     url: url,
@@ -12,6 +13,12 @@ async function urlToBase64(url) {
     res = res.find(item => item && item.data)
   }
   let base64 = uni.arrayBufferToBase64(res.data); //把arraybuffer转成base64
+  // #endif
+
+  // #ifdef MP-WEIXIN
+  const fs = wx.getFileSystemManager()
+  let base64 = fs.readFileSync(url, 'base64')
+  // #endif
   return base64
 }
 

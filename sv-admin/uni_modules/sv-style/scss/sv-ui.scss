@@ -1,0 +1,16 @@
+.sv-exam-plus-page {
+  @include useTheme {
+    .sv-exam {
+      --bg-color: #{getTheme('sv-popup-color')};
+      --border-color: #{getTheme('sv-border-color')};
+
+      .exam-card {
+        .uni-countdown__number,
+        .uni-countdown__splitor {
+          color: getTheme('sv-text-sub-color') !important;
+        }
+      }
+    }
+  }
+}
+

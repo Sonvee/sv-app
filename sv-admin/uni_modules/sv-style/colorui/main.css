@@ -4037,6 +4037,10 @@ scroll-view.cu-steps .cu-item {
   height: calc(100rpx + env(safe-area-inset-bottom));
 }
 
+.text-italic {
+  font-style: italic;
+}
+
 .flex-col {
   display: flex;
   flex-direction: column;

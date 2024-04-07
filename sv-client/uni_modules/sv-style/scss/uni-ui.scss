@@ -97,3 +97,43 @@ uni-modal {
     }
   }
 }
+
+.sv-uni-list {
+  .uni-list {
+    @include useTheme {
+      background-color: getTheme('sv-card-color');
+
+      .list-title {
+        padding: 20rpx 30rpx;
+        font-size: 12px;
+        border-bottom: 1rpx solid #{getTheme('sv-border-color')};
+        color: getTheme('sv-text-sub-color');
+        opacity: 0.6;
+      }
+
+      .uni-list-item {
+        background-color: getTheme('sv-card-color') !important;
+
+        .uni-list-item__content {
+          color: getTheme('sv-text-color');
+          .uni-list-item__content-title {
+            color: getTheme('sv-text-color');
+          }
+        }
+      }
+
+      .uni-list-item--hover {
+        background-color: getTheme('sv-hover-color') !important;
+      }
+
+      .uni-list--border-top,
+      .uni-list--border-bottom {
+        background-color: getTheme('sv-border-color');
+      }
+
+      .uni-list--border:after {
+        background-color: getTheme('sv-border-color');
+      }
+    }
+  }
+}

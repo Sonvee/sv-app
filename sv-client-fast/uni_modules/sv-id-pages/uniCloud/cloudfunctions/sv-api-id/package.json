@@ -1,9 +1,0 @@
-{
-  "name": "sv-api-id",
-  "dependencies": {
-    "sv-handler": "file:../common/sv-handler"
-  },
-  "extensions": {
-    "uni-cloud-jql": {}
-  }
-}

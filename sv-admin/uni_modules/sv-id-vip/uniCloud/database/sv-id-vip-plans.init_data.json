@@ -1,0 +1,73 @@
+[{
+    "plan_id": "vip_plan_one_day",
+    "plan_name": "日付",
+    "description": "体验一天",
+    "price": 100,
+    "discount": 20,
+    "benefits": [{
+      "benefit_id": "vip_benefit_no_ad",
+      "benefit_name": "免广告",
+      "icon": "sv-icons-no-ad"
+    }, {
+      "benefit_id": "vip_benefit_superior",
+      "benefit_name": "流光铭牌",
+      "icon": "sv-icons-vip",
+    }],
+    "valid_day": 1,
+    "sort": 1
+  },
+  {
+    "plan_id": "vip_plan_one_month",
+    "plan_name": "月卡",
+    "description": "半价优惠",
+    "price": 3000,
+    "discount": 1500,
+    "benefits": [{
+      "benefit_id": "vip_benefit_no_ad",
+      "benefit_name": "免广告",
+      "icon": "sv-icons-no-ad"
+    }, {
+      "benefit_id": "vip_benefit_superior",
+      "benefit_name": "流光铭牌",
+      "icon": "sv-icons-vip",
+    }],
+    "valid_day": 30,
+    "sort": 2
+  },
+  {
+    "plan_id": "vip_plan_one_quarter",
+    "plan_name": "季卡",
+    "description": "三折优惠",
+    "price": 9000,
+    "discount": 6000,
+    "benefits": [{
+      "benefit_id": "vip_benefit_no_ad",
+      "benefit_name": "免广告",
+      "icon": "sv-icons-no-ad"
+    }, {
+      "benefit_id": "vip_benefit_superior",
+      "benefit_name": "流光铭牌",
+      "icon": "sv-icons-vip",
+    }],
+    "valid_day": 90,
+    "sort": 3
+  },
+  {
+    "plan_id": "vip_plan_one_year",
+    "plan_name": "年卡",
+    "description": "超级折扣",
+    "price": 36000,
+    "discount": 26000,
+    "benefits": [{
+      "benefit_id": "vip_benefit_no_ad",
+      "benefit_name": "免广告",
+      "icon": "sv-icons-no-ad"
+    }, {
+      "benefit_id": "vip_benefit_superior",
+      "benefit_name": "流光铭牌",
+      "icon": "sv-icons-vip",
+    }],
+    "valid_day": 365,
+    "sort": 4
+  }
+]

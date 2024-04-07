@@ -1,0 +1,11 @@
+[{
+  "benefit_id": "vip_benefit_no_ad",
+  "benefit_name": "免广告",
+  "icon": "sv-icons-no-ad",
+  "sort": 1
+}, {
+  "benefit_id": "vip_benefit_superior",
+  "benefit_name": "流光铭牌",
+  "icon": "sv-icons-vip",
+  "sort": 2
+}]

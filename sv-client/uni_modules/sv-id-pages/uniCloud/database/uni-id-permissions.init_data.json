@@ -16,5 +16,11 @@
     "permission_name": "api接口读写权限",
     "comment": "api接口读写权限",
     "create_date": 0
+  },
+  {
+    "permission_id": "VIP_MANAGE",
+    "permission_name": "会员数据管理权限",
+    "comment": "管理VIP套餐和会员等数据权限",
+    "create_date": 0
   }
 ]

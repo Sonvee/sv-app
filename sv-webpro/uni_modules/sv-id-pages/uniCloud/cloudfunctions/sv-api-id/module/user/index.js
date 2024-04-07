@@ -32,9 +32,6 @@ module.exports = {
     pagesize = +pagesize
     pagenum = +pagenum
 
-    let userRes, count, pages
-
-
     // 页码不可小于1
     if (pagenum < 1) {
       throw handler.result({
@@ -43,25 +40,9 @@ module.exports = {
       })
     }
 
-    // 全量查询
-    if (pagesize < 1) {
-      userRes = await db.collection('uni-id-users').get()
-      // 总数统计
-      count = await db.collection('uni-id-users').count()
-      // 页数统计
-      pages = Math.ceil(count.total / pagesize)
+    let userRes, total, pages
 
-      throw handler.result({
-        data: userRes.data,
-        total: count.total,
-        pagesize,
-        pagenum,
-        pages,
-        params: this.params
-      })
-    }
-
-    // 分页查询
+    // 连接表实例
     let query = db.collection('uni-id-users')
 
     // 构建筛选条件(对象形式) - 写法一
@@ -132,14 +113,24 @@ module.exports = {
 
     // 合并所有条件
     if (conditions.length > 0) {
-      query = query.where(dbCmd.and(...conditions))
+      query = query.where(dbCmd.and(...conditions)).orderBy('register_date', 'asc')
     }
 
-    userRes = await query.orderBy('register_date', 'asc')
-      .skip(pagesize * (pagenum - 1)).limit(pagesize).get()
-
-    total = userRes.data.length
-    pages = Math.ceil(total / pagesize)
+    // 全量查询
+    if (pagesize < 1) {
+      userRes = await query.get()
+      // 总数统计 已获取userRes.data，可避免再用count与服务器交互
+      // const count = await query.count()
+      // total = count.total
+      total = userRes.data.length || 0
+      pages = 1
+    } else {
+      userRes = await query.skip(pagesize * (pagenum - 1)).limit(pagesize).get()
+      // 条数统计
+      const countRes = await query.count()
+      total = countRes.total
+      pages = Math.ceil(total / pagesize)
+    }
 
     return handler.result({
       data: userRes.data,

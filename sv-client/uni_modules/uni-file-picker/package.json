@@ -1,20 +1,22 @@
 {
-  "id": "sv-style",
-  "displayName": "基于colorui、iconfont、animista、自定义样式等模块化样式库",
-  "version": "1.2.1",
-  "description": "纯css/sass，内含colorui（扩充了部分原子类）阿里巴巴矢量图标、uni-icons、animista动画、自定义样式、主题色等",
+  "id": "uni-file-picker",
+  "displayName": "uni-file-picker 文件选择上传",
+  "version": "1.0.8",
+  "description": "文件选择上传组件，可以选择图片、视频等任意文件并上传到当前绑定的服务空间",
   "keywords": [
-    "style",
-    "原子类",
-    "模块化样式库",
-    "主题"
+    "uni-ui",
+    "uniui",
+    "图片上传",
+    "文件上传"
 ],
-  "repository": "",
+  "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
-    "HBuilderX": "^3.1.0"
+    "HBuilderX": ""
   },
-  "dcloudext": {
-    "type": "component-vue",
+  "directories": {
+    "example": "../../temps/example_temps"
+  },
+"dcloudext": {
     "sale": {
       "regular": {
         "price": "0.00"
@@ -28,29 +30,24 @@
     },
     "declaration": {
       "ads": "无",
-      "data": "插件不采集任何数据",
+      "data": "无",
       "permissions": "无"
     },
-    "npmurl": ""
+    "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui",
+    "type": "component-vue"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": ["uni-scss"],
     "encrypt": [],
     "platforms": {
       "cloud": {
         "tcb": "y",
-        "aliyun": "y",
-        "alipay": "y"
+        "aliyun": "y"
       },
       "client": {
-        "Vue": {
-          "vue2": "y",
-          "vue3": "y"
-        },
         "App": {
           "app-vue": "y",
-          "app-nvue": "u",
-          "app-uvue": "u"
+          "app-nvue": "n"
         },
         "H5-mobile": {
           "Safari": "y",
@@ -70,15 +67,15 @@
           "阿里": "y",
           "百度": "y",
           "字节跳动": "y",
-          "QQ": "y",
-          "钉钉": "y",
-          "快手": "y",
-          "飞书": "y",
-          "京东": "y"
+          "QQ": "y"
         },
         "快应用": {
-          "华为": "y",
-          "联盟": "y"
+          "华为": "u",
+          "联盟": "u"
+        },
+        "Vue": {
+            "vue2": "y",
+            "vue3": "y"
         }
       }
     }

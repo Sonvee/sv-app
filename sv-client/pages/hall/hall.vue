@@ -7,7 +7,7 @@
         :height="vtabHeight.height"
         chain
         keyName="name"
-        @change="change"
+        @change="changeSideTab"
       >
         <uv-vtabs-item v-for="(item, index) in list" :key="index" :index="index">
           <view class="padding-lr padding-top">{{ item.name }}</view>
@@ -35,29 +35,29 @@ const vtabHeight = computed(() => {
 
 const list = ref([
   {
-    name: '简介',
+    name: '标题一',
     content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
   },
   {
-    name: '特点',
+    name: '标题二',
     content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
   },
   {
-    name: '更新日志',
+    name: '标题三',
     content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
   },
   {
-    name: '注意事项',
+    name: '标题四',
     content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
   },
   {
-    name: '补充说明',
+    name: '标题五',
     content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
   }
 ])
 
-function change(index) {
-  console.log('选项改变：', index)
+function changeSideTab(index) {
+  console.log('侧栏选项改变：', index)
 }
 </script>
 

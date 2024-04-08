@@ -104,7 +104,8 @@ uni-modal {
       background-color: getTheme('sv-card-color');
 
       .list-title {
-        padding: 20rpx 30rpx;
+        padding: 16rpx 8rpx;
+        margin: 0 20rpx;
         font-size: 12px;
         border-bottom: 1rpx solid #{getTheme('sv-border-color')};
         color: getTheme('sv-text-sub-color');
@@ -120,6 +121,10 @@ uni-modal {
             color: getTheme('sv-text-color');
           }
         }
+
+        .uni-list-item__extra-text {
+          color: getTheme('sv-text-sub-color');
+        }
       }
 
       .uni-list-item--hover {
@@ -133,7 +138,15 @@ uni-modal {
 
       .uni-list--border:after {
         background-color: getTheme('sv-border-color');
+        right: 20rpx;
+        left: 20rpx;
       }
     }
+  }
+}
+
+.sv-uni-forms {
+  .uni-forms-item__label {
+    color: inherit !important;
   }
 }

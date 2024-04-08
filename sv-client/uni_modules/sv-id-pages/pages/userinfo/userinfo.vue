@@ -1,53 +1,63 @@
 <template>
   <view class="sv-id-pages sv-id-userinfo">
-    <uni-list>
-      <uni-list-item title="头像" link>
-        <template #footer>
-          <sv-id-pages-avatar width="140rpx" height="140rpx"></sv-id-pages-avatar>
-        </template>
-      </uni-list-item>
-      <uni-list-item
-        title="用户ID"
-        :rightText="userInfo._id"
-        link
-        @click="setClipboard(userInfo._id)"
-      ></uni-list-item>
-      <uni-list-item
-        title="昵称"
-        :rightText="userInfo.nickname"
-        link
-        @click="onNickname"
-      ></uni-list-item>
-      <uni-list-item
-        title="个性签名"
-        :rightText="userInfo.comment"
-        link
-        @click="onComment"
-      ></uni-list-item>
-    </uni-list>
-    <view class="divider"></view>
-    <uni-list>
-      <uni-list-item
-        v-if="userInfo.my_invite_code"
-        title="邀请码"
-        :rightText="userInfo.my_invite_code"
-        link
-        @click="setClipboard(userInfo.my_invite_code)"
-      ></uni-list-item>
-    </uni-list>
-    <view class="divider"></view>
-    <uni-list>
-      <uni-list-item title="账号与安全" link @click="onSecurity"></uni-list-item>
-    </uni-list>
-    <view class="divider"></view>
-    <uni-list>
-      <uni-list-item
-        class="text-center"
-        title="退出登录"
-        clickable
-        @click="onLogout"
-      ></uni-list-item>
-    </uni-list>
+    <view class="sv-uni-list">
+      <uni-list>
+        <uni-list-item title="头像" link>
+          <template #footer>
+            <sv-id-pages-avatar width="140rpx" height="140rpx"></sv-id-pages-avatar>
+          </template>
+        </uni-list-item>
+        <uni-list-item
+          title="用户ID"
+          :rightText="userInfo._id"
+          link
+          @click="setClipboard(userInfo._id)"
+        ></uni-list-item>
+        <uni-list-item
+          title="用户名"
+          :rightText="userInfo.username || '只能修改一次哦'"
+          link
+          @click="onUsername"
+        ></uni-list-item>
+        <uni-list-item
+          title="昵称"
+          :rightText="userInfo.nickname || '起个昵称吧'"
+          link
+          @click="onNickname"
+        ></uni-list-item>
+        <uni-list-item
+          title="个性签名"
+          :rightText="userInfo.comment || '编辑个性签名'"
+          link
+          @click="onComment"
+        ></uni-list-item>
+      </uni-list>
+    </view>
+    <view class="sv-uni-list" style="margin-top: 24rpx">
+      <uni-list>
+        <uni-list-item title="账号与安全" link @click="onSecurity"></uni-list-item>
+      </uni-list>
+    </view>
+    <view class="sv-uni-list" style="margin-top: 24rpx">
+      <uni-list>
+        <uni-list-item
+          class="text-center"
+          title="退出登录"
+          clickable
+          @click="onLogout"
+        ></uni-list-item>
+      </uni-list>
+    </view>
+    <!-- 弹窗 -->
+    <uni-popup ref="usernameDialog" type="dialog">
+      <uni-popup-dialog
+        mode="input"
+        :value="userInfo.username"
+        title="设置用户名"
+        placeholder="用户名必须为字母或数字"
+        @confirm="setUsername"
+      ></uni-popup-dialog>
+    </uni-popup>
     <uni-popup ref="nicknameDialog" type="dialog">
       <uni-popup-dialog
         mode="input"
@@ -108,6 +118,31 @@ export default {
         showToast: true // 配置是否弹出提示，默认弹出提示
       })
     },
+    // 修改用户名
+    onUsername() {
+      // 只允许修改一次，若已有用户名则点击复制到剪切板
+      if (this.userInfo.username) {
+        this.setClipboard(this.userInfo.username)
+      } else {
+        this.$refs.usernameDialog.open()
+      }
+    },
+    async setUsername(e) {
+      if (!e) return
+      // 用户名必须为字母或数字
+      if (!/^[a-zA-Z0-9]+$/.test(e)) {
+        uni.showToast({
+          title: '用户名必须为字母或数字',
+          icon: 'none'
+        })
+        return
+      }
+      await mutations.updateUserInfo({
+        username: e
+      })
+      this.$refs.usernameDialog.close()
+    },
+    // 修改昵称
     onNickname() {
       this.$refs.nicknameDialog.open()
     },
@@ -118,6 +153,7 @@ export default {
       })
       this.$refs.nicknameDialog.close()
     },
+    // 修改个性签名
     onComment() {
       this.$refs.commentDialog.open()
     },
@@ -150,8 +186,6 @@ export default {
 
 <style lang="scss">
 .sv-id-userinfo {
-  height: 100%;
-  background-color: $uni-bg-color-grey;
 
   :deep(.uni-list-item__content-title) {
     height: 100%;
@@ -163,10 +197,6 @@ export default {
     height: 120rpx;
     width: 120rpx;
   }
-}
-
-.divider {
-  height: 24rpx;
 }
 
 .text-center {

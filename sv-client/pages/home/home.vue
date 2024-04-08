@@ -12,6 +12,6 @@
 
 <style lang="scss">
 .home {
-  height: var(--page-main-height);
+  min-height: var(--page-main-height);
 }
 </style>

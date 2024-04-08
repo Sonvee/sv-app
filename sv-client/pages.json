@@ -30,68 +30,6 @@
       }
     },
     {
-      "path": "uni_modules/sv-id-pages/pages/userinfo/userinfo",
-      "style": {
-        "navigationBarTitleText": "个人中心",
-        "navigationStyle": "default",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
-      "path": "uni_modules/sv-id-pages/pages/userinfo/cropImage/cropImage",
-      "style": {
-        "navigationBarTitleText": "头像"
-      }
-    },
-    {
-      "path": "uni_modules/sv-id-pages/pages/userinfo/security/security",
-      "style": {
-        "navigationBarTitleText": "账号与安全",
-        "navigationStyle": "default",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
-      "path": "uni_modules/sv-id-pages/pages/userinfo/deactivate/deactivate",
-      "style": {
-        "navigationBarTitleText": "注销账号",
-        "navigationStyle": "default",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
-      "path": "uni_modules/sv-id-pages/pages/userinfo/change-pwd/change-pwd",
-      "style": {
-        "navigationBarTitleText": "修改密码",
-        "navigationStyle": "default",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
-      "path": "uni_modules/sv-id-pages/pages/userinfo/bind-mobile/bind-mobile",
-      "style": {
-        "navigationBarTitleText": "绑定手机",
-        "navigationStyle": "default",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
-      "path": "uni_modules/sv-id-pages/pages/userinfo/set-pwd/set-pwd",
-      "style": {
-        "navigationBarTitleText": "设置密码",
-        "navigationStyle": "default",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
-      "path": "uni_modules/sv-id-pages/pages/userinfo/unbind/unbind",
-      "style": {
-        "navigationBarTitleText": "解绑注销",
-        "navigationStyle": "default",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
       "path": "uni_modules/sv-id-pages/pages/agreements/service",
       "style": {
         "navigationBarTitleText": "用户服务协议",
@@ -104,52 +42,135 @@
         "navigationBarTitleText": "隐私政策条款",
         "navigationBarTextStyle": "black"
       }
+    },
+    {
+      "path": "pages/feedback/feedback",
+      "style": {
+        "navigationBarTitleText": "问题反馈",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/about/about",
+      "style": {
+        "navigationBarTitleText": "关于我们",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "subPackages": [{
-    "root": "pages/setting",
-    "pages": [{
-      "path": "setting",
-      "style": {
-        "navigationBarTitleText": "设置"
-      }
-    }]
-  }, {
-    "root": "pages/pay",
-    "pages": [{
-      "path": "pay",
-      "style": {
-        "navigationBarTitleText": "支付"
-      }
-    }]
-  }, {
-    "root": "uni_modules/sv-id-vip/pages",
-    "pages": [{
-        "path": "vip/vip",
-        "style": {
-          "navigationBarTitleText": "会员"
+      "root": "uni_modules/sv-id-pages/pages",
+      "pages": [{
+          "path": "userinfo/userinfo",
+          "style": {
+            "navigationBarTitleText": "个人中心",
+            "navigationStyle": "default",
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "userinfo/cropImage/cropImage",
+          "style": {
+            "navigationBarTitleText": "头像"
+          }
+        },
+        {
+          "path": "userinfo/security/security",
+          "style": {
+            "navigationBarTitleText": "账号与安全",
+            "navigationStyle": "default",
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "userinfo/deactivate/deactivate",
+          "style": {
+            "navigationBarTitleText": "注销账号",
+            "navigationStyle": "default",
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "userinfo/change-pwd/change-pwd",
+          "style": {
+            "navigationBarTitleText": "修改密码",
+            "navigationStyle": "default",
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "userinfo/bind-mobile/bind-mobile",
+          "style": {
+            "navigationBarTitleText": "绑定手机",
+            "navigationStyle": "default",
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "userinfo/set-pwd/set-pwd",
+          "style": {
+            "navigationBarTitleText": "设置密码",
+            "navigationStyle": "default",
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "userinfo/unbind/unbind",
+          "style": {
+            "navigationBarTitleText": "解绑注销",
+            "navigationStyle": "default",
+            "navigationBarTextStyle": "black"
+          }
         }
-      },
-      {
-        "path": "getcdkey/getcdkey",
+      ]
+    },
+    {
+      "root": "pages/setting",
+      "pages": [{
+        "path": "setting",
         "style": {
-          "navigationBarTitleText": "获取CDKEY"
+          "navigationBarTitleText": "设置"
         }
-      },
-      {
-        "path": "protocol/vip-protocol",
+      }]
+    },
+    {
+      "root": "pages/pay",
+      "pages": [{
+        "path": "pay",
         "style": {
-          "navigationBarTitleText": "会员协议"
+          "navigationBarTitleText": "支付"
         }
-      },
-      {
-        "path": "protocol/pay-protocol",
-        "style": {
-          "navigationBarTitleText": "支付条款"
+      }]
+    },
+    {
+      "root": "uni_modules/sv-id-vip/pages",
+      "pages": [{
+          "path": "vip/vip",
+          "style": {
+            "navigationBarTitleText": "会员"
+          }
+        },
+        {
+          "path": "getcdkey/getcdkey",
+          "style": {
+            "navigationBarTitleText": "获取CDKEY"
+          }
+        },
+        {
+          "path": "protocol/vip-protocol",
+          "style": {
+            "navigationBarTitleText": "会员协议"
+          }
+        },
+        {
+          "path": "protocol/pay-protocol",
+          "style": {
+            "navigationBarTitleText": "支付条款"
+          }
         }
-      }
-    ]
-  }],
+      ]
+    }
+  ],
   "globalStyle": {
     "navigationBarTitleText": "sv-client",
     "navigationBarBackgroundColor": "#ffffff",

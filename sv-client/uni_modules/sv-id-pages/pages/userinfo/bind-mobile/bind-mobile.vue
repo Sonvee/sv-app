@@ -65,7 +65,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #f2f2f2;
     box-sizing: border-box;
 
     .security-logo {

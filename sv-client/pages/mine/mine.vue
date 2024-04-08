@@ -46,9 +46,12 @@
         </view>
         <!-- 数据 -->
         <view class="sv-grid grid-col-4 padding-tb-xs">
-          <view class="grid-item-lg flex-col-vhc" v-for="item in statisticsCard" :key="item.lable">
-            <view class="text-xl text-bold text-green">{{ item.value }}</view>
-            <view class="text-sm text-grey">{{ item.lable }}</view>
+          <view class="grid-item-lg flex-col-vhc" v-for="item in statisticData" :key="item.name">
+            <view class="flex-vc">
+              <uv-count-to :startVal="0" :endVal="item.value" color="#39b54a"></uv-count-to>
+              <text v-if="item.name == '百分比'" class="text-cyan">%</text>
+            </view>
+            <view class="text-sm text-cyan">{{ item.name }}</view>
           </view>
         </view>
       </view>
@@ -87,36 +90,26 @@
           </button>
         </template>
       </view>
-      <!-- 功能 1 -->
-      <view class="sv-grid grid-col-4">
-        <view
-          class="grid-item flex-col align-center justify-evenly"
-          v-for="item in featureMenu"
-          :key="item.lable"
-        >
-          <text class="text-xxl" :class="item.value"></text>
-          <text class="text-sm">{{ item.lable }}</text>
-        </view>
-      </view>
-      <!-- 功能 2 -->
+      <!-- 功能 -->
       <view class="cu-bar margin-top-sm">
         <view class="action sub-title">
           <text class="text-bold text-blue">功能面板</text>
           <text class="text-sm text-ABC text-blue">feature</text>
         </view>
-        <view class="text-gray margin-right">
+        <!-- <view class="text-gray margin-right">
           <text class="text-sm">更多</text>
           <text class="cuIcon-right"></text>
-        </view>
+        </view> -->
       </view>
       <view class="sv-grid grid-col-4 grid-gap-row">
         <view
-          class="grid-item flex-col align-center justify-evenly"
+          class="grid-item-lg flex-col align-center justify-evenly"
           v-for="item in featureMenu"
-          :key="item.lable"
+          :key="item.name"
+          @click="onMenu(item)"
         >
-          <text class="text-xxl" :class="item.value"></text>
-          <text class="text-sm">{{ item.lable }}</text>
+          <text class="text-xxl" :class="item.icon"></text>
+          <text class="text-sm">{{ item.name }}</text>
         </view>
       </view>
       <!-- 其他服务 -->
@@ -127,11 +120,15 @@
         </view>
       </view>
       <view class="cu-list menu sm-border">
-        <!-- 图标 + 标题、arrow 带箭头 -->
-        <view class="cu-item arrow" v-for="item in 5" :key="item">
+        <view
+          class="cu-item arrow"
+          v-for="item in otherMenu"
+          :key="item.name"
+          @click="onMenu(item)"
+        >
           <view class="content">
-            <text class="cuIcon-circlefill text-grey"></text>
-            <text class="text-grey">图标 + 标题</text>
+            <text class="text-grey" :class="item.icon"></text>
+            <text class="text-grey">{{ item.name }}</text>
           </view>
         </view>
       </view>
@@ -144,10 +141,10 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import { useSysStore } from '../../store/sys'
+import { useSysStore } from '@/store/sys'
 import { mutations, store } from '@/uni_modules/sv-id-pages/common/store'
 import { judgeLogin, onScan, useThrottle } from '@/utils/util'
-import { vipVerify } from '../../service/api/vip'
+import { vipVerify } from '@/service/api/vip'
 import { changeTheme } from '@/utils/sys'
 
 const sysStore = useSysStore()
@@ -173,6 +170,7 @@ onLoad(() => {
    * 此处旨在为减少频繁刷新
    */
   getVipVerify()
+  handleInit()
 })
 
 // 手动刷新页面
@@ -184,6 +182,7 @@ async function onRefresh() {
     title: '正在刷新'
   })
   await getVipVerify()
+  await handleInit()
   uni.hideLoading()
 }
 
@@ -194,43 +193,54 @@ async function getVipVerify() {
   }
 }
 
-const statisticsCard = ref([
-  {
-    lable: '数据甲',
-    value: '25'
-  },
-  {
-    lable: '数据乙',
-    value: '33'
-  },
-  {
-    lable: '数据丙',
-    value: '61'
-  },
-  {
-    lable: '数据丁',
-    value: '40%'
-  }
+const statisticData = ref([
+  { name: '数据甲', value: 24 },
+  { name: '数据乙', value: 66 },
+  { name: '数据丙', value: 128 },
+  { name: '百分比', value: 88 }
 ])
 
+async function handleInit() {}
+
 const featureMenu = ref([
-  {
-    lable: '菜单甲',
-    value: 'cuIcon-comment'
-  },
-  {
-    lable: '菜单乙',
-    value: 'cuIcon-comment'
-  },
-  {
-    lable: '菜单丙',
-    value: 'cuIcon-comment'
-  },
-  {
-    lable: '菜单丁',
-    value: 'cuIcon-comment'
-  }
+  { name: '菜单甲', icon: 'cuIcon-apps', path: '' },
+  { name: '菜单乙', icon: 'cuIcon-apps', path: '' },
+  { name: '菜单丙', icon: 'cuIcon-apps', path: '' },
+  { name: '菜单丁', icon: 'cuIcon-apps', path: '' },
+  { name: '菜单戊', icon: 'cuIcon-apps', path: '' },
+  { name: '菜单己', icon: 'cuIcon-apps', path: '' },
+  { name: '菜单庚', icon: 'cuIcon-apps', path: '' },
+  { name: '菜单辛', icon: 'cuIcon-apps', path: '' }
 ])
+
+const otherMenu = [
+  { name: '设置', icon: 'cuIcon-settings', path: '/pages/setting/setting' },
+  { name: '问题反馈', icon: 'cuIcon-service', path: '/pages/feedback/feedback' },
+  { name: '关于我们', icon: 'cuIcon-info', path: '/pages/about/about' }
+]
+
+function onMenu(item) {
+  // 不需要登录的菜单
+  const whiteMenu = ['/pages/setting/setting', '/pages/about/about']
+
+  if (item.path && !whiteMenu.includes(item.path)) {
+    // 判断登录
+    const isLogin = judgeLogin()
+    // 未登录不予操作
+    if (!isLogin) return
+  }
+
+  if (item.path) {
+    uni.navigateTo({
+      url: item.path
+    })
+  } else {
+    uni.showToast({
+      title: '敬请期待',
+      icon: 'none'
+    })
+  }
+}
 
 function toggleTheme() {
   const theme = sysStore.getThemes() == 'light' ? 'dark' : 'light'
@@ -259,7 +269,7 @@ function onVip() {
 
 <style lang="scss">
 .mine {
-  // height: var(--page-height);
+  min-height: var(--page-main-height);
 
   .header {
     @include useTheme {

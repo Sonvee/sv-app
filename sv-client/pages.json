@@ -51,6 +51,13 @@
       }
     },
     {
+      "path": "pages/feedback/feedback-list",
+      "style": {
+        "navigationBarTitleText": "反馈记录",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
       "path": "pages/about/about",
       "style": {
         "navigationBarTitleText": "关于我们",

@@ -7,7 +7,6 @@
           <uni-data-select
             v-model="fbFrom.feedback_type"
             :localdata="feedback_type_map"
-            @change="changeSelect"
           ></uni-data-select>
         </view>
       </view>
@@ -52,7 +51,9 @@
         <button class="cu-btn bg-gradual-blue flex-sub" @click="toSubmit">提交反馈</button>
       </view>
       <!-- 悬浮按钮 -->
-      <view class="fab-btn">列表</view>
+      <view class="fab-btn" @click="onFeedbackDetail">
+        <text class="cuIcon-text text-xxl text-green"></text>
+      </view>
     </view>
     <!-- 退出拦截 -->
     <sv-intercept-back
@@ -64,7 +65,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
+import { onShow } from '@dcloudio/uni-app'
 import { store } from '@/uni_modules/sv-id-pages/common/store'
 import { feedbackAdd } from '@/service/api/sys'
 
@@ -86,11 +87,9 @@ const fbFrom = ref({
   create_date: ''
 })
 
-onLoad(() => {})
-
-function changeSelect(e) {
-  console.log('==== changeSelect :', e)
-}
+onShow(() => {
+  interceptFlag.value = true
+})
 
 // 图片上传相关
 // 获取上传状态
@@ -141,7 +140,6 @@ function toSubmit() {
         fbFrom.value.create_date = Date.now()
         fbFrom.value.feedback_id = `feedback_${store.userInfo._id}_${fbFrom.value.create_date}`
         const fbRes = await feedbackAdd(fbFrom.value)
-        console.log('==== feedbackAdd :', fbRes)
         uni.showToast({
           title: fbRes.message,
           icon: 'none',
@@ -156,6 +154,12 @@ function toSubmit() {
       }
     }
   })
+}
+
+function onFeedbackDetail() {
+  // 先关闭返回拦截
+  interceptFlag.value = false
+  uni.navigateTo({ url: '/pages/feedback/feedback-list' })
 }
 </script>
 
@@ -176,14 +180,18 @@ function toSubmit() {
     position: fixed;
     bottom: calc(120rpx + env(safe-area-inset-bottom));
     right: 24rpx;
-    width: 100rpx;
-    height: 100rpx;
+    width: 80rpx;
+    height: 80rpx;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0px 0px 10px 0px #c8c7cc66;
     backdrop-filter: blur(4px) brightness(120%);
+
+    &:active {
+      box-shadow: 0px 0px 10px 0px #c8c7cc;
+    }
   }
 }
 </style>

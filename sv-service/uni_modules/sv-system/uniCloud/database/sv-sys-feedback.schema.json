@@ -1,0 +1,85 @@
+{
+  "bsonType": "object",
+  "required": [
+    "user_id",
+    "feedback_id",
+    "feedback_content"
+  ],
+  "permission": {
+    "read": true,
+    "create": true,
+    "update": "doc._id == auth.uid || 'master' in auth.role",
+    "delete": "doc._id == auth.uid || 'master' in auth.role"
+  },
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "user_id": {
+      "bsonType": "string",
+      "description": "留言反馈用户ID/回复留言用户ID，参考uni-id-users表",
+      "foreignKey": "uni-id-users._id"
+    },
+    "feedback_id": {
+      "bsonType": "string",
+      "description": "反馈留言ID 由feedback_{userid}_{createdate}三部分组成"
+    },
+    "feedback_status": {
+      "bsonType": "int",
+      "description": "反馈状态标记",
+      "defaultValue": 0,
+      "enum": [{
+          "text": "审批中",
+          "value": 0
+        },
+        {
+          "text": "已解决",
+          "value": 1
+        },
+        {
+          "text": "已拒绝",
+          "value": 2
+        }
+      ]
+    },
+    "feedback_type": {
+      "bsonType": "int",
+      "description": "反馈类型：0 改进建议 1 发现bug",
+      "defaultValue": 0,
+      "enum": [{
+          "text": "改进建议",
+          "value": 0
+        },
+        {
+          "text": "发现bug",
+          "value": 1
+        }
+      ]
+    },
+    "feedback_title": {
+      "bsonType": "string",
+      "description": "反馈标题",
+      "trim": "both"
+    },
+    "feedback_content": {
+      "bsonType": "string",
+      "description": "反馈内容",
+      "trim": "right"
+    },
+    "feedback_image": {
+      "bsonType": "array",
+      "description": "上传反馈的图片列表"
+    },
+    "reply": {
+      "bsonType": "string",
+      "description": "处理结果，回复内容"
+    },
+    "create_date": {
+      "bsonType": "timestamp",
+      "description": "反馈时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

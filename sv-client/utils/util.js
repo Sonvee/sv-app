@@ -1,6 +1,4 @@
-import {
-  dayjs
-} from "dayjs";
+import dayjs from 'dayjs'
 import {
   mutations,
   store

@@ -52,10 +52,39 @@
                   :type="statusMap[curFeedback.feedback_status].type"
                 ></uv-tags>
               </view>
-              <view class="margin-top-sm">反馈内容：{{ curFeedback.feedback_content }}</view>
+              <view class="margin-top-sm">反馈时间：{{ timeFormat(curFeedback.create_date) }}</view>
+              <view class="margin-top-sm">
+                反馈内容：
+                <view class="margin-top-sm">
+                  <uni-easyinput
+                    v-model="curFeedback.feedback_content"
+                    type="textarea"
+                    disabled
+                    autoHeight
+                    :maxlength="-1"
+                    placeholder="请输入反馈内容"
+                  ></uni-easyinput>
+                </view>
+              </view>
               <view class="margin-top-sm">
                 <view class="margin-bottom-sm">反馈图片：</view>
-                <uv-album keyName="url" :urls="curFeedback.feedback_image"></uv-album>
+                <view class="flex-col-vhc">
+                  <uv-album
+                    v-if="curFeedback.feedback_image?.length > 0"
+                    keyName="url"
+                    :urls="curFeedback.feedback_image"
+                  ></uv-album>
+                  <uv-empty
+                    width="80"
+                    height="80"
+                    text="未上传图片"
+                    icon="https://cdn.uviewui.com/uview/empty/data.png"
+                  ></uv-empty>
+                </view>
+              </view>
+              <view class="margin-top-sm">
+                <view class="margin-bottom-sm">反馈回复：</view>
+                <view>1231312</view>
               </view>
             </view>
           </view>
@@ -69,6 +98,7 @@
 import { ref } from 'vue'
 import { store } from '@/uni_modules/sv-id-pages/common/store'
 import { feedbackList } from '@/service/api/sys'
+import { timeFormat } from '@/utils/util'
 
 const dataParams = ref({ user_id: store.userInfo._id })
 

@@ -56,14 +56,7 @@
               <view class="margin-top-sm">
                 反馈内容：
                 <view class="margin-top-sm">
-                  <uni-easyinput
-                    v-model="curFeedback.feedback_content"
-                    type="textarea"
-                    disabled
-                    autoHeight
-                    :maxlength="-1"
-                    placeholder="请输入反馈内容"
-                  ></uni-easyinput>
+                  <view class="content-box">{{ curFeedback.feedback_content }}</view>
                 </view>
               </view>
               <view class="margin-top-sm">
@@ -75,6 +68,7 @@
                     :urls="curFeedback.feedback_image"
                   ></uv-album>
                   <uv-empty
+                    v-else
                     width="80"
                     height="80"
                     text="未上传图片"
@@ -84,7 +78,14 @@
               </view>
               <view class="margin-top-sm">
                 <view class="margin-bottom-sm">反馈回复：</view>
-                <view>1231312</view>
+                <view v-if="curFeedback.reply" class="content-box">{{ curFeedback.reply }}</view>
+                <uv-empty
+                  v-else
+                  width="80"
+                  height="80"
+                  text="等待回复中"
+                  icon="https://cdn.uviewui.com/uview/empty/message.png"
+                ></uv-empty>
               </view>
             </view>
           </view>
@@ -174,6 +175,14 @@ function onFeedback(e) {
       .popup-detail {
         height: 100%;
         overflow: auto;
+
+        .content-box {
+          @include useTheme {
+            border: 1px solid #{getTheme('sv-border-color')};
+          }
+          border-radius: 8rpx;
+          padding: 12rpx 16rpx;
+        }
       }
     }
   }

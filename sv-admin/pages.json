@@ -41,9 +41,9 @@
   "subPackages": [{
       "root": "pages/business",
       "pages": [{
-        "path": "business1/business1",
+        "path": "feedback/feedback",
         "style": {
-          "navigationBarTitleText": "业务模块一",
+          "navigationBarTitleText": "用户反馈",
           "enablePullDownRefresh": false
         }
       }]

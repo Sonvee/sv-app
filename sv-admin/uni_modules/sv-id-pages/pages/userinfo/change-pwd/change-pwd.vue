@@ -4,7 +4,7 @@
       <image class="security-logo" :src="securityLogo.orange" mode=""></image>
       <text class="tips">为了您的账号安全，需要验证密码</text>
     </view>
-    <view class="pwd-form">
+    <view class="pwd-form sv-uni-forms">
       <uni-forms ref="formRef" :value="formData" :rules="rules" :label-width="80">
         <uni-forms-item name="oldPassword" label="旧密码" required>
           <uni-easyinput
@@ -143,7 +143,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #f2f2f2;
     box-sizing: border-box;
 
     .security-logo {

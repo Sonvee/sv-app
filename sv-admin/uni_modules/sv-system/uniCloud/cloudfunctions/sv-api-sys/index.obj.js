@@ -22,11 +22,18 @@ const {
   dictDelete
 } = require('./module/dict/index.js')
 
+const {
+  feedbackList,
+  feedbackAdd,
+  feedbackUpdate,
+  feedbackDelete
+} = require('./module/feedback/index.js')
+
 module.exports = {
   _before: async function() { // 通用预处理器
     // token身份安全校验
     const WHITE_LIST = [] // 校验白名单，例如'/menuList'
-    // 校验名单
+    // 校验名单  open easy normal strict
     const API_MODE = {
       '/menuList': 'open',
       '/menuAdd': 'strict',
@@ -41,6 +48,10 @@ module.exports = {
       '/dictAdd': 'strict',
       '/dictUpdate': 'strict',
       '/dictDelete': 'strict',
+      '/feedbackList': 'easy',
+      '/feedbackAdd': 'easy',
+      '/feedbackUpdate': 'easy',
+      '/feedbackDelete': 'easy',
     }
     const apiPath = this.getHttpInfo().path
     // 不是白名单的api需要进行校验
@@ -94,4 +105,12 @@ module.exports = {
   dictAdd,
   dictUpdate,
   dictDelete,
+
+  /**
+   * 反馈
+   */
+  feedbackList,
+  feedbackAdd,
+  feedbackUpdate,
+  feedbackDelete
 }

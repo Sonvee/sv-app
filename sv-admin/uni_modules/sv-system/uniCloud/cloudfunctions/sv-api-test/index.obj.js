@@ -17,7 +17,7 @@ module.exports = {
   _before: async function() { // 通用预处理器
     // token身份安全校验
     const WHITE_LIST = [] // 校验白名单，例如'/testList'
-    // 校验名单
+    // 校验名单 open easy normal strict
     const API_MODE = {
       '/testList': 'open',
       '/testAdd': 'open',

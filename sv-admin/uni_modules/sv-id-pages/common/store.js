@@ -18,6 +18,25 @@ export const mutations = {
   // data不为空，表示传递要更新的值(注意不是覆盖是合并),什么也不传时，直接查库获取更新
   async updateUserInfo(data = false) {
     if (data) {
+      uni.showLoading({
+        title: '更新中',
+      })
+      
+      if (data.username) {
+        // 先检查修改的用户名是否已存在
+        const isExist = await usersTable.where({
+          username: data.username
+        }).field('nickname').get()
+        if (isExist.result.data.length > 0) {
+          uni.showToast({
+            title: "用户名已存在",
+            icon: 'none',
+            duration: 3000
+          });
+          return
+        }
+      }
+
       usersTable.where('_id==$env.uid').update(data).then(e => {
         // console.log(e);
         if (e.result.updated) {
@@ -55,12 +74,18 @@ export const mutations = {
           realNameAuth: realNameRes
         })
       } catch (e) {
-        this.setUserInfo({}, { cover: true })
+        this.setUserInfo({}, {
+          cover: true
+        })
         console.error(e.message, e.errCode);
       }
     }
   },
-  async setUserInfo(data, { cover } = { cover: false }) {
+  async setUserInfo(data, {
+    cover
+  } = {
+    cover: false
+  }) {
     // console.log('set-userInfo', data);
     let userInfo = cover ? data : Object.assign(store.userInfo, data)
     store.userInfo = Object.assign({}, userInfo)
@@ -80,8 +105,8 @@ export const mutations = {
     }
     uni.removeStorageSync('uni_id_token');
     uni.setStorageSync('uni_id_token_expired', 0)
-    
-    if(config.routerMode) {
+
+    if (config.routerMode) {
       callback() // 此处无法访问vue-router，开放回调函数用于手动路由跳转
     } else {
       uni.redirectTo({
@@ -89,11 +114,15 @@ export const mutations = {
       });
     }
     uni.$emit('uni-id-pages-logout')
-    this.setUserInfo({}, { cover: true })
+    this.setUserInfo({}, {
+      cover: true
+    })
   },
 
   loginBack(e = {}) {
-    const { uniIdRedirectUrl = '' } = e
+    const {
+      uniIdRedirectUrl = ''
+    } = e
     let delta = 0; //判断需要返回几层
     let pages = getCurrentPages();
     // console.log(pages);
@@ -162,10 +191,12 @@ export const mutations = {
     }
 
     if (autoBack) {
-      if(config.routerMode) {
+      if (config.routerMode) {
         callback() // 此处无法访问vue-router，开放回调函数用于手动路由跳转
       } else {
-        this.loginBack({ uniIdRedirectUrl })
+        this.loginBack({
+          uniIdRedirectUrl
+        })
       }
     }
   }

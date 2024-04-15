@@ -12,57 +12,44 @@
         账号安全情况{{ securityStatus.text }}
       </text>
     </view>
-    <view class="divider"></view>
-    <uni-list>
-      <uni-list-item
-        title="绑定手机"
-        :rightText="mobileNumber || '去绑定'"
-        show-extra-icon
-        :extra-icon="accountInfo.isMobileBound ? correctIcon : warningIcon"
-        link
-        @click="onBindMobile"
-      />
-      <uni-list-item
-        title="绑定微信"
-        :rightText="accountInfo.isWeixinBound ? '已绑定' : '去绑定'"
-        show-extra-icon
-        :extra-icon="accountInfo.isWeixinBound ? correctIcon : warningIcon"
-        link
-        @click="onBindThird('weixin')"
-      />
-      <!-- <uni-list-item
-        title="绑定QQ"
-        :rightText="accountInfo.isQQBound ? '已绑定' : '去绑定'"
-        show-extra-icon
-        :extra-icon="accountInfo.isQQBound ? correctIcon : warningIcon"
-        link
-        @click="onBindThird('qq')"
-      /> -->
-      <!-- <uni-list-item
-        title="实名认证"
-        show-extra-icon
-        :extra-icon="warningIcon"
-        link
-        @click="onRealName"
-      /> -->
-      <uni-list-item
-        title="修改密码"
-        show-extra-icon
-        :extra-icon="accountInfo.isPasswordSet ? correctIcon : warningIcon"
-        link
-        @click="onChangePwd"
-      />
-    </uni-list>
-    <view class="divider"></view>
-    <uni-list>
-      <uni-list-item
-        title="解绑注销"
-        show-extra-icon
-        :extra-icon="dangerIcon"
-        link
-        @click="onUnbind"
-      />
-    </uni-list>
+    <view class="sv-uni-list">
+      <uni-list>
+        <uni-list-item
+          title="绑定手机"
+          :rightText="mobileNumber || '去绑定'"
+          show-extra-icon
+          :extra-icon="accountInfo.isMobileBound ? correctIcon : warningIcon"
+          link
+          @click="onBindMobile"
+        />
+        <uni-list-item
+          title="绑定微信"
+          :rightText="accountInfo.isWeixinBound ? '已绑定' : '去绑定'"
+          show-extra-icon
+          :extra-icon="accountInfo.isWeixinBound ? correctIcon : warningIcon"
+          link
+          @click="onBindThird('weixin')"
+        />
+        <uni-list-item
+          title="修改密码"
+          show-extra-icon
+          :extra-icon="accountInfo.isPasswordSet ? correctIcon : warningIcon"
+          link
+          @click="onChangePwd"
+        />
+      </uni-list>
+    </view>
+    <view class="sv-uni-list" style="margin-top: 24rpx">
+      <uni-list>
+        <uni-list-item
+          title="解绑注销"
+          show-extra-icon
+          :extra-icon="dangerIcon"
+          link
+          @click="onUnbind"
+        />
+      </uni-list>
+    </view>
   </view>
 </template>
 
@@ -232,11 +219,6 @@ export default {
           })
         })
     },
-    onRealName() {
-      uni.navigateTo({
-        url: '/uni_modules/sv-id-pages/pages/userinfo/realname-verify/realname-verify'
-      })
-    },
     onChangePwd() {
       uni.navigateTo({
         url: '/uni_modules/sv-id-pages/pages/userinfo/change-pwd/change-pwd'
@@ -259,7 +241,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #f2f2f2;
     box-sizing: border-box;
 
     .security-score {
@@ -290,9 +271,5 @@ export default {
       font-size: 16px;
     }
   }
-}
-
-.divider {
-  height: 24rpx;
 }
 </style>

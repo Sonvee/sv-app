@@ -145,9 +145,7 @@ export default {
   width: 750rpx;
   justify-content: center;
   align-items: center;
-  border-top: solid 1px #e4e6ec;
   padding-top: 10px;
-  background-color: #ffffff;
   max-width: 690px;
 }
 

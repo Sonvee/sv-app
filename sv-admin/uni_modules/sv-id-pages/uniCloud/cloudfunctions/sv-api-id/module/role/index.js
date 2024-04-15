@@ -41,7 +41,7 @@ module.exports = {
     const roleRes = await db.collection('uni-id-roles').doc(_id).update(this.params)
 
     return handler.result({
-      data: roleRes.data,
+      data: roleRes,
     })
   },
   // 添加角色
@@ -60,7 +60,7 @@ module.exports = {
     const roleRes = await db.collection('uni-id-roles').add(this.params)
 
     return handler.result({
-      data: roleRes.data,
+      data: roleRes,
     })
   },
   // 删除角色
@@ -80,7 +80,7 @@ module.exports = {
     }).remove()
 
     return handler.result({
-      data: roleRes.data,
+      data: roleRes,
     })
   },
 
@@ -99,7 +99,7 @@ module.exports = {
     })
 
     return handler.result({
-      data: roleRes.data,
+      data: roleRes,
     })
   },
   // 指定用户删除角色 - 云对象之间调用
@@ -112,7 +112,7 @@ module.exports = {
     })
 
     return handler.result({
-      data: roleRes.data,
+      data: roleRes,
     })
   }
 }

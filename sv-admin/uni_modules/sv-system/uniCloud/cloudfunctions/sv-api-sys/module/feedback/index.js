@@ -10,6 +10,7 @@ module.exports = {
       feedback_id,
       feedback_title,
       feedback_type,
+      feedback_status,
       pagesize = 20,
       pagenum = 1
     } = this.params
@@ -48,6 +49,9 @@ module.exports = {
     }
     if (feedback_type) {
       conditions.feedback_type = dbCmd.eq(Number(feedback_type))
+    }
+    if (feedback_status) {
+      conditions.feedback_status = dbCmd.eq(Number(feedback_status))
     }
 
     // 将所有有效的筛选条件添加到查询对象中
@@ -124,23 +128,23 @@ module.exports = {
       data: feedbackRes,
     })
   },
-  
+
   // 反馈删除
   async feedbackDelete() {
     const {
       feedback_id
     } = this.params
-  
+
     if (!feedback_id) {
       throw handler.result({
         code: 40001
       })
     }
-  
+
     const feedbackRes = await db.collection('sv-sys-feedback').where({
-      'feedback_id': dbCmd.eq(feedback_id)
+      'feedback_id': Array.isArray(feedback_id) ? dbCmd.in(feedback_id) : dbCmd.eq(feedback_id)
     }).remove()
-  
+
     return handler.result({
       data: feedbackRes,
     })

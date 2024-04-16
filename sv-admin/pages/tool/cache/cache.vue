@@ -143,7 +143,7 @@ function clear() {
 function del(item) {
   const { key } = item
   ElMessageBox.confirm(
-    `确认删除${key}吗？删除部分缓存可能导致意料之外的问题，还请三思哦~`,
+    `确认删除『 ${key} 』吗？删除部分缓存可能导致意料之外的问题，还请三思哦~`,
     '系统提示',
     {
       confirmButtonText: '确定',

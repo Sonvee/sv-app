@@ -156,7 +156,7 @@ async function submitForm(e) {
 // 删除
 function del(item) {
   const { appid, name, icon_url } = item
-  ElMessageBox.confirm(`确认删除${name}吗？`, '系统提示', {
+  ElMessageBox.confirm(`确认删除『 ${name} 』吗？`, '系统提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'

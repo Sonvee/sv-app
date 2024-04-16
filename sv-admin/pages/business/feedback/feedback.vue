@@ -6,7 +6,7 @@
     </view>
     <!-- 表格头部控制栏 -->
     <view class="control">
-      <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button>
+      <!-- <el-button type="primary" plain size="small" :icon="Plus" @click="add">新增</el-button> -->
       <el-button type="danger" plain size="small" :icon="Delete" @click="selectionRemove">
         批量删除
       </el-button>
@@ -52,14 +52,57 @@
         :min-width="400"
         show-overflow-tooltip
       ></el-table-column>
+      <el-table-column prop="feedback_image" label="反馈图片" :min-width="220">
+        <template #default="scope">
+          <view v-if="scope.row.feedback_image?.length > 0">
+            <el-image
+              v-for="(item, index) in scope.row.feedback_image"
+              style="width: 30px; height: 20px; margin-right: 2px"
+              :src="item.url"
+              :preview-src-list="scope.row.feedback_image.map((it) => it.url)"
+              :initial-index="index"
+              fit="cover"
+              preview-teleported
+            />
+          </view>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="feedback_type"
         label="反馈类型"
+        align="center"
         :width="120"
         show-overflow-tooltip
       >
-      
+        <template #default="scope">
+          <el-tag :type="fbtypeDict[scope.row.feedback_type].type" effect="dark">
+            {{ fbtypeDict[scope.row.feedback_type].text }}
+          </el-tag>
+        </template>
       </el-table-column>
+      <el-table-column
+        prop="feedback_status"
+        label="反馈状态"
+        align="center"
+        :width="120"
+        show-overflow-tooltip
+      >
+        <template #default="scope">
+          <el-tag :type="fbstatusDict[scope.row.feedback_status].type" effect="dark">
+            {{ fbstatusDict[scope.row.feedback_status].text }}
+          </el-tag>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        prop="create_date"
+        label="反馈时间"
+        :formatter="(row) => timeFormat(row.create_date)"
+        align="center"
+        :width="180"
+        sortable
+        show-overflow-tooltip
+      ></el-table-column>
 
       <el-table-column label="配置" align="center" :width="160" fixed="right">
         <template #default="scope">
@@ -98,6 +141,7 @@ import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { feedbackList, feedbackAdd, feedbackDelete, feedbackUpdate } from '@/service/api/sys'
 import { useSysStore } from '@/store/sys'
 import { isEmpty } from 'lodash-es'
+import { timeFormat } from '@/utils/util'
 
 const showHeader = ref(useSysStore().platform == 'pc') // 头部筛选栏显示
 const tableData = ref([]) // 菜单表格
@@ -107,6 +151,19 @@ const total = ref(0) // 表格总数
 const showForm = ref(false) // 显示表单
 const formInit = ref({}) // 表单初始值
 const formMode = ref('') // 表单模式 add / edit
+
+const fbtypeDict = {
+  undefined: { text: '改进建议', type: 'primary' },
+  0: { text: '改进建议', type: 'primary' },
+  1: { text: '发现bug', type: 'danger' }
+}
+
+const fbstatusDict = {
+  undefined: { text: '审批中', type: 'primary' },
+  0: { text: '审批中', type: 'primary' },
+  1: { text: '已解决', type: 'success' },
+  2: { text: '已拒绝', type: 'danger' }
+}
 
 // 初始获取表格数据
 handleTable(dataParams.value)
@@ -182,7 +239,7 @@ async function submitForm(e) {
 // 删除
 function del(item) {
   const { feedback_title, feedback_id } = item
-  ElMessageBox.confirm(`确认删除${feedback_title}吗？`, '系统提示', {
+  ElMessageBox.confirm(`确认删除『 ${feedback_title} 』吗？`, '系统提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'

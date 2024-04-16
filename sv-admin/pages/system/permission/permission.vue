@@ -135,7 +135,7 @@ async function submitForm(e) {
 // 删除
 function del(item) {
   const { permission_id, permission_name } = item
-  ElMessageBox.confirm(`确认删除${permission_name}吗？`, '系统提示', {
+  ElMessageBox.confirm(`确认删除『 ${permission_name} 』吗？`, '系统提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'

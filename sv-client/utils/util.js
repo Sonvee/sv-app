@@ -67,3 +67,17 @@ export function useThrottle(toast = '点击太快啦', time = 2000) {
     return false
   }
 }
+
+/**
+ * 合并对象，只合并原有对象中存在的参数，用法同Object.assign()
+ * @param {Object} target 原对象
+ * @param {Object} source 要合并覆盖的对象
+ */
+export function assignOverride(target, source) {
+  for (var key in source) {
+    if (source.hasOwnProperty(key) && target.hasOwnProperty(key)) {
+      target[key] = source[key];
+    }
+  }
+  return target;
+}

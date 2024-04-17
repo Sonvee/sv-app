@@ -45,8 +45,11 @@ module.exports = {
     }
     // 将所有有效的筛选条件添加到查询对象中
     if (Object.keys(conditions).length > 0) {
-      query = query.where(conditions).orderBy('create_date', 'desc')
+      query = query.where(conditions)
     }
+    
+    // 排序规则
+    query = query.orderBy('create_date', 'desc')
 
     if (pagesize < 1) {
       // 全量查询

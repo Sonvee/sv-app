@@ -113,8 +113,11 @@ module.exports = {
 
     // 合并所有条件
     if (conditions.length > 0) {
-      query = query.where(dbCmd.and(...conditions)).orderBy('register_date', 'asc')
+      query = query.where(dbCmd.and(...conditions))
     }
+
+    // 排序规则
+    query = query.orderBy('register_date', 'asc')
 
     // 全量查询
     if (pagesize < 1) {

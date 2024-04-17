@@ -278,3 +278,9 @@
     --el-tree-node-hover-bg-color: #{getTheme('sv-admin-hover-hl-color')};
   }
 }
+
+.sv-el-date-picker {
+  @include useTheme {
+    --el-disabled-bg-color: #{getTheme('sv-admin-mask-color')};
+  }
+}

@@ -1,184 +1,327 @@
 <template>
   <sv-page>
     <view class="feedback">
-      <view class="feedback-type flex align-center margin-bottom-sm">
-        反馈类型：
-        <view class="sv-uni-data-select flex-sub">
-          <uni-data-select
-            v-model="fbFrom.feedback_type"
-            :localdata="feedback_type_map"
-          ></uni-data-select>
-        </view>
+      <view class="sv-paging-header">
+        <uv-tabs
+          :list="tabList"
+          keyName="text"
+          activeStyle="color:#0081ff"
+          inactiveStyle="color:#1cbbb4"
+          @click="tapTab"
+        >
+          <template #right>
+            <text
+              v-if="editList.length > 0"
+              class="cuIcon-delete text-xl text-red padding-sm"
+              @click="onDeleteList"
+            ></text>
+            <text
+              class="cuIcon-edit text-xl padding-sm"
+              :class="[isEdit ? 'text-blue' : 'text-cyan']"
+              @click="onEditList"
+            ></text>
+          </template>
+        </uv-tabs>
       </view>
-      <view class="feedback-title flex align-center margin-bottom-sm">
-        反馈标题：
-        <view class="sv-uni-easyinput flex-sub">
-          <uni-easyinput
-            v-model="fbFrom.feedback_title"
-            placeholder="请输入反馈标题 (可选)"
-          ></uni-easyinput>
-        </view>
-      </view>
-      <view class="feedback-content margin-bottom-sm">
-        <view class="margin-bottom-sm">反馈内容：</view>
-        <view class="sv-uni-easyinput flex-sub">
-          <uni-easyinput
-            v-model.trim="fbFrom.feedback_content"
-            type="textarea"
-            autoHeight
-            :maxlength="-1"
-            placeholder="请输入反馈内容"
-          ></uni-easyinput>
-        </view>
-      </view>
-      <!-- 反馈图片上传- 当反馈类型不为试题错误时显示 -->
-      <view class="feedback-image margin-bottom-sm" v-if="fbFrom.feedback_type !== 2">
-        <view class="margin-bottom-sm">反馈图片：</view>
-        <uni-file-picker
-          v-model="fbFrom.feedback_image"
-          fileMediatype="image"
-          mode="grid"
-          @select="select"
-          @progress="progress"
-          @success="success"
-          @fail="fail"
-        />
-      </view>
-      <!-- 占位 -->
-      <view style="height: 80rpx"></view>
-      <view class="feedback-control flex-vc">
-        <button class="cu-btn bg-gradual-red flex-sub margin-right-sm" @click="toBack">返回</button>
-        <button class="cu-btn bg-gradual-blue flex-sub" @click="toSubmit">提交反馈</button>
+      <view class="sv-paging-list">
+        <sv-paging
+          ref="pagingRef"
+          :apiFunc="feedbackList"
+          :apiParams="dataParams"
+          @apiQuery="queryRes"
+        >
+          <template #default="{ data }">
+            <!-- 列表 -->
+            <view
+              class="feedback-item flex-vc card"
+              :class="[isEdit ? 'shake-bottom' : '']"
+              @click="onFeedback(data.item)"
+            >
+              <view class="feedback-item-box">
+                <view class="flex-vc">
+                  <view class="flex-sub flex-vc">
+                    <sv-checkbox
+                      v-if="isEdit"
+                      class="margin-right-sm"
+                      :info="data.item.feedback_id"
+                      @change="changeCheck"
+                    ></sv-checkbox>
+                    <view class="text-line-1 text-bold">
+                      {{ data.item.feedback_title }}
+                    </view>
+                  </view>
+                  <uv-tags
+                    size="mini"
+                    :text="statusMap[data.item.feedback_status].text"
+                    :type="statusMap[data.item.feedback_status].type"
+                  ></uv-tags>
+                </view>
+                <view class="margin-top-xs text-sm text-line-2">
+                  {{ data.item.feedback_content }}
+                </view>
+              </view>
+              <view class="cuIcon-right text-xl text-gray padding-lr"></view>
+            </view>
+          </template>
+        </sv-paging>
       </view>
       <!-- 悬浮按钮 -->
-      <view class="fab-btn" @click="onFeedbackDetail">
+      <view class="fab-btn" @click="onFeedbackSend">
         <text class="cuIcon-text text-xxl text-green"></text>
       </view>
+      <uv-popup ref="feedbackDetailRef" mode="center" closeable>
+        <view class="feedback-detail-popup">
+          <view class="popup-header">
+            <view class="popup-title text-line-1">
+              {{ curFeedback.feedback_title }}
+            </view>
+          </view>
+          <view class="popup-content">
+            <view class="popup-detail">
+              <!-- 内容详情 -->
+              <view class="flex-vc">
+                类型：
+                <uv-tags
+                  size="mini"
+                  :text="typeMap[curFeedback.feedback_type].text"
+                  :type="typeMap[curFeedback.feedback_type].type"
+                ></uv-tags>
+              </view>
+              <view class="flex-vc margin-top-sm">
+                状态：
+                <uv-tags
+                  size="mini"
+                  :text="statusMap[curFeedback.feedback_status].text"
+                  :type="statusMap[curFeedback.feedback_status].type"
+                ></uv-tags>
+              </view>
+              <view class="margin-top-sm">反馈时间：{{ timeFormat(curFeedback.create_date) }}</view>
+              <view class="margin-top-sm">
+                <view class="flex-vc">
+                  <view>反馈内容：</view>
+                  <view class="flex-sub"></view>
+                  <text
+                    class="cuIcon-edit text-lg text-bold text-green"
+                    @click="onEdit(curFeedback)"
+                  ></text>
+                </view>
+                <view class="margin-top-sm">
+                  <view class="content-box">{{ curFeedback.feedback_content }}</view>
+                </view>
+              </view>
+              <view class="margin-top-sm">
+                <view class="margin-bottom-sm">反馈图片：</view>
+                <view class="flex-col-vhc">
+                  <uv-album
+                    v-if="curFeedback.feedback_image?.length > 0"
+                    keyName="url"
+                    :urls="curFeedback.feedback_image"
+                  ></uv-album>
+                  <uv-empty
+                    v-else
+                    width="80"
+                    height="80"
+                    text="未上传图片"
+                    icon="https://cdn.uviewui.com/uview/empty/data.png"
+                  ></uv-empty>
+                </view>
+              </view>
+              <view class="margin-top-sm">
+                <view class="margin-bottom-sm">反馈回复：</view>
+                <view v-if="curFeedback.reply" class="content-box">
+                  <mp-html class="rich-text" :content="curFeedback.reply" />
+                </view>
+                <uv-empty
+                  v-else
+                  width="80"
+                  height="80"
+                  text="等待回复中"
+                  icon="https://cdn.uviewui.com/uview/empty/message.png"
+                ></uv-empty>
+              </view>
+            </view>
+          </view>
+        </view>
+      </uv-popup>
     </view>
-    <!-- 退出拦截 -->
-    <sv-intercept-back
-      :show="interceptFlag"
-      content="反馈内容还未提交，确定退出吗？"
-    ></sv-intercept-back>
   </sv-page>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { onShow } from '@dcloudio/uni-app'
 import { store } from '@/uni_modules/sv-id-pages/common/store'
-import { feedbackAdd } from '@/service/api/sys'
+import { feedbackList, feedbackDelete } from '@/service/api/sys'
+import { timeFormat } from '@/utils/util'
 
-const feedback_type_map = ref([
+const dataParams = ref({ user_id: store.userInfo._id, feedback_type: '' })
+const pagingRef = ref()
+
+const tabList = ref([
+  { text: '全部', value: '' },
   { text: '改进建议', value: 0 },
   { text: '发现bug', value: 1 }
 ])
 
-const interceptFlag = ref(true)
-
-const fbFrom = ref({
-  user_id: store.userInfo._id,
-  feedback_id: '',
-  feedback_type: 0,
-  feedback_title: '',
-  feedback_content: '',
-  feedback_image: [],
-  feedback_status: 0,
-  create_date: ''
-})
-
-onShow(() => {
-  interceptFlag.value = true
-})
-
-// 图片上传相关
-// 获取上传状态
-function select(e) {
-  console.log('选择文件：', e)
-}
-// 获取上传进度
-function progress(e) {
-  console.log('上传进度：', e)
-}
-// 上传成功
-function success(e) {
-  console.log('上传成功', e)
-}
-// 上传失败
-function fail(e) {
-  console.log('上传失败：', e)
+const typeMap = {
+  0: { text: '改进建议', type: 'info' },
+  1: { text: '发现bug', type: 'warning' }
 }
 
-function toBack() {
-  uni.navigateBack()
+const statusMap = {
+  0: { text: '审批中', type: 'primary' },
+  1: { text: '已解决', type: 'success' },
+  2: { text: '已拒绝', type: 'error' }
 }
 
-// 提交
-function toSubmit() {
-  if (fbFrom.value.feedback_type === '') {
-    uni.showToast({
-      title: '请选择反馈类型',
-      icon: 'error'
-    })
-    return
+function tapTab(e) {
+  // 更新参数
+  dataParams.value['feedback_type'] = e.value
+  // 重载
+  pagingRef.value.reload()
+}
+
+function queryRes(e) {
+  // console.log('==== queryRes :', e)
+}
+
+const feedbackDetailRef = ref()
+const curFeedback = ref()
+
+function onFeedback(e) {
+  curFeedback.value = e
+  feedbackDetailRef.value.open()
+}
+
+// 前往发送反馈页面
+function onFeedbackSend() {
+  uni.navigateTo({ url: '/pages/feedback/feedback-form' })
+}
+
+// 前往编辑当前反馈
+function onEdit(e) {
+  // 移除_id字段不参与更新
+  delete e._id
+  // 通信通道传值
+  uni.navigateTo({
+    url: '/pages/feedback/feedback-form',
+    success(res) {
+      res.eventChannel.emit('e-transmit-feedback', {
+        data: e,
+        mode: 'edit'
+      })
+    }
+  })
+  // 关闭弹窗
+  feedbackDetailRef.value.close()
+}
+
+const isEdit = ref(false)
+function onEditList() {
+  isEdit.value = !isEdit.value
+  if (!isEdit.value) {
+    // 置空编辑选中数组
+    editList.value = []
   }
-  if (!fbFrom.value.feedback_content) {
-    uni.showToast({
-      title: '请输入反馈内容',
-      icon: 'error'
-    })
-    return
+}
+
+const editList = ref([])
+function changeCheck(e) {
+  const { checked, info } = e
+  // checked为true时，向editList中添加项，否则删除
+  if (checked) {
+    editList.value.push(info)
+  } else {
+    const findIndex = editList.value.findIndex((item) => item == info)
+    editList.value.splice(findIndex, 1)
   }
+}
+
+function onDeleteList() {
   uni.showModal({
     title: '系统提示',
-    content: '确定提交问题反馈吗？',
-    cancelText: '再检查一下',
+    content: '确定删除选中项吗？',
     showCancel: true,
     success: async ({ confirm }) => {
       if (confirm) {
-        // 提交反馈单
-        fbFrom.value.create_date = Date.now()
-        fbFrom.value.feedback_id = `feedback_${store.userInfo._id}_${fbFrom.value.create_date}`
-        const fbRes = await feedbackAdd(fbFrom.value)
-        uni.showToast({
-          title: fbRes.message,
-          icon: 'none',
-          duration: 1200
+        const deleteRes = await feedbackDelete({
+          feedback_id: editList.value
         })
-        if (fbRes.success) {
-          interceptFlag.value = false
-          setTimeout(() => {
-            uni.navigateBack()
-          }, 1200)
-        }
+        uni.showToast({ title: deleteRes.message })
+        pagingRef.value.reload()
+        // 置空编辑选中数组
+        editList.value = []
+        isEdit.value = false
       }
     }
   })
-}
-
-function onFeedbackDetail() {
-  // 先关闭返回拦截
-  interceptFlag.value = false
-  uni.navigateTo({ url: '/pages/feedback/feedback-list' })
 }
 </script>
 
 <style lang="scss">
 .feedback {
-  min-height: var(--page-notab-height);
-  padding: 24rpx;
-  box-sizing: border-box;
+  height: var(--page-notab-height);
   position: relative;
 
-  .feedback-control {
-    position: absolute;
-    bottom: calc(24rpx + env(safe-area-inset-bottom));
-    width: calc(100% - 48rpx);
+  .sv-paging-header {
+    height: 88rpx;
+
+    @include useTheme {
+      background-color: getTheme('sv-bg-color');
+    }
+  }
+
+  .sv-paging-list {
+    height: calc(100% - 88rpx);
+
+    .feedback-item {
+      margin: 20rpx;
+
+      .feedback-item-box {
+        flex: 1;
+        padding: 20rpx 0 20rpx 30rpx;
+      }
+    }
+  }
+
+  .feedback-detail-popup {
+    width: 80vw;
+    height: 80vh;
+
+    @include useTheme {
+      background-color: getTheme('sv-card-color');
+    }
+
+    .popup-header {
+      height: 96rpx;
+      padding: 30rpx 96rpx 30rpx 30rpx;
+
+      .popup-title {
+        font-weight: 700;
+      }
+    }
+
+    .popup-content {
+      padding: 0 30rpx 30rpx 30rpx;
+      height: calc(100% - 96rpx);
+
+      .popup-detail {
+        height: 100%;
+        overflow: auto;
+
+        .content-box {
+          @include useTheme {
+            border: 1px solid #{getTheme('sv-border-color')};
+          }
+          border-radius: 8rpx;
+          padding: 12rpx 16rpx;
+        }
+      }
+    }
   }
 
   .fab-btn {
     position: fixed;
-    bottom: calc(120rpx + env(safe-area-inset-bottom));
+    bottom: calc(180rpx + env(safe-area-inset-bottom));
     right: 24rpx;
     width: 80rpx;
     height: 80rpx;
@@ -188,6 +331,7 @@ function onFeedbackDetail() {
     align-items: center;
     box-shadow: 0px 0px 10px 0px #c8c7cc66;
     backdrop-filter: blur(4px) brightness(120%);
+    z-index: 999;
 
     &:active {
       box-shadow: 0px 0px 10px 0px #c8c7cc;

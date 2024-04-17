@@ -55,8 +55,11 @@ module.exports = {
     }
     // 使用JQL进行条件查询
     if (conditions) {
-      query = query.where(conditions).orderBy('start_date', 'desc')
+      query = query.where(conditions)
     }
+    
+    // 排序规则
+    query = query.orderBy('start_date', 'desc')
 
     if (pagesize < 1) {
       // 全量查询

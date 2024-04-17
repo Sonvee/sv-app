@@ -183,10 +183,9 @@ watchEffect(() => {
     delete formBase.password
     formBase._id = ''
   } else {
-    // 新增账号，需要删掉_id字段，添加password、register_date字段
+    // 新增账号，需要删掉_id字段，添加password
     delete formBase._id
     formBase.password = ''
-    formBase.register_date = Date.now()
   }
   formData.value = assignOverride({ ...formBase }, props.formInit)
 })

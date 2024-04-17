@@ -46,14 +46,14 @@
     {
       "path": "pages/feedback/feedback",
       "style": {
-        "navigationBarTitleText": "问题反馈",
+        "navigationBarTitleText": "反馈记录",
         "enablePullDownRefresh": false
       }
     },
     {
-      "path": "pages/feedback/feedback-list",
+      "path": "pages/feedback/feedback-form",
       "style": {
-        "navigationBarTitleText": "反馈记录",
+        "navigationBarTitleText": "反馈工单",
         "enablePullDownRefresh": false
       }
     },

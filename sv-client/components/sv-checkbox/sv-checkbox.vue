@@ -34,6 +34,7 @@ function onCheck() {
   display: inline-block;
   border-radius: 8rpx;
   border: 1px solid #007aff;
+  flex-shrink: 0;
 
   .box-checked {
     width: 100%;

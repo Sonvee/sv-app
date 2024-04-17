@@ -45,19 +45,21 @@ module.exports = {
       conditions.feedback_id = dbCmd.eq(feedback_id)
     }
     if (feedback_title) {
-      conditions.feedback_title = dbCmd.eq(feedback_title)
+      conditions.feedback_title = new RegExp(feedback_title.split('').join('.*'), 'i'); // 模糊查询
     }
-    if (feedback_type) {
+    if (feedback_type || feedback_type === 0) {
       conditions.feedback_type = dbCmd.eq(Number(feedback_type))
     }
-    if (feedback_status) {
+    if (feedback_status || feedback_status === 0) {
       conditions.feedback_status = dbCmd.eq(Number(feedback_status))
     }
 
     // 将所有有效的筛选条件添加到查询对象中
     if (Object.keys(conditions).length > 0) {
-      query = query.where(conditions).orderBy('create_date', 'desc')
+      query = query.where(conditions)
     }
+    // 排序规则
+    query = query.orderBy('create_date', 'desc')
 
     if (pagesize < 1) {
       // 全量查询
@@ -126,6 +128,7 @@ module.exports = {
 
     return handler.result({
       data: feedbackRes,
+      message: '更新成功'
     })
   },
 
@@ -147,6 +150,7 @@ module.exports = {
 
     return handler.result({
       data: feedbackRes,
+      message: '删除成功'
     })
   },
 }

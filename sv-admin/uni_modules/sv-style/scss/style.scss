@@ -33,7 +33,7 @@ page {
 
 uni-page-body {
   height: 100%;
-  
+
   @include useTheme {
     background-color: getTheme('sv-bg-color');
     color: getTheme('sv-text-color');
@@ -52,15 +52,19 @@ a {
   overflow: hidden;
 
   @include useTheme {
-    background-color: getTheme('sv-admin-card-color');
-    border-top: 1px solid #{getTheme('sv-admin-border-color')};
-    border-left: 1px solid #{getTheme('sv-admin-border-color')};
+    background-color: getTheme('sv-card-color');
   }
 
   &:hover {
     backdrop-filter: blur(4px) brightness(120%);
     @include useTheme {
-      box-shadow: 0px 0px 10px 0px #{getTheme('sv-admin-border-color')};
+      box-shadow: 0px 0px 10px 0px #{getTheme('sv-border-color')};
+    }
+  }
+
+  &:active {
+    @include useTheme {
+      background-color: getTheme('sv-hover-color');
     }
   }
 }

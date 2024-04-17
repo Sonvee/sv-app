@@ -30,11 +30,11 @@
     "enable": true
   },
   {
-    "menu_id": "business_business1",
-    "name": "业务模块一",
-    "url": "/pages/business/business1/business1",
-    "parent_id": "business ",
-    "icon": "admin-icons-stat",
+    "menu_id": "business_feedback",
+    "name": "用户反馈",
+    "url": "/pages/business/feedback/feedback",
+    "parent_id": "business",
+    "icon": "cuIcon-service",
     "sort": 201,
     "permission": [],
     "enable": true

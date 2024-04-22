@@ -252,6 +252,46 @@ export default defineConfig({
       },
     ],
 
-    socialLinks: [{ icon: "github", link: "https://gitee.com/Sonve/sv-app" }],
+    socialLinks: [
+      { icon: "github", link: "https://gitee.com/Sonve/sv-app" },
+      {
+        icon: {
+          svg: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11.984 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12a12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.016 0m6.09 5.333c.328 0 .593.266.592.593v1.482a.594.594 0 0 1-.593.592H9.777c-.982 0-1.778.796-1.778 1.778v5.63c0 .327.266.592.593.592h5.63c.982 0 1.778-.796 1.778-1.778v-.296a.593.593 0 0 0-.592-.593h-4.15a.592.592 0 0 1-.592-.592v-1.482a.593.593 0 0 1 .593-.592h6.815c.327 0 .593.265.593.592v3.408a4 4 0 0 1-4 4H5.926a.593.593 0 0 1-.593-.593V9.778a4.444 4.444 0 0 1 4.445-4.444h8.296Z"/></svg>`,
+        },
+        link: "https://gitee.com/Sonve/sv-app",
+        ariaLabel: "Gitee",
+      },
+      {
+        icon: {
+          svg: `<svg t="1713778098002" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2278" width="32" height="32"><path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#2B9939" p-id="2279"></path><path d="M347.33473185 704.1094791h334.50868979V235.83183485h111.46837529v579.78054125H235.83183485V235.83183485h111.502897v468.27764425z" fill="#ffffff" p-id="2280"></path></svg>`,
+        },
+        link: "https://ext.dcloud.net.cn/publisher?id=1173575",
+        ariaLabel: "DCloud",
+      },
+    ],
+
+    search: {
+      provider: "local",
+      options: {
+        locales: {
+          zh: {
+            translations: {
+              button: {
+                buttonText: "搜索文档",
+                buttonAriaLabel: "搜索文档",
+              },
+              modal: {
+                noResultsText: "无法找到相关结果",
+                resetButtonTitle: "清除查询条件",
+                footer: {
+                  selectText: "选择",
+                  navigateText: "切换",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
 });

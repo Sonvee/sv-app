@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { testList } from '@/service/api/test'
+import { testList } from '@/api/test'
 export default {
   name: 'sv-paging',
   props: {

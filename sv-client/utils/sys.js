@@ -1,7 +1,7 @@
 import { useSysStore } from "@/store/sys"
 import { isEmpty } from "lodash-es"
 import { storageDicts } from "./pinia-storage"
-import { dictList } from "@/service/api/sys"
+import { dictList } from "@/api/sys"
 
 /**
  * 本地字典提取 - 结合新版服务器缓存字典使用

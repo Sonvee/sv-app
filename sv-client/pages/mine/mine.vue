@@ -144,7 +144,7 @@ import { onLoad } from '@dcloudio/uni-app'
 import { useSysStore } from '@/store/sys'
 import { mutations, store } from '@/uni_modules/sv-id-pages/common/store'
 import { judgeLogin, onScan, useThrottle } from '@/utils/util'
-import { vipVerify } from '@/service/api/vip'
+import { vipVerify } from '@/api/vip'
 import { changeTheme } from '@/utils/sys'
 
 const sysStore = useSysStore()

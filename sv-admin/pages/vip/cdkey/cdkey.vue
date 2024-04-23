@@ -135,7 +135,7 @@ import {
   cdkeyInvalidRemove,
   cdkeyList,
   cdkeyVerifyAuto
-} from '@/service/api/vip'
+} from '@/api/vip'
 import { useSysStore } from '@/store/sys'
 import { timeFormat, setClipboard } from '@/utils/util'
 import { createCDKey } from '@/uni_modules/sv-id-vip/utils'

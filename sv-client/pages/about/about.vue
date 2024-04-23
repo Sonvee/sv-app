@@ -47,7 +47,7 @@
 </template>
 
 <script setup>
-import config from '@/configs/index.js'
+import config from '@/uni_modules/sv-configs/config/index.js'
 
 const aboutMenu = [
   { name: '功能介绍', icon: 'cuIcon-question', path: '' },

@@ -16,7 +16,7 @@ export default defineConfig({
     siteTitle: "sv-docs",
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "🚀快速开始", link: "/src/guide/guide" },
+      { text: "🚀快速开始", link: "/src/base/quick" },
       {
         text: "框架",
         items: [
@@ -162,16 +162,8 @@ export default defineConfig({
         text: "其他",
         items: [
           {
-            text: "config 配置",
-            link: "/src/other/config/config",
-          },
-          {
-            text: "request 封装",
-            link: "/src/other/request/request",
-          },
-          {
-            text: "工具方法",
-            link: "/src/other/util/util",
+            text: "鸣谢",
+            link: "/src/other/thank",
           },
         ],
       },
@@ -241,13 +233,60 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: "Examples",
+        text: "基础",
         items: [
           {
-            text: "Markdown Examples",
-            link: "/src/examples/markdown-examples",
+            text: "介绍",
+            link: "/src/base/intro",
           },
-          { text: "Runtime API Examples", link: "/src/examples/api-examples" },
+          {
+            text: "快速开始",
+            link: "/src/base/quick",
+          },
+          {
+            text: "常见问题",
+            link: "/src/base/problem",
+          },
+          {
+            text: "博客文章",
+            link: "/src/base/blog",
+          },
+          {
+            text: "更新日志",
+            link: "/src/base/log",
+          },
+        ],
+      },
+      {
+        text: "框架",
+        items: [
+          {
+            text: "配置",
+            link: "/src/plugins/sv-configs/sv-configs",
+          },
+          {
+            text: "服务端",
+            link: "/src/frame/sv-service/sv-service",
+          },
+          {
+            text: "客户端",
+            link: "/src/frame/sv-client/sv-client",
+            items: [
+              {
+                text: "内置组件",
+                items: [
+                  {
+                    text: "sv-page",
+                    link: "/src/components/sv-page/sv-page",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            text: "管理端",
+            link: "/src/frame/sv-admin/sv-admin",
+          },
         ],
       },
     ],

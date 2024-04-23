@@ -59,7 +59,7 @@ import SvForm from './components/sv-form/sv-form.vue'
 import { RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
-import { roleAdd, roleDelete, roleList, roleUpdate } from '@/service/api/svid'
+import { roleAdd, roleDelete, roleList, roleUpdate } from '@/api/svid'
 import { storageRoles } from '@/utils/pinia-storage'
 
 const tableData = ref([]) // 菜单表格

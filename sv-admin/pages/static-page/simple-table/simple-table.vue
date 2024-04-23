@@ -81,7 +81,7 @@ import SvForm from './components/sv-form/sv-form.vue'
 import SvTableHeader from './components/sv-table-header/sv-table-header.vue'
 import { RefreshRight, Plus, EditPen, Delete, View, Hide } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
-import { testList, testAdd, testDelete, testUpdate } from '@/service/api/test'
+import { testList, testAdd, testDelete, testUpdate } from '@/api/test'
 import { useSysStore } from '@/store/sys'
 import { isEmpty } from 'lodash-es'
 

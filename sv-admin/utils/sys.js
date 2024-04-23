@@ -3,7 +3,7 @@ import {
   appList,
   dictList,
   menuList
-} from '@/service/api/sys.js'
+} from '@/api/sys.js'
 import {
   cloneDeep,
   concat,
@@ -20,7 +20,7 @@ import {
 import {
   permissionList,
   roleList
-} from '@/service/api/svid'
+} from '@/api/svid'
 import {
   useSvidStore
 } from '@/store/svid'

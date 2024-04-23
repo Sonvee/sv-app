@@ -97,7 +97,7 @@
 import { nextTick, ref } from 'vue'
 import SvForm from './components/sv-form/sv-form.vue'
 import { getMenu } from '@/utils/sys.js'
-import { menuAdd, menuDelete, menuUpdate } from '@/service/api/sys.js'
+import { menuAdd, menuDelete, menuUpdate } from '@/api/sys.js'
 import { Sort, RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 

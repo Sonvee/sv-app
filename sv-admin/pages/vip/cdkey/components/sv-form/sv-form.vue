@@ -75,7 +75,7 @@
 
 <script setup>
 import { ref, watchEffect } from 'vue'
-import { vipList } from '@/service/api/vip'
+import { vipList } from '@/api/vip'
 import { createCDKey } from '@/uni_modules/sv-id-vip/utils'
 
 const props = defineProps({

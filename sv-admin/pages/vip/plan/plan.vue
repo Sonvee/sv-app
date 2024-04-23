@@ -57,7 +57,7 @@ import { ref } from 'vue'
 import SvForm from './components/sv-form/sv-form.vue'
 import { RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
-import { vipAdd, vipDelete, vipList, vipUpdate } from '@/service/api/vip'
+import { vipAdd, vipDelete, vipList, vipUpdate } from '@/api/vip'
 import { convertFenToYuan } from '@/uni_modules/sv-id-vip/utils'
 
 const tableData = ref([]) // 菜单表格

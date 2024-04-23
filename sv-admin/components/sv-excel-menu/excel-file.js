@@ -8,17 +8,17 @@ import {
 import {
   appAddList,
   appList
-} from '@/service/api/sys';
+} from '@/api/sys';
 import {
   logList
-} from '@/service/api/svid';
+} from '@/api/svid';
 import {
   cdkeyList
-} from '@/service/api/vip';
+} from '@/api/vip';
 import {
   testAddList,
   testList
-} from '@/service/api/test';
+} from '@/api/test';
 
 
 

@@ -150,7 +150,7 @@
 <script setup>
 import { ref } from 'vue'
 import { store } from '@/uni_modules/sv-id-pages/common/store'
-import { feedbackList, feedbackDelete } from '@/service/api/sys'
+import { feedbackList, feedbackDelete } from '@/api/sys'
 import { timeFormat } from '@/utils/util'
 
 const dataParams = ref({ user_id: store.userInfo._id, feedback_type: '' })

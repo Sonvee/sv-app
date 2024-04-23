@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import config from '@/configs/index.js'
+import config from '@/uni_modules/sv-configs/config/index.js'
 
 const qqqunImg = config.base_cdn + '/static/qqqun.jpg'
 

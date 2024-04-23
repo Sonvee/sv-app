@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import request from '@/service/request/index.js'
+import request from '@/uni_modules/sv-configs/request/index.js'
 import { ref } from 'vue'
 
 const url = ref('')

@@ -63,7 +63,7 @@
 import { ref, getCurrentInstance } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { store } from '@/uni_modules/sv-id-pages/common/store'
-import { feedbackAdd, feedbackUpdate } from '@/service/api/sys'
+import { feedbackAdd, feedbackUpdate } from '@/api/sys'
 import { assignOverride } from '@/utils/util'
 
 const { proxy } = getCurrentInstance()

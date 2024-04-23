@@ -1,7 +1,7 @@
 {
   "id": "sv-id-vip",
   "displayName": "用户会员制功能模组",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "基于sv-clinet、sv-id-pages的用户VIP会员制功能模组，开箱即用",
   "keywords": [
     "vip",

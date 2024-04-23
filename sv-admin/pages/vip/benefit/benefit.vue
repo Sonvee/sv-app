@@ -41,7 +41,7 @@ import { ref } from 'vue'
 import SvForm from './components/sv-form/sv-form.vue'
 import { RefreshRight, Plus, EditPen, Delete } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
-import { benefitAdd, benefitDelete, benefitList, benefitUpdate } from '@/service/api/vip'
+import { benefitAdd, benefitDelete, benefitList, benefitUpdate } from '@/api/vip'
 
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading

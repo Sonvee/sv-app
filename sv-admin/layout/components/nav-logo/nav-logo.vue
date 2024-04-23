@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import config from '@/configs/index.js'
+import config from '@/uni_modules/sv-configs/config/index.js'
 
 function onLogo() {
   uni.navigateTo({

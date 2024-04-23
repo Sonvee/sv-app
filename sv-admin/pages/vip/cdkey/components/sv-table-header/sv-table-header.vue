@@ -28,7 +28,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { vipList } from '@/service/api/vip'
+import { vipList } from '@/api/vip'
 
 const props = defineProps({
   size: {

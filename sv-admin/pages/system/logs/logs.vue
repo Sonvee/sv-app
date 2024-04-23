@@ -67,7 +67,7 @@ import { ref } from 'vue'
 import { RefreshRight } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { timeFormat } from '@/utils/util'
-import { logList } from '@/service/api/svid'
+import { logList } from '@/api/svid'
 
 const tableData = ref([]) // 菜单表格
 const loading = ref(false) // 表格loading

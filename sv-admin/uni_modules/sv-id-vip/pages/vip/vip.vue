@@ -229,7 +229,7 @@
 import { computed, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { store } from '@/uni_modules/sv-id-pages/common/store'
-import { benefitList, cdkeyActive, vipList, vipPayActive, vipVerify } from '@/service/api/vip'
+import { benefitList, cdkeyActive, vipList, vipPayActive, vipVerify } from '@/api/vip'
 import { isEmpty } from 'lodash-es'
 import { createCDKey, validCDKey, convertFenToYuan } from '../../utils'
 import dayjs from 'dayjs'

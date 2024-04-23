@@ -1,8 +1,8 @@
 import { useSvidStore } from '@/store/svid.js'
 import { useSysStore } from '@/store/sys'
 import { useNavStore } from '@/store/nav'
-import { permissionList, roleList } from '@/service/api/svid.js'
-import { appList, dictList } from '@/service/api/sys'
+import { permissionList, roleList } from '@/api/svid.js'
+import { appList, dictList } from '@/api/sys'
 
 export async function storagePermissions() {
   const svidStore = useSvidStore()

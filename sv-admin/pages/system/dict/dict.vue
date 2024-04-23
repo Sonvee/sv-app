@@ -98,7 +98,7 @@ import {
 import SvTableHeader from './components/sv-table-header/sv-table-header.vue'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 import { setClipboard, timeFormat } from '@/utils/util'
-import { dictAdd, dictDelete, dictList, dictUpdate } from '@/service/api/sys'
+import { dictAdd, dictDelete, dictList, dictUpdate } from '@/api/sys'
 import { storageDicts } from '@/utils/pinia-storage'
 import { useSysStore } from '@/store/sys'
 

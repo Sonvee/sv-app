@@ -1,5 +1,5 @@
 import { useSysStore } from '@/store/sys'
-import { dictList } from '@/service/api/sys'
+import { dictList } from '@/api/sys'
 
 export async function storageDicts() {
   const sysStore = useSysStore()

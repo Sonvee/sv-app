@@ -15,7 +15,7 @@ hero:
   actions:
     - theme: brand
       text: 🚀快速开始
-      link: /src/guide/guide
+      link: /src/base/quick
 
     - theme: alt
       text: 服务端

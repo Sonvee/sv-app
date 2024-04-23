@@ -51,7 +51,7 @@ import {
   permissionDelete,
   permissionList,
   permissionUpdate
-} from '@/service/api/svid'
+} from '@/api/svid'
 import { storagePermissions } from '@/utils/pinia-storage'
 
 const tableData = ref([]) // 菜单表格

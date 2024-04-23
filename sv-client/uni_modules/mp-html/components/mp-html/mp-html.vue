@@ -5,14 +5,14 @@
     <node v-else :childs="nodes" :opts="[lazyLoad,loadingImg,errorImg,showImgMenu,selectable]" name="span" />
     <!-- #endif -->
     <!-- #ifdef APP-PLUS-NVUE -->
-    <web-view ref="web" src="/static/app-plus/mp-html/local.html" :style="'margin-top:-2px;height:' + height + 'px'" @onPostMessage="_onMessage" />
+    <web-view ref="web" src="/uni_modules/mp-html/static/app-plus/mp-html/local.html" :style="'margin-top:-2px;height:' + height + 'px'" @onPostMessage="_onMessage" />
     <!-- #endif -->
   </view>
 </template>
 
 <script>
 /**
- * mp-html v2.4.3
+ * mp-html v2.5.0
  * @description 富文本组件
  * @tutorial https://github.com/jin-yufeng/mp-html
  * @property {String} container-style 容器的样式

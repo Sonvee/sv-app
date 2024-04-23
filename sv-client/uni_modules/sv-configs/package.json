@@ -1,7 +1,7 @@
 {
   "id": "sv-configs",
   "displayName": "sv-configs 全局配置项",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "用于SV框架的全局配置项，以及request封装等",
   "keywords": [
     "configs",

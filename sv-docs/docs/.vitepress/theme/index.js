@@ -1,4 +1,13 @@
-import DefaultTheme from 'vitepress/theme'
-import './style.css'
+import "./style.css";
+import { h } from "vue";
+import Theme from "vitepress/theme";
+import HomeFriendly from "./components/HomeFriendly.vue";
 
-export default DefaultTheme
+export default {
+  ...Theme,
+  Layout() {
+    return h(Theme.Layout, null, {
+      "home-features-after": () => h(HomeFriendly),
+    });
+  },
+};

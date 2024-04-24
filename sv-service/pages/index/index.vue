@@ -24,7 +24,7 @@
 <script setup>
 import request from '@/uni_modules/sv-configs/request/index.js'
 import { ref } from 'vue'
-
+console.log('==== 1 :', 1);
 const url = ref('')
 const params = ref('')
 const result = ref()

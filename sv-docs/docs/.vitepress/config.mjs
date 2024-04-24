@@ -5,7 +5,7 @@ const frameMenu = {
   items: [
     {
       text: "概况",
-      link: "/src/frame/general/general",
+      link: "/src/frame/intro/intro",
     },
     {
       text: "服务端",
@@ -25,6 +25,10 @@ const frameMenu = {
 const pluginsMenu = {
   text: "插件",
   items: [
+    {
+      text: "概况",
+      link: "/src/plugins/intro/intro",
+    },
     {
       text: "配置模块",
       link: "/src/plugins/sv-configs/sv-configs",
@@ -221,7 +225,7 @@ export default defineConfig({
             link: "https://ext.dcloud.net.cn/plugin?id=271",
           },
           {
-            text: "阿里巴巴矢量图标库",
+            text: "iconfont",
             link: "https://www.iconfont.cn",
           },
           {
@@ -233,7 +237,7 @@ export default defineConfig({
             link: "https://vueuse.org",
           },
           {
-            text: "Pinia 持久化",
+            text: "pinia-plugin-unistorage",
             link: "https://ext.dcloud.net.cn/plugin?id=8081",
           },
           {
@@ -253,10 +257,6 @@ export default defineConfig({
       {
         text: "基础",
         items: [
-          {
-            text: "介绍",
-            link: "/src/base/intro",
-          },
           {
             text: "快速开始",
             link: "/src/base/quick",

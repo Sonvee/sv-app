@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 
 const frameMenu = {
   text: "框架",
+  collapsed: false,
   items: [
     {
       text: "概况",
@@ -24,6 +25,7 @@ const frameMenu = {
 
 const pluginsMenu = {
   text: "插件",
+  collapsed: false,
   items: [
     {
       text: "概况",
@@ -82,9 +84,11 @@ const pluginsMenu = {
 
 const componentsMenu = {
   text: "组件",
+  collapsed: false,
   items: [
     {
       text: "客户端",
+      collapsed: false,
       items: [
         {
           text: "sv-page",
@@ -110,6 +114,7 @@ const componentsMenu = {
     },
     {
       text: "管理端",
+      collapsed: false,
       items: [
         {
           text: "sv-icon-select",
@@ -156,7 +161,6 @@ const componentsMenu = {
   ],
 };
 
-// https://vitepress.dev/zh/reference/site-config
 export default defineConfig({
   base: "/docs",
   outDir: "../dist",
@@ -164,6 +168,7 @@ export default defineConfig({
   title: "sv-app",
   description: "A VitePress Site",
   cleanUrls: true,
+  lastUpdated: true,
 
   head: [
     ["link", { rel: "icon", href: "/docs/favicon.ico" }], // 需要加上根目录前缀，否则资源访问不到
@@ -183,7 +188,8 @@ export default defineConfig({
   themeConfig: {
     logo: "/logo.png",
     siteTitle: "sv-app",
-    // https://vitepress.dev/reference/default-theme-config
+    lastUpdatedText: '最后更新',
+
     nav: [
       { text: "🚀快速开始", link: "/src/base/quick" },
       frameMenu,
@@ -256,6 +262,7 @@ export default defineConfig({
     sidebar: [
       {
         text: "基础",
+        collapsed: false,
         items: [
           {
             text: "快速开始",

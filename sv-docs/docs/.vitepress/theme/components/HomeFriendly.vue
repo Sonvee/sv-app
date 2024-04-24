@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { useFriendly } from "../data/friendly.js";
+import { useFriendly } from "../data/friendly";
 import VPFeature from "vitepress/dist/client/theme-default/components/VPFeature.vue";
 
 const { data } = useFriendly();

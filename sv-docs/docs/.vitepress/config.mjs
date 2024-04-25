@@ -5,7 +5,7 @@ const frameMenu = {
   collapsed: false,
   items: [
     {
-      text: "概况",
+      text: "框架概况",
       link: "/src/frame/intro/intro",
     },
     {
@@ -28,7 +28,7 @@ const pluginsMenu = {
   collapsed: false,
   items: [
     {
-      text: "概况",
+      text: "插件概况",
       link: "/src/plugins/intro/intro",
     },
     {
@@ -170,6 +170,16 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
 
+  markdown: {
+    container: {
+      tipLabel: "提示",
+      warningLabel: "警告",
+      dangerLabel: "危险",
+      infoLabel: "信息",
+      detailsLabel: "详细信息",
+    },
+  },
+
   head: [
     ["link", { rel: "icon", href: "/docs/favicon.ico" }], // 需要加上根目录前缀，否则资源访问不到
     [
@@ -188,7 +198,7 @@ export default defineConfig({
   themeConfig: {
     logo: "/logo.png",
     siteTitle: "sv-app",
-    lastUpdatedText: '最后更新',
+    lastUpdatedText: "最后更新",
 
     nav: [
       { text: "🚀快速开始", link: "/src/base/quick" },

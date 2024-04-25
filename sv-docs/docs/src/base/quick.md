@@ -21,3 +21,11 @@
 ### 代码仓库
 
 直接将 `sv-app` 的 [代码仓库](https://gitee.com/Sonve/sv-app) 克隆到本地， 分别导入至 HBuilderX 中打开即可 (不要直接导入 sv-app 目录，而是分别导入 sv-app 下的三端)。
+
+## 下一步
+
+此时你已将三端框架成功下载到本地，接来下根据对应端的框架介绍进行操作即可。
+
+- [sv-service](/src/frame/sv-service/sv-service) 服务端
+- [sv-client](/src/frame/sv-client/sv-client) 客户端
+- [sv-admin](/src/frame/sv-admin/sv-admin) 管理端

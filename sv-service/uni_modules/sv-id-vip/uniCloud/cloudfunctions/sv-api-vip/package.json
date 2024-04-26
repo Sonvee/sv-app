@@ -5,5 +5,17 @@
   },
   "extensions": {
     "uni-cloud-jql": {}
+  },
+  "cloudfunction-config": {
+    "concurrency": 1,
+    "memorySize": 512,
+    "timeout": 60,
+    "triggers": [{
+      "name": "vipVerifyAutoTrigger",
+      "type": "timer",
+      "config": "0 15 4 * * * *"
+    }],
+    "path": "/api/vip",
+    "runtime": "Nodejs18"
   }
 }

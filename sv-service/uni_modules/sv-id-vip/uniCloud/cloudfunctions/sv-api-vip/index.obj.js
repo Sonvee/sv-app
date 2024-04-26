@@ -104,8 +104,10 @@ module.exports = {
      *  "TriggerName":"TIMER_LATEST", //触发器名
      *  "Type":"Timer" //触发器类型，目前只有Timer
      *  }
+     * 
+     * 定时刷新库中所有vip角色是否过期，需配置corn
+     * @tutorial https://doc.dcloud.net.cn/uniCloud/trigger.html
      */
-    // 定时刷新库中所有vip角色是否过期，需在云对象中配置cron: ["0 15 4 * * ?"] 每日上午4:15分定时执行
     try {
       vipVerifyAuto()
     } catch (err) {

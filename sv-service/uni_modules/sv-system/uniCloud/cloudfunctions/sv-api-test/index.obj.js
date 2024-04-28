@@ -15,6 +15,9 @@ const {
 
 module.exports = {
   _before: async function() { // 通用预处理器
+    const httpInfo = this.getHttpInfo()
+    if (!httpInfo) return // 云对象之间调用时无httpInfo处理
+
     // token身份安全校验
     const WHITE_LIST = [] // 校验白名单，例如'/testList'
     // 校验名单 open easy normal strict

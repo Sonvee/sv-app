@@ -4,9 +4,12 @@
 
 ```
 sv-service
-├─ uniCloud-aliyun       # 云函数目录
-│  ├─ cloudfunctions
-│  └─ database
+├─ uniCloud-aliyun       # uniCloud目录
+│  ├─ cloudfunctions     # 云函数目录
+│  │  ├─ common          # 公共模块
+│  │  └─ ...             # 云对象
+│  └─ database           # 数据库目录
+│     └─ ...             # 数据库表及扩展
 ├─ api                   # api目录
 │  ├─ test.js            # api文件
 │  └─ ...
@@ -38,9 +41,12 @@ sv-service
 
 ```
 sv-client
-├─ uniCloud-aliyun       # 云函数目录
-│  ├─ cloudfunctions
-│  └─ database
+├─ uniCloud-aliyun       # uniCloud目录
+│  ├─ cloudfunctions     # 云函数目录
+│  │  ├─ common          # 公共模块
+│  │  └─ ...             # 云对象
+│  └─ database           # 数据库目录
+│     └─ ...             # 数据库表及扩展
 ├─ api                   # api目录
 │  ├─ test.js            # api文件
 │  └─ ...
@@ -97,9 +103,12 @@ sv-client
 
 ```
 sv-admin
-├─ uniCloud-aliyun       # 云函数目录
-│  ├─ cloudfunctions
-│  └─ database
+├─ uniCloud-aliyun       # uniCloud目录
+│  ├─ cloudfunctions     # 云函数目录
+│  │  ├─ common          # 公共模块
+│  │  └─ ...             # 云对象
+│  └─ database           # 数据库目录
+│     └─ ...             # 数据库表及扩展
 ├─ api                   # api目录
 │  ├─ test.js            # api文件
 │  └─ ...

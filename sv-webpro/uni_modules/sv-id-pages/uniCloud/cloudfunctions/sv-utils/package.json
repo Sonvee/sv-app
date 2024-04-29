@@ -1,7 +1,0 @@
-{
-  "name": "sv-utils",
-  "dependencies": {
-    "sv-handler": "file:../common/sv-handler"
-  },
-  "extensions": {}
-}

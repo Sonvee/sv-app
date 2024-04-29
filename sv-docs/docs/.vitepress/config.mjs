@@ -166,7 +166,7 @@ export default defineConfig({
   outDir: "../dist",
   lang: "zh-CN",
   title: "sv-app",
-  description: "A VitePress Site",
+  description: "一个基于 vue3 + uniapp + unicloud 开发的框架",
   cleanUrls: true,
   lastUpdated: true,
 

@@ -1,0 +1,19 @@
+/* 全局滚动条样式 */
+/* 宽度 */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+/* 轨道 */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* 滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 2px; /* 圆角 */
+  background: var(--vp-c-brand-soft);
+
+  &:hover {
+    background: rgba(98, 133, 208, 0.32);
+  }
+}

@@ -63,5 +63,23 @@ export default {
    * }
    * */
   setPasswordAfterLogin: false,
-  routerMode: false, // 仅供纯web端vue-router使用时开启，其他情况禁止开启
+
+  // ----- 以上皆为 uni-id-pages 原配置项，本插件不做改动，以下为本插件专属配置项 -----
+  loginWay: {
+    account: true, // 账密登录
+    sms: true, // 短信验证码登录
+    // #ifdef APP
+    univerify: true, // 手机一键登录
+    // #endif
+    third: {
+      weixin: true, // 微信登录
+      qq: false, // qq登录
+      // alipay: false // 支付宝登录
+    }
+  },
+  /**
+   * 仅供纯web端并使用vue-router时开启，其他情况禁止开启
+   * 开启后，本插件内部所有页面将会采用router.push形式进行跳转
+   */
+  routerMode: false,
 }

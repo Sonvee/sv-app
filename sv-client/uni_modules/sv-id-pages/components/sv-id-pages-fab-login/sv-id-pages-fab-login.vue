@@ -1,24 +1,29 @@
 <template>
-  <!-- 第三方快捷登录 -->
+  <!-- 登录方式 -->
   <view class="quick-login">
-    <view class="quick-login-btn account-login" @click="accountLogin">
+    <view
+      class="quick-login-btn account-login"
+      v-if="config.loginWay.account"
+      @click="accountLogin"
+    >
       <uni-icons type="staff-filled" size="30" color="#ffffff"></uni-icons>
     </view>
-    <view class="quick-login-btn sms-login" @click="smsLogin">
+    <view class="quick-login-btn sms-login" v-if="config.loginWay.sms" @click="smsLogin">
       <uni-icons type="email-filled" size="30" color="#ffffff"></uni-icons>
     </view>
     <!-- #ifdef APP -->
-    <view class="quick-login-btn phone-login" @click="phoneLogin">
+    <view class="quick-login-btn phone-login" v-if="config.loginWay.univerify" @click="phoneLogin">
       <uni-icons type="phone-filled" size="30" color="#ffffff"></uni-icons>
     </view>
     <!-- #endif -->
-    <view class="quick-login-btn third-login" @click="thirdLogin">
+    <view class="quick-login-btn third-login" v-if="config.loginWay.third" @click="thirdLogin">
       <uni-icons type="more-filled" size="30" color="#ffffff"></uni-icons>
     </view>
   </view>
 </template>
 
 <script>
+import config from '@/uni_modules/sv-id-pages/config.js'
 import { mutations } from '@/uni_modules/sv-id-pages/common/store.js'
 const uniIdCo = uniCloud.importObject('uni-id-co', {
   errorOptions: {
@@ -29,6 +34,7 @@ const uniIdCo = uniCloud.importObject('uni-id-co', {
 export default {
   data() {
     return {
+      config,
       univerifyStyle: {
         // 一键登录弹出窗的样式配置参数
         fullScreen: true, // 是否全屏显示，true表示全屏模式，false表示非全屏模式，默认值为false。

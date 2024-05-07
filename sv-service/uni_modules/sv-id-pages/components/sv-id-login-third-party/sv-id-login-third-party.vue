@@ -4,14 +4,22 @@
     <view class="form">
       <!-- 登录 -->
       <view class="login-form">
-        <button class="login-btn quick-weixin" @click="submitLogin('weixin')">
+        <button
+          class="login-btn quick-weixin"
+          v-if="config.loginWay.third.weixin"
+          @click="submitLogin('weixin')"
+        >
           <uni-icons type="weixin" size="16" color="#ffffff"></uni-icons>
           <text decode>&nbsp;微信一键登录</text>
         </button>
-        <!-- <button class="login-btn quick-qq" @click="submitLogin('qq')">
+        <button
+          class="login-btn quick-qq"
+          v-if="config.loginWay.third.qq"
+          @click="submitLogin('qq')"
+        >
           <uni-icons type="qq" size="16" color="#ffffff"></uni-icons>
           <text decode>&nbsp;QQ一键登录</text>
-        </button> -->
+        </button>
       </view>
     </view>
     <!-- 隐私政策 -->
@@ -22,6 +30,7 @@
 </template>
 
 <script>
+import config from '@/uni_modules/sv-id-pages/config.js'
 import mixin from '@/uni_modules/sv-id-pages/common/login-page.mixin.js'
 import { mutations } from '../../common/store'
 const uniIdCo = uniCloud.importObject('uni-id-co', { customUI: true })
@@ -30,6 +39,7 @@ export default {
   mixins: [mixin],
   data() {
     return {
+      config,
       provider: 'weixin'
     }
   },

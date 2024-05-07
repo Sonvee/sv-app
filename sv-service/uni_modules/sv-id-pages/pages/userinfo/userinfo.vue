@@ -186,22 +186,15 @@ export default {
 
 <style lang="scss">
 .sv-id-userinfo {
-
   :deep(.uni-list-item__content-title) {
     height: 100%;
     display: flex;
     align-items: center;
   }
-
-  .avatar-image {
-    height: 120rpx;
-    width: 120rpx;
-  }
-}
-
-.text-center {
-  :deep(.uni-list-item__content-title) {
-    justify-content: center;
+  .text-center {
+    :deep(.uni-list-item__content-title) {
+      justify-content: center;
+    }
   }
 }
 </style>

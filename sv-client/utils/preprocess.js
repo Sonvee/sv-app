@@ -1,6 +1,12 @@
-import { useSysStore } from '@/store/sys.js';
-import { storageDicts } from './pinia-storage.js';
-import { changeTheme } from './sys.js';
+import {
+  useSysStore
+} from '@/store/sys.js';
+import {
+  storageDicts
+} from './pinia-storage.js';
+import {
+  changeTheme
+} from './sys.js';
 
 // 预处理
 export async function preProcess() {
@@ -14,17 +20,20 @@ export async function preProcess() {
    */
   uni.hideTabBar()
   // 监听登录成功
-  listenLoginSuccess()
+  listenLogin()
   // 初始系统配置参数
   initSysConfig()
 }
 
 
-function listenLoginSuccess() {
+function listenLogin() {
   uni.$on('uni-id-pages-login-success', (e) => {
     console.log('==== 登录成功 ====', e);
     storageDicts()
     initSysConfig()
+  })
+  uni.$on('uni-id-pages-logout', () => {
+    console.log('==== 退出登录 ====');
   })
 }
 

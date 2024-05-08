@@ -6,7 +6,7 @@
 
 ## 文档
 
-文档已迁移至 [sv-app 框架体系综合文档](https://static-mp-74bfcbac-6ba6-4f39-8513-8831390ff75a.next.bspapp.com/docs/)
+文档已迁移至 [sv-app 框架体系综合文档](https://gitee.com/Sonve/sv-app-docs)
 
 ## 写在最后
 
